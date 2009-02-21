@@ -1,3 +1,0 @@
-<global-forwards>
-	<forward name="index" path="/index.jsp" redirect="false" />
-</global-forwards>

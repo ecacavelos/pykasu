@@ -1,9 +1,0 @@
-.esconderParaImpresion{
-	visibility: hidden;		
-}
-.mostrarParaImpresion{	
-	top: 1cm;
-	left: 60px;
-	position: absolute; 	
-	visibility:visible;
-}
