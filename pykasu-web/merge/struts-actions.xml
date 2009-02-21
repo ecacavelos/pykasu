@@ -1,0 +1,12 @@
+<action
+      path="/activation"
+      type="org.apache.struts.actions.ForwardAction"
+      parameter="/activationform.jsp"
+    />
+
+    
+    <action
+      path="/getMoraInfo801"
+      type="org.apache.struts.actions.ForwardAction"
+      parameter="/getMoraInfo.do"
+    />
