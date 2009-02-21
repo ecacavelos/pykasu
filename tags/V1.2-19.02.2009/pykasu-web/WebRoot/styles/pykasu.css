@@ -1,0 +1,349 @@
+/* CSS Document */
+body{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	margin:0px;
+/*	background-color:#DDDDDD; */
+}
+.options{
+	margin:0px;
+}
+div.options{
+/*	background-color:#9999FF; */
+}
+td.options{
+/*	background-color:#EEEEEE; */
+	font-size:x-small;
+	border: none;
+	
+/*
+	border-style: solid;
+	border-width: 1px;
+	border-color:#999999;
+*/	
+}
+a.options{
+	text-decoration: none;
+	color: #222222;
+}
+
+table {
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+
+table.options{
+	border-spacing: 0px;
+	border-collapse: collapse;
+	border: none;	
+}
+
+th{
+	font-size: 12px;
+	font-weight: bold;	
+	font-style: normal;
+	background-color: silver;
+	font-family: sans-serif;
+	padding-left: 7px;
+	padding-right: 7px;	
+}
+
+td{
+	font-size: small;
+	font-weight: normal;	
+	font-family: sans-serif;
+}
+
+h1{
+	font-size: medium;
+	font-weight: bold;	
+	font-family: sans-serif;	
+}
+
+td.odd{
+	background-color: #F0F0F0;
+}
+
+#header{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100px;
+	background-color:#444444;
+	font-family:sans-serif;
+	font-size:large;
+	font-style: normal;
+}
+#menu{
+	position:absolute;
+	left:0px;
+	top:100px;
+	width:125px;
+	height:600px;
+	background-color:#444444;
+	z-index:1;
+}
+#menu a{
+	text-decoration: none;
+	color: #222222;
+}
+#menu table{
+	width:100%;
+}
+
+#menu input{
+	font-size:10px;
+	width:100px;
+	 
+}
+#menu tr{
+	background-color:#666666;
+}
+#menu td{
+	background-color:#EEEEEE;
+	font-size:10px;
+}
+#menu th{
+	background-color:#666666;
+	color:#FFFFCC;
+	font-size:10px;
+	font-weight: bold;
+}
+#main{
+	left:125px;
+	
+	font-size:10px;
+	top:100px;
+	position:absolute;
+	visibility:visible;
+	width:auto;
+	height:auto;
+	min-height:753px;
+	min-width:670px;
+	background-color: white;
+	font-family: Verdana,Arial;
+	font-size:10px;	
+	z-index:0;
+	margin-top: 1%;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+#main INPUT{
+	font-family: Verdana,Arial;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: right;
+	text-transform: uppercase;
+	
+}
+#register INPUT{
+	font-family: Verdana,Arial;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: left;
+	text-transform: none;
+	
+}
+#main p{
+	margin-left:25px;
+	margin-right:25px;
+	text-align:justify;
+	
+	
+}
+#main h2{
+	margin-top:20px;
+	text-transform:uppercase;
+	position:relative;
+	
+	text-align:center;
+	margin-left:20px;
+	margin-right:20px;
+	color:#FFFFFF;
+	background-color:#006699;
+	
+	font-size: 14px;
+}
+#main td{
+	font-family: Verdana,Arial;
+	font-size: 10px;
+	font-weight: bold;
+	border-color: #333333;
+}
+tr{
+	margin:0px;
+}
+td{
+	margin:0px;
+}
+table.form{
+	margin-top:20px;
+	margin-left:15px;
+	margin-right:15px;
+	border-color:#666666;
+	background-color:#EEEEEE;
+	border-style:outset;
+	border-left-color:#EEEEEE;
+	border-top-color:#EEEEEE;
+	border-bottom-color:#333333;
+	border-right-color:#333333;
+	
+}
+td.form{
+	width:auto;
+	border:1px;
+}
+td.formlabel{
+	width:auto;
+	text-align:right;
+}
+td.formfield{
+	width:100%;
+	text-align:left;
+}
+td.formerror{
+	color:#FF0000;
+	font-weight:800;
+	width:100%;
+	
+	
+}
+#errors{
+	margin-right:20px;
+	margin-top:20px;
+	margin-left: 20px;
+	height: 30px;
+	font-size:20px;
+	background-color:#FF6600;
+	color: #FFFFFF;
+}
+#errors p{
+	margin-left:10px;
+}
+#errors table{
+	margin:0px;
+	height:30px;
+	width:100%;
+	text-transform:uppercase;
+	color:#FFFFFF;
+	font-weight:700;
+	vertical-align:middle;
+	text-align:center;
+}
+
+#messages{
+	margin-right:20px;
+	margin-top:20px;
+	margin-left: 20px;
+	height: 30px;
+	font-size:20px;
+	background-color:#FFFFFF;
+	color: blue;
+}
+#messages p{
+	margin-left:10px;
+}
+#messages table{
+	margin:0px;
+	height:30px;
+	width:100%;
+	text-transform:uppercase;
+	color:#FFFFFF;
+	font-weight:700;
+	vertical-align:middle;
+	text-align:center;
+}
+#form{
+	margin-left:15px;
+	margin-right:15px;
+}
+
+p.hint{
+	color: green;
+}
+
+p.msg-title{
+	font-family: tahoma;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: underline;
+	font-style: normal;
+}
+
+p.msg-text{
+	font-family: tahoma;
+	font-size: 12px;
+	font-weight: normal;	
+	font-style: normal;	
+	padding-left: 0px;
+}
+
+a{
+ text-decoration: none; 
+}
+
+div.searchResult{
+	background-color: blue;
+	font-size: medium;
+	text-align: center;
+	color: white;
+	width: 80%;
+}
+
+table.searchResult{
+	width: 80%;
+	table-layout: auto;
+}
+
+th.searchResult{
+	font-size: small;
+	color: black;
+	font-weight: bold;
+	background: white;
+}
+
+td.searchResult{
+	font-size: small;
+	color: black;
+	text-align: center;
+}
+
+table.payment{
+
+}
+
+tr.payment{
+}
+
+th.payment{
+	font-size: 10px;
+	color: white;
+	background-color: navy;
+	text-align: center;		
+}
+
+td.payment{
+	font-size: 10px;
+	color: black;
+	text-align: left;
+}
+
+td.paymentLabel{
+	font-size: 10px;
+	color: black;
+	text-align: left;
+	font-weight: bold;
+}
+
+body.payment{
+	background: white;
+}
+
+p.app-title{
+	font-size: 28px;
+	font-weight: bolder;
+	font-family: tahoma;
+	color: silver;
+	padding-left: 14px;
+}
