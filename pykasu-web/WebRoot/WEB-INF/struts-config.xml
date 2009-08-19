@@ -72,6 +72,18 @@
   <!-- ========== Action Mapping Definitions =================================== -->
    <action-mappings>
     <action
+      path="/showraffleticketlist"
+      type="py.com.roshka.pykasu.web.actions.ShowRaffleTicketsAction"
+      unknown="false"
+      validate="true"
+    >
+      <forward
+        name="success"
+        path="/raffleList.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
       path="/paydment"
       type="py.com.roshka.pykasu.web.actions.PaymentFormAction"
       name="PaymentFormWeb"
@@ -82,12 +94,12 @@
     >
       <forward
         name="success"
-        path="/paydmentSucc.jsp"
+        path="/index.jsp"
         redirect="false"
       />
       <forward
         name="error"
-        path="/paydmentError.jsp"
+        path="/index.jsp"
         redirect="false"
       />
     </action>

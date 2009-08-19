@@ -2,13 +2,13 @@ package py.com.roshka.pykasu.persistence.users;
 
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
-
-import py.com.roshka.pykasu.interfaces.Auditable;
-//import py.com.roshka.pykasu.persistence.audit.Audit;
 
 /*
 
@@ -55,7 +50,7 @@ public class User implements Serializable{
 	private String documentNumber; //Número de cédula. Se necesita para el HomeBanking
 	private BusinessCompany businessCompany;
     //private Set <Role> roles;
-    private Set<Role> roles=new HashSet<Role>();
+    private List<Role> roles=new ArrayList<Role>();
     private Boolean paymentAvaliable;
 	
 	@SuppressWarnings("unchecked")
@@ -188,19 +183,19 @@ public class User implements Serializable{
 	@SuppressWarnings("unchecked")
 	@ManyToMany( 
     	targetEntity=py.com.roshka.pykasu.persistence.users.Role.class,
-    	cascade={CascadeType.PERSIST}
+    	cascade={CascadeType.PERSIST},
+    	fetch=FetchType.LAZY
     )
     @JoinTable(
     	name="user_roles",
     	joinColumns={@JoinColumn(name="user_iid")},
     	inverseJoinColumns={@JoinColumn(name="role_iid")}
     )
-    public Set <Role> getRoles() {
+    public List <Role> getRoles() {
         return roles;
     }
 
-    @SuppressWarnings("unchecked")
-	public void setRoles(Set roles) {
+	public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
     

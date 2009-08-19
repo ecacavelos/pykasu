@@ -175,15 +175,15 @@
 		<rule name="TRGc21"  order="70"  cellTargetId="c21" formula="c17 + c19"/>	
 		<rule name="TRGc22"  order="80"  cellTargetId="c22" formula="c15"/>
 		<rule name="TRGc23"  order="90"  cellTargetId="c23" formula="c21"/>
-		<rule name="TRGc24"  order="100"  cellTargetId="c24" formula="c22 - c23" condition="(c22 - c23) &gt; 0"/>
+		<rule name="TRGc24"  order="100"  cellTargetId="c24" formula="c22 - c23"/>
 		<rule name="TRGc24_0"  order="105"  cellTargetId="c24" formula="0" condition="c24 &lt; 0"/>			
 		<rule name="TRGc25"  order="110"  cellTargetId="c25" formula="c24"/>	
 		<!--<rule name="TRGc29"  order="30"  cellTargetId="c29" formula=""/>-->	
 		<rule name="TRGc30"  order="120"  cellTargetId="c30" formula="c26 + c27 + c28"/>
 		<rule name="TRGc31"  order="130"  cellTargetId="c31" formula="c25 + c29"/>
-		<rule name="TRGc32"  order="140"  cellTargetId="c32" formula="c30 - c31" condition="(c30 - c31) &gt; 0" />	
+		<rule name="TRGc32"  order="140"  cellTargetId="c32" formula="c30 - c31"/>	
 		<rule name="TRGc32_0"  order="150"  cellTargetId="c32" formula="0" condition="c32 &lt; 0"/>	
-		<rule name="TRGc33"  order="160"  cellTargetId="c33" formula="c31 - c30" condition="(c31 - c30) &gt; 0"/>	
+		<rule name="TRGc33"  order="160"  cellTargetId="c33" formula="c31 - c30"/>	
 		<rule name="TRGc33_0"  order="165"  cellTargetId="c33" formula="0" condition="c33 &lt; 0"/>	
 		<!--<rule name="TRGc34"  order="30"  cellTargetId="c34" formula=""/>-->
 		<!--<rule name="TRGc35"  order="35"  cellTargetId="c35" formula=""/> -->

@@ -52,7 +52,10 @@ public class HomeBankingItf implements Serializable{
 			//url = new URL("http://10.2.1.39:8080/wservision/servlet/awsimpuestos");
 			ClassLoader cl = getClass().getClassLoader();
 			Properties properties = new Properties();
-			properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));;
+			//properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));;
+			URL urlp = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			properties.load(urlp.openStream());;
+
 			url = new URL(properties.getProperty("WS_PAYMENT_URL"));
 			logger.debug("Get locator from url: " + url.toString());			
 			WsimpuestosLocator wsImpLocator = new WsimpuestosLocator();

@@ -149,10 +149,12 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 		this.businessCompany = businessCompany;
 	}
 
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-	@JoinColumn(name="user_iid", nullable=false)
+	//@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@ManyToOne(optional=false)
+	@JoinColumn(name="user_iid", nullable=false, updatable=false)
 	public User getCreatedBy() {
 		return createdBy;
+		
 	}
 	
 	@Id @Column (name="form_iid")

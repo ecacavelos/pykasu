@@ -1,6 +1,9 @@
 package py.com.roshka.pykasu.util;
 
 import java.io.IOException;
+import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,6 +15,58 @@ public class Utils {
 			.getLogger(Utils.class);
 	
 	static final long ONE_HOUR = 60 * 60 * 1000L;
+
+	public static boolean isRaffleTime(java.util.Date date){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return isRaffleTime(cal);
+	}
+	
+	public static boolean isRaffleTime(Calendar cal){
+		logger.debug("isRaffleTime -- INIT --" );
+		String raffleBegin = "01/01/1970"; 
+		String raffleEnd = "01/01/1970"; 
+		
+		logger.debug("isRaffleTime to: " + cal.getTime());
+		
+		ClassLoader cl = Utils.class.getClassLoader();
+		logger.debug("isRaffleTime -- INIT -- ClassLoader: is null? " + (cl == null));
+		Properties properties = new Properties();
+		try {
+			logger.debug("isRaffleTime -- INIT -- Properties is null? "+ (properties == null) );
+			//properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));
+			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			properties.load(url.openStream());;
+
+			logger.debug("isRaffleTime -- INIT --" );
+			raffleBegin = properties.getProperty(py.com.roshka.pykasu.util.Globals.RAFFLE_BEGIN,"01/01/1970");
+			logger.debug("isRaffleTime - begin: " + raffleBegin);
+			raffleEnd = properties.getProperty(py.com.roshka.pykasu.util.Globals.RAFFLE_END,"01/01/1970");
+			logger.debug("isRaffleTime - end: " + raffleEnd);
+		} catch (IOException e) {
+			logger.warn("Error al recuperar el archivo de propiedades para obtener el valor de " + py.com.roshka.pykasu.util.Globals.RAFFLE_BEGIN + " o " + py.com.roshka.pykasu.util.Globals.RAFFLE_END);		
+		};
+		
+		Calendar begin = Calendar.getInstance();
+		Calendar end   = Calendar.getInstance();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+		try {
+			begin.setTime(sdf.parse(raffleBegin));
+			end.setTime(sdf.parse(raffleEnd));
+
+		} catch (ParseException e) {		
+			e.printStackTrace();
+			logger.error("Error al interpretar las fechas del sorteo: ", e);
+			return false;
+		}
+
+		
+		return cal.after(begin) && cal.before(end);
+	}
+	
+	
 	
 	public static boolean afterCloseHour(){
 		return afterCloseHour(new Date(System.currentTimeMillis()));
@@ -32,7 +87,10 @@ public class Utils {
 		Properties properties = new Properties();
 		try {
 			logger.debug("afterCloseHour -- INIT -- Properties is null? "+ (properties == null) );
-			properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));
+			//properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));
+			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			properties.load(url.openStream());;
+			
 			logger.debug("afterCloseHour -- INIT --" );
 			closeHour = properties.getProperty(py.com.roshka.pykasu.util.Globals.CLOSE_HOUR,"18:00");
 			logger.debug("afterCloseHour " + closeHour);

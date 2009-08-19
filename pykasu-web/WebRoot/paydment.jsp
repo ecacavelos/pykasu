@@ -26,7 +26,7 @@
 			%>
 			
 			var jsTaxes = new Array(<%=taxes.size()%>);
-			
+
 			<%
 			py.com.roshka.pykasu.persistence.fiscal.Taxes tax = null;
 			while(itTaxes.hasNext()){
@@ -92,7 +92,7 @@
 			function getFormType(){
 				return "850";
 			}
-			
+
 			function submitForm(){
 				var form = document.getElementById('paymentform');
 				if(!validateDate()){
@@ -111,10 +111,6 @@
 						alert('Debe especificar el periodo correctamente');
 						return;
 					}				
-//					if(document.getElementById('year').value > 2007){
-//						alert('El año debe ser menor o igual a 2007');
-//						return;
-//					}
 				}
 
 				if(tax[4]=='R'){  //requiere resolucion, por tanto hay que controlar que tenga al menos un valor
@@ -123,24 +119,24 @@
 						return;
 					}				
 				}
-<%--				
+
 				if(<%=(accountList != null)%>){
-					 document.getElementById("amount").value = document.getElementById("totalAmount").innerHTML;
-				}
---%>				
-				if(<%=(accountList != null)%>){
+
 					<%
 					int accountOrder = 0;
-					for(HBAccountV2 account : accountList){%>
-						<%
-							String amount = ""+accountOrder + "_" + account.getNumber(); 
-							accountOrder++;
-						%>
-						document.getElementById("<%=amount%>").value = removeCommas(document.getElementById("<%=amount%>").value);
-						if(parseInt(document.getElementById("<%=amount%>").value) == 0){
-							document.getElementById("<%=amount%>").value = "";
-						}
+					if(accountList != null){
+						for(HBAccountV2 account : accountList){%>
+							<%
+								String amount = ""+accountOrder + "_" + account.getNumber(); 
+								accountOrder++;
+							%>
+							document.getElementById("<%=amount%>").value = removeCommas(document.getElementById("<%=amount%>").value);
+							if(parseInt(document.getElementById("<%=amount%>").value) == 0){
+								document.getElementById("<%=amount%>").value = "";
+							}
+						<%}%>
 					<%}%>
+
 					calculateTotalAmount();
 					document.getElementById("amount").value = document.getElementById("totalAmount").innerHTML;					
 				}				
@@ -149,26 +145,7 @@
 				
 
 				form.submit(); //el control los montos se realizan en el momento de la carga.
-				
-//				var amount = document.getElementById('amount');
-//				amount.value = removeCommas(amount.value);
-				
-				/*Se obtiene el mayor valor*/
-/*
-				if(document.getElementById('savingAccountNr') != null){
-					var selectedIndex = document.getElementById('savingAccountNr').selectedIndex;
-								
-					var maxAmountValue = removeCommas(document.getElementById('accountAmount'+selectedIndex).value);
-					if(parseInt(amount.value) > parseInt(maxAmountValue)){
-						alert('El monto ingresado supera el monto disponible en su cuenta');
-						document.getElementById('amount').value = '';
-					}else{
-						form.submit();
-					}
-				}else{ //si no tiene cuenta, se submitea nomas
-					form.submit();
-				}
-*/				
+		
 			}
 			
 			function checkAmount(input){
@@ -188,16 +165,21 @@
 				calculateTotalAmount();
 			}
 			
-			function isNumber(input){
-				parseInt(input.value);
+			function getValueInt(value){
+				
+				if(isNaN(parseInt(value))){
+					return 0;
+				}else{
+					return parseInt(value);
+				}
 			}
+			
 			
 			function calculateTotalAmount(){
 				var totalAmount = 0;
 				for(var i=0; i < jsAccounts.length; i++){	
 					totalAmount =  parseInt(totalAmount) + parseInt(jsAccounts[i][2]);
 				}
-				//alert(totalAmount);
 				document.getElementById('totalAmount').innerHTML = addCommas(totalAmount);
 			}
 			
@@ -211,6 +193,7 @@
 			function enableInputs(){
 				var rucInput = document.getElementById('ruc');				
 				rucInput.disabled = 'false';
+				document.getElementById('totalAmount').innerHTML = "0";
 			}
 			var valueOld;
 		</script>

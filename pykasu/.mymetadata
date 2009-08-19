@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enterprise-project
+  version="1.0.0"
+  name="pykasu"
+  id="myeclipse.1225259990070"
+  j2ee-spec="5.0"
+  archive="pykasu.ear">
+  <project-modules>
+    <project-module
+      type="WEB"
+      name="pykasu-web"
+      id="myeclipse.1225257709394"
+      context-root="/pycasu"
+      j2ee-spec="5.0"
+      archive="pykasu-web.war">
+      <attributes>
+        <attribute name="webrootdir" value="/WebRoot" />
+      </attributes>
+    </project-module>
+    <project-module
+      type="EJB"
+      name="pykasu-ejb"
+      id="myeclipse.1225256407647"
+      j2ee-spec="5.0"
+      archive="pykasu-ejb.jar" />
+  </project-modules>
+</enterprise-project>
+

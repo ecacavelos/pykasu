@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import py.com.roshka.pykasu.persistence.forms.GenericForm;
 import py.com.roshka.pykasu.persistence.users.BusinessCompany;
@@ -58,13 +59,13 @@ public class PaymentForm  extends GenericForm implements Serializable{
 		return id;
 	}	
 	
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@ManyToOne
 	@JoinColumn(name="bcompany_iid", nullable=false)	
 	public BusinessCompany getBusinessCompany() {
 		return businessCompany;
 	}
 
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@ManyToOne
 	@JoinColumn(name="user_iid", nullable=false)	
 	public User getCreatedBy() {
 		return createdBy;
@@ -183,5 +184,17 @@ public class PaymentForm  extends GenericForm implements Serializable{
 		this.dv = dv;
 	}
 
+	@Transient
+	public String getFiscalPeriod() {
+		String cero = "";
+		if(this.getFiscalPeriodMonth()!= null && this.getFiscalPeriodMonth()<10){
+			cero = "0";
+		}
+		return ""+this.getFiscalPeriodYear()+cero+this.getFiscalPeriodMonth();
+	}
+
+	public String toString(){
+		return "RUC:"+getRuc() + " Monto:"+getPaymentAmount() + " Periodo:" + getFiscalPeriod(); 
+	}
 	
 }

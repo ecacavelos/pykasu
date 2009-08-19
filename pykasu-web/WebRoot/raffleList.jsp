@@ -80,23 +80,28 @@
 	<body>
 	<jsp:include page="header.jsp"/> 
 	<jsp:include page="menu.jsp"/> 
-	<div id="main"> 
-		<label>
-			El PAGO se ha realizado EXITOSAMENTE
-			<%if(request.getAttribute("paymentAmount")!=null){%>
-				<%= " por el monto de: " + request.getAttribute("paymentAmount")%>
-			<%}%>
-		</label>
-<%-- 		
-		<p>
-			<%if(((Boolean)request.getAttribute("showAccount")).booleanValue()){ %>			
-				<%py.com.roshka.pykasu.web.util.HBAccount hbAccount = (py.com.roshka.pykasu.web.util.HBAccount) request.getAttribute("account");%>
-				<%=hbAccount.getGeneralDescription()%>
-			<%}else{%>
-				&nbsp;
-			<%}%>
-		</p>
---%>		
+	<div id="main">
+		<h1>Cupones habilitados</h1> 
+		<table width="40%">
+			<tr>
+				<th width="5%">Número</th>
+				<th>Fecha</th>
+			</tr>
+			<%
+				boolean filaPar = false;
+				int i=0;
+			%>
+			<logic:iterate id="raffleTicket" name="raffleTickets">
+			<%	
+				i++; 
+				filaPar = (i % 2 == 0);
+			%>
+			<tr>
+				<td <%out.print(filaPar?" class=\"odd\"":"");%> align="center"><bean:write name="raffleTicket" property="id" /></td>
+				<td <%out.print(filaPar?" class=\"odd\"":"");%> align="center"><bean:write name="raffleTicket" property="arrivalTime" /></td>
+			</tr>
+			</logic:iterate>
+		</table>
 	</div>
 	</body>
 </html:html>	
