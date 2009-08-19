@@ -1,0 +1,19 @@
+<taglib>
+	
+	<taglib-uri>logic</taglib-uri>
+	<taglib-location>/WEB-INF/tlds/struts-logic.tld</taglib-location>
+</taglib>
+<taglib>
+	
+	<taglib-uri>bean</taglib-uri>
+	<taglib-location>/WEB-INF/tlds/struts-bean.tld</taglib-location>
+</taglib>
+<taglib>
+	
+	<taglib-uri>nested</taglib-uri>
+	<taglib-location>/WEB-INF/tlds/struts-nested.tld</taglib-location>
+</taglib>
+<taglib>
+	<taglib-uri>html</taglib-uri>
+	<taglib-location>/WEB-INF/tlds/struts-html.tld</taglib-location>
+</taglib>

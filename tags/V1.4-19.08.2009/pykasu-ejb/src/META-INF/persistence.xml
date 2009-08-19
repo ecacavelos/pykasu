@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence
+		xmlns="http://java.sun.com/xml/ns/persistence"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+		version="1.0"
+>
+   <persistence-unit name="pykasu">
+      <jta-data-source>java:/PykasuDS</jta-data-source>
+      <class>py.com.roshka.pykasu.persistence.raffle.RaffleTicket</class>
+      <class>py.com.roshka.pykasu.persistence.payment.Account</class>
+      <class>py.com.roshka.pykasu.persistence.payment.PaymentForm</class>
+      <class>py.com.roshka.pykasu.persistence.fiscal.ExpiringDate</class>
+      <class>py.com.roshka.pykasu.persistence.fiscal.FiscalAdvanced</class>      
+      <class>py.com.roshka.pykasu.persistence.fiscal.FiscalContravertionFee</class>
+      <class>py.com.roshka.pykasu.persistence.fiscal.FiscalMountOverdue</class>
+	  <class>py.com.roshka.pykasu.persistence.fiscal.FiscalPercentOverdue</class>
+	  <class>py.com.roshka.pykasu.persistence.fiscal.FiscalPeriod</class>
+	  <class>py.com.roshka.pykasu.persistence.forms.Form101</class>
+	  <class>py.com.roshka.pykasu.persistence.forms.Form104</class>
+	  <class>py.com.roshka.pykasu.persistence.forms.Form106</class>
+	  <class>py.com.roshka.pykasu.persistence.forms.Form108</class>
+	  <class>py.com.roshka.pykasu.persistence.forms.Form109</class>
+	  <class>py.com.roshka.pykasu.persistence.forms.Form110</class>		  
+	  <class>py.com.roshka.pykasu.persistence.forms.Form117</class>		  		  
+	  <class>py.com.roshka.pykasu.persistence.forms.Form118</class>		  		  
+	  <class>py.com.roshka.pykasu.persistence.forms.Form120</class>		  		  
+	  <class>py.com.roshka.pykasu.persistence.forms.Form122</class>		  		  
+	  <class>py.com.roshka.pykasu.persistence.forms.Form123</class>		  		  
+  	  <class>py.com.roshka.pykasu.persistence.forms.Form800</class>
+  	  <class>py.com.roshka.pykasu.persistence.forms.Form801</class>
+  	  <class>py.com.roshka.pykasu.persistence.forms.Form850</class>
+  	  <class>py.com.roshka.pykasu.persistence.users.BusinessCompany</class>
+  	  <class>py.com.roshka.pykasu.persistence.users.Role</class>
+  	  <class>py.com.roshka.pykasu.persistence.users.User</class>	  	  
+	  <class>py.com.roshka.pykasu.persistence.uploadForm.UploadForm</class>
+      <properties>     
+         <property name="hibernate.hbm2ddl.auto" value="update" />
+         <property name="hibernate.show_sql" value="true" /> 
+         <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>-->
+         <!--<property name="hibernate.dialect" value="org.hibernate.dialect.DB2400Dialect"/>-->
+          <property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect"/> 
+		 <!--  <property name="hibernate.connection.autocommit">true</property>   -->
+      </properties>
+   </persistence-unit>
+
+   <persistence-unit name="tributos">
+      <jta-data-source>java:/TributosDS</jta-data-source>
+	      <class>py.com.roshka.pykasu.persistence.fiscal.Holiday</class>
+	      <class>py.com.roshka.pykasu.persistence.fiscal.FormSetting</class>
+	      <class>py.com.roshka.pykasu.persistence.ruc.Ruc</class>        
+	      <class>py.com.roshka.pykasu.persistence.fiscal.Salary</class>  
+		  <class>py.com.roshka.pykasu.persistence.fiscal.Taxes</class>  	            	          
+      <properties>
+  		 <property name="hibernate.dialect" value="org.hibernate.dialect.DB2400Dialect"/>
+         <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>-->
+         <property name="hibernate.show_sql" value="true" /> 
+      </properties>
+   </persistence-unit>   
+      
+</persistence>

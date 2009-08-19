@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<form type="ClientData" description="Datos de Cliente" >
+	<sections type="header">
+		<section id="main" name="main" description="Identificador"  order="0">
+
+			<line id="L1" name="id" order="10" description="">
+				<cell id="id"  col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Identificador:" alignAddtionalDescription="LEFT"/>			
+				<cell id="ruc" col="2" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="RUC:" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="L2" name="name" order="30" description="Razon Social / Nombre">
+				<cell id="name"  col="1" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Razon Social / Nombre:" alignAddtionalDescription="LEFT" colSpan="2"/>			
+			</line>
+			<line id="L3" name="obligation" order="40" description="">
+				<cell id="obligation"  col="1" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Obligación:" alignAddtionalDescription="LEFT" choices="| 0 | VARIOS; | 111 | IRACIS - REGIMEN GENERAL; | 112 | DISTRIBUCION UTILIDADES; | 113 | IRACIS ESPECIALES; | 114 | INGRESOS OCAS. IRACIS; | 115 | INGRE. OCAS.IRACIS P.FÃSICA; | 116 | RENTA ADUANA; | 121 | RENTA PERSONAL - REGIMEN GENERAL; | 131 | IMAGRO; | 132 | IMAGRO- ESPECIALES; | 141 | IRPC; | 142 | TRIBUTO UNICO (HASTA ABRIL 2007); | 143 | TRIBUTO UNICO MAQUILA; | 144 | RENTA - REGIMEN SIMPLIFICADO; | 151 | Ret IRACIS/IMAGR/PER; | 161 | ANTICIPO IRACIS; | 162 | ANTICIPO IMAGRO; | 163 | ANTICIPO IRPC; | 164 | ANTICIPO IRPC; | 171 | CUOTA FACIL. PAGO RENTA; | 172 | FAC. PAGO RTA ADUANA; | 211 | IVA; | 212 | IVA SEMESTRAL; | 213 | IVA - REGIMEN SIMPLIFICADO; | 214 | IVA ADUANA; | 221 | RETENCION IVA; | 231 | CUOTA FACIL. PAGO IVA; | 232 | FAC. PAGO IVA ADUANA; | 311 | ISC - GENERAL; | 312 | ISC ADUANA; | 321 | ISC - COMBUSTIBLES; | 331 | CUOTA FACIL PAGO ISC; | 332 | FAC. PAGO ISC ADUANA; | 411 | RETENCION ACTOS Y DOCUMENTOS; | 431 | PATENTE FISCAL EX.VEHICULO; | 441 | CUOTA FACIL PAGO OTROS; | 442 | CUOTA FACIL PAGO ADUANA; | 451 | INSTRUMENTOS DE CONTROL; | 461 | OTROS PAGOS OCASIONALES; | 511 | RESOLUCION AJUS. RENTA; | 512 | RESOLUCION AJUS. IVA; | 513 | RESOLUCION AJUS. ISC; | 514 | RESOLUCION AJUS. OTROS; | 515 | RESOLUCION AJUS. CONTRAV; | 516 | RESOLUCION AJUS. OTROS; | 517 | OTRAS CONTRAVENCIONES; | 521 | CERTIFICADO DE DEUDA; | 531 | RES. AJUS. ISC.; | 541 | RES. AJUS. OTROS TRIB.; | 551 | RES. AJUS. CONTRAV.; | 561 | RES. AJUS OTROS CONCEPTOS; | 571 | OTRAS CONTRAVENCIONES; | 591 | CERT. DEUDA IRACIS; | 592 | CERT. DEUDA RTA PERS.; | 593 | CERT. DEUDA IMAGRO; | 594 | CERT. DEUDA OTROS REG.; | 595 | CERT. DEUDA IVA; | 596 | CERT. DEUDA ISC; | 597 | CERT. DEUDA OTROS TRIB.; | 598 | CERT. DEUDA CONTRAV.; | 599 | CERT. DEUDA OTROS CONCEP.; | "/>
+				<cell id="resolutionNr"  col="2" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Resolución Nro:" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="L4" name="H1L4" order="50" description="Periodo Fiscal">
+				<cell id="fiscalPeriodMonth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT"/>
+				<cell id="fiscalPeriodYear"   col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT"/>
+			</line>			
+			<line id="L5" name="H1L5" order="60" description="Periodo Fiscal">
+				<cell id="savingAccountNumber"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Caja de ahorro:" alignAddtionalDescription="LEFT"/>
+				<cell id="paymentAmount"   		col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Importe" 		  alignAddtionalDescription="LEFT"/>
+			</line>		
+		</section>
+	</sections>
+</form>

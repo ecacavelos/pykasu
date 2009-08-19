@@ -1,0 +1,1 @@
+package py.com.roshka.pykasu.interfaces;public interface Form848ManagerInterface extends GenericFormManager {}
