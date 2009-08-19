@@ -1,6 +1,7 @@
 package py.com.roshka.pykasu.ejb;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
@@ -92,7 +93,10 @@ public class CalendarManagerEJB implements CalendarManager{
 				ClassLoader cl = getClass().getClassLoader();
 				Properties prop = new Properties();
 
-				prop.load(cl.getResourceAsStream(Globals.PYKASU_PROPERTIES));
+//				prop.load(cl.getResourceAsStream(Globals.PYKASU_PROPERTIES));
+				URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+				prop.load(url.openStream());;
+				
 				Calendar closeDate = Calendar.getInstance();
 				String closeHour = prop.getProperty(Globals.CLOSE_HOUR);
 				String[] ch = closeHour.split(":");

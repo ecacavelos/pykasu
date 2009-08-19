@@ -1,6 +1,7 @@
 
 <%@ page contentType="text/html" language="java"
 %>
+<jsp:directive.page import="py.com.roshka.pykasu.web.Globals"/>
 
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
@@ -32,14 +33,12 @@
 	</head>
 	
 	<body onload="showmessage()" onkeyup="whichButton(event)">
-		<jsp:include page="header.jsp"/> 
+		<br><jsp:include page="header.jsp"/> 
 		
 		<jsp:include page="menu.jsp"/> 
 		
 		<div id="main">
-		
 
-			
 			<logic:notPresent name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>"> 
 				<div id="welcome">
 					<p class="msg-title">Bienvenido al Sistema de Tributos Web</p>
@@ -58,6 +57,25 @@
 						</div>
 						<%request.getSession().removeAttribute("errorMessage");%>
 					<%}%>
+					<%if(request.getAttribute(Globals.MESSAGE)!=null){%>
+						<div id="showMsg" style="background-color: green; padding: 10px;">
+							<label style="color: white;font-weight: bold"><%=request.getAttribute(Globals.MESSAGE)%></label>
+						</div>
+					<%}%>
+					<%if( //si es tiempo de rifa y es cliente
+						py.com.roshka.pykasu.util.Utils.isRaffleTime(
+							new java.util.Date(System.currentTimeMillis())) 
+						&& 
+						((py.com.roshka.pykasu.persistence.users.User)
+							request.getSession().getAttribute(Globals.LOGIN_USER))
+								.getBusinessCompany().getClient().booleanValue()){%>
+						<div id="showRaffleInfo" style="padding: 10px;">
+							<label style="font-weight: bold">Sorteo electrónico de 5 notebook con internet movil gratis por 1 año</label>
+							<br />
+							<label>Para observar sus cupones, presione <a href="showraffleticketlist.do" >aqui</a></label>
+						</div>
+					<%}%>
+					
 					<%-- <p class="msg-title">Bienvenido al Sistema de Tributos Web</p> --%>
 					<p class="msg-title"><b>Instrucciones básicas.</b></p>
 					<p class="msg-text">A la izquierda encontrará un menú. </p>

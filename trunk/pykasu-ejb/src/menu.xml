@@ -99,12 +99,12 @@
 		</action>
 		
 	</program>
-
+<!-- 
 	<program name="Manejo de Archivos" order="48" description="" active="true" rolesAllowed="users">
 		<action name="Subir un archivo de Formulario" order="10" url="uploadfileform.do" urlHelp="" description="" active="true" rolesAllowed="users"/>
 		<action name="Ver Formularios enviados por archivo" order="20" url="showuploadforms.do" urlHelp="" description="" active="true" rolesAllowed="users"/>
 	</program>
-
+-->
 	<program name="Pagos" order="49" description="" active="true" rolesAllowed="users">
 		<action name="Realizar Pagos" order="10" url="prvpaydmentform.do"  urlHelp="" description="" active="true" rolesAllowed=""/>		
 		<action name="Buscar Pagos"   order="20" url="showpaymentlist.do"  urlHelp="" description="" active="true" rolesAllowed=""/>		

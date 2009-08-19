@@ -440,9 +440,14 @@ function lostFocus(obj){
 	</tr>
 	<%}//iterator de rubros %>
 	</table>
-	<hr>
+	<hr>	
+	<%-- Por lo visto solo se puede pasar de de PROCESO a CONFIRMADO (el estado ANULADO parece haber desaparecido) no tiene sentido el boton ENVIAR
+		Ademas de esta forma se puede solucionar un problema de seguridad del sorteo --%>
+	<%if(((cellStatus != null)&& cellStatus.getData().toString().trim().equalsIgnoreCase("")) || (cellStatus.getData().toString().trim().equalsIgnoreCase("PROCESO"))){%>	
 	<input type="button" value="Enviar" onclick="submitForm('send')"/>
 	<input type="button" value="Cancelar" onclick="submitForm('cancel')"/>
+	<%}%>
+
 	&nbsp;
 	<%if((cellStatus != null) 
 		 && (cellStatus.getData().toString().equals("CONFIRMADO"))

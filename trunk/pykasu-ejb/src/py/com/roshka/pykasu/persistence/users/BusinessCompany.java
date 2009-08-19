@@ -1,24 +1,15 @@
 package py.com.roshka.pykasu.persistence.users;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 import py.com.roshka.pykasu.exceptions.InvalidRucException;
-import py.com.roshka.pykasu.persistence.payment.Account;
-import py.com.roshka.pykasu.persistence.ruc.Ruc;
 
 //TODO Hacer que exista una empresa administradora
 //TODO Que no se coloque la fecha de hoy en los anticipos
@@ -48,11 +39,12 @@ public class BusinessCompany implements Serializable {
 	private String activationKey;
 	private Boolean isAdministrative;
 	private Boolean printFormService;
+	private Boolean client;
 //	private Set<Account> accounts = new HashSet<Account>();
 
 
 	protected BusinessCompany(){
-
+		this.client = Boolean.FALSE;
 	}
 	@Deprecated
 	public BusinessCompany(String ruc, String name) 
@@ -99,6 +91,7 @@ public class BusinessCompany implements Serializable {
 		this.phoneNumber = businessPhoneNumber.trim().toUpperCase();		
 		this.faxNumber = faxNumber.trim().toUpperCase();
 		this.constitutionDate = constitutionDate;
+		this.client = Boolean.FALSE;
 	}
 
 	@Id @Column(name="bcompany_iid")
@@ -280,6 +273,18 @@ public class BusinessCompany implements Serializable {
 	public void setPrintFormService(Boolean printFormService) {
 		this.printFormService = printFormService;
 	}
+	
+	@Column(name="is_client")
+	public Boolean getClient() {
+		return client;
+	}
+	public void setClient(Boolean client) {
+		this.client = client;
+	}
+
+
+	
+	
 	
 //	@OneToMany(targetEntity=Account.class,  
 //			   fetch = FetchType.EAGER,

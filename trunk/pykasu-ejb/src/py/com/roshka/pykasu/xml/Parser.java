@@ -42,7 +42,7 @@ import py.com.roshka.pykasu.exceptions.PykasuParsingException;
 import py.com.roshka.pykasu.persistence.users.Role;
 
 //---------------------
-import com.sun.org.apache.xerces.internal.jaxp.validation.xs.SchemaFactoryImpl;
+//import com.sun.org.apache.xerces.internal.jaxp.validation.xs.SchemaFactoryImpl;
 
 public class Parser {
 	
@@ -394,43 +394,42 @@ public class Parser {
 	}
 	
 	public static SimpleForm parseUploadFileForm(InputStream is) throws PykasuParsingException{
-        try{		
-        	
-        	// parse an XML document into a DOM tree
-    	    DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document document = parser.parse(is);
-			
-		    // create a SchemaFactory capable of understanding WXS schemas
-//		    SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);	
-			com.sun.org.apache.xerces.internal.jaxp.validation.xs.SchemaFactoryImpl factory = 
-				new SchemaFactoryImpl();
-			
-		    
-		    // load a WXS schema, represented by a Schema instance
-		    Source schemaFile = new StreamSource(Parser.class.getClassLoader().getResourceAsStream("forms/taxform.xsd"));
-		    
-		    System.out.println("El esquema file: " + schemaFile.getClass().toString());
-		    javax.xml.transform.stream.StreamSource ss = (javax.xml.transform.stream.StreamSource)schemaFile;
-		    
-		    //Source schemaFile = new StreamSource(new File("c:/java/me/pykasu/pykasu-ejb/src/related-files/schema/taxform.xsd"));
-		    Schema schema = factory.newSchema(schemaFile);
-		    System.out.println("factory:"+factory.getClass().toString());
-		    System.out.println("schema:"+schema.getClass().toString());
-		    
-		    // create a Validator instance, which can be used to validate an instance document
-		    Validator validator = schema.newValidator();
-		    System.out.println("validator:"+validator.getClass().toString());
-		    // validate the DOM tree
-		    validator.validate(new DOMSource(document));
-
-            return parseUploadFileForm(document);
-        }catch (Throwable e){
-            System.out.println(System.getProperty("java.vm.version"));
-            System.out.println(System.getProperty("java.specification.version"));
-            e.printStackTrace();
-            throw new PykasuParsingException(e.getMessage());
-        }
-
+		return null;
+//        try{		
+//        	
+//        	// parse an XML document into a DOM tree
+//    	    DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//			Document document = parser.parse(is);
+//			
+//		    // create a SchemaFactory capable of understanding WXS schemas
+////		    SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);	
+//			
+//		    
+//		    // load a WXS schema, represented by a Schema instance
+//		    Source schemaFile = new StreamSource(Parser.class.getClassLoader().getResourceAsStream("forms/taxform.xsd"));
+//		    
+//		    System.out.println("El esquema file: " + schemaFile.getClass().toString());
+//		    javax.xml.transform.stream.StreamSource ss = (javax.xml.transform.stream.StreamSource)schemaFile;
+//		    
+//		    //Source schemaFile = new StreamSource(new File("c:/java/me/pykasu/pykasu-ejb/src/related-files/schema/taxform.xsd"));
+//		    Schema schema = factory.newSchema(schemaFile);
+//		    System.out.println("factory:"+factory.getClass().toString());
+//		    System.out.println("schema:"+schema.getClass().toString());
+//		    
+//		    // create a Validator instance, which can be used to validate an instance document
+//		    Validator validator = schema.newValidator();
+//		    System.out.println("validator:"+validator.getClass().toString());
+//		    // validate the DOM tree
+//		    validator.validate(new DOMSource(document));
+//
+//            return parseUploadFileForm(document);
+//        }catch (Throwable e){
+//            System.out.println(System.getProperty("java.vm.version"));
+//            System.out.println(System.getProperty("java.specification.version"));
+//            e.printStackTrace();
+//            throw new PykasuParsingException(e.getMessage());
+//        }
+//
 	}
 
 	private static SimpleForm parseUploadFileForm(org.w3c.dom.Document doc) throws PykasuParsingException{

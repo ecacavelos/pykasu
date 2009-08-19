@@ -583,27 +583,27 @@
 		<rule name="TRGc53_0" order="61"  cellTargetId="c53" formula="0" condition="c53 &lt; 0" />
 		
 		<!-- RUBRO 2  -->
-		<rule name="TRGc54"  order="70"  cellTargetId="c54" formula="(c22 +c46)-c16" condition="(c22 +c46) &gt; c16"/>
+		<rule name="TRGc54"  order="70"  cellTargetId="c54" formula="(c22 +c46)-c16" />
 		<rule name="TRGc54_0"  order="75" cellTargetId="c54" formula="0" condition="c54 &lt; 0"/>
-		<rule name="TRGc55"  order="80"  cellTargetId="c55" formula="(c27+c53)-c21" condition="(c27+c53) &gt; c21"/>
+		<rule name="TRGc55"  order="80"  cellTargetId="c55" formula="(c27+c53)-c21" />
 		<rule name="TRGc55_0"  order="85" cellTargetId="c55" formula="0" condition="c55 &lt; 0"/>
-		<rule name="TRGc56"  order="90"  cellTargetId="c56" formula="c16-(c22 +c46)" condition="c16 &gt; (c22 +c46)"/>
+		<rule name="TRGc56"  order="90"  cellTargetId="c56" formula="c16-(c22 +c46)" />
 		<rule name="TRGc56_0"  order="95" cellTargetId="c56" formula="0" condition="c56 &lt; 0"/>
-		<rule name="TRGc57"  order="100"  cellTargetId="c57" formula="c21-(c27 +c53)" condition="c21 &gt; (c27 +c53)"/>
+		<rule name="TRGc57"  order="100"  cellTargetId="c57" formula="c21-(c27 +c53)" />
 		<rule name="TRGc57_0"  order="105" cellTargetId="c57" formula="0" condition="c57 &lt; 0"/>
 		
 		<!-- RUBRO 3  -->
-		<rule name="TRGc59"  order="110"  cellTargetId="c59" formula="c58-c60" condition="c58 &gt; c60"/>
+		<rule name="TRGc59"  order="110"  cellTargetId="c59" formula="c58-c60" />
 		<rule name="TRGc59_0"  order="115" cellTargetId="c59" formula="0" condition="c59 &lt; 0"/>
 		<rule name="TRGc60"  order="120"  cellTargetId="c60" formula="c57" />
-		<rule name="TRGc61"  order="130" cellTargetId="c61" formula="c60-c58" condition="(c60-c58) &gt; 0"/>
+		<rule name="TRGc61"  order="130" cellTargetId="c61" formula="c60-c58"/>
 		<rule name="TRGc61_0"  order="135" cellTargetId="c61" formula="0" condition="c61 &lt; 0"/>
 		
 		<!-- RUBRO 4 -->
 		<rule name="TRGc67"  order="140" cellTargetId="c67" formula="c62+c63+c64+c65+c66"/>
 		<rule name="TRGc68"  order="150" cellTargetId="c68" formula="c61"/>
 		<rule name="TRGc69"  order="160" cellTargetId="c69" formula="c68"/>
-		<rule name="TRGc70"  order="170" cellTargetId="c70" formula="c69 - c67" condition="(c69 - c67) &gt; 0"/>
+		<rule name="TRGc70"  order="170" cellTargetId="c70" formula="c69 - c67"/>
 		<rule name="TRGc70_0"  order="175" cellTargetId="c70" formula="0" condition="c70 &lt; 0"/>
 		
 		<!-- RUBRO 5 -->
@@ -613,20 +613,20 @@
 		<rule name="TRGc74"  order="210" cellTargetId="c74" formula="c64 * 0.1"/>
 		<rule name="TRGc76"  order="220" cellTargetId="c76" formula="c71 + c72+ c73+ c74+ c75 "/>
 		<rule name="TRGc82"  order="230" cellTargetId="c82" formula="c77 + c78 + c79 + c80 + c81"/>
-		<rule name="TRGc83"  order="240" cellTargetId="c83" formula="c82 - c85" condition="c82 &gt; c85"/>
+		<rule name="TRGc83"  order="240" cellTargetId="c83" formula="c82 - c85"/>
 		<rule name="TRGc83_0"  order="245" cellTargetId="c83" formula="0" condition="c83 &lt; 0"/>
 		<rule name="TRGc85"  order="250" cellTargetId="c85" formula="c76 + c84"/>
-		<rule name="TRGc86"  order="255" cellTargetId="c86" formula="c85 - c82" condition="c85 &gt; c82"/>
+		<rule name="TRGc86"  order="255" cellTargetId="c86" formula="c85 - c82"/>
 		<rule name="TRGc86_0"  order="260" cellTargetId="c86" formula="0" condition="c86 &lt; 0"/>
 		<rule name="TRGc89"  order="265" cellTargetId="c89" formula="c86 +c87+c88"/>
 		
 		<!-- RUBRO 6 -->
 		
-		<rule name="TRGc92"  order="270" cellTargetId="c92" formula="c90 - c91" condition="c90 - c91 &gt; 0"/>
+		<rule name="TRGc92"  order="270" cellTargetId="c92" formula="c90 - c91"/>
 		<rule name="TRGc92_0"  order="271" cellTargetId="c92" formula="0" condition="c92 &lt; 0"/>
 		<rule name="TRGc93_1"  order="275" cellTargetId="c93" formula="c83" condition="c83 &lt;= c92"/>
 		<rule name="TRGc93_2"  order="276" cellTargetId="c93" formula="c92" condition="c92 &lt; c83"/>		
-		<rule name="TRGc94"  order="280" cellTargetId="c94" formula="(c92 - c93)/4" condition="c92 &gt; c93"/>
+		<rule name="TRGc94"  order="280" cellTargetId="c94" formula="(c92 - c93)/4"/>
 		<rule name="TRGc94_0"  order="285" cellTargetId="c94" formula="0" condition="c94 &lt; 0"/>
 		
 		<!-- RUBRO 7 -->
@@ -634,7 +634,7 @@
 		<rule name="TRGc108"  order="300" cellTargetId="c108" formula="c106 + c107"/>
 		<rule name="TRGc116"  order="310" cellTargetId="c116" formula="c109 + c110 + c111 + c112 - c113 + c114 - c115"/>
 		<rule name="TRGc116_0"  order="315" cellTargetId="c116" formula="0" condition="c116 &lt; 0"/>
-		<rule name="TRGc122"  order="320" cellTargetId="c122" formula="c108 + c109 + c110 + c111 + c112 - c113 + c114 - c115" condition="(c108 + c109 + c110 + c111 + c112 - c113 + c114 - c115) &gt; 0"/>
+		<rule name="TRGc122"  order="320" cellTargetId="c122" formula="c108 + c109 + c110 + c111 + c112 - c113 + c114 - c115"/>
 		<rule name="TRGc122_0"  order="325" cellTargetId="c122" formula="0" condition="c122 &lt; 0"/>
 		
 		

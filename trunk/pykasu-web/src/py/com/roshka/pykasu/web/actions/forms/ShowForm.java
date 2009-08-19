@@ -96,7 +96,7 @@ public class ShowForm extends Action {
             if(request.getAttribute(Globals.FORM_STATUS) == null){
             	request.setAttribute(Globals.FORM_STATUS, "insert_mode");
             }
-            
+
             return mapping.findForward("form");
         }
         return mapping.findForward("index");

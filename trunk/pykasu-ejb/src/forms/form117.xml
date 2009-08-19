@@ -143,15 +143,15 @@
 
 	<rules>
 	<!-- Rules 1 -->
-		<rule name="TRGc12"  order="10"  cellTargetId="c12" formula="c10 - c11" condition="(c10 - c11) &gt; 0"/>	
+		<rule name="TRGc12"  order="10"  cellTargetId="c12" formula="c10 - c11"/>	
 		<rule name="TRGc12_0"  order="15"  cellTargetId="c12" formula="0" condition="c12 &lt; 0"/>	
 		<rule name="TRGc13"  order="20"  cellTargetId="c13" formula="c12 * 0.1" />
 		<rule name="TRGc14"  order="30"  cellTargetId="c14" formula="c13 * 0.5"/>
 		<rule name="TRGc20"  order="40"  cellTargetId="c20" formula="c15+c16+c17+c18"/>	
 		<rule name="TRGc21"  order="50"  cellTargetId="c21" formula="c14+c19"/>	
-		<rule name="TRGc22"  order="60"  cellTargetId="c22" formula="c20 - c21" condition="(c20 - c21) &gt; 0"/>
+		<rule name="TRGc22"  order="60"  cellTargetId="c22" formula="c20 - c21"/>
 		<rule name="TRGc22_0"  order="65"  cellTargetId="c22" formula="0" condition="c22 &lt; 0"/>
-		<rule name="TRGc23"  order="70"  cellTargetId="c23" formula="c21 - c20" condition="(c21 - c20) &gt; 0"/>
+		<rule name="TRGc23"  order="70"  cellTargetId="c23" formula="c21 - c20"/>
 		<rule name="TRGc23_0"  order="75"  cellTargetId="c23" formula="0" condition="c23 &lt; 0"/>
 		<rule name="TRGc26"  order="120"  cellTargetId="c26" formula="c23 + c24 + c25"/>
 	</rules>

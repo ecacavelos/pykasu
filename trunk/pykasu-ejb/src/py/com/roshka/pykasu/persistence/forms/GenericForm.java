@@ -58,13 +58,13 @@ public class GenericForm {
 				}
 				
 			} catch (IllegalArgumentException e) {
-				logger.error("Error to fill the cell "+ cell.getId() + "  " + e.getMessage());
+				logger.info("Error to fill the cell "+ cell.getId() + "  " + e.getMessage());
 			} catch (IntrospectionException e) {
-				logger.error("Error to fill the cell "+ cell.getId(), e);
+				logger.info("Error to fill the cell "+ cell.getId(), e);
 			} catch (IllegalAccessException e) {
-				logger.error("Error to fill the cell "+ cell.getId(), e);
+				logger.info("Error to fill the cell "+ cell.getId(), e);
 			} catch (InvocationTargetException e) {
-				logger.error("Error to fill the cell "+ cell.getId(), e);
+				logger.info("Error to fill the cell "+ cell.getId(), e);
 			}    		
 		}
 	}

@@ -12,6 +12,8 @@ import java.util.Properties;
 
 import javax.xml.rpc.ServiceException;
 
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
+
 import cc_services.CTACTE_WSExecute;
 import cc_services.CTACTE_WSExecuteResponse;
 import cc_services.CTACTE_WSLocator;
@@ -26,12 +28,17 @@ import cc_services.Serv_sal_in;
 import py.com.roshka.pykasu.exceptions.HBGenericException;
 import py.com.roshka.pykasu.exceptions.HBQueryException;
 import py.com.roshka.pykasu.exceptions.HBUpdateException;
+import py.com.roshka.pykasu.persistence.payment.PaymentForm;
 import py.com.roshka.pykasu.persistence.users.User;
+import services.Liqui_in;
 import services.Ser03_in;
 import services.Serv_ahorroExecute;
 import services.Serv_ahorroExecuteResponse;
 import services.Serv_ahorroLocator;
 import services.Serv_ahorroSoapPort;
+import services.WsliquidacionExecute;
+import services.WsliquidacionLocator;
+import services.WsliquidacionSoapPort;
 
 
 public class HomeBankingItfV2 implements Serializable{
@@ -48,6 +55,7 @@ public class HomeBankingItfV2 implements Serializable{
 	private URL queryAccountURL = null;
 	private URL paymentCheckingAccountURL = null;
 	private URL paymentSavingAccountURL = null;
+	private URL savePaymentURL = null;
 	
 	public HomeBankingItfV2(User user) throws HBGenericException {
 
@@ -58,7 +66,9 @@ public class HomeBankingItfV2 implements Serializable{
 		try {
 			ClassLoader cl = getClass().getClassLoader();
 			properties = new Properties();
-			properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));;
+			//properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));;
+			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			properties.load(url.openStream());;
 			
 			queryAccountURL = new URL(properties.getProperty("WS_QUERY_ACCOUNT_URL"));
 			logger.info("WS_QUERY_ACCOUNT_URL: " + queryAccountURL.getPath());
@@ -68,9 +78,10 @@ public class HomeBankingItfV2 implements Serializable{
 			
 			paymentCheckingAccountURL = new URL(properties.getProperty("WS_PAYMENT_CHECKING_ACCOUNT_URL"));
 			logger.info("WS_PAYMENT_CHECKING_ACCOUNT_URL: " + paymentCheckingAccountURL.getPath());
-			
-			
-			
+
+			savePaymentURL = new URL(properties.getProperty("WS_PAYMENT_SAVE_PAYMENT_URL"));
+			logger.info("WS_PAYMENT_SAVE_PAYMENT_URL: " + savePaymentURL.getPath());
+
 			logger.debug("End of creating HomeBankingItf");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -146,7 +157,7 @@ public class HomeBankingItfV2 implements Serializable{
 				saving.setComprobante(transaccionNumber);
 				saving.setTipMovimiento(properties.getProperty("WS_SAVING_MOVIMENT_TYPE", "D"));
 				saving.setOrigen((byte)Integer.parseInt(properties.getProperty("WS_SAVING_ORIGIN", "18")));
-				
+				saving.setMoneda(account.getMoneyCode());
 				parameters.setSdt_in(saving);
 				
 				Serv_ahorroExecuteResponse response = savingPort.execute(parameters);
@@ -176,7 +187,7 @@ public class HomeBankingItfV2 implements Serializable{
 				}
 			
 			}else{
-				throw new HBUpdateException("El tipo de cuenta " + account.getType().toString() + " no es procesable.");
+				throw new HBUpdateException("El tipo de cuenta " + account.getType().toString() + " no se puede procesar.");
 			}
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -190,84 +201,52 @@ public class HomeBankingItfV2 implements Serializable{
 
 		
 	}
-//	public HBAccount performPayment(String ruc,
-//									String obligationTax,
-//									String resolutionNr,
-//									String accountNr, 
-//									double amountToPaydment,
-//									Integer month,
-//									Integer year)
-//		throws HBUpdateException
-//	{ 
-//		
-//		
-//		
-//		logger.debug("Setting segVision UsrTipo to 'A'");
-//	 	try {
-//	 		wsResponse.getSegvision().setUsrTipo("A");
-//
-//	 		int i = getAccount(accountNr);
-//			wsResponse.getSdtimpuestos()[i].setImpMonto(amountToPaydment);
-//			wsResponse.getSdtimpuestos()[i].setImpTpoImp(obligationTax);
-//			if(resolutionNr != null && !resolutionNr.trim().equalsIgnoreCase("")){
-//				wsResponse.getSdtimpuestos()[i].setImpNroRes(new Long(Integer.parseInt(resolutionNr)));
-//			}
-//			wsResponse.getSdtimpuestos()[i].setImpNroDoc(ruc);
-//			
-//			if(month != null)
-//				wsResponse.getSdtimpuestos()[i].setImpPdoMes(month.byteValue());
-//			
-//			if(year != null)
-//				wsResponse.getSdtimpuestos()[i].setImpPdoAmo(year.shortValue());
-//			
-//			wsie.setSegvision(wsResponse.getSegvision());
-//			wsie.setSdtimpuestos(wsResponse.getSdtimpuestos());
-//
-//			wsExcecute();
-//			SdtImpuestosItem sii = wsResponse.getSdtimpuestos()[getAccount(accountNr)];
-//			return new HBAccount(sii.getImpCtaNro(), sii.getImpCtaSdo() - sii.getImpMonto());
-//	 	} catch (HBGenericException e) {
-//			e.printStackTrace();
-//			throw new HBUpdateException();
-//		} 
-//	 	
-//	}
-//	
-//	private int getAccount(String accountNr) throws HBGenericException{
-//		int i = 0;
-//	 	long account = Long.parseLong(accountNr);
-//		while(wsResponse.getSdtimpuestos()[i].getImpCtaNro() != account){
-//			i ++;
-//		}
-//		return i;
-//	}
-//	
-//	private void wsExcecute() throws HBGenericException{
-//		try {
-//			logger.debug(">>>>>>>>> Going to Invoque WS");
-//			logger.debug("segVeision: \n" + wsie.getSegvision());
-//			for(int i=0; i< wsie.getSdtimpuestos().length; i++){
-//				logger.debug("sdtImpuestos: \n" + wsie.getSdtimpuestos()[i]);
-//			}
-//			logger.debug("sdtRespuestas: \n" + wsie.getSdtrespuestas());
-//			
-//			wsResponse = wsImpSoapPort.execute(wsie);
-//			
-//			logger.debug(">>>>>>>>> WS Response");
-//			logger.debug("segVeision: \n" + wsResponse.getSegvision());
-//			for(int i=0; i< wsResponse.getSdtimpuestos().length; i++){
-//				logger.debug("sdtImpuestos: \n" + wsResponse.getSdtimpuestos()[i]);
-//			}
-//			logger.debug("sdtRespuestas: \n" + wsResponse.getSdtrespuestas());
-//			logger.debug(">>>>>>>>> End of WS Response");
-//
-//		
-//		} catch (RemoteException e){
-//			e.printStackTrace();
-//			//return null;
-//			throw new HBGenericException("Error al intentar conectar al Web Service. Verificar la Conexión "+e);	
-//		}
-//	}
+
+	
+	public void registerPayment(PaymentForm pf) throws HBUpdateException{
+		try {
+			logger.info("Realizando pago: " + pf);
+			WsliquidacionLocator liqLocator = new WsliquidacionLocator();
+			WsliquidacionSoapPort liqPort = liqLocator.getwsliquidacionSoapPort(savePaymentURL);
+			
+			logger.debug("Creando liquidacion");
+			Liqui_in liquidacion = new Liqui_in();
+			logger.debug("Asignando usuario: " + properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
+			liquidacion.setUsuario(properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
+			logger.debug("Asignando ruc: " + pf.getRuc());
+			liquidacion.setNumero_Ruc(pf.getRuc());
+			logger.debug("Asignando monto a pagar: " + pf.getPaymentAmount());			
+			liquidacion.setMonto(pf.getPaymentAmount());
+			logger.debug("Asignando tipo de importe: " + pf.getObligation());
+			if(pf.getObligation() != null){
+				liquidacion.setTp_Importe((short)Integer.parseInt(pf.getObligation()));
+			}
+			logger.debug("Asignando periodo fiscal: " + pf.getFiscalPeriod());			
+			liquidacion.setPeriodo(pf.getFiscalPeriod());			
+			if(pf.getResolution()!= null){
+				logger.debug("Asignando resolucion: " + Integer.parseInt(pf.getResolution()));
+				liquidacion.setResolucion(Integer.parseInt(pf.getResolution()));
+			}
+
+			logger.debug("Creando y estableciendo parametros");
+			WsliquidacionExecute parameters = new WsliquidacionExecute();
+			parameters.setLiquidacion(liquidacion);
+			logger.debug("Ejecutando pago");
+			liqPort.execute(parameters);
+			
+			logger.info("Finalizo el PAGO");
+			
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			logger.error("Error al consumir el WebServices",e);
+			throw new HBUpdateException(e.getMessage());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			logger.error("Error al consumir el WebServices",e);
+			throw new HBUpdateException(e.getMessage());
+		}
 		
+	}
+	
 	
 }

@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -170,7 +171,10 @@ public class ProccessFileForm extends Action {
 		ClassLoader cl = getClass().getClassLoader();
 		Properties properties = new Properties();
 		try {
-			properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));
+//			properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));
+			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			properties.load(url.openStream());;
+			
 			path = properties.getProperty(py.com.roshka.pykasu.util.Globals.UPLOAD_FILE_FOLDER);
 		} catch (IOException e) {
 			logger.warn("Error al recuperar el archivo de propiedades para obtener el valor de " + py.com.roshka.pykasu.util.Globals.UPLOAD_FILE_FOLDER + ". Se utilizara el valor por omision: "+ path,e);

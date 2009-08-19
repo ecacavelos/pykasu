@@ -3,6 +3,7 @@ package py.com.roshka.pykasu.ejb;
 
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.annotation.EJB;
@@ -36,6 +37,7 @@ import py.com.roshka.pykasu.persistence.users.Role;
 import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.util.Globals;
 import py.com.roshka.pykasu.util.RoleManager;
+
 import py.com.roshka.util.mail.Mailer;
 
 
@@ -181,7 +183,10 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			Properties properties = new Properties();
 			
 			//properties.load(cl.getResourceAsStream(MAIL_PROPERTIES));
-			properties.load(cl.getResourceAsStream(Globals.PYKASU_PROPERTIES));
+			//properties.load(cl.getResourceAsStream(Globals.PYKASU_PROPERTIES));
+			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			properties.load(url.openStream());;
+
 			
 			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
 					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
