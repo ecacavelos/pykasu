@@ -20,9 +20,7 @@ import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.util.Utils;
 import py.com.roshka.pykasu.web.Globals;
 import py.com.roshka.pykasu.web.forms.PaymentFormWeb;
-import py.com.roshka.pykasu.web.util.HBAccount;
 import py.com.roshka.pykasu.web.util.HBAccountV2;
-import py.com.roshka.pykasu.web.util.HomeBankingItf;
 import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
 
 /**

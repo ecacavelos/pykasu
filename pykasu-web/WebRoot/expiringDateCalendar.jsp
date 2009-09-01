@@ -30,7 +30,7 @@
 </logic:present>
 
 <h1>Calendario de Vencimientos</h1>
-<html:form action="expiringDateCalendar">
+<html:form action="expiringDateCalendar" method="post">
 
 <h2>Perido fiscal</h2>
 <table style="width:100%;border-spacing:0">

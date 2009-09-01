@@ -217,7 +217,7 @@
 		} 
 	}
 	%>
-	<html:form action="paydment" styleId="paymentform">	
+	<html:form action="paydment" styleId="paymentform" method="post">	
 	<table width="90%" align="center">
 		<tr>
 			<td width="15%"><label>RUC:</label></td>

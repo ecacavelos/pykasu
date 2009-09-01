@@ -72,6 +72,7 @@ public class User implements Serializable{
 	public User(String fullName, String passwordDigest, String userName, String userPhoneNumber, 
 			String ruc, String dv, String userAddress, String userLocality, String bornDate, 
 			String email ,String userType, BusinessCompany bCompany) {
+		
 		this(userName, passwordDigest, fullName, bCompany);
 		this.phoneNumber = userPhoneNumber;
 		this.ruc = ruc;

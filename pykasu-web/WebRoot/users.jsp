@@ -26,7 +26,7 @@
 		py.com.roshka.pykasu.ui.util.ResultItem item = (py.com.roshka.pykasu.ui.util.ResultItem)results.next();	
 %>
 	<tr><td>
-		<form method="get" action="editUserItem.do">
+		<form method="post" action="editUserItem.do">
 		<table>
 		<tr>
 		<td width="70%"><%=item.getDescription()%><input type="hidden" name="id" value="<%=item.getId().toString()%>"></td>

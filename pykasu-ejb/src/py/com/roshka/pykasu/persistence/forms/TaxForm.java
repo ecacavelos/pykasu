@@ -115,6 +115,8 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 
 	private Integer orderNumber;
 	private Date presentationDate;
+	
+	private String messageInfo;
 
 	protected TaxForm(){
 		this.active = true;
@@ -343,6 +345,15 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 		this.presentationDate = presentationDate;
 	}
 	
+	@Column (name="msg_info")	
+	public String getMessageInfo() {
+		return messageInfo;
+	}
+
+	public void setMessageInfo(String messageInfo) {
+		this.messageInfo = messageInfo;
+	}
+
 	@Transient
 	public String getFiscalPeriod(){
 		String fp = (""+getFiscalPeriodYear());

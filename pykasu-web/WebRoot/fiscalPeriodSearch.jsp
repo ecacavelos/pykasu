@@ -25,7 +25,7 @@
 </logic:present>
 
 <h1>Búsqueda de Periodos Fiscales</h1>
-<html:form action="fiscalPeriodSearch">
+<html:form action="fiscalPeriodSearch" method="post">
 
 <h2>Perido fiscal</h2>
 <table style="width:100%;border-spacing:0">

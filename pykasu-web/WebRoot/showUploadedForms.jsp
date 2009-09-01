@@ -19,7 +19,7 @@
 <div id="main">
 
 	<h1>Formularios enviados al Sistema</h1>
-	<form name="showUploadForms" id="showUploadForms" action="showuploadforms.do">
+	<form name="showUploadForms" id="showUploadForms" action="showuploadforms.do" method="post">
 		<%pageContext.setAttribute("dateFormName","showUploadForms");
 		pageContext.setAttribute("dateVarName","init");%>
 		Desde:<%@include file="datemgr.jsp"%>

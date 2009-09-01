@@ -20,6 +20,7 @@ import py.com.roshka.pykasu.exceptions.InvalidUserNameException;
 import py.com.roshka.pykasu.exceptions.MailException;
 import py.com.roshka.pykasu.exceptions.PykasuGenericException;
 import py.com.roshka.pykasu.interfaces.SystemRegistration;
+import py.com.roshka.pykasu.persistence.users.BusinessCompany;
 import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.web.Globals;
 import py.com.roshka.pykasu.web.forms.RegisterUserForm;
@@ -30,17 +31,10 @@ import py.com.roshka.pykasu.web.forms.RegisterUserForm;
  *
  * @struts.action
  *  path = "/register"
- *  input = "/userform.jsp"
+ *  input = "/createUserForm.jsp"
  *  name = "RegisterUserForm"
  *  parameter = "formType"
- *  validate = "true";
- *
- * @struts.action
- *  path = "/registerJuridico"
- *  input = "/userJuridicoform.jsp"  
- *  name = "RegisterUserForm"
- *  parameter = "formType"
- *  validate = "true"; *      
+ *  validate = "true";  
  *  
  *  
  *  @struts.action-forward
@@ -49,25 +43,17 @@ import py.com.roshka.pykasu.web.forms.RegisterUserForm;
  *  
  *  @struts.action-forward
  *      name = "error"
- *      path = "/userform.jsp"
+ *      path = "/createUserForm.jsp"
  *
- *  @struts.action-forward
- *      name = "error"
- *      path = "/userform.jsp"
- *      
  */
 public class RegisterUserAction extends DispatchAction{
 
     static org.apache.log4j.Logger logger = org.apache.log4j.Logger
             .getLogger(RegisterUserAction.class);
     
-   // @Override
-   /* public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	return registerUser(mapping, form, request, response);
-    }
-    */
     public ActionForward registerUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
+
     	System.out.println("A registrar usuario");
         logger.info("Register User");
         if (!super.isCancelled(request)){
@@ -76,95 +62,32 @@ public class RegisterUserAction extends DispatchAction{
             
             InitialContext ic = new InitialContext();
             
-            SystemRegistration systemRegistration = (SystemRegistration) ic.lookup("pykasu/SystemRegistration/local");   
-            try{
+            SystemRegistration systemRegistration = (SystemRegistration) ic.lookup("pykasu/SystemRegistration/local");  
             
-	            if(registerUserForm.getUserType().equalsIgnoreCase(User.USER_TYPE_FISICO)){
-	            	System.out.println("Persona Fisica");
-	            	//Modifico para que reciba primero los datos de la PFisica (o UAdm) y desps los de la PJuridica
-	            	systemRegistration.register(registerUserForm.getUserName(),
-	            			registerUserForm.getFullName(),
-	            			registerUserForm.getPhoneNumber(),
-	            			registerUserForm.getRuc(),
-	            			registerUserForm.getDv(),
-	            			registerUserForm.getAddress(),
-	            			registerUserForm.getLocality(),
-	            			registerUserForm.getBornDate(),
-	            			registerUserForm.getEmail(),
-	            			registerUserForm.getPassword(),//HASTA ACA PF
-	            			registerUserForm.getFullName(),//Nombre de la empresa
-	            			"PERSONA_FISICA",//Ramo
-	            			registerUserForm.getRuc(),//Ruc
-	            			registerUserForm.getDv(),//DV
-	            			"null", //Persona de contacto
-	            			registerUserForm.getCiContactPerson(),// "null", //CI del contacto
-	            			registerUserForm.getAddress(), //Direccion de la empresa
-	            			registerUserForm.getLocality(), //Localidad
-	            			registerUserForm.getPhoneNumber(), //Telefono
-	            			"null", //Fax number
-	            			"null", //Fecha de constitucion
-	            			registerUserForm.getUserType()//Tipo de usuario (fisico, juridico)
-	            			);
-	            	
-	            	/*systemRegistration.register(registerUserForm.getUserName(),
-		                    registerUserForm.getPassword(),
-		                    registerUserForm.getFullName(),
-		                    registerUserForm.getEmail(),
-		                    registerUserForm.getRuc(),//El bussinesCompanyRuc es el Ruc de la PFisica
-		                    registerUserForm.getFullName(),//El BusinessCompanyName es el Nombre Completo
-		                    registerUserForm.getPhoneNumber(),
-		                    registerUserForm.getFaxNumber(),
-		                    registerUserForm.getAddress(),
-		                    registerUserForm.getUserType(),
-		                    registerUserForm.getComercialActivity(),
-		                    registerUserForm.getContactPerson(),
-		                    registerUserForm.getCiContactPerson()
-		                    
-		                    );*/
-		            request.setAttribute(Globals.MESSAGE,"La cuenta " + registerUserForm.getUserName() + " ha sido modificada.<br>Se le ha enviado un correo a la direccion " + registerUserForm.getEmail() + " con las instrucciones necesarias para activar la cuenta.");
-	            }else{//juridica
-	            	System.out.println("Peronsa juridica");
-	            	systemRegistration.register(registerUserForm.getUserName(),
-	            			registerUserForm.getFullName(),
-	            			registerUserForm.getPhoneNumber(),
-	            			registerUserForm.getBusinessCompanyRuc(),
-	            			registerUserForm.getDv(),
-	            			registerUserForm.getAddress(),
-	            			registerUserForm.getLocality(),
-	            			"null",//Fecha de nacimiento
-	            			registerUserForm.getEmail(),
-	            			registerUserForm.getPassword(),//HASTA ACA UAdm
-	            			registerUserForm.getBusinessCompanyName(),//Nombre de la empresa
-	            			registerUserForm.getComercialActivity(),//Ramo
-	            			registerUserForm.getBusinessCompanyRuc(),//Ruc
-	            			registerUserForm.getBusinessCompanyDV(),//DV
-	            			registerUserForm.getContactPerson(), //Persona de contacto
-	            			registerUserForm.getCiContactPerson(), //CI del contacto
-	            			registerUserForm.getAddress(), //Direccion de la empresa
-	            			registerUserForm.getLocality(), //Localidad
-	            			registerUserForm.getPhoneNumber(), //Telefono
-	            			registerUserForm.getFaxNumber(), //Fax number
-	            			registerUserForm.getConstitutionDate(), //Fecha de constitucion
-	            			registerUserForm.getUserType()//Tipo de usuario (fisico, juridico)
-	            			);
-	            	
-	            	/*systemRegistration.register(registerUserForm.getUserName(),
-		                    registerUserForm.getPassword(),
-		                    registerUserForm.getFullName(),
-		                    registerUserForm.getEmail(),
-		                    registerUserForm.getBusinessCompanyRuc(),
-		                    registerUserForm.getBusinessCompanyName(),
-		                    registerUserForm.getPhoneNumber(),
-		                    registerUserForm.getFaxNumber(),
-		                    registerUserForm.getAddress(),
-		                    registerUserForm.getUserType(),
-		                    registerUserForm.getComercialActivity(),
-		                    registerUserForm.getContactPerson(),
-		                    registerUserForm.getCiContactPerson()
-		                    
-		                    );*/
-		            request.setAttribute(Globals.MESSAGE,"La cuenta " + registerUserForm.getUserName() + " ha sido modificada.<br>Se le ha enviado un correo a la direccion " + registerUserForm.getEmail() + " con las instrucciones necesarias para activar la cuenta.");
-	            }
+            String clearPasswd = request.getParameter("tmpPassword");
+            try{
+
+	        	systemRegistration.register(
+	    			registerUserForm.getUserName(),
+	    			registerUserForm.getFullName(),
+	    			registerUserForm.getPhoneNumber(),
+	    			registerUserForm.getRuc(),
+	    			registerUserForm.getDv(),
+	    			registerUserForm.getAddress(),
+	    			registerUserForm.getLocality(),
+	    			registerUserForm.getEmail(),
+	    			//registerUserForm.getPassword(),
+	    			clearPasswd,
+	    			registerUserForm.getBusinessCompanyName(),//Nombre de la empresa
+	    			registerUserForm.getComercialActivity(),//Ramo
+	    			registerUserForm.getContactPerson(), //Persona de contacto
+	    			registerUserForm.getCiContactPerson(), //CI del contacto
+	    			registerUserForm.getFaxNumber(), //Fax number
+	    			registerUserForm.getConstitutionDate(), //Fecha de constitucion
+	    			registerUserForm.getUserType()//Tipo de usuario (fisico, juridico)
+				);
+	    	
+	            request.setAttribute(Globals.MESSAGE,"La cuenta " + registerUserForm.getUserName() + " ha sido modificada.<br>Se le ha enviado un correo a la direccion " + registerUserForm.getEmail() + " con las instrucciones necesarias para activar la cuenta.");
             
         	}catch (MailException e) {        		
         		logger.error(e);
