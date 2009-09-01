@@ -117,9 +117,11 @@ function encryp(){
 		<tr>			
 			<td><input type="button" value="Ingresar" onclick="encryp()" id="login_button"/></td>
 		</tr>
+		<tr><td><hr/></td></tr>		
 		<tr>			
-			<td><a href="showuserform.do">Registrar una cuenta nueva</a></td>
+			<td><a href="admissionform.do">Registrar una cuenta nueva</a></td>
 		</tr>
+		<tr><td><hr/></td></tr>
 		<tr><td><a href="/pycasu/html/FAQ.htm" target="_blank">Para más detalles, puede remitirse a las preguntas más frecuentes</a></td></tr>
 	</table>
 	</form>

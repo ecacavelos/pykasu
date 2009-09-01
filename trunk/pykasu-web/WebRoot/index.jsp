@@ -15,7 +15,7 @@
 		function showmessage()
 		{			
 			<logic:present name="PYKASU.MESSAGE">
-				alert('<bean:write name="PYKASU.MESSAGE" filter="false"/>')
+				//alert('<bean:write name="PYKASU.MESSAGE" filter="false"/>')
 			</logic:present>
 			<logic:present name="PYKASU.ERROR">
 				alert('<bean:write name="PYKASU.ERROR" filter="false"/>')

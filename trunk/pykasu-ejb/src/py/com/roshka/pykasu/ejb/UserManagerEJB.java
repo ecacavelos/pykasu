@@ -97,16 +97,21 @@ public class UserManagerEJB implements UserManager {
 	public void changePassword(String userName, String oldPassword, String newPassword)
 			throws LoginFailureException {
 		try{
+			
 			User user = getUser(userName, oldPassword);
 			user.setPasswordDigest(newPassword);
+			user.getBusinessCompany().setIsActive(Boolean.TRUE);
+			
+			em.persist(user);
+			
 		}catch (UserNotFoundException userNotFound) {
-			throw new LoginFailureException("Usuario " + userName + " no encontrado.");
+			throw new LoginFailureException("No se ha encontrado un usuario con la contraseña provista");
+			
 		}catch (LoginFailureException lfe){
 			throw lfe;	
 		}
-
 	}
-
+	
 //	@RolesAllowed("users")
 	public void updateDataUser(User user) {
 		logger.info("Updating user data for " + user.getUserName());

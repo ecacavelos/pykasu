@@ -62,19 +62,19 @@ public class UIManagerEJB implements UIManager{
 			logger.info(" ---------------------------> Principal! : "
 					+ sc.getCallerPrincipal());
 			
-			if(user.getBusinessCompany().getIsActive().equals(Boolean.FALSE)){
-				Program p = new Program("General","algo",1);
-				Action a = new Action("Activar cuenta","algo","activation.do");
-				Set actions = new HashSet();
-				actions.add(a);
-				a = new Action("Salir","","closepykasusession.do");
-				actions.add(a);
-				p.setActions(actions);
-				menu = new HashSet();
-				menu.add(p);
-				
-			}else{
-			
+//			if(user.getBusinessCompany().getIsActive().equals(Boolean.FALSE)){
+//				Program p = new Program("General","algo",1);
+//				Action a = new Action("Activar cuenta","algo","activation.do");
+//				Set actions = new HashSet();
+//				actions.add(a);
+//				a = new Action("Salir","","closepykasusession.do");
+//				actions.add(a);
+//				p.setActions(actions);
+//				menu = new HashSet();
+//				menu.add(p);
+//				
+//			}else
+			{
 				user.getRoles();
 				List userRoles = new ArrayList();
 				userRoles.addAll(user.getRoles());

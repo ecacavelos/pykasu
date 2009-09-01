@@ -25,7 +25,7 @@
 <jsp:include page="menu.jsp"/> 
 <div id="main"> 
 <div id="register">
-<html:form action="/register.do" >
+<html:form action="/register.do" method="post">
 
   <html:hidden property="formType" value="<%=(String)request.getAttribute(py.com.roshka.pykasu.web.Globals.USER_FORM_FORM_TYPE) %>"/>
   <html:hidden property="userType" value="fisico"/>
@@ -133,8 +133,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="formlabel">Fecha de nacimiento:</td>
-					<td class="formfield"><html:text property="bornDate"/></td>
+					<td class="formlabel">Fecha de nacimiento:(*)</td>
+					<td class="formfield"><html:text property="contitutionDate"/></td>
 				</tr>
 				<tr>
 					<td class="formlabel">

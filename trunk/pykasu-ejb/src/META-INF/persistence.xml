@@ -8,6 +8,7 @@
 >
    <persistence-unit name="pykasu">
       <jta-data-source>java:/PykasuDS</jta-data-source>
+      <class>py.com.roshka.pykasu.persistence.admission.Admission</class>
       <class>py.com.roshka.pykasu.persistence.raffle.RaffleTicket</class>
       <class>py.com.roshka.pykasu.persistence.payment.Account</class>
       <class>py.com.roshka.pykasu.persistence.payment.PaymentForm</class>

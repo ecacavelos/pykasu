@@ -17,7 +17,7 @@
 <jsp:include page="menu.jsp"/> 
 <div id="main">
 	<h1>Activar Cuenta</h1>
-	<form action="activationAccount.do" method="get">
+	<form action="activationAccount.do" method="post">
 	<table align="left">
 		<tr>
 			<th>Ingrese la clave de activación:</th>

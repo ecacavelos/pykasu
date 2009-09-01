@@ -7,14 +7,13 @@ public class Globals {
 	
 	public static final String SMTP_HOST = "172.30.1.3";
 	public static final String MAIL_ACTIVATION_SENDER = "tributos@vision.com.py";
-	public static final String MAIL_ACTIVATION_SUBJECT = "Datos para activacion de cuenta";
-	public static final String MAIL_ACTIVATION_BODY = "Gracias por registrarse.\n" +
-					        						  "Para terminar con el proceso de registro debe activar su cuenta.\n" +
-					        						  "Para activar su cuenta Ud. debe ingresar al sitio web https://formularios.vision.com.py/pycasu/ \n" + 
-					        						  "ingresar con su nombre de usuario y contrasena. " +
-					        						  "Se desplegara un menu en el lado izquierdo de la ventana, por favor elija la opcion 'Activar Cuenta'" +
-					        						  "Se le mostrara una ventana para ingresar su clave de activiacion, sea tan amable de ingresar esta clave. "+
-					        	                      "Su clave de activacion es: ";
+
+	public static final String MAIL_ACTIVATION_SUBJECT = "Registro de Cuenta Activado";
+	public static final String MAIL_ACTIVATION_BODY = "Gracias por utlizar el Sistema de Tributos Web.\n\nAhora su cuenta esta activada.\nPara ingresar por favor haga clic en el siguiente enlace:\nhttp://localhost:8080/pycasu/\ne ingrese con los siguietes datos:\n";
+
+	public static final String MAIL_ADMISSION_SUBJECT="Registro de Cuenta en Proceso";
+	public static final String MAIL_ADMISSION_BODY="Gracias por Registrar una solicitud para utilizar el Sistema de Tributos Web.\n\nPara validar su Registro, debe ingresar al siguiente enlace:\nhttp://localhost:8080/pycasu/activationreg.do?sn=";
+	
 	
 	public static final String RAFFLE_BEGIN = "RAFFLE_BEGIN"; 
 	public static final String RAFFLE_END = "RAFFLE_END";

@@ -22,14 +22,29 @@
 <jsp:include page="menu.jsp"/> 
 <div id="main">
 <div id="register">
-<html:form action="/showuserform.do">
+<html:form action="/showuserform.do" method="post">
 
   <logic:present name="PYKASU.ERROR">
 		<div id="errors">
 			<p><bean:write name="PYKASU.ERROR" filter="false"/></p>
 		</div>
   </logic:present>
-
+  
+  
+  Gracias por estar interesado en el Sistema de Tributos Web de Visión Banco <br/><br/>
+  A través de este sistema Ud podrá cargar formularios impositivos y disfrutar<br/> 
+  de los servicios que Visión Banco le brinda, como ser la presentación de dichos formularios,<br/> 
+  o el pago en línea de los mismos, entre otros.
+  <br/><br/>
+  Sea tan amable de elegir el tipo de cuenta que más se ajusta a sus necesidades:<br/>
+  
+   <html:radio property="type" value="MULTI_USER"/>Cuenta Empresarial<br/>
+  Con este tipo de cuenta, Ud y más personas relacionadas a su empresa, podran cargar formularios impositivos.<br/>
+ 
+  <html:radio property="type" value="SINGLE_USER"/>Cuenta Particular<br/>
+  Con este tipo de cuenta, Ud podran cargar sus formularios impositivos.<br/>
+  
+<!--   
   <table cellspacing="1" cellpadding="2" class="form">
 	<tr>
 		<td>
@@ -61,6 +76,7 @@
 		</td>
 	</tr>
   </table>
+ -->  
 </html:form>
 </div>
 </div>

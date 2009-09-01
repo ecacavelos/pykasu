@@ -7,6 +7,7 @@ import py.com.roshka.pykasu.exceptions.InvalidRucException;
 import py.com.roshka.pykasu.exceptions.InvalidUserNameException;
 import py.com.roshka.pykasu.exceptions.MailException;
 import py.com.roshka.pykasu.exceptions.PykasuFatalException;
+import py.com.roshka.pykasu.exceptions.PykasuGenericException;
 import py.com.roshka.pykasu.persistence.users.BusinessCompany;
 import py.com.roshka.pykasu.persistence.users.User;
 
@@ -27,5 +28,25 @@ public interface SystemRegistration {
 			throws InvalidRucException, InvalidUserNameException, MailException;
 	
 	public void activate(String activationKey)
-			throws ActivateAccountException;		
+			throws ActivateAccountException;
+	
+	
+	public User register(			
+			String userName,  //administrador 
+			String userFullName,  //administrador
+			String phoneNumber, 
+			String ruc, 
+			String dv, 
+			String address, 
+			String locality,  
+			String email,   
+			String passwordDigest, 
+			String businessCompanyName,  
+			String comercialActivity,	
+			String contactPerson, 
+			String ciContactPerson, 
+			String faxNumber, 
+			String constitutionDate, 
+			String userType) 
+	throws PykasuGenericException;	
 }

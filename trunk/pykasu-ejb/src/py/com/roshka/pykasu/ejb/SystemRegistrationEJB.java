@@ -3,7 +3,9 @@ package py.com.roshka.pykasu.ejb;
 
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 
 import javax.annotation.EJB;
@@ -30,6 +32,7 @@ import py.com.roshka.pykasu.exceptions.InvalidRucException;
 import py.com.roshka.pykasu.exceptions.InvalidUserNameException;
 import py.com.roshka.pykasu.exceptions.MailException;
 import py.com.roshka.pykasu.exceptions.PykasuFatalException;
+import py.com.roshka.pykasu.exceptions.PykasuGenericException;
 import py.com.roshka.pykasu.interfaces.SystemRegistration;
 import py.com.roshka.pykasu.interfaces.UserManager;
 import py.com.roshka.pykasu.persistence.users.BusinessCompany;
@@ -37,8 +40,10 @@ import py.com.roshka.pykasu.persistence.users.Role;
 import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.util.Globals;
 import py.com.roshka.pykasu.util.RoleManager;
+import py.com.roshka.pykasu.util.Utils;
 
 import py.com.roshka.util.mail.Mailer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 
 @Stateless
@@ -94,7 +99,7 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			
 			
 			//Si pertenece a una empresa que administra el sistema
-			if(bc.getIsAdministrative().equals(Boolean.TRUE)){
+			if(bc.getIsAdministrative().booleanValue()){
 				try {
 					role = rm.getRole(RoleManager.SYSTEMADMINROLENAME);
 				} catch (InvalidRoleException e) {
@@ -109,32 +114,43 @@ public class SystemRegistrationEJB implements SystemRegistration{
 
 	}
 
-
-//	public User register(String userName, String passwordDigest, String userFullName, 
-//    String businessCompanyRuc, String businessCompanyName)
-	public User register(String userName, String userFullName, String userPhoneNumber, String ruc, 
-			String dv, String userAddress, String userLocality, String bornDate, String email,   
-			String passwordDigest, String businessCompanyName, String comercialActivity,
-			String businessCompanyRuc, String businessCompanyDv, String contactPerson, 
-			String ciContactPerson, String businessAddress, String businessLocality, String businessPhoneNumber, 
-			String faxNumber, String constitutionDate, String userType)
-			throws InvalidRucException, InvalidUserNameException, MailException {
-
-//		BusinessCompany bc = new BusinessCompany(businessCompanyName, comercialActivity,
-//				businessCompanyRuc, businessCompanyDv, contactPerson, 
-//				ciContactPerson, businessAddress, businessLocality, businessPhoneNumber, 
-//				faxNumber, constitutionDate);
-
-		//El programa que hizo la gente de desarrollo de Vision no usa el IDENTITY de las tablas; usa select max()+1 :'( voy a tener que hacer lo mismo.
-//		Integer newid = new Integer(getNextId("id","BusinessCompany"));
-
-		BusinessCompany bc = new BusinessCompany(businessCompanyName, comercialActivity,
-				businessCompanyRuc, businessCompanyDv, contactPerson, 
-				ciContactPerson, businessAddress, businessLocality, businessPhoneNumber, 
-				faxNumber, constitutionDate);
-
+	public User register(			
+			String userName,  //administrador 
+			String userFullName,  //administrador
+			String phoneNumber, 
+			String ruc, 
+			String dv, 
+			String address, 
+			String locality,  
+			String email,   
+			String passwordDigest, 
+			String businessCompanyName, //puede ser null 
+			String comercialActivity,	
+			String contactPerson, 
+			String ciContactPerson, 
+			String faxNumber, 
+			String constitutionDate, 
+			String userType) 
+	throws PykasuGenericException{
+		
+		BusinessCompany bc = new BusinessCompany(
+					businessCompanyName, 
+					comercialActivity,
+					ruc, 
+					dv, 
+					contactPerson,	
+					ciContactPerson, 
+					address, 
+					locality, 
+					phoneNumber, 
+					faxNumber,
+					constitutionDate);
+		
+		bc.setEmail(email);
+		
 		try{
 			User userTmp = null;
+			logger.info(">>>>>>>>>>>>>>>>> :username" + userName);
 			userTmp = (User) em.createQuery("select u from User u where userName = :userName")
 								.setParameter("userName",userName)
 								.getSingleResult();
@@ -145,19 +161,19 @@ public class SystemRegistrationEJB implements SystemRegistration{
 		}catch (NoResultException e){
 			logger.info("User " + userName + " is not present in the system. Begin to create");
 		}
-				
-		
-//		newid = new Integer(getNextId("id","User"));
-		
+		String clearPasswd = passwordDigest;
+		try {
+			passwordDigest = Utils.SHA1(passwordDigest);
+		} catch (NoSuchAlgorithmException e1) {
+			logger.error(e1);
+		} catch (UnsupportedEncodingException e1) {
+			logger.error(e1);
+		}
 		//no se usa addUser porque este método requiere de un rol de Administrador.
-		User user = new User(userFullName,passwordDigest,userName, userPhoneNumber, 
-				ruc, dv, userAddress, userLocality, bornDate, email ,userType, bc);
-
-//		User user = new User(newid, userFullName,passwordDigest,userName, userPhoneNumber, 
-//				ruc, dv, userAddress, userLocality, bornDate, email ,userType, bc);
+		User user = new User(userFullName,passwordDigest,userName, phoneNumber, 
+				ruc, dv, address, locality, constitutionDate, email ,userType, bc);
 
 		user.setDocumentNumber(ciContactPerson); //le paso la CI para que sea usada por la persona a la hora de hacer pagos
-
 		
 		//al no usar el método addUser, se tienen que agregar los roles "a mano"
 		RoleManager rm = new RoleManager(em);
@@ -168,35 +184,42 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			role = rm.newRole(RoleManager.USERROLENAME,"Users role");			
 		}
 		user.getRoles().add(role);
+
 		try {
-			role = rm.getRole(RoleManager.ADMNISTRATORROLENAME);
+			role = rm.getRole(RoleManager.USERADMINROLENAME);
 		} catch (InvalidRoleException e) {
-			role = rm.newRole(RoleManager.ADMNISTRATORROLENAME,"Administators role");			
+			role = rm.newRole(RoleManager.USERADMINROLENAME,"Admins some Users properties");			
 		}
 		user.getRoles().add(role);
+		
+		if(userType.equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER)){
+			try {
+				role = rm.getRole(RoleManager.ADMNISTRATORROLENAME);
+			} catch (InvalidRoleException e) {
+				role = rm.newRole(RoleManager.ADMNISTRATORROLENAME,"Administators role");			
+			}
+			user.getRoles().add(role);
+		}
 		
 	
 		try {
 			
-			ClassLoader cl = getClass().getClassLoader();
-						
 			Properties properties = new Properties();
-			
-			//properties.load(cl.getResourceAsStream(MAIL_PROPERTIES));
-			//properties.load(cl.getResourceAsStream(Globals.PYKASU_PROPERTIES));
 			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
 			properties.load(url.openStream());;
-
 			
+			//Mail
 			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
 					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
 					user.getEmail(),
-					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT), 
-					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + user.getBusinessCompany().getActivationKey()
-			
+					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT),
+					//cuerpo del correo
+					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + 
+					"\nNombre de usuario:" +	user.getUserName() +
+					"\nContraseña:"+clearPasswd+
+					properties.getProperty("MAIL_TAIL","")
         	);
 
-		//	em.refresh(user);
 			em.persist(user);
 		
 		} catch (IOException e) {
@@ -213,9 +236,113 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			throw new MailException(e.getMessage());			
 		} 
 
+		return user;
+	}
+	
+	@Deprecated
+	public User register(
+			String userName, 
+			String userFullName, 
+			String userPhoneNumber, 
+			String ruc, 
+			String dv, 
+			String userAddress, 
+			String userLocality, 
+			String bornDate, 
+			String email,   
+			String passwordDigest, 
+			String businessCompanyName, 
+			String comercialActivity,
+			String businessCompanyRuc, 
+			String businessCompanyDv, 
+			String contactPerson, 
+			String ciContactPerson, 
+			String businessAddress, 
+			String businessLocality, 
+			String businessPhoneNumber, 
+			String faxNumber, 
+			String constitutionDate, 
+			String userType)
 
-
-		return (user);
+	throws InvalidRucException, InvalidUserNameException, MailException {
+		return null;
+//		BusinessCompany bc = new BusinessCompany(businessCompanyName, comercialActivity,
+//				businessCompanyRuc, businessCompanyDv, contactPerson, 
+//				ciContactPerson, businessAddress, businessLocality, businessPhoneNumber, 
+//				faxNumber, constitutionDate);
+//				bc.setType(userType);
+//
+//		try{
+//			User userTmp = null;
+//			userTmp = (User) em.createQuery("select u from User u where userName = :userName")
+//								.setParameter("userName",userName)
+//								.getSingleResult();
+//			
+//			if(userTmp != null){
+//				throw new InvalidUserNameException(userName + " es un nombre de usuario ya registrado en el sistema.");
+//			}
+//		}catch (NoResultException e){
+//			logger.info("User " + userName + " is not present in the system. Begin to create");
+//		}
+//				
+//		//no se usa addUser porque este método requiere de un rol de Administrador.
+//		User user = new User(userFullName,passwordDigest,userName, userPhoneNumber, 
+//				ruc, dv, userAddress, userLocality, bornDate, email ,userType, bc);
+//
+//		user.setDocumentNumber(ciContactPerson); //le paso la CI para que sea usada por la persona a la hora de hacer pagos
+//		
+//		//al no usar el método addUser, se tienen que agregar los roles "a mano"
+//		RoleManager rm = new RoleManager(em);
+//		Role role;
+//		try {
+//			role = rm.getRole(RoleManager.USERROLENAME);
+//		} catch (InvalidRoleException e) {
+//			role = rm.newRole(RoleManager.USERROLENAME,"Users role");			
+//		}
+//		user.getRoles().add(role);
+//
+//		
+//		if(userType != null && userType.equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER)){
+//			try {
+//				role = rm.getRole(RoleManager.ADMNISTRATORROLENAME);
+//			} catch (InvalidRoleException e) {
+//				role = rm.newRole(RoleManager.ADMNISTRATORROLENAME,"Administators role");			
+//			}
+//			user.getRoles().add(role);
+//		}
+//	
+//		try {
+//			
+//			Properties properties = new Properties();
+//			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+//			properties.load(url.openStream());;
+//
+//// ------------ ESTO DEBERIA DE DESCOMENTARSE --------------- y avisar en este correo al usuario que su registro ha sido			
+//			
+//			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
+//					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
+//					user.getEmail(),
+//					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT), 
+//					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + user.getBusinessCompany().getActivationKey()
+//        	);
+//
+//			em.persist(user);
+//		
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			logger.error(e);
+//			throw new MailException(e.getMessage());
+//		} catch (AddressException e) {
+//			e.printStackTrace();
+//			logger.error(e);
+//			throw new MailException(e.getMessage());
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//			logger.error(e);			
+//			throw new MailException(e.getMessage());			
+//		} 
+//
+//		return (user);
 	}
 
 	public void activate(String activationKey) throws ActivateAccountException {

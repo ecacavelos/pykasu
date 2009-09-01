@@ -12,9 +12,6 @@ import javax.persistence.Table;
 import py.com.roshka.pykasu.exceptions.InvalidRucException;
 
 //TODO Hacer que exista una empresa administradora
-//TODO Que no se coloque la fecha de hoy en los anticipos
-//TODO Verificar que todos los campos traigan correctamente su valor en 801 y 800
-//TODO Datos de los clientes. Corroborar que funcione bien. Que recupere siempre
 //TODO Cambio de contraseña
 
 @Entity (name = "BusinessCompany") 
@@ -22,6 +19,9 @@ import py.com.roshka.pykasu.exceptions.InvalidRucException;
 //@SequenceGenerator (name = "seq_bcompany", sequenceName="seq_bcompany")
 public class BusinessCompany implements Serializable {
 
+	public static final String TYPE_MULTI_USER  = "MULTI_USER";
+	public static final String TYPE_SINGLE_USER = "SIMPLE_USER";
+	
 	private Integer id;
 	private String name;//Nombre de la empresa
 	private String comercialActivity;//Ramo
@@ -40,6 +40,8 @@ public class BusinessCompany implements Serializable {
 	private Boolean isAdministrative;
 	private Boolean printFormService;
 	private Boolean client;
+	private String type;
+	private String status;
 //	private Set<Account> accounts = new HashSet<Account>();
 
 
@@ -281,8 +283,21 @@ public class BusinessCompany implements Serializable {
 	public void setClient(Boolean client) {
 		this.client = client;
 	}
-
-
+	@Column(name="type", length=20)
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	@Column(name="status", length=20)
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	
 	
 	

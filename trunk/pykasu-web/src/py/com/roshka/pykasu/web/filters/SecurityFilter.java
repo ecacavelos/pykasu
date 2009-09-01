@@ -1,6 +1,7 @@
 package py.com.roshka.pykasu.web.filters;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import javax.security.auth.Subject;
@@ -20,7 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.jboss.security.SimplePrincipal;
 import org.jboss.security.auth.callback.SecurityAssociationHandler;
 
+import py.com.roshka.pykasu.exceptions.PykasuFatalException;
 import py.com.roshka.pykasu.persistence.users.User;
+import py.com.roshka.pykasu.ui.menu.Action;
+import py.com.roshka.pykasu.ui.menu.Program;
 import py.com.roshka.pykasu.web.Globals;
 
 /**
@@ -44,17 +48,30 @@ public class SecurityFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		logger.debug(">>>>>>>>>> Enter in SecurityFilter! <<<<<<<<<<");
-		//logger.info(((HttpServletRequest) request).getRequestURI());
+		logger.info(((HttpServletRequest) request).getRequestURI());
 		try {
 			if ( ((HttpServletRequest) request).getParameter("j_username") != null || 
 					((HttpServletRequest) request).getRequestURI().contains("showuserform.do") || 
 					((HttpServletRequest) request).getRequestURI().contains("/register.do") ||
-					((HttpServletRequest) request).getRequestURI().contains("/registerJuridico.do"))	{
+					((HttpServletRequest) request).getRequestURI().contains("/registerJuridico.do") ||
+					((HttpServletRequest) request).getRequestURI().contains("activationreg.do") ||
+					((HttpServletRequest) request).getRequestURI().contains("admissionform.do"))	{
 				chain.doFilter(request, response);
 			} else {
 				
 				User userBean = (User) ((HttpServletRequest) request).getSession(false)
-				.getAttribute(Globals.LOGIN_USER);
+					.getAttribute(Globals.LOGIN_USER);
+
+//				if(!userBean.getBusinessCompany().getIsActive().booleanValue()){
+//					//redirigir a cambio de password
+//					((HttpServletResponse) response).sendRedirect("changePassword.do");
+//				}
+				
+//				List<Program> programs = (List<Program>)((HttpServletRequest)request).getSession(false).getAttribute(Globals.USER_PROGRAMS);
+//				
+//				if(!canAccess(((HttpServletRequest) request).getRequestURI(), programs)){
+//					throw new PykasuFatalException("No tiene permiso para " + ((HttpServletRequest) request).getRequestURI());
+//				}
 				
 				logger.info("user es null? "+(userBean==null));
 				logger.info(userBean.getUserName());
@@ -93,4 +110,20 @@ public class SecurityFilter implements Filter {
 
 	}
 
+	private boolean canAccess(String requestURI, List<Program> programs){
+		if(requestURI == null || programs == null){
+			return false;
+		}
+		
+		for(Program p : programs){
+			for(Action a : p.getActions()){
+				logger.info("Compare " + requestURI + " == " + a.getUrl());
+				if(requestURI.contains(a.getUrl())){					
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 }

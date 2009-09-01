@@ -12,6 +12,7 @@ public class RoleManager {
 	public static final String USERROLENAME = "users";
 	public static final String ADMNISTRATORROLENAME = "administrator";
 	public static final String SYSTEMADMINROLENAME = "sysadmin";
+	public static final String USERADMINROLENAME = "useradmin";
 
 	private EntityManager em;
 	

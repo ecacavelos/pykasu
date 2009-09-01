@@ -164,7 +164,7 @@ function lostFocus(obj){
 	<label style="text-decoration: blink; font-weight: bold">Cargando ... </label> 
 </div>
 <div id="form_div" style="visibility: hidden">
-<html:form action="enviarGenericForm.do">
+<html:form action="enviarGenericForm.do" method="post">
 
 	<html:errors/>
 	<html:hidden property="formName" 

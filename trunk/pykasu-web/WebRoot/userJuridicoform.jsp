@@ -1,10 +1,11 @@
-<%@ page contentType="text/html" language="java"
-
-%>
+<%@ page contentType="text/html" language="java"%>
 
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic"%>
+
+<jsp:directive.page import="py.com.roshka.pykasu.persistence.admission.*"/>
+<% Admission admission = (Admission) request.getAttribute("admission");  %>
 
 
 <html>
@@ -12,11 +13,6 @@
 <title>Sistema</title>
 <script LANGUAGE="JavaScript" SRC="menus.js"></script>
 <script LANGUAGE="JavaScript" SRC="js/sha1.js"></script>
-<script LANGUAGE="JavaScript">
-	function encryp2params(tmp_pass, obj){
-		obj.value = hex_sha1(tmp_pass.value)
-	}
-</script>
 <link href="styles/pykasu.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -25,7 +21,7 @@
 <jsp:include page="menu.jsp"/> 
 <div id="main">
 <div id="register">
-<html:form action="/registerJuridico.do" >
+<html:form action="/registerJuridico.do" method="post">
 
   <html:hidden property="formType" value="<%=(String)request.getAttribute(py.com.roshka.pykasu.web.Globals.USER_FORM_FORM_TYPE) %>"/>
   <html:hidden property="userType" value="juridico"/>
@@ -51,9 +47,7 @@
 		<td>
 		  <table width="100%">
 			    <tr>
-					<td class="formlab" colspan="2">
-						Nombre de la cuenta:
-					</td>
+					<td class="formlab" colspan="2">Nombre de la cuenta:</td>
 					<td>
 						<html:text property="userName"/>
 						<html:errors property="userform.userName.mandatory"/>
@@ -82,9 +76,7 @@
 					</tr>
 					
 					<tr>
-						<td class="formlabel">
-							Ramo:
-						</td>
+						<td class="formlabel">Ramo:</td>
 						<td class="formfield">
 							<html:text property="comercialActivity"/> 
 						</td>
@@ -110,7 +102,7 @@
 							Persona de contacto:
 						</td>
 						<td class="formfield">
-							<html:text property="contactPerson"/> 
+							<html:text property="contactPerson" value="<%=admission.getContactPerson()%>"/> 
 						</td>
 					</tr>
 					<tr>
@@ -159,7 +151,7 @@
 							Fecha de constitución:
 						</td>
 						<td class="formfield">
-							<html:text property="constitutionDate"/>
+							<html:text property="constitutionDate" />
 						</td>
 					</tr>
 				</logic:notPresent>
@@ -189,7 +181,7 @@
 						Correo electrónico:
 					</td>
 					<td colspan="3" class="formfield">
-						<html:text property="email" size="40"/>
+						<html:text property="email" size="40" value="<%=admission.getMail()%>"/>
 						<html:errors property="userform.email.mandatory"/>
 					</td>		
 				</tr>	

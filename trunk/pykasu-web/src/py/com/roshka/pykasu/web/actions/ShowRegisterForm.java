@@ -6,6 +6,8 @@
  */
 package py.com.roshka.pykasu.web.actions;
 
+import java.util.List;
+
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +17,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.sun.org.apache.commons.beanutils.BeanUtils;
+
+import py.com.roshka.pykasu.interfaces.AdmissionManager;
 import py.com.roshka.pykasu.interfaces.SystemRegistration;
+import py.com.roshka.pykasu.persistence.admission.Admission;
 import py.com.roshka.pykasu.web.Globals;
 import py.com.roshka.pykasu.web.forms.RegisterUserForm;
 import py.com.roshka.pykasu.web.forms.SelectUserType;
@@ -25,23 +31,15 @@ import py.com.roshka.pykasu.web.forms.SelectUserType;
  *
  * @struts.action
  *  path = "/showuserform"
- *  name = "SelectUserType"
- *    
- *  @struts.action-forward
- *      name = "success"
- *      path = "/userform.jsp"
- *  	
- *  @struts.action-forward
- *      name = "selectUserType"
- *      path = "/selectUserType.jsp"
- *      
- *  @struts.action-forward
- *      name = "userForm"
- *      path = "/userform.jsp"
  *
  *  @struts.action-forward
- *      name = "userJuridicoForm"
- *      path = "/userJuridicoform.jsp"           
+ *      name = "userForm"
+ *      path = "/createUserForm.jsp"
+ *      
+ *  @struts.action-forward
+ *      name = "error"
+ *      path = "/index.jsp"           
+ *                 
  */
 public class ShowRegisterForm extends Action{
    
@@ -49,32 +47,37 @@ public class ShowRegisterForm extends Action{
     
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        //ACA DIFERENCIAR
-    	String fwd = "";
-    	if(form != null){
-    		SelectUserType formu = (SelectUserType) form;
-    		
-    		String userType = formu.getUserType(); 
-        	if(userType != null){//Si no es null, se ve a que tipo de formulario direccionar
-        		request.setAttribute(Globals.USER_FORM_FORM_TYPE,Globals.USER_FORM_REGISTER_USER);
-
-        		//VER PA QUE SE PONE ESTO
-        		//TODO: PONER DESPUES POR ATRIBUTO TB EL TIPO DE USER
-        		if(userType.equalsIgnoreCase("fisico")){
-        			formu.setUserType(null);
-            		fwd = "userForm";
-            	}else{
-            		formu.setUserType(null);
-            		fwd = "userJuridicoForm";
-            	}
-        	}else{
-        		fwd = "selectUserType";
-        	}
-    	}else{//Si es null, hay que seleccionar el tipo de persona a registrar
-    		fwd = "selectUserType";
+    	
+    	if(request.getParameter("admissionId")==null){
+    		request.setAttribute(Globals.ERROR,"La aplicación detectó un parámetro incorrecto en su solicitud");
+    		return mapping.findForward("error");
     	}
-        
-        //return mapping.findForward("success");
-        return mapping.findForward(fwd);
+    	
+    	try{
+	    	Integer admissionId = Integer.parseInt(request.getParameter("admissionId"));
+	    	
+			InitialContext ic = new InitialContext();
+			AdmissionManager am =  (AdmissionManager) ic.lookup("pykasu/AdmissionManager/local");
+			Admission admission = am.getAdmission(admissionId);
+	
+	    	request.setAttribute("admission", admission);
+	    	
+	    	request.setAttribute(Globals.USER_FORM_FORM_TYPE, Globals.USER_FORM_REGISTER_USER); 
+	    		    	
+	        return mapping.findForward("userForm");
+	        
+    	}catch (Exception e) {
+    		request.setAttribute(Globals.ERROR,"La aplicación detectó un parámetro incorrecto en su solicitud");
+    		return mapping.findForward("error");
+		}
     }
+    
+	
+	/*
+	 *   EmployeeService service = new EmployeeService();
+		EmployeeForm employeeForm = (EmployeeForm) form;
+		EmployeeDTO employeeDTO = new EmployeeDTO();
+		BeanUtils.copyProperties( employeeDTO, employeeForm ); 
+	 * 
+	 * */    
 }
