@@ -19,11 +19,17 @@ import org.jboss.annotation.ejb.RemoteBinding;
 import org.jboss.annotation.security.SecurityDomain;
 
 import py.com.roshka.pykasu.exceptions.FindingException;
+import py.com.roshka.pykasu.exceptions.InvalidRoleException;
 import py.com.roshka.pykasu.exceptions.LoginFailureException;
+import py.com.roshka.pykasu.exceptions.PykasuFatalException;
+import py.com.roshka.pykasu.exceptions.PykasuGenericException;
 import py.com.roshka.pykasu.exceptions.UserNotFoundException;
 import py.com.roshka.pykasu.interfaces.UserManager;
+import py.com.roshka.pykasu.persistence.users.BusinessCompany;
+import py.com.roshka.pykasu.persistence.users.Role;
 import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.ui.util.ResultItem;
+import py.com.roshka.pykasu.util.RoleManager;
 
 
 @Stateless
@@ -170,6 +176,67 @@ public class UserManagerEJB implements UserManager {
 			logger.error(e);
 			throw new FindingException(e.getMessage());
 		}
+		return user;
+	}
+	
+	public List<User> getUsers() throws PykasuGenericException{
+		User loggedUser = null;
+		try {
+			loggedUser = findUserByName(sc.getCallerPrincipal().getName());
+	
+	    	List<User>users=  (List<User>) em.createQuery("select users from User as users where users.businessCompany = :businessCompany")
+	    				.setParameter("businessCompany",loggedUser.getBusinessCompany())
+	    				.getResultList();
+	    	
+	    	
+	    	return users;
+		}catch (Exception e) {
+			throw new PykasuGenericException(e); 
+		}
+	}
+	
+	public User getUser(String userId) throws PykasuGenericException{
+		Integer i = Integer.parseInt(userId);
+		return  em.find(User.class, i);
+	}
+	
+	public void save(User user) throws PykasuGenericException{
+		try{
+			//em.refresh(user);
+			em.merge(user);
+			//em.persist(user);
+		}catch (Exception e) {
+			logger.error(e);
+			throw new PykasuGenericException(e);
+		}
+	}
+
+	public User createUser(String userName, String passwordDigest, String fullName, String documentNumber, String email, BusinessCompany bc) throws PykasuGenericException{
+		User user = new User(fullName,  passwordDigest,  userName, bc.getPhoneNumber(), 
+				 bc.getRuc(), bc.getDv(),  bc.getAddress(),  bc.getLocality(),  bc.getConstitutionDate(), 
+				 email, bc.getType(), bc);
+		user.setDocumentNumber(documentNumber);
+		
+		RoleManager rm = new RoleManager(em);
+		Role role;
+		try {
+			role = rm.getRole(RoleManager.USERROLENAME);
+		} catch (InvalidRoleException e) {
+			throw new PykasuFatalException(RoleManager.USERROLENAME + " is not found!");
+		}
+		user.getRoles().add(role);
+
+		try {
+			role = rm.getRole(RoleManager.USERADMINROLENAME);
+		} catch (InvalidRoleException e) {
+			role = rm.newRole(RoleManager.USERADMINROLENAME,"User Administration role");			
+		}
+		user.getRoles().add(role);			
+		
+		
+		em.persist(user);
+		
+		
 		return user;
 	}
 

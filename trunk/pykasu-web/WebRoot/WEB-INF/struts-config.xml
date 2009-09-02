@@ -22,6 +22,10 @@
       type="py.com.roshka.pykasu.web.forms.ExpiringDateCalendar"
     />
     <form-bean
+      name="UserEditForm"
+      type="py.com.roshka.pykasu.web.actions.forms.UserEditForm"
+    />
+    <form-bean
       name="UploadForm"
       type="py.com.roshka.pykasu.web.forms.UploadForm"
     />
@@ -285,6 +289,26 @@
       />
     </action>
     <action
+      path="/edituser"
+      type="py.com.roshka.pykasu.web.actions.EditUserAction"
+      name="UserEditForm"
+      scope="request"
+      input="/editUser.jsp"
+      unknown="false"
+      validate="true"
+    >
+      <forward
+        name="success"
+        path="/index.jsp"
+        redirect="false"
+      />
+      <forward
+        name="this"
+        path="/editUser.jsp"
+        redirect="false"
+      />
+    </action>
+    <action
       path="/admissionslist"
       type="py.com.roshka.pykasu.web.actions.ShowAdmissionAction"
       unknown="false"
@@ -507,7 +531,7 @@
       />
       <forward
         name="error"
-        path="/createUserForm.jsp"
+        path="/index.jsp"
         redirect="false"
       />
     </action>

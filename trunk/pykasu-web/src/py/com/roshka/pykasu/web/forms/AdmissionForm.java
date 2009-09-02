@@ -141,48 +141,53 @@ public class AdmissionForm extends ActionForm {
 		ActionErrors errors = new ActionErrors();
 		
 		logger.info("Validate Admission Form");
-		if(getType() != null){
+		request.setAttribute("type", request.getParameter("type"));
+		if((""+request.getParameter("loaded")).equalsIgnoreCase("true")){
 			if(getType().equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER)){
 				if(getCompanyName() == null || getCompanyName().trim().length() == 0){
 		            errors.add("userform.companyName.mandatory", new ActionError("userform.companyName.mandatory"));
-		            logger.info("userform.companyName.mandatory");
+		            logger.warn("userform.companyName.mandatory");
 				}
 			}
 			if(getRuc() == null || getRuc().trim().length() == 0){
 	            errors.add("userform.ruc.mandatory", new ActionError("userform.ruc.mandatory"));
-	            logger.info("userform.ruc.mandatory");				
+	            logger.warn("userform.ruc.mandatory");				
 			}
 			if(getDv() == null || getDv().trim().length() == 0){
 	            errors.add("userform.dv.mandatory", new ActionError("userform.dv.mandatory"));
-	            logger.info("userform.dv.mandatory");				
+	            logger.warn("userform.dv.mandatory");				
 			}
 			if(getAddress() == null || getAddress().trim().length() == 0){
 	            errors.add("userform.address.mandatory", new ActionError("userform.address.mandatory"));
-	            logger.info("userform.address.mandatory");				
+	            logger.warn("userform.address.mandatory");				
 			}
 			if(getPhone() == null || getPhone().trim().length() == 0){
 	            errors.add("userform.phone.mandatory", new ActionError("userform.phone.mandatory"));
-	            logger.info("userform.phone.mandatory");				
-			}			
+	            logger.warn("userform.phone.mandatory");				
+			}
+			if(getOffice() == null || getOffice().trim().length() == 0){
+	            errors.add("userform.office.mandatory", new ActionError("userform.office.mandatory"));
+	            logger.warn("userform.office.mandatory");				
+			}
 			if(getCiContactPerson() == null || getCiContactPerson().trim().length() == 0){
 	            errors.add("userform.ci.mandatory", new ActionError("userform.ci.mandatory"));
-	            logger.info("userform.ci.mandatory");				
+	            logger.warn("userform.ci.mandatory");				
 			}			
 			if(getConstitution() == null || getConstitution().trim().length() == 0){
 	            errors.add("userform.date.mandatory", new ActionError("userform.date.mandatory"));
-	            logger.info("userform.date.mandatory");				
+	            logger.warn("userform.date.mandatory");				
 			}
 			if(getFname() == null || getFname().trim().length() == 0){
 	            errors.add("userform.name.mandatory", new ActionError("userform.name.mandatory"));
-	            logger.info("userform.name.mandatory");				
+	            logger.warn("userform.name.mandatory");				
 			}
 			if(getLname() == null || getLname().trim().length() == 0){
 	            errors.add("userform.lastName.mandatory", new ActionError("userform.lastName.mandatory"));
-	            logger.info("userform.lastName.mandatory");				
+	            logger.warn("userform.lastName.mandatory");				
 			}
 			if(getMail() == null || getMail().trim().length() == 0){
 	            errors.add("userform.email.mandatory", new ActionError("userform.email.mandatory"));
-	            logger.info("userform.email.mandatory");				
+	            logger.warn("userform.email.mandatory");				
 			}
 
 		}

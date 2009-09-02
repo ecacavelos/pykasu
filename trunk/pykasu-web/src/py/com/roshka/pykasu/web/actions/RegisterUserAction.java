@@ -16,9 +16,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import py.com.roshka.pykasu.ejb.AdmissionManagerEJB;
 import py.com.roshka.pykasu.exceptions.InvalidUserNameException;
 import py.com.roshka.pykasu.exceptions.MailException;
 import py.com.roshka.pykasu.exceptions.PykasuGenericException;
+import py.com.roshka.pykasu.interfaces.AdmissionManager;
 import py.com.roshka.pykasu.interfaces.SystemRegistration;
 import py.com.roshka.pykasu.persistence.users.BusinessCompany;
 import py.com.roshka.pykasu.persistence.users.User;
@@ -40,10 +42,10 @@ import py.com.roshka.pykasu.web.forms.RegisterUserForm;
  *  @struts.action-forward
  *      name = "success"
  *      path = "/index.jsp"
- *  
+ *      
  *  @struts.action-forward
  *      name = "error"
- *      path = "/createUserForm.jsp"
+ *      path = "/index.jsp"
  *
  */
 public class RegisterUserAction extends DispatchAction{
@@ -51,7 +53,7 @@ public class RegisterUserAction extends DispatchAction{
     static org.apache.log4j.Logger logger = org.apache.log4j.Logger
             .getLogger(RegisterUserAction.class);
     
-    public ActionForward registerUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward registerUser(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
     	System.out.println("A registrar usuario");
@@ -67,28 +69,39 @@ public class RegisterUserAction extends DispatchAction{
             String clearPasswd = request.getParameter("tmpPassword");
             try{
 
-	        	systemRegistration.register(
-	    			registerUserForm.getUserName(),
-	    			registerUserForm.getFullName(),
-	    			registerUserForm.getPhoneNumber(),
-	    			registerUserForm.getRuc(),
-	    			registerUserForm.getDv(),
-	    			registerUserForm.getAddress(),
-	    			registerUserForm.getLocality(),
-	    			registerUserForm.getEmail(),
-	    			//registerUserForm.getPassword(),
-	    			clearPasswd,
-	    			registerUserForm.getBusinessCompanyName(),//Nombre de la empresa
-	    			registerUserForm.getComercialActivity(),//Ramo
-	    			registerUserForm.getContactPerson(), //Persona de contacto
-	    			registerUserForm.getCiContactPerson(), //CI del contacto
-	    			registerUserForm.getFaxNumber(), //Fax number
-	    			registerUserForm.getConstitutionDate(), //Fecha de constitucion
-	    			registerUserForm.getUserType()//Tipo de usuario (fisico, juridico)
-				);
-	    	
+	        	User user =
+		        	systemRegistration.register(
+		    			registerUserForm.getUserName(),
+		    			registerUserForm.getFullName(),
+		    			registerUserForm.getPhoneNumber(),
+		    			registerUserForm.getRuc(),
+		    			registerUserForm.getDv(),
+		    			registerUserForm.getAddress(),
+		    			registerUserForm.getLocality(),
+		    			registerUserForm.getEmail(),
+		    			//registerUserForm.getPassword(),
+		    			clearPasswd,
+		    			registerUserForm.getBusinessCompanyName(),//Nombre de la empresa
+		    			registerUserForm.getComercialActivity(),//Ramo
+		    			registerUserForm.getContactPerson(), //Persona de contacto
+		    			registerUserForm.getCiContactPerson(), //CI del contacto
+		    			registerUserForm.getFaxNumber(), //Fax number
+		    			registerUserForm.getConstitutionDate(), //Fecha de constitucion
+		    			registerUserForm.getUserType(),//Tipo de usuario (fisico, juridico)
+		    			registerUserForm.getOffice()
+					);
+	        		        		    	
 	            request.setAttribute(Globals.MESSAGE,"La cuenta " + registerUserForm.getUserName() + " ha sido modificada.<br>Se le ha enviado un correo a la direccion " + registerUserForm.getEmail() + " con las instrucciones necesarias para activar la cuenta.");
-            
+	            if(request.getParameter("admissionId")!=null){
+	            	try{
+	            	AdmissionManager amgr = (AdmissionManager) ic.lookup("pykasu/AdmissionManager/local");
+	            	amgr.admitedAdmission(Integer.parseInt(request.getParameter("admissionId")), user.getBusinessCompany());
+	            	}catch (PykasuGenericException e) {
+	            		logger.error(e);
+	            		request.setAttribute(Globals.ERROR,"Ocurrió un error al establecer el estado de esta Admisión a " + AdmissionManagerEJB.STATUS_CONFIGURADO+". Esto no le afectará al usuario.");
+					}
+	            }
+	            
         	}catch (MailException e) {        		
         		logger.error(e);
         		e.printStackTrace();

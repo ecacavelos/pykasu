@@ -1,6 +1,7 @@
 <%@ page contentType="text/html" language="java"
 
 %>
+<%@page import="py.com.roshka.pykasu.persistence.users.User"%>
 
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
@@ -18,55 +19,32 @@
 <jsp:include page="menu.jsp"/> 
 <div id="main"> 
 
-<h2><%=(String)request.getAttribute(py.com.roshka.pykasu.web.Globals.GLOBAL_TITLE)%></h2>
-<table>
+<h3><%=(String)request.getAttribute(py.com.roshka.pykasu.web.Globals.GLOBAL_TITLE)%></h3>
+	<table border="1">
 <%
-	java.util.Iterator results = ((java.util.List)request.getAttribute(py.com.roshka.pykasu.web.Globals.USER_USERS_LIST)).iterator();
-	while (results.hasNext()){
-		py.com.roshka.pykasu.ui.util.ResultItem item = (py.com.roshka.pykasu.ui.util.ResultItem)results.next();	
-%>
-	<tr><td>
-		<form method="post" action="editUserItem.do">
-		<table>
+	java.util.List<User> users = ((java.util.List<User>)request.getAttribute(py.com.roshka.pykasu.web.Globals.USER_USERS_LIST));
+	if(users.size() == 0){%>
+		<tr><td>No hay registros</td></tr>
+	<%}else{%>
 		<tr>
-		<td width="70%"><%=item.getDescription()%><input type="hidden" name="id" value="<%=item.getId().toString()%>"></td>
-		<td width="10%">
-			<%
-				if (item.isShowDetails()){
-			%>
-				<input type="submit" value="Detalles" name="option"> 
-			<%}else{ %>
-				 Detalles
-			<%}%>
-		</td>
-		<td width="10%">
-			<%
-				if (item.isEditable()){
-			%>
-				<input type="submit" value="Editar" name="option"> 
-			<%}else{ %>
-				 Editar
-			<%}%>
-		</td>
-		<td width="10%">
-			<%
-				if (item.isDeleteable()){
-			%>
-				<input type="submit" value="Borrar" name="option"> 
-			<%}else{ %>
-				 Borrar
-			<%}%>
-		</td>
-		</tr>
-		</table>
-		</form>
-		</td>
-	</tr>
-
-<%}%>
-</table>
-<%
-%>
+			<th>Usuario</th>
+			<th>Nombre</th>
+			<th>CI</th>
+			<th>Correo</th>
+			<th>&nbsp;</th>						
+		</tr>		
+		<%for(User user : users){%>
+		<tr>
+			<td><%=user.getUserName() %></td>		
+			<td><%=user.getFullName()%></td>
+			<td><%=user.getDocumentNumber()%></td>
+			<td><%=user.getEmail()%></td>
+			<td><form action="edituser.do" method="post"><input type="hidden" name="userId" value="<%=user.getId()%>" /><input type="submit" value="Editar"/> </form></td>				
+		</tr>		
+		
+		<%}%>
+	<%}%>		
+	</table>
 </div>
 </body>
 </html>

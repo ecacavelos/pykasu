@@ -48,7 +48,11 @@ public class AdmissionAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		if(request.getParameter("loaded")!=null){ //hay datos cargados
+		if(request.getParameter("type")!=null){
+			request.setAttribute("type", request.getParameter("type"));
+		}
+		
+		if((""+request.getParameter("loaded")).equalsIgnoreCase("true")){ //hay datos cargados
 			InitialContext ic = new InitialContext();
 			AdmissionManager am =  (AdmissionManager) ic.lookup("pykasu/AdmissionManager/local");
 			try{	

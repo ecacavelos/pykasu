@@ -347,3 +347,9 @@ p.app-title{
 	color: silver;
 	padding-left: 14px;
 }
+
+#inputform input{
+	font-family: Verdana,Arial;
+	font-size: 10px;
+	 
+}

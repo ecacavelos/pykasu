@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" language="java" %>
+<%@page import="py.com.roshka.pykasu.persistence.users.BusinessCompany"%>
 
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
@@ -11,39 +12,20 @@
 <script LANGUAGE="JavaScript" SRC="js/sha1.js"></script>
 <link href="styles/pykasu.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-	
-	function  showSelectedForm(){
-		var radio = document.getElementById('multiuser');
-		if(radio.checked){
-			showform('MULTI_USER');
-		}else{
-			radio = document.getElementById('singleuser');
-			if(radio.checked){
-				showform('SINGLE_USER');
-			}
-		}
-	
-	}
 
-	function showform(formtype){
+	function sendform(dataloaded){
+		var loaded = document.getElementById('loaded');
+		loaded.value = dataloaded;
 		
-		var table = document.getElementById(formtype);
-		table.style.display = '';
+		document.forms[1].submit();
 
-		if(formtype == 'MULTI_USER'){
-			formtype = 'SINGLE_USER';
-		}else if(formtype == 'SINGLE_USER'){
-			formtype = 'MULTI_USER'
-		} 
-		
-		table = document.getElementById(formtype);
-		table.style.display = 'none';
+		return true;
 	}
 </script>
 
 </head>
 
-<body onload="showSelectedForm()">
+<body>
 <jsp:include page="header.jsp"/> 
 <jsp:include page="menu.jsp"/> 
 <div id="main">
@@ -51,7 +33,8 @@
 <div id="register">
 <h3>Solicitud de Ingreso</h3>
 <br><html:form action="/admissionform.do" method="post">
-
+  <input type="hidden" name="loaded" id="loaded" value="false"/>
+  
   <b>Gracias por estar interesado en el Sistema de Tributos Web de Visión Banco</b><br/><br/>
   A través de este sistema Ud podrá cargar formularios impositivos y disfrutar<br/> 
   de los servicios que Visión Banco le brinda, como ser la presentación de dichos formularios,<br/> 
@@ -59,19 +42,19 @@
   <br/><br/>
   Sea tan amable de elegir el tipo de cuenta que más se ajusta a sus necesidades:<br/>
   
-   <html:radio property="type" value="MULTI_USER" onchange="showform('MULTI_USER')" styleId="multiuser"/><b>Cuenta Empresarial</b><br/>
+   <html:radio property="type" value="MULTI_USER" onclick="sendform('false')" styleId="multiuser"/><b>Cuenta Empresarial</b><br/>
   Con este tipo de cuenta, Ud y más personas relacionadas a su empresa, podran cargar formularios impositivos.<br/>
   Generalmente este tipo de cuenta, se ajusta a Empresas Contables que registran formularios impositivos de sus clientes.<br/><br/> 
-  <html:radio property="type" value="SINGLE_USER" onchange="showform('SINGLE_USER')" styleId="singleuser"/><b>Cuenta Particular</b><br/>
+  <html:radio property="type" value="SINGLE_USER" onclick="sendform('false')" styleId="singleuser"/><b>Cuenta Particular</b><br/>
   Con este tipo de cuenta, Ud podran cargar sus formularios impositivos.<br/>
   Normalmente, este tipo de cuenta es seleccionado por personas independientes que cargar sus formularios impositivos.
   <br/> 
   <br/>
   Una vez seleccionado el tipo de cuenta, se le requerirán algunos datos necesarios para realizar el registos<br/>
   Los campos marcados con (*) indican que son obligatorios.
-  <input type="hidden" name="loaded" value="true"/>
   <br/><br/><br/>
-  <table id="MULTI_USER" style="display: none;">
+  <%if((""+request.getAttribute("type")).equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER)){%>  
+  <table>  
 	  <tr><td colspan="4" align="center"><h3>Datos de la Empresa</h3></td></tr>
 	   <tr>
 	  		<td>Nombre de la empresa: (*)</td>
@@ -98,7 +81,7 @@
 	  		<td colspan="1"><html:text property="locality"></html:text></td>  		
 	  	</tr>  	
 	  	<tr>
-	  		<td>Sucursal más cercana:</td>  		  		
+	  		<td>Centro de Atención al Cliente<br/>donde retirará sus formularios:(*)</td>  		  		
 	  		<td colspan="3">
 	  			<html:select property="office">
 					<optgroup label="Asunción">
@@ -150,7 +133,8 @@
 						<option value="SANTA ROSA DEL AGUARAY">Santa Rosa del Aguaray - Ruta General Aquino c/ Prof. Pedro Gónzalez</option>
 						<option value="VILLARRICA">Villarrica - Avda. Carlos A. López esq. Mcal. Estigarribia</option>
 					</optiongroup>  			
-	  			</html:select>
+	  			</html:select><br/>
+	  			<html:errors property="userform.office.mandatory"/></td>
 	  		</td>  		
 	  	</tr>  	  	
 	  	<tr>
@@ -162,7 +146,8 @@
 	  	</tr>  	
 	  	<tr>
 	  		<td>Fecha de constitución: (*)</td>
-	  		<td colspan="3"><html:text property="constitution"></html:text></td>
+	  		<td colspan="3"><html:text property="constitution"></html:text><br/>
+	  		<html:errors property="userform.date.mandatory"/></td></td>
 	  	</tr>  	
 		<tr><td colspan="4" align="center"><h3>Datos del Contacto</h3></td></tr>
 	  	<tr>
@@ -177,9 +162,6 @@
 	  	</tr>
 	
 	  	<tr>
-<%--   		<td>Persona de Contacto: (*)</td>
-	  		<td colspan="1"><html:text property="contactPerson"></html:text></td>
---%>	  		
 	  		<td>Cédula Identidad: (*)</td>
 	  		<td colspan="1"><html:text property="ciContactPerson"></html:text><br/>
 	  		<html:errors property="userform.ci.mandatory"/></td>  		
@@ -190,11 +172,13 @@
 	  		<html:errors property="userform.email.mandatory"/></td>
 	  	</tr>  	
 	  	<tr>  		
-	  		<td colspan="4" align="center"><html:submit value="Registrar"/>&nbsp;&nbsp;<html:reset value="Limpiar Campos"/></td>
+	  		<td colspan="4" align="center"><html:submit value="Registrar" onclick="sendform('true')"/>&nbsp;&nbsp;<html:reset value="Limpiar Campos"/></td>
 	  	</tr>  	    	
   </table>
-  
-  <table id="SINGLE_USER" style="display: none;">
+  <%}%>
+  <%if((""+request.getAttribute("type")).equalsIgnoreCase(BusinessCompany.TYPE_SINGLE_USER)){%>
+   
+  <table>
 	  	<tr>
 	  		<td>Nombres: (*)</td>
 	  		<td colspan="3"><html:text property="fname" size="70"></html:text><br/>
@@ -225,7 +209,7 @@
 	  		<td colspan="1"><html:text property="locality"></html:text></td>  		
 	  	</tr>  	
 	  	<tr>
-	  		<td>Sucursal más cercana:</td>  		  		
+	  		<td>Centro de Atención al Cliente<br/>donde retirará sus formularios:(*)</td>	  		
 	  		<td colspan="3">
 	  			<html:select property="office">
 					<optgroup label="Asunción">
@@ -277,7 +261,8 @@
 						<option value="SANTA ROSA DEL AGUARAY">Santa Rosa del Aguaray - Ruta General Aquino c/ Prof. Pedro Gónzalez</option>
 						<option value="VILLARRICA">Villarrica - Avda. Carlos A. López esq. Mcal. Estigarribia</option>
 					</optiongroup>  			
-	  			</html:select>
+	  			</html:select><br/>
+	  			<html:errors property="userform.office.mandatory"/></td>
 	  		</td>  		
 	  	</tr>  	  	
 	  	<tr>
@@ -303,10 +288,12 @@
 	  		<html:errors property="userform.email.mandatory"/></html:text></td>
 	  	</tr>  	
 	  	<tr>  		
-	  		<td colspan="4" align="center"><html:submit value="Registrar"/>&nbsp;&nbsp;<html:reset value="Limpiar Campos"/></td>
+	  		<td colspan="4" align="center"><html:submit value="Registrar" onclick="sendform('true')"/>&nbsp;&nbsp;<html:reset value="Limpiar Campos"/></td>
 	  	</tr>  	    	
   </table>
+  <%}%>
   <br/>
+ 
   
 </html:form>
 </div>

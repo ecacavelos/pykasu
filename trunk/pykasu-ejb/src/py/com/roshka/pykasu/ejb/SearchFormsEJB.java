@@ -21,6 +21,7 @@ import org.jboss.annotation.ejb.RemoteBinding;
 import py.com.roshka.pykasu.interfaces.SearchFormsInterface;
 import py.com.roshka.pykasu.interfaces.UserManager;
 import py.com.roshka.pykasu.persistence.forms.ItemSearch;
+import py.com.roshka.pykasu.persistence.forms.ItemSearch.FieldName;
 import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.util.Utils;
 
@@ -132,9 +133,18 @@ public class SearchFormsEJB implements SearchFormsInterface{
 		}		
 				
 		List <Object[]>list =  q.getResultList();
-		 
-		for(Object[] line : list){			 			 
-			 items.add(new ItemSearch(line));
+		
+		ItemSearch itemSearch = null;
+		for(Object[] line : list){	
+			itemSearch = new ItemSearch(line);
+			
+			javax.persistence.Query d = em.createNativeQuery("select STATUS, AT from FORMS_WF where FORM_TYPE like :formType  and FORM_IID = :formId");
+			d.setParameter("formType", itemSearch.getValue(FieldName.FORM_TYPE));
+			d.setParameter("formId", itemSearch.getValue(FieldName.FORM_IID));
+			List <Object[]>details =  d.getResultList();
+			itemSearch.setDetails(details);
+			
+			items.add(itemSearch);
 		}
 		 
         return items;

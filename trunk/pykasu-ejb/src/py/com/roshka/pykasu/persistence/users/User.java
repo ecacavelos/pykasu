@@ -153,7 +153,7 @@ public class User implements Serializable{
 		this.passwordDigest = passwordDigest;
 	}
 
-	@ManyToOne (cascade={CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
+	@ManyToOne //(cascade={CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
 	@JoinColumn(name = "bcompany_id")		
 	public BusinessCompany getBusinessCompany() {
 		return businessCompany;

@@ -28,12 +28,11 @@ public class ShowUsersAction extends Action{
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		InitialContext ic = new InitialContext();
-		
 		UserManager userManager = null;
-		
 		userManager = (UserManager) ic.lookup("pykasu/UserManager/local");	
-		List users = userManager.getAllUsers();
+		List<User> users = userManager.getUsers();
 		
 		request.setAttribute(Globals.USER_USERS_LIST,users);
         request.setAttribute(Globals.GLOBAL_TITLE,"Lista de Usuarios");
