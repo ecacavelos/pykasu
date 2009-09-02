@@ -43,7 +43,7 @@ public class ShowAdmissionAction extends Action {
 			request.setAttribute("status", status);
 		}
 		Integer admissionId = -1;
-		if(request.getParameter("admissionId") != null){
+		if(request.getParameter("admissionId") != null && request.getParameter("admissionId").trim().length() >0){
 			admissionId = Integer.parseInt(request.getParameter("admissionId"));
 		}
 		

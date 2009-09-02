@@ -41,17 +41,19 @@ public class EditResultUserItem extends DispatchAction{
     public ActionForward Detalles (ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         
-        request.setAttribute(Globals.ERROR,"Borrar - No tiene permitido ver detalles del usuario");
+        request.setAttribute(Globals.ERROR_MESSAGE,"Detalles - No tiene permitido ver detalles del usuario");
         return  mapping.findForward("index");
     }
+    
     public ActionForward Borrar (ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        request.setAttribute(Globals.ERROR,"Borrar - No tiene permitido Borrar Usuarios");
+        request.setAttribute(Globals.ERROR,"Borrar 1 - No tiene permitido Borrar Usuarios");
         return mapping.findForward("index");
     }
+    
     public ActionForward Editar (ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        request.setAttribute(Globals.ERROR,"Borrar - No tiene permitido editar el usuario");
+        //request.setAttribute(Globals.ERROR,"Editar - No tiene permitido editar el usuario");
         return  mapping.findForward("edit");
     }
     

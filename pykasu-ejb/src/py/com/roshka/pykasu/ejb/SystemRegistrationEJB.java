@@ -86,6 +86,16 @@ public class SystemRegistrationEJB implements SystemRegistration{
 		}catch(FindingException ef){
 			//username not exists in DB, so adding user
 		
+			try {
+				passwordDigest = Utils.SHA1(passwordDigest);
+			} catch (NoSuchAlgorithmException e1) {
+				logger.error(e1);
+				throw new PykasuFatalException();
+			} catch (UnsupportedEncodingException e1) {
+				logger.error(e1);
+				throw new PykasuFatalException();
+			}
+			
 			User user = new User(userName,passwordDigest,fullName,bc);
 			user.setDocumentNumber(documentNumber);
 			RoleManager rm = new RoleManager(em);
@@ -96,17 +106,14 @@ public class SystemRegistrationEJB implements SystemRegistration{
 				throw new PykasuFatalException(RoleManager.USERROLENAME + " is not found!");
 			}
 			user.getRoles().add(role);
-			
-			
-			//Si pertenece a una empresa que administra el sistema
-			if(bc.getIsAdministrative().booleanValue()){
-				try {
-					role = rm.getRole(RoleManager.SYSTEMADMINROLENAME);
-				} catch (InvalidRoleException e) {
-					role = rm.newRole(RoleManager.SYSTEMADMINROLENAME,"System Administration role");			
-				}
-				user.getRoles().add(role);			
+
+			try {
+				role = rm.getRole(RoleManager.USERADMINROLENAME);
+			} catch (InvalidRoleException e) {
+				role = rm.newRole(RoleManager.USERADMINROLENAME,"User Administration role");			
 			}
+			user.getRoles().add(role);			
+
 			
 			em.persist(user);
 			return user;
@@ -130,7 +137,8 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			String ciContactPerson, 
 			String faxNumber, 
 			String constitutionDate, 
-			String userType) 
+			String userType,
+			String office) 
 	throws PykasuGenericException{
 		
 		BusinessCompany bc = new BusinessCompany(
@@ -147,6 +155,7 @@ public class SystemRegistrationEJB implements SystemRegistration{
 					constitutionDate);
 		
 		bc.setEmail(email);
+		bc.setOffice(office);
 		
 		try{
 			User userTmp = null;
@@ -169,6 +178,7 @@ public class SystemRegistrationEJB implements SystemRegistration{
 		} catch (UnsupportedEncodingException e1) {
 			logger.error(e1);
 		}
+		
 		//no se usa addUser porque este método requiere de un rol de Administrador.
 		User user = new User(userFullName,passwordDigest,userName, phoneNumber, 
 				ruc, dv, address, locality, constitutionDate, email ,userType, bc);
@@ -209,16 +219,16 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			properties.load(url.openStream());;
 			
 			//Mail
-			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
-					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
-					user.getEmail(),
-					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT),
-					//cuerpo del correo
-					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + 
-					"\nNombre de usuario:" +	user.getUserName() +
-					"\nContraseña:"+clearPasswd+
-					properties.getProperty("MAIL_TAIL","")
-        	);
+//			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
+//					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
+//					user.getEmail(),
+//					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT),
+//					//cuerpo del correo
+//					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + 
+//					"\nNombre de usuario:" +	user.getUserName() +
+//					"\nContraseña:"+clearPasswd+
+//					properties.getProperty("MAIL_TAIL","")
+//        	);
 
 			em.persist(user);
 		
@@ -226,14 +236,14 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			e.printStackTrace();
 			logger.error(e);
 			throw new MailException(e.getMessage());
-		} catch (AddressException e) {
-			e.printStackTrace();
-			logger.error(e);
-			throw new MailException(e.getMessage());
-		} catch (MessagingException e) {
-			e.printStackTrace();
-			logger.error(e);			
-			throw new MailException(e.getMessage());			
+//		} catch (AddressException e) {
+//			e.printStackTrace();
+//			logger.error(e);
+//			throw new MailException(e.getMessage());
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//			logger.error(e);			
+//			throw new MailException(e.getMessage());			
 		} 
 
 		return user;

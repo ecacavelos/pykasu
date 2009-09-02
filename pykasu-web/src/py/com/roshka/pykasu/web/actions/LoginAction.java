@@ -93,6 +93,10 @@ public class LoginAction extends Action {
 			List<Program> programs = uiManager.getMenu();
 			request.getSession().setAttribute(Globals.USER_PROGRAMS,programs);
 
+			if(pksUser.getBusinessCompany().getIsActive().booleanValue() == Boolean.FALSE){
+				request.setAttribute("firstTime", "true");
+				return mapping.findForward("changePassword");
+			}
 			
 		
 		} catch (LoginException e) {			
@@ -106,10 +110,6 @@ public class LoginAction extends Action {
 			request.getSession().setAttribute(Globals.ERROR_MESSAGE,"La contrasena del usuario " + username + " proveida por usted no corresponde con la almacenada en el sistema.");
 		}
 		
-		if(pksUser.getBusinessCompany().getIsActive().booleanValue() == Boolean.FALSE){
-			request.setAttribute("firstTime", "true");
-			return mapping.findForward("changePassword");
-		}
 
 		return mapping.findForward("index");
 

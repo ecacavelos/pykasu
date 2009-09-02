@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.ejb.Local;
 import javax.ejb.Remote;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +20,8 @@ import org.jboss.annotation.ejb.RemoteBinding;
 import py.com.roshka.pykasu.exceptions.PykasuGenericException;
 import py.com.roshka.pykasu.interfaces.AdmissionManager;
 import py.com.roshka.pykasu.persistence.admission.Admission;
+import py.com.roshka.pykasu.persistence.users.BusinessCompany;
+import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.util.Globals;
 import py.com.roshka.util.mail.Mailer;
 
@@ -52,15 +56,15 @@ public class AdmissionManagerEJB implements AdmissionManager{
 			}
 			em.persist(admission);
 
-			Properties properties = new Properties();
-			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);			
-			properties.load(url.openStream());;
-
-			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
-					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
-					admission.getMail(),
-					properties.getProperty("MAIL_ADMISSION_SUBJECT",Globals.MAIL_ADMISSION_SUBJECT), 
-					properties.getProperty("MAIL_ADMISSION_BODY",Globals.MAIL_ADMISSION_BODY) + i + properties.getProperty("MAIL_TAIL",""));
+//			Properties properties = new Properties();
+//			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);			
+//			properties.load(url.openStream());;
+//
+//			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
+//					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
+//					admission.getMail(),
+//					properties.getProperty("MAIL_ADMISSION_SUBJECT",Globals.MAIL_ADMISSION_SUBJECT), 
+//					properties.getProperty("MAIL_ADMISSION_BODY",Globals.MAIL_ADMISSION_BODY) + i + properties.getProperty("MAIL_TAIL",""));
 			
 			return i;			
 		}catch (Exception e) {
@@ -83,24 +87,43 @@ public class AdmissionManagerEJB implements AdmissionManager{
 
 		Properties properties = new Properties();
 		URL url;
-		try {
-			url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
-			properties.load(url.openStream());;
-			
-			Mailer.sendMail(
-					properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
-					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
-					properties.getProperty("MAIL_ACTIVATION_OPER"),
-					"Solicitud de Registro de Tribustos Web confiramda", 
-					"Se ha confirmado la solicitud: " + ads.getId() + " correspondiente a " + ads.getContactPerson());
-			
-		} catch (Exception e) {
-			throw new PykasuGenericException("Error al activar la solicitud de registro",e);
-		}			
+//		try {
+//			url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+//			properties.load(url.openStream());
+//			
+//			Mailer.sendMail(
+//					properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
+//					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
+//					properties.getProperty("MAIL_ACTIVATION_OPER"),
+//					"Solicitud de Registro de Tribustos Web confiramda", 
+//					"Se ha confirmado la solicitud: " + ads.getId() + " correspondiente a " + ads.getContactPerson());
+//			
+//		} catch (Exception e) {
+//			throw new PykasuGenericException("Error al activar la solicitud de registro",e);
+//		}			
 		
 		
 	}
 
+	public void admitedAdmission(Integer admissionId, BusinessCompany bc)
+		throws PykasuGenericException {
+		try{
+			Admission ads =  em.find(Admission.class, admissionId);
+			if(!(""+ads.getStatus()).equalsIgnoreCase(STATUS_CONFIRMADO)){
+				throw new PykasuGenericException("La solicitud ya ha sido procesada");
+			}
+			
+			ads.setStatus(STATUS_CONFIGURADO);
+			ads.setBcompanyId(bc.getId());
+			
+			em.persist(ads);
+			
+		} catch (Exception e) {
+			throw new PykasuGenericException("Error al activar la solicitud de registro",e);
+		}			
+	}
+
+	
 	public List<Admission> getAll() throws PykasuGenericException {
 		List<Admission> admissions = new ArrayList<Admission>();
 		
@@ -129,8 +152,6 @@ public class AdmissionManagerEJB implements AdmissionManager{
 
 		return ads;
 	}
-	
-	
 	
 	
 }

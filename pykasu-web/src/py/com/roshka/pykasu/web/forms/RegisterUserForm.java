@@ -41,6 +41,7 @@ public class RegisterUserForm extends ActionForm {
     private String email;
     private String password;
     private String replyPassword;
+    private String office;
 
     private String businessCompanyName;
     private String comercialActivity;//Ramo
@@ -59,6 +60,8 @@ public class RegisterUserForm extends ActionForm {
             HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
         System.out.println("Valida el form de registro");
+        
+        
         return errors;
     }
 
@@ -195,6 +198,16 @@ public class RegisterUserForm extends ActionForm {
 	public void setCity(String city) {
 		this.city = city;
 	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
+	}
+	
+	
 
 //	public String getBornDate() {
 //		return bornDate;

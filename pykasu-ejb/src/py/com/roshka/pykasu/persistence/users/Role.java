@@ -89,11 +89,8 @@ public class Role implements Serializable{
 
     
     @SuppressWarnings("unchecked")
-	@ManyToMany(
-    	cascade={CascadeType.PERSIST},
-    	mappedBy="roles",
-    	targetEntity=py.com.roshka.pykasu.persistence.users.User.class
-    )   
+	@ManyToMany(//cascade={CascadeType.PERSIST},	
+			mappedBy="roles",	targetEntity=py.com.roshka.pykasu.persistence.users.User.class  )   
 	public List<User> getUsers() {
 		return users;
 	}

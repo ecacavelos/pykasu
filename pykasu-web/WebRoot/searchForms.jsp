@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
+<%@page import="py.com.roshka.pykasu.persistence.forms.TaxForm"%>
 
 <%@ taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html" %>
@@ -44,7 +45,7 @@
 		<link href="styles/pykasu.css" rel="stylesheet" type="text/css">			
 	</head>
 	
-	<body onload="opt.init(document.forms[0])">
+	<body <%if(items == null){%>onload="opt.init(document.forms[0])"<%}%>>
 	<br><jsp:include page="header.jsp"/> 
 	<jsp:include page="menu.jsp"/> 
 	<div id="main">
@@ -157,6 +158,7 @@
 					<th>Año</th>					
 					<th>Presentado</th>
 					<th>Estado</th>
+					<th>Historia</th>
 				</tr>		
 			<% 			
 				for(ItemSearch item : items){%>
@@ -170,12 +172,28 @@
 						<td> <%=item.getValue(ItemSearch.FieldName.PRESENTATION_DATE)%></td>
 						<td> <%=item.getValue(ItemSearch.FieldName.STATUS)%></td>
 						<td>
-							<table>
-								<tr><td>Presentado:</td><td>fecha hora</td></tr>
-								<tr><td>Confirmado:</td><td>fecha hora</td></tr>
-								<tr><td>Enviado a la Set:</td><td>fecha hora</td></tr>
+							<%if(item.getDetails() != null){%>
+							<table>								
+								<%for(Object[] details : item.getDetails()){ %>
+								<tr><td><%=details[ItemSearch.FieldNameDetail.STATUS.ordinal()]%></td><td><%=details[ItemSearch.FieldNameDetail.AT.ordinal()]%></td></tr>
+								<%}%>
 							</table>
+							<%}%>
 						</td>
+						<td>
+							<form method="post" action="editItem.do">
+								<input type="hidden" name="id" value="<%=item.getValue(ItemSearch.FieldName.FORM_IID)%>">
+								<input type="hidden" name="form" value="<%=item.getValue(ItemSearch.FieldName.FORM_TYPE)%>">
+																
+								<input type="submit" value="Detalles" name="option"/>
+								<%if(((String)item.getValue(ItemSearch.FieldName.STATUS)).equalsIgnoreCase(TaxForm.FORM_STATUS_PROCESS)){ %>
+								<input type="submit" value="Editar" name="option"/>
+								<%}%>
+								<%if(((String)item.getValue(ItemSearch.FieldName.STATUS)).equalsIgnoreCase(TaxForm.FORM_STATUS_PROCESS)){ %>
+								<input type="submit" value="Borrar" name="option"/>
+								<%}%>
+							</form>							
+						</td>						
 					</tr>
 			<% 	}
 			}

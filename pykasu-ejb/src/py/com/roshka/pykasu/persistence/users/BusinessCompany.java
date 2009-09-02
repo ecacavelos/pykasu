@@ -20,7 +20,7 @@ import py.com.roshka.pykasu.exceptions.InvalidRucException;
 public class BusinessCompany implements Serializable {
 
 	public static final String TYPE_MULTI_USER  = "MULTI_USER";
-	public static final String TYPE_SINGLE_USER = "SIMPLE_USER";
+	public static final String TYPE_SINGLE_USER = "SINGLE_USER";
 	
 	private Integer id;
 	private String name;//Nombre de la empresa
@@ -42,6 +42,7 @@ public class BusinessCompany implements Serializable {
 	private Boolean client;
 	private String type;
 	private String status;
+	private String office;
 //	private Set<Account> accounts = new HashSet<Account>();
 
 
@@ -296,6 +297,13 @@ public class BusinessCompany implements Serializable {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	@Column(name="office", length=255)
+	public String getOffice() {
+		return office;
+	}
+	public void setOffice(String office) {
+		this.office = office;
 	}
 	
 	

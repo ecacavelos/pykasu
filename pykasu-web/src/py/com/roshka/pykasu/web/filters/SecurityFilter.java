@@ -62,11 +62,6 @@ public class SecurityFilter implements Filter {
 				User userBean = (User) ((HttpServletRequest) request).getSession(false)
 					.getAttribute(Globals.LOGIN_USER);
 
-//				if(!userBean.getBusinessCompany().getIsActive().booleanValue()){
-//					//redirigir a cambio de password
-//					((HttpServletResponse) response).sendRedirect("changePassword.do");
-//				}
-				
 //				List<Program> programs = (List<Program>)((HttpServletRequest)request).getSession(false).getAttribute(Globals.USER_PROGRAMS);
 //				
 //				if(!canAccess(((HttpServletRequest) request).getRequestURI(), programs)){
@@ -92,6 +87,13 @@ public class SecurityFilter implements Filter {
 				logger.info(">>> request:" + request + " response: " + response.toString() );
 				chain.doFilter(request, response);
 				loginContext.logout();
+				
+				
+				//para que no tenga cache.
+				((HttpServletResponse) response).addHeader("Pragma", "no-cache");
+				((HttpServletResponse) response).addHeader("Cache-Control", "no-store");
+				((HttpServletResponse) response).addHeader("Cache-Control", "must-revalidate");		
+				((HttpServletResponse) response).setDateHeader( "Expires", 0 );
 			}
 			logger.debug(">>>>>>>>>> Exit to SecurityFilter! <<<<<<<<<<");			
 		} catch (Throwable e) {

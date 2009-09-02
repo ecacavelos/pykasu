@@ -47,6 +47,7 @@ public interface SystemRegistration {
 			String ciContactPerson, 
 			String faxNumber, 
 			String constitutionDate, 
-			String userType) 
+			String userType,
+			String office) 
 	throws PykasuGenericException;	
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" language="java"%>
+<%@page import="py.com.roshka.pykasu.persistence.users.BusinessCompany"%>
 
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
@@ -14,8 +15,13 @@
 <script LANGUAGE="JavaScript" SRC="menus.js"></script>
 <script LANGUAGE="JavaScript" SRC="js/sha1.js"></script>
 <script LANGUAGE="JavaScript">
-	function encryp2params(tmp_pass, obj){
+/*	function encryp2params(tmp_pass, obj){
 		obj.value = hex_sha1(tmp_pass.value)
+	}
+*/	
+	function encryp2params(){
+		document.getElementById('password').value = hex_sha1(document.getElementById('tmpPassword')); 
+		document.getElementById('replyPassword').value = hex_sha1(document.getElementById('tmpReplyPassword'));
 	}
 </script>
 <link href="styles/pykasu.css" rel="stylesheet" type="text/css">
@@ -28,10 +34,9 @@
 <div id="register">
 <html:form action="/register.do" method="post">
 
-  <%--<html:hidden property="formType" value="<%=admission.getType()%>"/>--%>
-  <%--<html:hidden property="formType" value="registerUser"/>--%>
   <html:hidden property="formType" value="<%=(String)request.getAttribute(py.com.roshka.pykasu.web.Globals.USER_FORM_FORM_TYPE) %>"/>  
   <html:hidden property="userType" value="<%=admission.getType()%>"/>
+  <input type="hidden" name="admissionId" value="<%=admission.getId()%>"/>
 
   <table class="form">
 	<tr>
@@ -47,19 +52,14 @@
 	<tr>
 		<td>
 		  <table width="100%">
+		  			<%if(admission.getType().equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER)){ %>
 					<tr>
-						<td  width="40%">Nombre de la Empresa:</td>
+						<td  width="40%" align="right">Nombre de la Empresa:</td>
 						<td><html:text property="businessCompanyName" size="60" value="<%=admission.getCompanyName()%>"/></td>
 					</tr>
-<%-- 
+					<%} %>
 					<tr>
-						<td colspan="2">
-							<p class="hint">En el caso de un contribuyente particular, colocar un nombre de fantasia</p>
-						</td>
-					</tr>
---%>					
-					<tr>
-						<td class="formlabel">Actividad Principal:</td>
+						<td width="40%" align="right">Actividad Principal:</td>
 						<td class="formfield"><html:text property="comercialActivity" size="60" value="<%=admission.getMainActivity()%>"/></td>
 					</tr>
 					<tr>
@@ -69,12 +69,6 @@
 							<html:errors property="userform.Ruc.mandatory"/>						
 							DV:<html:text property="dV" size="2" value="<%=admission.getDv()%>"/></td>
 					</tr>
-<%-- 
-					<tr>
-						<td class="formlabel">Persona de contacto:</td>
-						<td class="formfield"><html:text property="contactPerson" value="<%=admission.getContactPerson()%>" size="60"/></td>
-					</tr>
---%>					
 					<tr>
 						<td class="formlabel">Dirección:</td>
 						<td class="formfield"><html:text property="address" size="60" value="<%=admission.getAddress()%>"/></td>
@@ -99,6 +93,63 @@
 							<html:text property="constitutionDate" value="<%=admission.getConstitutionStr()%>"/>
 						</td>
 					</tr>
+				  	<tr>				  		
+				  		<td>Centro de Atención al Cliente<br/>donde retirará sus formularios:</td>	  		
+				  		<td colspan="2">				  			
+				  			<html:select property="office" value="<%=admission.getOffice()%>">				  				
+								<optiongroup label="Asunción">
+									<html:option value=""></html:option>
+									<html:option value="CASA MATRIZ">Casa Matriz - EEUU 780 e/Fulgencio R. Moreno y L.A. de Herrera</html:option>
+									<html:option value="GRAL SANTOS">Gral. Santos - Avda. Gral. Santos esq. Avda. Fndo. de la Mora</html:option>
+									<html:option value="PALMA">Palma - Palma esq. Ntra. Sra. de la Asunción</html:option>
+									<html:option value="OLIVA">Oliva - Oliva esq. O`leary</html:option>
+									<html:option value="PINOZA">Pinozá - Avda. Eusebio Ayala esq. Bruno Guggiari</html:option>
+									<html:option value="VILLA MORRA">Villa Morra - Charles de Gaulle c/ Mcal. Lopez</html:option>
+									<html:option value="MULTIPLAZA">Multiplaza - Avda Eusebio Ayala N° 4501</html:option>
+									<html:option value="DENIS ROA">Denis Roa - Denis Roa esq. Moisés Bertoni</html:option>
+									<html:option value="SANTISIMA TRINIDAD">Santisima Trinidad - Avda. Sacramento esq. Avenida Santisima Trinidad</html:option>
+								</optiongroup>
+								<optiongroup label="Gran Asunción">
+									<html:option value="SAN LORENZO I">San Lorenzo I - Ruta Mcal. Estigarribia esq. Cnel. Romero</html:option>
+									<html:option value="SAN LORENZO II">San Lorenzo II - 10 de Agosto esq. Hernandarias</html:option>
+									<html:option value="NEMBY">Ñemby - 9 de Agosto esq. Ytororó</html:option>
+									<html:option value="LAMBARE">Lambaré - Avda. Cacique Lambaré c/San Vicente</html:option>
+									<html:option value="MARIANO R. ALONSO">Mariano R. Alonso - Ruta Transchaco Km. 15 1/2</html:option>
+									<html:option value="LIMPIO">Limpio - Avda. Colón c/ Mcal. Estigarribia</html:option>
+									<html:option value="LUQUE">Luque - Avda. Gral. Aquino esq. Teniente Herrero Bueno</html:option>
+									<html:option value="FNDO DE LA MORA">Fndo. de la Mora - Ruta Mcal. Estigarribia esq. 10 de Julio</html:option>
+									<html:option value="CAPIATA">Capiatá - Ruta Mcal Estigarribia esq. Mcal. López Km 20</html:option>
+								</optiongroup>
+								<optiongroup label="Interior">
+									<html:option value="CAACUPE">Caacupé - Eligio Ayala esq. Juan E. O`leary</html:option>
+									<html:option value="CAAGUAZU">Caaguazú - Avda. Bernardino Caballero c/ Gral. Díaz</html:option>
+									<html:option value="CARAPEGUA">Carapeguá - Ruta Mcal. López y Cristóbal Colón</html:option>
+									<html:option value="CIUDAD DE SAN IGNACIO">Ciudad de San Ignacio - Ruta Mcal. Estigarribia  esq. Fulgencio Yegros </html:option>
+									<html:option value="CIUDAD DEL ESTE I">Ciudad del Este I - Avda.Gral. Bernardino Caballero esq. Paso de Patria</html:option>
+									<html:option value="CIUDAD DEL ESTE II">Ciudad del Este II - Avda. Julio César Riquelme - Km 7 Monday</html:option>
+									<html:option value="CIUDAD DEL ESTE III">Ciudad del Este III - Boquerón c/Avda. Adrián Jara.</html:option>
+									<html:option value="CNEL OVIEDO">Cnel. Oviedo - José Segundo Decoud e/ Tuyutí</html:option>
+									<html:option value="CONCEPCION">Concepción - Pdte. Franco e/ Gral. Garay y 14 de Mayo</html:option>
+									<html:option value="CURUGUATY">Curuguaty - 14 de Mayo esq. Julia Miranda Cueto de Estigarribia</html:option>
+									<html:option value="ENCARNACION">Encarnación - Mcal. Estigarribia entre Tomás Romero Pereira y Villarrica</html:option>
+									<html:option value="ITAGUA">Itaguá - Ruta Mcal. Estigarribia esq. Juan C. Centurión </html:option>
+									<html:option value="KATUETE">Katueté - La Residenta esq. Capellán Arzamendia</html:option>
+									<html:option value="LOMA PLATA">Loma Plata - Avda. Central Nº 1160 esq. Gondra</html:option>
+									<html:option value="MARIA AUXILIADORA">Maria Auxiliadora - Tomas Romero Pereira esq. Maria Auxiliadora</html:option>
+									<html:option value="OBLIGADO">Obligado - Avda. Gaspar R. de Francia esq. Colonias Unidas</html:option>
+									<html:option value="PEDRO JUAN CABALLERO">Pedro Juan Caballero - Avda. Carlos A. López y Perpetuo Socorro</html:option>
+									<html:option value="PILAR">Pilar - Albersoni esq. Antequera</html:option>
+									<html:option value="SALTOS DEL GUAIRA">Saltos del Guairá - Avenida Paraguay esq. Ricardo Mendez Gonzalves</html:option>
+									<html:option value="SAN ESTANISLAO">San Estanislao - Mcal.López c/ Cnel.Zoilo González</html:option>
+									<html:option value="SAN JUAN NEPOMUCENO">San Juan Nepomuceno - Ruta Mcal. Estigarribia N° 360 c/Pai Fariña</html:option>
+									<html:option value="SANTA RITA">Santa Rita - Avda. Carlos Antonio López esq. Eusebio Ayala</html:option>
+									<html:option value="SANTA ROSA DEL AGUARAY">Santa Rosa del Aguaray - Ruta General Aquino c/ Prof. Pedro Gónzalez</html:option>
+									<html:option value="VILLARRICA">Villarrica - Avda. Carlos A. López esq. Mcal. Estigarribia</html:option>
+								</optiongroup>  			
+				  			</html:select>
+				  		</td>  		
+				  	</tr>  	  	
+					
 			</table>
 		</td>
 	</tr>
@@ -135,7 +186,7 @@
 				<tr>
 					<td class="formlab" align="right">Nombre de la cuenta:</td>
 					<td>
-						<html:text property="userName" size="40" value="<%=admission.getFname().toLowerCase()+"."+admission.getLname().toLowerCase()%>"/>
+						<html:text property="userName" size="40" value="<%=""+request.getAttribute("userName")%>"/>
 						<html:errors property="userform.userName.mandatory"/>
 						<html:errors property="userform.userName.invalid"/>
 					</td>
@@ -146,22 +197,24 @@
 					</td>
 				</tr>
 				<tr>
+				
 					<td class="formlabel">Password:</td>
 					<td class="formfield">
 						<html:hidden property="password" styleId="password" />
-						<input type="text" name="tmpPassword" size="40" onchange="encryp2params(this, document.getElementById('password'))"/>
+						<input type="password" name="tmpPassword" size="40" value="<%=""+admission.getId()%>"/>
 					</td>
-			</tr><tr>		
+			</tr>
+			<tr>		
 					<td class="formlabel">Repetir Password:</td>
 					<td class="formfield">
 						<html:hidden property="replyPassword" styleId="replyPassword"/>
-						<input type="text" name="tmpReplyPassword" size="40" onchange="encryp2params(this, document.getElementById('replyPassword'))"/>
+						<input type="password" name="tmpReplyPassword" size="40" value="<%=""+admission.getId()%>"/>
 						<html:errors property="userform.password.mandatory"/>
 						<html:errors property="userform.replyPassword.mandatory"/>
 						<html:errors property="userform.passwords.notEquals"/>
 						<html:errors property="userform.password.short"/>
 					</td>
-				</tr>
+				</tr>				
 			</table>
 		</td>
 	</tr>
@@ -170,7 +223,7 @@
 			<table width="100%">
 				<tr>
 					<td align="right" width="85%">
-						<html:submit value="Crear"/>
+						<html:submit value="Crear" onclick="encryp2params()"/>
 					</td>
 					<td align="right" width="15%">
 						<html:cancel value="Cancelar"/>
@@ -181,6 +234,7 @@
 	</tr>
 </table>
 </html:form>
+
 </div>
 </div>
 </body>

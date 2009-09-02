@@ -38,30 +38,20 @@
 		<jsp:include page="menu.jsp"/> 
 		
 		<div id="main">
-
-			<logic:notPresent name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>"> 
-				<div id="welcome">
-					<p class="msg-title">Bienvenido al Sistema de Tributos Web</p>
-					<p class="msg-text">Para utilizar el sistema necesita una cuenta activada.</p>
-					<p class="msg-text">Si aún no tiene una cuenta, sea tan amable de registrar su nueva cuenta.</p>
+			<jsp:include page="messages.jsp"/> 
+			<logic:notPresent name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>">
+				<div style="background-color:#444444; font-family:tahoma;font-size:12px;font-weight:bolder;padding:14px;width:550px" >
+					<label style="color: silver; font-size: 16px;">Estimado Cliente/Contribuyente:</label><br/><br/>
+					<label style="color: silver;  font-size: 14px;">Le informamos que hemos realizado mejoras en el Servicio de Tributos vía Internet, las mismas contribuirán a darle agilidad y mayor seguridad al proceso, para lo cual deberá registrar los datos solicitados, ingresando a la opción "Registrar una cuenta nueva" para el servicio de PRESENTACIÓN DE DECLARACIÓN JURADA.<br/><br/>
+					Su usuario y contraseña para PAGO DE IMPUESTO, seguirán vigentes.<br/><br/>
+					Ponemos a su disposición un instructivo que lo ayudará a obtener mas detalles del servicio.<br/><br/>
+					Ante consultas, le invitamos a comunicarse con nosotros al 414 3000 de 08:00 a 18:00 hs.</label>
 				</div>
+				
 			</logic:notPresent>
 			
 			<logic:present name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>"> 
 				<div id="welcome">
-					<%if(request.getSession().getAttribute("errorMessage")!=null){%>
-						<div id="errorMsg" style="background-color: red; padding: 10px;">
-							<label style="color: white;font-weight: bold; text-decoration: blink;">Error</label><br>
-							<label style="color: white;font-weight: bold">Se ha registrado un error en el sistema</label><br>
-							<label style="color: white;font-weight: bold"><%=request.getSession().getAttribute("errorMessage")%></label>
-						</div>
-						<%request.getSession().removeAttribute("errorMessage");%>
-					<%}%>
-					<%if(request.getAttribute(Globals.MESSAGE)!=null){%>
-						<div id="showMsg" style="background-color: green; padding: 10px;">
-							<label style="color: white;font-weight: bold"><%=request.getAttribute(Globals.MESSAGE)%></label>
-						</div>
-					<%}%>
 					<%if( //si es tiempo de rifa y es cliente
 						py.com.roshka.pykasu.util.Utils.isRaffleTime(
 							new java.util.Date(System.currentTimeMillis())) 
