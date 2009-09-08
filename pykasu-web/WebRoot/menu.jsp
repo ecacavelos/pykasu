@@ -103,7 +103,7 @@ function encryp(){
 			<td>Usuario</td>
 		</tr>
 		<tr>
-			<td><input type="text" name="j_username"></td>
+			<td><input type="text" name="j_username" id="username"></td>
 		</tr>
 		<tr>			
 			<td>Password</td>
@@ -122,7 +122,7 @@ function encryp(){
 			<td><a href="admissionform.do">Registrar una cuenta nueva</a></td>
 		</tr>
 		<tr><td><hr/></td></tr>
-		<tr><td><a href="/pycasu/html/FAQ.htm" target="_blank">Para más detalles, puede remitirse a las preguntas más frecuentes</a></td></tr>
+		<tr><td><a href="/pycasu/html/procesoSolicitud.htm" target="_blank">Conozca más sobre el proceso de Solicitud de Cuenta</a></td></tr>
 	</table>
 	</form>
 	</logic:notPresent>

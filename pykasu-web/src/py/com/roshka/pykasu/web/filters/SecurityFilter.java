@@ -51,8 +51,8 @@ public class SecurityFilter implements Filter {
 		logger.info(((HttpServletRequest) request).getRequestURI());
 		try {
 			if ( ((HttpServletRequest) request).getParameter("j_username") != null || 
-					((HttpServletRequest) request).getRequestURI().contains("showuserform.do") || 
-					((HttpServletRequest) request).getRequestURI().contains("/register.do") ||
+					//((HttpServletRequest) request).getRequestURI().contains("showuserform.do") || 
+					((HttpServletRequest) request).getRequestURI().contains("/register.do") ||					
 					((HttpServletRequest) request).getRequestURI().contains("/registerJuridico.do") ||
 					((HttpServletRequest) request).getRequestURI().contains("activationreg.do") ||
 					((HttpServletRequest) request).getRequestURI().contains("admissionform.do"))	{
@@ -61,12 +61,6 @@ public class SecurityFilter implements Filter {
 				
 				User userBean = (User) ((HttpServletRequest) request).getSession(false)
 					.getAttribute(Globals.LOGIN_USER);
-
-//				List<Program> programs = (List<Program>)((HttpServletRequest)request).getSession(false).getAttribute(Globals.USER_PROGRAMS);
-//				
-//				if(!canAccess(((HttpServletRequest) request).getRequestURI(), programs)){
-//					throw new PykasuFatalException("No tiene permiso para " + ((HttpServletRequest) request).getRequestURI());
-//				}
 				
 				logger.info("user es null? "+(userBean==null));
 				logger.info(userBean.getUserName());

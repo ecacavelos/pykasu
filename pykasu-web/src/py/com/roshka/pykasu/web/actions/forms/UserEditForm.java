@@ -2,6 +2,7 @@ package py.com.roshka.pykasu.web.actions.forms;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -62,9 +63,32 @@ public class UserEditForm extends ActionForm {
 			HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
 
+        if(request.getParameter("actionType")!=null && request.getParameter("actionType").equalsIgnoreCase("add")){
+        	if(getUserName()==null || getUserName().trim().length() == 0){
+	            errors.add("userform.userName.mandatory", new ActionError("userform.userName.mandatory"));
+        	}
+        }
         
+        if(getFullName()==null || getFullName().trim().length() == 0){
+            errors.add("userform.name.mandatory", new ActionError("userform.name.mandatory"));
+    	}
         
+        if(getPassword()==null || getPassword().trim().length() == 0){
+            errors.add("userform.password.mandatory", new ActionError("userform.password.mandatory"));
+    	}
+                
+        if(getReplyPassword()==null || getReplyPassword().trim().length() == 0){
+            errors.add("userform.replyPassword.mandatory", new ActionError("userform.replyPassword.mandatory"));
+    	}
+
+        if(getPassword()!= null && getPassword().length() < 6 ){
+        	errors.add("userform.passwords.notEquals", new ActionError("userform.passwords.notEquals"));
+        }
+
         
+        if(getPassword()!= null && !getPassword().equalsIgnoreCase(getReplyPassword())){
+        	errors.add("userform.password.short", new ActionError("userform.password.short"));
+        }
         return errors;
 	}
 	
