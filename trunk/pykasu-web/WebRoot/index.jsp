@@ -24,7 +24,7 @@
 		
 		function whichButton(event)
 		{
-			if(document.getElementById('login_button') != null && event.keyCode==13){
+			if(document.getElementById('login_button') != null && event.keyCode==13 && document.getElementById('username').value != null && document.getElementById('username').value.length > 0 ){
 				encryp();
 			}
 			

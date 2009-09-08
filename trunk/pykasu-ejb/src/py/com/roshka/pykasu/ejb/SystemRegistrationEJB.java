@@ -141,7 +141,27 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			String office) 
 	throws PykasuGenericException{
 		
-		BusinessCompany bc = new BusinessCompany(
+		
+		try{
+
+			User userTmp = null;
+			logger.info(">>>>>>>>>>>>>>>>> username :" + userName);
+			userTmp = (User) em.createQuery("select u from User u where userName = :userName")
+								.setParameter("userName",userName)
+								.getSingleResult();
+			
+			if(userTmp != null){
+				throw new InvalidUserNameException(userName + " es un nombre de usuario ya registrado en el sistema.");
+			}
+		}catch (NoResultException e){
+			logger.info("User " + userName + " is not present in the system. Begin to create");
+		}
+		String clearPasswd = passwordDigest;
+
+		try{
+			passwordDigest = Utils.SHA1(passwordDigest);
+			
+			BusinessCompany bc = new BusinessCompany(
 					businessCompanyName, 
 					comercialActivity,
 					ruc, 
@@ -154,99 +174,77 @@ public class SystemRegistrationEJB implements SystemRegistration{
 					faxNumber,
 					constitutionDate);
 		
-		bc.setEmail(email);
-		bc.setOffice(office);
-		
-		try{
-			User userTmp = null;
-			logger.info(">>>>>>>>>>>>>>>>> :username" + userName);
-			userTmp = (User) em.createQuery("select u from User u where userName = :userName")
-								.setParameter("userName",userName)
-								.getSingleResult();
+			bc.setEmail(email);
+			bc.setOffice(office);
 			
-			if(userTmp != null){
-				throw new InvalidUserNameException(userName + " es un nombre de usuario ya registrado en el sistema.");
-			}
-		}catch (NoResultException e){
-			logger.info("User " + userName + " is not present in the system. Begin to create");
-		}
-		String clearPasswd = passwordDigest;
-		try {
-			passwordDigest = Utils.SHA1(passwordDigest);
-		} catch (NoSuchAlgorithmException e1) {
-			logger.error(e1);
-		} catch (UnsupportedEncodingException e1) {
-			logger.error(e1);
-		}
-		
-		//no se usa addUser porque este método requiere de un rol de Administrador.
-		User user = new User(userFullName,passwordDigest,userName, phoneNumber, 
-				ruc, dv, address, locality, constitutionDate, email ,userType, bc);
-
-		user.setDocumentNumber(ciContactPerson); //le paso la CI para que sea usada por la persona a la hora de hacer pagos
-		
-		//al no usar el método addUser, se tienen que agregar los roles "a mano"
-		RoleManager rm = new RoleManager(em);
-		Role role;
-		try {
-			role = rm.getRole(RoleManager.USERROLENAME);
-		} catch (InvalidRoleException e) {
-			role = rm.newRole(RoleManager.USERROLENAME,"Users role");			
-		}
-		user.getRoles().add(role);
-
-		try {
-			role = rm.getRole(RoleManager.USERADMINROLENAME);
-		} catch (InvalidRoleException e) {
-			role = rm.newRole(RoleManager.USERADMINROLENAME,"Admins some Users properties");			
-		}
-		user.getRoles().add(role);
-		
-		if(userType.equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER)){
+			em.persist(bc);
+	
+			//no se usa addUser porque este método requiere de un rol de Administrador.
+			User user = new User(userFullName,passwordDigest,userName, phoneNumber, 
+					ruc, dv, address, locality, constitutionDate, email ,userType, bc);
+	
+			user.setDocumentNumber(ciContactPerson); //le paso la CI para que sea usada por la persona a la hora de hacer pagos
+			
+			//al no usar el método addUser, se tienen que agregar los roles "a mano"
+			RoleManager rm = new RoleManager(em);
+			Role role;
 			try {
-				role = rm.getRole(RoleManager.ADMNISTRATORROLENAME);
+				role = rm.getRole(RoleManager.USERROLENAME);
 			} catch (InvalidRoleException e) {
-				role = rm.newRole(RoleManager.ADMNISTRATORROLENAME,"Administators role");			
+				role = rm.newRole(RoleManager.USERROLENAME,"Users role");			
 			}
 			user.getRoles().add(role);
-		}
-		
 	
-		try {
+			try {
+				role = rm.getRole(RoleManager.USERADMINROLENAME);
+			} catch (InvalidRoleException e) {
+				role = rm.newRole(RoleManager.USERADMINROLENAME,"Admins some Users properties");			
+			}
+			user.getRoles().add(role);
 			
+			if(userType.equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER)){
+				try {
+					role = rm.getRole(RoleManager.ADMNISTRATORROLENAME);
+				} catch (InvalidRoleException e) {
+					role = rm.newRole(RoleManager.ADMNISTRATORROLENAME,"Administators role");			
+				}
+				user.getRoles().add(role);
+			}
+
 			Properties properties = new Properties();
 			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
 			properties.load(url.openStream());;
 			
 			//Mail
-//			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
-//					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
-//					user.getEmail(),
-//					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT),
-//					//cuerpo del correo
-//					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + 
-//					"\nNombre de usuario:" +	user.getUserName() +
-//					"\nContraseña:"+clearPasswd+
-//					properties.getProperty("MAIL_TAIL","")
-//        	);
+			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
+					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
+					user.getEmail(),
+					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT),
+					//cuerpo del correo
+					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + 
+					"\nNombre de usuario:" +	user.getUserName() +
+					"\nClave de acceso:"+clearPasswd+
+					properties.getProperty("MAIL_TAIL","")
+        	);
 
 			em.persist(user);
-		
+
+			return user;
 		} catch (IOException e) {
-			e.printStackTrace();
 			logger.error(e);
 			throw new MailException(e.getMessage());
-//		} catch (AddressException e) {
-//			e.printStackTrace();
-//			logger.error(e);
-//			throw new MailException(e.getMessage());
-//		} catch (MessagingException e) {
-//			e.printStackTrace();
-//			logger.error(e);			
-//			throw new MailException(e.getMessage());			
+		} catch (AddressException e) {
+			logger.error(e);
+			throw new MailException(e.getMessage());
+		} catch (MessagingException e) {
+			logger.error(e);			
+			throw new MailException(e.getMessage());			
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(e);			
+			throw new PykasuGenericException(e);						
 		} 
 
-		return user;
+		
 	}
 	
 	@Deprecated

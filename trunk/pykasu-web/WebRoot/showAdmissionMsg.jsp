@@ -16,14 +16,19 @@
 <jsp:include page="header.jsp"/> 
 <div id="main">
  <logic:present name="error">
-	<div id="errors">
+	<div style="font-size: 14px; font-weight: bold; padding: 12px;" >
 		<%=request.getAttribute("error") %>			
 	</div>
   </logic:present>
   
   <logic:present name="success">
-	<div id="messages">
+	<div style="font-size: 14px; font-weight: bold; padding: 12px;" >
 		<%=request.getAttribute("success") %>			
+	</div>
+	<div style="font-size: 14px;">
+		Gente de Visión Banco se pondrá en contacto con usted para darle curso a su Solicitud. <br/>
+		En este punto, deberá aceptar las condiciones establecidas en el Contrato de Prestación de Servicios.<br/>
+		Finalmente, usted recibirá un nombre de usuario y contraseña con el cual podrá ingresar al Sistema de Tributos Web
 	</div>
   </logic:present>
 </div>

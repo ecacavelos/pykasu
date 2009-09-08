@@ -7,7 +7,7 @@
 	</program>
 
 	<program name="Administración de usuarios" order="10" description="" active="true" rolesAllowed="administrator">
-		<action name="Agregar usuario" order="10" url="edituser.do?actionType=add"   urlHelp="" description="" active="true" rolesAllowed="administrator"/>
+		<action name="Agregar usuario" order="10" url="editUser.jsp?actionType=add"   urlHelp="" description="" active="true" rolesAllowed="administrator"/>
 		<action name="Buscar usuarios" order="20" url="showUsers.do" urlHelp="" description="" active="true" rolesAllowed="administrator"/>
 	</program>
 

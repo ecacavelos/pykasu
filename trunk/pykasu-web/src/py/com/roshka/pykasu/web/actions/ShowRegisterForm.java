@@ -80,7 +80,7 @@ public class ShowRegisterForm extends Action{
 				}
 			}
 	    	
-			if(value<0){ //no se encontró nada
+			if(value<0){ //no se encontró ningun buen nombre, entonces va a ser la primera letra de su nombre + su apellldo + los ultimos 3 dígitos de su clave de admision.
 				request.setAttribute("userName", admission.getFname().toLowerCase().substring(0,1)+admission.getLname().toLowerCase()+""+admission.getId().toString().substring(admission.getId().toString().length()-3,admission.getId().toString().length()));
 			}else{
 				request.setAttribute("userName", unames.get(value));

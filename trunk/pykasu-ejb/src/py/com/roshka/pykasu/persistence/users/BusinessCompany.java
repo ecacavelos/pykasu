@@ -284,7 +284,7 @@ public class BusinessCompany implements Serializable {
 	public void setClient(Boolean client) {
 		this.client = client;
 	}
-	@Column(name="type", length=20)
+	@Column(name="bctype", length=20)
 	public String getType() {
 		return type;
 	}

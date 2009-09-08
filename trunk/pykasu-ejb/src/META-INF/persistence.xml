@@ -36,6 +36,7 @@
   	  <class>py.com.roshka.pykasu.persistence.users.Role</class>
   	  <class>py.com.roshka.pykasu.persistence.users.User</class>	  	  
 	  <class>py.com.roshka.pykasu.persistence.uploadForm.UploadForm</class>
+	  <class>py.com.roshka.pykasu.persistence.admission.Admission</class>
       <properties>     
          <property name="hibernate.hbm2ddl.auto" value="update" />
          <property name="hibernate.show_sql" value="true" /> 

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.SessionContext;
@@ -35,8 +36,7 @@ import py.com.roshka.pykasu.util.RoleManager;
 @Stateless
 @Local ({UserManager.class})
 @LocalBinding (jndiBinding="pykasu/UserManager/local")
-
-//@SecurityDomain("PykasuAppPolicy")
+@SecurityDomain("PykasuAppPolicy")
 
 public class UserManagerEJB implements UserManager {
 
@@ -99,7 +99,7 @@ public class UserManagerEJB implements UserManager {
 		return user;
 	}
 
-//	@RolesAllowed("users")
+	@RolesAllowed("useradmin")
 	public void changePassword(String userName, String oldPassword, String newPassword)
 			throws LoginFailureException {
 		try{
@@ -178,7 +178,7 @@ public class UserManagerEJB implements UserManager {
 		}
 		return user;
 	}
-	
+	@RolesAllowed("administrator")
 	public List<User> getUsers() throws PykasuGenericException{
 		User loggedUser = null;
 		try {
@@ -194,12 +194,13 @@ public class UserManagerEJB implements UserManager {
 			throw new PykasuGenericException(e); 
 		}
 	}
-	
+	@RolesAllowed("administrator")
 	public User getUser(String userId) throws PykasuGenericException{
 		Integer i = Integer.parseInt(userId);
 		return  em.find(User.class, i);
 	}
 	
+	@RolesAllowed("administrator")	
 	public void save(User user) throws PykasuGenericException{
 		try{
 			//em.refresh(user);
@@ -211,6 +212,7 @@ public class UserManagerEJB implements UserManager {
 		}
 	}
 
+	@RolesAllowed("administrator")
 	public User createUser(String userName, String passwordDigest, String fullName, String documentNumber, String email, BusinessCompany bc) throws PykasuGenericException{
 		User user = new User(fullName,  passwordDigest,  userName, bc.getPhoneNumber(), 
 				 bc.getRuc(), bc.getDv(),  bc.getAddress(),  bc.getLocality(),  bc.getConstitutionDate(), 
