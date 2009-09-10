@@ -36,6 +36,7 @@ public class AdmissionForm extends ActionForm {
 	private String fax;
 	private String constitution;
 	private String mail;
+	private String legacyUsers;
 	
 	
 	public String getCompanyName() {
@@ -135,6 +136,12 @@ public class AdmissionForm extends ActionForm {
 		this.office = office;
 	}
 	
+	public String getLegacyUsers() {
+		return legacyUsers;
+	}
+	public void setLegacyUsers(String legacyUsers) {
+		this.legacyUsers = legacyUsers;
+	}
 	@Override
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {

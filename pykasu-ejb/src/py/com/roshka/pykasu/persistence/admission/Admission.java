@@ -36,6 +36,7 @@ public class Admission {
 	private String mail;
 	private String status;
 	private Integer bcompanyId;
+	private String legacyUsers;
 
 	public Admission(){
 		this.status = AdmissionManagerEJB.STATUS_REGISTRO;
@@ -210,6 +211,15 @@ public class Admission {
 		this.companyName = companyName;
 	}
 	
+	@Column(name="legacy_users")
+	public String getLegacyUsers() {
+		return legacyUsers;
+	}
+
+	public void setLegacyUsers(String legacyUsers) {
+		this.legacyUsers = legacyUsers;
+	}
+
 	@Transient
 	public String getTypeUIName(){
 		if( (""+type).equalsIgnoreCase(BusinessCompany.TYPE_MULTI_USER) ){

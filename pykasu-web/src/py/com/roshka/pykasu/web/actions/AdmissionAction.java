@@ -78,6 +78,9 @@ public class AdmissionAction extends Action {
 											af.getFax(),
 											date,
 											af.getMail());
+				
+				ads.setLegacyUsers(af.getLegacyUsers());
+				
 				am.addAdmission(ads);
 				
 				request.getSession().setAttribute(Globals.MESSAGE, "Solicitud de Admisión ingresado correctamente.<br/>Se enviará un correo a: " + af.getMail() + " con las instrucciones necesarias para activar esta solicitud de adminisón.");

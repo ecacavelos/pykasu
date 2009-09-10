@@ -28,19 +28,13 @@
 			opt.saveNewRightOptions("widgetSelections");
 		</script>
 		
-		<script LANGUAGE="JavaScript">
-			function submitForm(){
-				var form = document.getElementById('paymentform');
-				if(!validateDate()){
-					alert('Fecha de Declaración NO VALIDA');
-					return;
-				}
-				
-				var amount = document.getElementById('amount');
-				amount.value = removeCommas(amount.value);
-				
-				form.submit();
-			}			
+		<script LANGUAGE="JavaScript">	
+			function canSearch(){
+				if(document.getElementById("widgetSelections").value.length <= 0){
+					alert('Debe seleccionar al menos un Tipo de Formulario.');
+				}				
+				return document.getElementById("widgetSelections").value.length > 0; 				
+			}	
 		</script>
 		<link href="styles/pykasu.css" rel="stylesheet" type="text/css">			
 	</head>
@@ -54,7 +48,7 @@
 		<hr/>
 		<form action="searchForms.do" name="showForms" id="showForms">
 			<input type="hidden" name="search" value="true" />
-			<input type="hidden" name="widgetSelections" value="" />
+			<input type="hidden" name="widgetSelections" value="" id="widgetSelections"/>
 			
 			<h3>Seleccione los formularios:</h3>
 			<table border="0" style="margin-top: 0; padding-top: 0" >
@@ -137,7 +131,7 @@
 			<h3>&nbsp;</h3>
 			<div id="help"></div>
 			<h3>&nbsp;</h3>
-			<input type="submit" value="Recuperar"/>			
+			<input type="submit" value="Recuperar" onclick="return canSearch()"/>			
 		</form>
 		<%}%>
 		<hr/>
