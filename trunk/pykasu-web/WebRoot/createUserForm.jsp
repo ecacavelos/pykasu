@@ -95,60 +95,58 @@
 					</tr>
 				  	<tr>				  		
 				  		<td>Centro de Atención al Cliente<br/>donde retirará sus formularios:</td>	  		
-				  		<td colspan="2">				  			
-				  			<html:select property="office" value="<%=admission.getOffice()%>">
-								<optgroup label="Asunción">
-									<option value=""></option>
-									<option value="1">Casa Matriz - EEUU 780 e/Fulgencio R. Moreno y L.A. de Herrera</option>
-									<option value="3">Gral. Santos - Avda. Gral. Santos esq. Avda. Fndo. de la Mora</option>
-									<option value="7">Palma - Palma esq. Ntra. Sra. de la Asunción</option>
-									<option value="26">Oliva - Oliva esq. O`leary</option>
-									<option value="23">Pinozá - Avda. Eusebio Ayala esq. Bruno Guggiari</option>
-									<option value="14">Villa Morra - Charles de Gaulle c/ Mcal. Lopez</option>
-									<option value="25">Multiplaza - Avda Eusebio Ayala N° 4501</option>
-									<option value="34">Denis Roa - Denis Roa esq. Moisés Bertoni</option>
-									<option value="36">Santisima Trinidad - Avda. Sacramento esq. Avenida Santisima Trinidad</option>
-								</optiongroup>
-								<optgroup label="Gran Asunción">
-									<option value="2">San Lorenzo I - Ruta Mcal. Estigarribia esq. Cnel. Romero</option>
-									<option value="32">San Lorenzo II - 10 de Agosto esq. Hernandarias</option>
-									<option value="8">Ñemby - 9 de Agosto esq. Ytororó</option>
-									<option value="10">Lambaré - Avda. Cacique Lambaré c/San Vicente</option>
-									<option value="9">Mariano R. Alonso - Ruta Transchaco Km. 15 1/2</option>
-									<option value="29">Limpio - Avda. Colón c/ Mcal. Estigarribia</option>
-									<option value="4">Luque - Avda. Gral. Aquino esq. Teniente Herrero Bueno</option>
-									<option value="13">Fndo. de la Mora - Ruta Mcal. Estigarribia esq. 10 de Julio</option>
-									<option value="28">Capiatá - Ruta Mcal Estigarribia esq. Mcal. López Km 20</option>
-								</optiongroup>
-								<optgroup label="Interior">
-									<option value="6">Caacupé - Eligio Ayala esq. Juan E. O`leary</option>
-									<option value="15">Caaguazú - Avda. Bernardino Caballero c/ Gral. Díaz</option>
-									<option value="17">Carapeguá - Ruta Mcal. López y Cristóbal Colón</option>
-									<option value="33">Ciudad de San Ignacio - Ruta Mcal. Estigarribia  esq. Fulgencio Yegros </option>
-									<option value="11">Ciudad del Este I - Avda.Gral. Bernardino Caballero esq. Paso de Patria</option>
-									<option value="20">Ciudad del Este II - Avda. Julio César Riquelme - Km 7 Monday</option>
-									<option value="31">Ciudad del Este III - Boquerón c/Avda. Adrián Jara.</option>
-									<option value="12">Cnel. Oviedo - José Segundo Decoud e/ Tuyutí</option>
-									<option value="16">Concepción - Pdte. Franco e/ Gral. Garay y 14 de Mayo</option>
-									<option value="38">Curuguaty - 14 de Mayo esq. Julia Miranda Cueto de Estigarribia</option>
-									<option value="5">Encarnación - Mcal. Estigarribia entre Tomás Romero Pereira y Villarrica</option>
-									<option value="35">Itaguá - Ruta Mcal. Estigarribia esq. Juan C. Centurión </option>
-									<option value="24">Katueté - La Residenta esq. Capellán Arzamendia</option>
-									<option value="40">Loma Plata - Avda. Central Nº 1160 esq. Gondra</option>
-									<option value="41">Maria Auxiliadora - Tomas Romero Pereira esq. Maria Auxiliadora</option>
-									<option value="27">Obligado - Avda. Gaspar R. de Francia esq. Colonias Unidas</option>
-									<option value="22">Pedro Juan Caballero - Avda. Carlos A. López y Perpetuo Socorro</option>
-									<option value="18">Pilar - Albersoni esq. Antequera</option>
-									<option value="37">Saltos del Guairá - Avenida Paraguay esq. Ricardo Mendez Gonzalves</option>
-									<option value="21">San Estanislao - Mcal.López c/ Cnel.Zoilo González</option>
-									<option value="39">San Juan Nepomuceno - Ruta Mcal. Estigarribia N° 360 c/Pai Fariña</option>
-									<option value="30">Santa Rita - Avda. Carlos Antonio López esq. Eusebio Ayala</option>
-									<option value="PAC">Santa Rosa del Aguaray - Ruta General Aquino c/ Prof. Pedro Gónzalez</option>
-									<option value="19">Villarrica - Avda. Carlos A. López esq. Mcal. Estigarribia</option>
-									<option value="42">Coronel Bogado</option>
-								</optiongroup>  			
-				  			</html:select><br/>				  							  				
-				  		</td>  		
+				  		<td colspan="2">				  							  			
+				  			<html:select property="office" value="<%=(""+admission.getOffice()).trim()%>">
+							 	<optgroup label="Asunción"   > 
+									<option value="" <%if((""+admission.getOffice()).trim().equalsIgnoreCase("")){out.write("\"selected\"");}%>></option>
+									<option value="1"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("1")){out.write("selected");}%> >Casa Matriz - EEUU 780 e/Fulgencio R. Moreno y L.A. de Herrera</option>
+									<option value="3"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("3")){out.write("selected");}%> >Gral. Santos - Avda. Gral. Santos esq. Avda. Fndo. de la Mora</option>
+									<option value="7"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("7")){out.write("selected");}%> >Palma - Palma esq. Ntra. Sra. de la Asunción</option>
+									<option value="26"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("26")){out.write("selected");}%>  >Oliva - Oliva esq. O`leary</option>
+									<option value="23"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("23")){out.write("selected");}%>  >Pinozá - Avda. Eusebio Ayala esq. Bruno Guggiari</option>
+									<option value="14"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("14")){out.write("selected");}%>  >Villa Morra - Charles de Gaulle c/ Mcal. Lopez</option>
+									<option value="25"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("25")){out.write("selected");}%>  >Multiplaza - Avda Eusebio Ayala N° 4501</option>
+									<option value="34"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("34")){out.write("selected");}%>  >Denis Roa - Denis Roa esq. Moisés Bertoni</option>
+									<option value="36"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("36")){out.write("selected");}%>  >Santisima Trinidad - Avda. Sacramento esq. Avenida Santisima Trinidad</option>
+								</optiongroup>      
+								<optgroup label="Gran Asunción"   >                     
+									<option value="2"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("2")){out.write("selected");}%> >San Lorenzo I - Ruta Mcal. Estigarribia esq. Cnel. Romero</option>
+									<option value="32"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("32")){out.write("selected");}%>  >San Lorenzo II - 10 de Agosto esq. Hernandarias</option>
+									<option value="8"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("8")){out.write("selected");}%> >Ñemby - 9 de Agosto esq. Ytororó</option>
+									<option value="10"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("10")){out.write("selected");}%>  >Lambaré - Avda. Cacique Lambaré c/San Vicente</option>
+									<option value="9"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("9")){out.write("selected");}%> >Mariano R. Alonso - Ruta Transchaco Km. 15 1/2</option>
+									<option value="29"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("29")){out.write("selected");}%>  >Limpio - Avda. Colón c/ Mcal. Estigarribia</option>
+									<option value="4"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("4")){out.write("selected");}%> >Luque - Avda. Gral. Aquino esq. Teniente Herrero Bueno</option>
+									<option value="13"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("13")){out.write("selected");}%>  >Fndo. de la Mora - Ruta Mcal. Estigarribia esq. 10 de Julio</option>
+									<option value="28"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("28")){out.write("selected");}%>  >Capiatá - Ruta Mcal Estigarribia esq. Mcal. López Km 20</option>
+								</optiongroup>          
+								<optgroup label="Interior"   >                          
+									<option value="6"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("6")){out.write("selected");}%> >Caacupé - Eligio Ayala esq. Juan E. O`leary</option>
+									<option value="15"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("15")){out.write("selected");}%>  >Caaguazú - Avda. Bernardino Caballero c/ Gral. Díaz</option>
+									<option value="17"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("17")){out.write("selected");}%>  >Carapeguá - Ruta Mcal. López y Cristóbal Colón</option>
+									<option value="33"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("33")){out.write("selected");}%>  >Ciudad de San Ignacio - Ruta Mcal. Estigarribia  esq. Fulgencio Yegros </option>
+									<option value="11"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("11")){out.write("selected");}%>  >Ciudad del Este I - Avda.Gral. Bernardino Caballero esq. Paso de Patria</option>
+									<option value="20"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("20")){out.write("selected");}%>  >Ciudad del Este II - Avda. Julio César Riquelme - Km 7 Monday</option>
+									<option value="31"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("31")){out.write("selected");}%>  >Ciudad del Este III - Boquerón c/Avda. Adrián Jara.</option>
+									<option value="12"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("12")){out.write("selected");}%>  >Cnel. Oviedo - José Segundo Decoud e/ Tuyutí</option>
+									<option value="16"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("16")){out.write("selected");}%>  >Concepción - Pdte. Franco e/ Gral. Garay y 14 de Mayo</option>
+									<option value="38"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("38")){out.write("selected");}%>  >Curuguaty - 14 de Mayo esq. Julia Miranda Cueto de Estigarribia</option>
+									<option value="5"   <%if((""+admission.getOffice()).trim().equalsIgnoreCase("5")){out.write("selected");}%> >Encarnación - Mcal. Estigarribia entre Tomás Romero Pereira y Villarrica</option>
+									<option value="35"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("35")){out.write("selected");}%>  >Itaguá - Ruta Mcal. Estigarribia esq. Juan C. Centurión </option>
+									<option value="24"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("24")){out.write("selected");}%>  >Katueté - La Residenta esq. Capellán Arzamendia</option>
+									<option value="40"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("40")){out.write("selected");}%>  >Loma Plata - Avda. Central Nº 1160 esq. Gondra</option>
+									<option value="41"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("41")){out.write("selected");}%>  >Maria Auxiliadora - Tomas Romero Pereira esq. Maria Auxiliadora</option>
+									<option value="27"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("27")){out.write("selected");}%>  >Obligado - Avda. Gaspar R. de Francia esq. Colonias Unidas</option>
+									<option value="22"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("22")){out.write("selected");}%>  >Pedro Juan Caballero - Avda. Carlos A. López y Perpetuo Socorro</option>
+									<option value="18"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("18")){out.write("selected");}%>  >Pilar - Albersoni esq. Antequera</option>
+									<option value="37"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("37")){out.write("selected");}%>  >Saltos del Guairá - Avenida Paraguay esq. Ricardo Mendez Gonzalves</option>
+									<option value="21"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("21")){out.write("selected");}%>  >San Estanislao - Mcal.López c/ Cnel.Zoilo González</option>
+									<option value="39"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("39")){out.write("selected");}%>  >San Juan Nepomuceno - Ruta Mcal. Estigarribia N° 360 c/Pai Fariña</option>
+									<option value="30"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("30")){out.write("selected");}%>  >Santa Rita - Avda. Carlos Antonio López esq. Eusebio Ayala</option>								
+									<option value="19"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("19")){out.write("selected");}%>  >Villarrica - Avda. Carlos A. López esq. Mcal. Estigarribia</option>
+									<option value="42"  <%if((""+admission.getOffice()).trim().equalsIgnoreCase("42")){out.write("selected");}%>  >Coronel Bogado</option>
+								</optiongroup>			 
+				  			</html:select><br/>				  		</td>  		
 				  	</tr>  	  	
 					
 			</table>

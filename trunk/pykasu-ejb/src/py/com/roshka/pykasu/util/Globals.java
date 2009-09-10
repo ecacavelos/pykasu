@@ -14,6 +14,7 @@ public class Globals {
 	public static final String MAIL_ADMISSION_SUBJECT="Registro de Cuenta en Proceso";
 	public static final String MAIL_ADMISSION_BODY="Gracias por Registrar una solicitud para utilizar el Sistema de Tributos Web.\n\nPara validar su Registro, debe ingresar al siguiente enlace:\nhttp://localhost:8080/pycasu/activationreg.do?sn=";
 	
+	public static final String CRON_MAIL_NOTIFICATIONS="0 0/10 * * * ?";
 	
 	public static final String RAFFLE_BEGIN = "RAFFLE_BEGIN"; 
 	public static final String RAFFLE_END = "RAFFLE_END";

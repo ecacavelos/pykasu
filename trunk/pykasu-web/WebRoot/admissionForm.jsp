@@ -134,7 +134,6 @@
 						<option value="21">San Estanislao - Mcal.López c/ Cnel.Zoilo González</option>
 						<option value="39">San Juan Nepomuceno - Ruta Mcal. Estigarribia N° 360 c/Pai Fariña</option>
 						<option value="30">Santa Rita - Avda. Carlos Antonio López esq. Eusebio Ayala</option>
-						<option value="PAC">Santa Rosa del Aguaray - Ruta General Aquino c/ Prof. Pedro Gónzalez</option>
 						<option value="19">Villarrica - Avda. Carlos A. López esq. Mcal. Estigarribia</option>
 						<option value="42">Coronel Bogado</option>
 					</optiongroup>  			
@@ -175,7 +174,22 @@
 	  		<td>Correo electrónico: (*)</td>
 	  		<td colspan="3">&nbsp;<html:text property="mail" size="60"></html:text><br/>
 	  		<html:errors property="userform.email.mandatory"/></td>
-	  	</tr>  	
+	  	</tr>
+	  	<tr>
+	  		<td colspan="4">	
+	  		<div style="color: blue; font-size: 10px; font-style: italic; width: 700px;" >
+	  		Si Ud. tiene ya una cuenta, o su empresa tiene varias cuentas 
+	  		con la cual ya han realizado declaraciones anteriores, y desea que
+	  		las mismas sean migradas a su nueva cuenta, favor especifíque los
+	  		nombres de usuario separados entre ; (punto y coma)
+	  		Ejemplo: pwelti;aiwa;rramirez  
+	  		</div>
+	  		</td>
+	  	</tr> 	  	
+	  	<tr>
+	  		<td>Migración de usuarios anterirores:</td>
+	  		<td colspan="3">&nbsp;<html:text property="legacyUsers" size="60"></html:text></td>
+	  	</tr>
 	  	<tr>  		
 	  		<td colspan="4" align="center"><html:submit value="Registrar" onclick="sendform('true')"/>&nbsp;&nbsp;<html:reset value="Limpiar Campos"/></td>
 	  	</tr>  	    	
@@ -262,8 +276,7 @@
 						<option value="37">Saltos del Guairá - Avenida Paraguay esq. Ricardo Mendez Gonzalves</option>
 						<option value="21">San Estanislao - Mcal.López c/ Cnel.Zoilo González</option>
 						<option value="39">San Juan Nepomuceno - Ruta Mcal. Estigarribia N° 360 c/Pai Fariña</option>
-						<option value="30">Santa Rita - Avda. Carlos Antonio López esq. Eusebio Ayala</option>
-						<option value="PAC">Santa Rosa del Aguaray - Ruta General Aquino c/ Prof. Pedro Gónzalez</option>
+						<option value="30">Santa Rita - Avda. Carlos Antonio López esq. Eusebio Ayala</option>					
 						<option value="19">Villarrica - Avda. Carlos A. López esq. Mcal. Estigarribia</option>
 						<option value="42">Coronel Bogado</option>
 					</optiongroup>  			
@@ -292,7 +305,22 @@
 	  		<td>Correo electrónico: (*)</td>
 	  		<td colspan="3">&nbsp;<html:text property="mail" size="60"><br/>
 	  		<html:errors property="userform.email.mandatory"/></html:text></td>
-	  	</tr>  	
+	  	</tr>
+	  	<tr>
+	  		<td colspan="4">	
+	  		<div style="color: blue; font-size: 10px; font-style: italic; width: 700px;" >
+	  		Si Ud. tiene ya una cuenta, o su empresa tiene varias cuentas 
+	  		con la cual ya han realizado declaraciones anteriores, y desea que
+	  		las mismas sean migradas a su nueva cuenta, favor especifíque los
+	  		nombres de usuario separados entre ; (punto y coma)
+	  		Ejemplo: pwelti;aiwa;rramirez  
+	  		</div>
+	  		</td>
+	  	</tr> 	  	
+	  	<tr>
+	  		<td>Migración de usuarios anterirores:</td>
+	  		<td colspan="3">&nbsp;<html:text property="legacyUsers" size="60"></html:text></td>
+	  	</tr>	  	 
 	  	<tr>  		
 	  		<td colspan="4" align="center"><html:submit value="Registrar" onclick="sendform('true')"/>&nbsp;&nbsp;<html:reset value="Limpiar Campos"/></td>
 	  	</tr>  	    	

@@ -22,6 +22,18 @@
    <listener>
       <listener-class>py.com.roshka.pykasu.web.listeners.SessionListener</listener-class>
    </listener>
+   
+   <servlet>
+	    <description></description>
+	    <display-name>FormStatusNotify</display-name>
+	    <servlet-name>FormStatusNotify</servlet-name>
+	    <servlet-class>py.com.roshka.pykasu.web.scheduler.FormStatusNotify</servlet-class>
+	    <load-on-startup>2</load-on-startup> 
+   </servlet>
+   <servlet-mapping>
+	    <servlet-name>FormStatusNotify</servlet-name>
+	    <url-pattern>/FormStatusNotify</url-pattern>
+   </servlet-mapping>
 	
 	<servlet>
 
