@@ -27,7 +27,7 @@
 			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
 				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
 				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" />
-				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#controlaAnho"/>
+				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#controlaAnho#TRGc37_0#TRGc37"/>
 				<!-- <cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#retriveSalary()"/> -->
 			</line>	
 			
@@ -284,21 +284,26 @@
 	<rules>
 		
 		<rule name= "TRGc17"   order= "10"  cellTargetId= "c17" formula= "c10 * 0.30" />
-		<rule name= "TRGc18"   order= "20" cellTargetId= "c18" formula= "c11 * 0.30" />
-		<rule name= "TRGc20"   order= "30" cellTargetId= "c20" formula= "c17+ c18+c19" />
-		<rule name= "TRGc22"   order= "40" cellTargetId= "c22" formula= "c21 - c23" />
-		<rule name= "TRGc22_0" order= "45" cellTargetId= "c22" formula= "0" condition= "c22 &lt; 0" />
-		<rule name= "TRGc24"   order= "50" cellTargetId= "c24" formula= "c23 - c21" />
-		<rule name= "TRGc24_0" order= "55" cellTargetId= "c24" formula= "0" condition= "c24 &lt; 0" />
-		<rule name= "TRGc25"   order= "60" cellTargetId= "c25" formula= "c23 * 0.30" />
-		<rule name= "TRGc27"   order= "70" cellTargetId= "c27" formula= "c26 - c28" />
-		<rule name= "TRGc27_0" order= "75" cellTargetId= "c27" formula= "0" condition= "c27 &lt; 0" />
-		<rule name= "TRGc29"   order= "80" cellTargetId= "c29" formula= "c28 - c26" />
-		<rule name= "TRGc29_0" order= "85" cellTargetId= "c29" formula= "0" condition= "c29 &lt; 0" />
-		<rule name= "TRGc35"   order= "90" cellTargetId= "c35" formula= "c30+c31+c32+c33+c34" />
+		<rule name= "TRGc18"   order= "20"  cellTargetId= "c18" formula= "c11 * 0.30" />
+		<rule name= "TRGc20"   order= "30"  cellTargetId= "c20" formula= "c17+ c18+c19" />
+		<rule name= "TRGc22"   order= "40"  cellTargetId= "c22" formula= "c21 - c23" />
+		<rule name= "TRGc22_0" order= "45"  cellTargetId= "c22" formula= "0" condition= "c22 &lt; 0" />
+		<rule name= "TRGc24"   order= "50"  cellTargetId= "c24" formula= "c23 - c21" />
+		<rule name= "TRGc24_0" order= "55"  cellTargetId= "c24" formula= "0" condition= "c24 &lt; 0" />
+		<rule name= "TRGc25"   order= "60"  cellTargetId= "c25" formula= "c23 * 0.30" />
+		<rule name= "TRGc27"   order= "70"  cellTargetId= "c27" formula= "c26 - c28" />
+		<rule name= "TRGc27_0" order= "75"  cellTargetId= "c27" formula= "0" condition= "c27 &lt; 0" />
+		<rule name= "TRGc29"   order= "80"  cellTargetId= "c29" formula= "c28 - c26" />
+		<rule name= "TRGc29_0" order= "85"  cellTargetId= "c29" formula= "0" condition= "c29 &lt; 0" />
+		<rule name= "TRGc35"   order= "90"  cellTargetId= "c35" formula= "c30+c31+c32+c33+c34" />
 		<rule name= "TRGc36"   order= "100" cellTargetId= "c36" formula= "c35 - c40" />
 		<rule name= "TRGc36_0" order= "105" cellTargetId= "c36" formula= "0" condition= "c36 &lt; 0" />
-		<rule name= "TRGc37"   order= "110" cellTargetId= "c37" formula= "c20 * 0.10" />
+
+				
+		<rule name= "TRGc37_0" order= "110" cellTargetId= "c37" formula= "c20 * 0.145"/>		
+		<rule name= "TRGc37"   order= "111" cellTargetId= "c37" formula= "c20 * 0.10" condition="removeCommas(document.getElementById('fiscalPeriodYear').value) &lt; 2009"/>
+
+		
 		<rule name= "TRGc38"   order= "120" cellTargetId= "c38" formula= "c24 * 0.10" condition="c24 &lt; c25"/>
 		<rule name= "TRGc38_0" order= "125" cellTargetId= "c38" formula= "c25 * 0.10" condition="c25 &lt; c24"/>
 		<rule name= "TRGc40"   order= "130" cellTargetId= "c40" formula= "c37 + c39" condition="c37 &gt;= c38"/>

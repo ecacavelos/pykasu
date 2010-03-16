@@ -48,7 +48,7 @@ function calculateAfterPlugin(){
 	
 	refreshVars();
 	TRGc38();
-	TRGc38_0()
+	TRGc38_0();
 }
 
 /*

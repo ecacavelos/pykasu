@@ -62,14 +62,19 @@ public class UserManagerEJB implements UserManager {
 		logger.info("Get a Query whit the next pattern: userName:" + userName.trim().toLowerCase());
 		User user = null;
 		try{
-			logger.debug("Try to get User without PaymentAvailable");
-			user =	(User) em.createQuery("select users from User as users where users.isActive is true and users.userName like :userName and users.paymentAvaliable = :paParam")
-						  		 .setParameter("userName",userName.trim().toLowerCase())
-						  		 .setParameter("paParam",Boolean.FALSE)
-						  		 .getSingleResult();
+			logger.info("Try to get User without PaymentAvailable");
+//			user =	(User) em.createQuery("select users from User as users where users.isActive is true and users.userName like :userName and users.paymentAvaliable = :paParam")
+//						  		 .setParameter("userName",userName.trim().toLowerCase())
+//						  		 .setParameter("paParam",Boolean.FALSE)
+//						  		 .getSingleResult();
+			user =	(User) em.createQuery("select users from User as users where users.isActive is true and users.userName like :userName")
+	  		 .setParameter("userName",userName.trim().toLowerCase())
+//	  		 .setParameter("paParam",Boolean.FALSE)
+	  		 .getSingleResult();
+			
 		}catch(NoResultException e) {
 			try{
-				logger.debug("User not found. Try now to get User with PaymentAvailable");
+				logger.info("User not found. Try now to get User with PaymentAvailable");
 				String uname = userName.trim().toLowerCase();
 				DecimalFormat df = new DecimalFormat("000000000000000");
 				uname = df.format(Double.parseDouble(uname));
@@ -91,8 +96,8 @@ public class UserManagerEJB implements UserManager {
 		}
 			
 		if(!user.getPasswordDigest().equals(passwdDigest)){
-			logger.debug("DB Password:" + user.getPasswordDigest());
-			logger.debug("User Password:" + passwdDigest);
+			logger.info("DB Password:" + user.getPasswordDigest());
+			logger.info("User Password:" + passwdDigest);
 			throw new LoginFailureException("La contraseña provista para autenticar al usuario  " + user.getUserName() + " no corresponde." );
 		}
 
@@ -165,13 +170,13 @@ public class UserManagerEJB implements UserManager {
 	   throws FindingException{
 		User user = null;
 		try{
-			logger.debug("-------------> Before perform query.");	
+			logger.info("-------------> Before perform query.");	
 
 			user= (User)em.createQuery("select users from User users where users.userName = :principalUser")
 					.setParameter("principalUser",username.trim().toLowerCase())
 					.getSingleResult();
 
-			logger.debug("-------------> After perform query.");	
+			logger.info("-------------> After perform query.");	
 		}catch(NoResultException e){
 			logger.error(e);
 			throw new FindingException(e.getMessage());

@@ -73,7 +73,7 @@ public class ClientDataEJB implements ClientDataInterface{
 
 		ClientData cd = new ClientData(user); 
 		try {
-        	logger.debug("Finding principal user");
+        	logger.info("Finding principal user");
         	
 			
 			cd.fillForm(form);
@@ -193,9 +193,9 @@ public class ClientDataEJB implements ClientDataInterface{
 	protected Form getEmptyFormFromXml(){
     	Form form = null;
 		ClassLoader cl = getClass().getClassLoader();
-		logger.debug("-----> Parsing the xml to retrive a empty form 800");
+		logger.info("-----> Parsing the xml to retrive a empty form 800");
 		form = Parser.parseForm(cl.getResourceAsStream(CLIENT_DATA_XML));
-		logger.debug("-----> Finnish to parsing");	
+		logger.info("-----> Finnish to parsing");	
     	return form;    
 	}
 

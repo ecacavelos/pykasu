@@ -74,7 +74,7 @@ public class ProcesarForm extends Action{
                 raffleTicketManager = (RaffleTicketManager) ic.lookup("pykasu/RaffleTicketManager/local");
                 
                 
-                logger.debug("Setting cells to Form ");
+                logger.info("Setting cells to Form ");
                 
         		String presentationDate = gf.getField("paymentDate");
         		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -115,7 +115,7 @@ public class ProcesarForm extends Action{
                     }
                 }
                 //TODO: Hacer una ventana de mensajes para mostrar mensajes, y que no aparezca tan feo como ahora el mensaje
-                logger.debug("La clase del FORMBEAN -> [Canonical: " + formBean.getClass().getCanonicalName() + "]/[Class: " + formBean.getClass().getName() + "]");
+                logger.info("La clase del FORMBEAN -> [Canonical: " + formBean.getClass().getCanonicalName() + "]/[Class: " + formBean.getClass().getName() + "]");
 //                Cell c = formBean.getCell("paymentDate");
 //                c.getData();
                 

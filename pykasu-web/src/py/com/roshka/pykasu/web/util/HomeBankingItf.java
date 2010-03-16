@@ -41,7 +41,7 @@ public class HomeBankingItf implements Serializable{
 		//tb se debe crear el SegVision para este usuario.
 		this.user = user;		
 		logger.info("Creating HomeBankingItf");
-		logger.debug("User: " + user.getUserName() + " with Document:" + user.getDocumentNumber());	
+		logger.info("User: " + user.getUserName() + " with Document:" + user.getDocumentNumber());	
 		
 		SegVision segVision = null;
 		SdtImpuestosItem[] accounts = null;
@@ -57,13 +57,13 @@ public class HomeBankingItf implements Serializable{
 			properties.load(urlp.openStream());;
 
 			url = new URL(properties.getProperty("WS_PAYMENT_URL"));
-			logger.debug("Get locator from url: " + url.toString());			
+			logger.info("Get locator from url: " + url.toString());			
 			WsimpuestosLocator wsImpLocator = new WsimpuestosLocator();
-			logger.debug("Locator available!");
+			logger.info("Locator available!");
 			
-			logger.debug("Getting port ");
+			logger.info("Getting port ");
 			wsImpSoapPort =	wsImpLocator.getwsimpuestosSoapPort(url);
-			logger.debug("Port available!");
+			logger.info("Port available!");
 			
 			segVision = new SegVision();
 			segVision.setUsrCod("VISION");//aca se va a poner el usuario "duro"
@@ -91,7 +91,7 @@ public class HomeBankingItf implements Serializable{
 			wsie.setSdtimpuestos(accounts);
 			wsie.setSdtrespuestas(responses);
 			
-			logger.debug("End of creating HomeBankingItf");
+			logger.info("End of creating HomeBankingItf");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			throw new HBGenericException(e.getMessage());
@@ -109,14 +109,14 @@ public class HomeBankingItf implements Serializable{
 	public Set<HBAccount> getAccunts() throws HBQueryException{
 		
 		logger.info("Attemp to get account to " + user.getUserName() + " with document "+ user.getDocumentNumber());
-		logger.debug("Before to setting UsrTipo to 'C'");
+		logger.info("Before to setting UsrTipo to 'C'");
 		wsie.getSegvision().setUsrTipo("C");
 		wsie.setSdtimpuestos(new SdtImpuestosItem[0]);
 
 		try {
-			logger.debug("Before to execute wsExcecute");
+			logger.info("Before to execute wsExcecute");
 			wsExcecute();
-			logger.debug("After to execute wsExcecute");
+			logger.info("After to execute wsExcecute");
 		} catch (HBGenericException e) {
 			e.printStackTrace();
 			throw new HBQueryException(e);
@@ -152,7 +152,7 @@ public class HomeBankingItf implements Serializable{
 		
 		
 		
-		logger.debug("Setting segVision UsrTipo to 'A'");
+		logger.info("Setting segVision UsrTipo to 'A'");
 	 	try {
 	 		wsResponse.getSegvision().setUsrTipo("A");
 
@@ -194,22 +194,22 @@ public class HomeBankingItf implements Serializable{
 	
 	private void wsExcecute() throws HBGenericException{
 		try {
-			logger.debug(">>>>>>>>> Going to Invoque WS");
-			logger.debug("segVeision: \n" + wsie.getSegvision());
+			logger.info(">>>>>>>>> Going to Invoque WS");
+			logger.info("segVeision: \n" + wsie.getSegvision());
 			for(int i=0; i< wsie.getSdtimpuestos().length; i++){
-				logger.debug("sdtImpuestos: \n" + wsie.getSdtimpuestos()[i]);
+				logger.info("sdtImpuestos: \n" + wsie.getSdtimpuestos()[i]);
 			}
-			logger.debug("sdtRespuestas: \n" + wsie.getSdtrespuestas());
+			logger.info("sdtRespuestas: \n" + wsie.getSdtrespuestas());
 			
 			wsResponse = wsImpSoapPort.execute(wsie);
 			
-			logger.debug(">>>>>>>>> WS Response");
-			logger.debug("segVeision: \n" + wsResponse.getSegvision());
+			logger.info(">>>>>>>>> WS Response");
+			logger.info("segVeision: \n" + wsResponse.getSegvision());
 			for(int i=0; i< wsResponse.getSdtimpuestos().length; i++){
-				logger.debug("sdtImpuestos: \n" + wsResponse.getSdtimpuestos()[i]);
+				logger.info("sdtImpuestos: \n" + wsResponse.getSdtimpuestos()[i]);
 			}
-			logger.debug("sdtRespuestas: \n" + wsResponse.getSdtrespuestas());
-			logger.debug(">>>>>>>>> End of WS Response");
+			logger.info("sdtRespuestas: \n" + wsResponse.getSdtrespuestas());
+			logger.info(">>>>>>>>> End of WS Response");
 
 		
 		} catch (RemoteException e){

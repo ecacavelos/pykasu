@@ -26,26 +26,26 @@ public class Utils {
 	}
 	
 	public static boolean isRaffleTime(Calendar cal){
-		logger.debug("isRaffleTime -- INIT --" );
+		logger.info("isRaffleTime -- INIT --" );
 		String raffleBegin = "01/01/1970"; 
 		String raffleEnd = "01/01/1970"; 
 		
-		logger.debug("isRaffleTime to: " + cal.getTime());
+		logger.info("isRaffleTime to: " + cal.getTime());
 		
 		ClassLoader cl = Utils.class.getClassLoader();
-		logger.debug("isRaffleTime -- INIT -- ClassLoader: is null? " + (cl == null));
+		logger.info("isRaffleTime -- INIT -- ClassLoader: is null? " + (cl == null));
 		Properties properties = new Properties();
 		try {
-			logger.debug("isRaffleTime -- INIT -- Properties is null? "+ (properties == null) );
+			logger.info("isRaffleTime -- INIT -- Properties is null? "+ (properties == null) );
 			//properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));
 			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
 			properties.load(url.openStream());;
 
-			logger.debug("isRaffleTime -- INIT --" );
+			logger.info("isRaffleTime -- INIT --" );
 			raffleBegin = properties.getProperty(py.com.roshka.pykasu.util.Globals.RAFFLE_BEGIN,"01/01/1970");
-			logger.debug("isRaffleTime - begin: " + raffleBegin);
+			logger.info("isRaffleTime - begin: " + raffleBegin);
 			raffleEnd = properties.getProperty(py.com.roshka.pykasu.util.Globals.RAFFLE_END,"01/01/1970");
-			logger.debug("isRaffleTime - end: " + raffleEnd);
+			logger.info("isRaffleTime - end: " + raffleEnd);
 		} catch (IOException e) {
 			logger.warn("Error al recuperar el archivo de propiedades para obtener el valor de " + py.com.roshka.pykasu.util.Globals.RAFFLE_BEGIN + " o " + py.com.roshka.pykasu.util.Globals.RAFFLE_END);		
 		};
@@ -82,21 +82,21 @@ public class Utils {
 	}
 	
 	public static boolean afterCloseHour(Calendar cal){
-		logger.debug("afterCloseHour -- INIT --" );
+		logger.info("afterCloseHour -- INIT --" );
 		String closeHour = "18:00"; //horario por omisión
-		logger.debug("afterCloseHour -- INIT --" );
+		logger.info("afterCloseHour -- INIT --" );
 		ClassLoader cl = Utils.class.getClassLoader();
-		logger.debug("afterCloseHour -- INIT -- ClassLoader: is null? " + (cl == null));
+		logger.info("afterCloseHour -- INIT -- ClassLoader: is null? " + (cl == null));
 		Properties properties = new Properties();
 		try {
-			logger.debug("afterCloseHour -- INIT -- Properties is null? "+ (properties == null) );
+			logger.info("afterCloseHour -- INIT -- Properties is null? "+ (properties == null) );
 			//properties.load(cl.getResourceAsStream(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES));
 			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
 			properties.load(url.openStream());;
 			
-			logger.debug("afterCloseHour -- INIT --" );
+			logger.info("afterCloseHour -- INIT --" );
 			closeHour = properties.getProperty(py.com.roshka.pykasu.util.Globals.CLOSE_HOUR,"18:00");
-			logger.debug("afterCloseHour " + closeHour);
+			logger.info("afterCloseHour " + closeHour);
 		} catch (IOException e) {
 			logger.warn("Error al recuperar el archivo de propiedades para obtener el valor de " + py.com.roshka.pykasu.util.Globals.CLOSE_HOUR + ". se utilizara el valor por omision: " + closeHour);		
 		};
@@ -107,12 +107,12 @@ public class Utils {
 		c.setTime(new Date(System.currentTimeMillis()));
 
 		if(hm[0]!=null){
-			logger.debug("afterCloseHour " + closeHour + " HOURS= " + hm[0]);
+			logger.info("afterCloseHour " + closeHour + " HOURS= " + hm[0]);
 			c.set(Calendar.HOUR, Integer.parseInt(hm[0].trim()));			
 		}
 
 		if(hm[1]!=null){
-			logger.debug("afterCloseHour " + closeHour + " MIN= " + hm[1]);
+			logger.info("afterCloseHour " + closeHour + " MIN= " + hm[1]);
 			c.set(Calendar.MINUTE, Integer.parseInt(hm[1].trim()));			
 		}
 		
@@ -138,18 +138,18 @@ public class Utils {
 		dateTo.setTime(dateTo.getTime()+ 12 *ONE_HOUR);
 		long diff = dateTo.getTime() - dateFrom.getTime();
 		
-		logger.debug("Difference days between " + dateFrom + " and " + dateTo);
+		logger.info("Difference days between " + dateFrom + " and " + dateTo);
 
 		Double d = new Double(((diff + ONE_HOUR) / (24 * ONE_HOUR)));
 		//d = Math.ceil(d);
 		//return new Integer(d.intValue()+1); // el mas 1 le puso el ninho rey
-		logger.debug("Amount difference days: " + d.intValue());
+		logger.info("Amount difference days: " + d.intValue());
 		return new Integer(d.intValue()); 
 	}	
 	
 	public static Integer MonthDiff(Date dateFrom, Date dateTo){
 
-		logger.debug("Difference month between " + dateFrom + " and " + dateTo);
+		logger.info("Difference month between " + dateFrom + " and " + dateTo);
 
 		GregorianCalendar gcFrom = new GregorianCalendar();
 		gcFrom.setTime(dateFrom);
@@ -166,17 +166,17 @@ public class Utils {
 		return new Integer(i);
 	}
 	public static Integer FiscalMonthDiff(Date dateFrom, Date dateTo){
-		logger.debug("Difference month between " + dateFrom + " and " + dateTo);
+		logger.info("Difference month between " + dateFrom + " and " + dateTo);
 
 		Integer amountDays = DateDiff(dateFrom, dateTo);
 		Double d = new Double((double)amountDays/30);
 		//System.out.println(amountDays + " - div: " + amountDays/30 + " - d= " + d);
-		logger.debug("Goign to comparate " + d.doubleValue() + " with " + d.intValue());
+		logger.info("Goign to comparate " + d.doubleValue() + " with " + d.intValue());
 		if(d.doubleValue() > d.intValue()){
-			logger.debug("Returning " + (d.intValue() + 1));
+			logger.info("Returning " + (d.intValue() + 1));
 			return new Integer(d.intValue() + 1);
 		}else{
-			logger.debug("Returning " + d.intValue());
+			logger.info("Returning " + d.intValue());
 			return new Integer(d.intValue());
 		}
 	}	

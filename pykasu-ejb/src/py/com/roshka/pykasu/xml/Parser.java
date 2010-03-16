@@ -166,7 +166,7 @@ public class Parser {
 			if(xmlCells.item(i).getNodeType()== Node.ELEMENT_NODE){
 				cell = new Cell(line);				
 				fillCell(cell, xmlCells.item(i).getAttributes());
-				//logger.debug("Parsenado la celda: " + cell.getId());
+				//logger.info("Parsenado la celda: " + cell.getId());
 				line.addCell(cell);				
 			}
 	    }		

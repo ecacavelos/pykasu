@@ -64,7 +64,7 @@ public class GenericForm extends ActionForm{
 
     @SuppressWarnings("unchecked")
 	public void setField(String key,String value){
-    	logger.debug("Setting a field Key:" + key + " Value: " + value );
+    	logger.info("Setting a field Key:" + key + " Value: " + value );
         fields.put(key,value);
     }
     public String getField(String key){

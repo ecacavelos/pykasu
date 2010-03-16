@@ -209,11 +209,11 @@ public abstract class GenericFormManagerEJB implements GenericFormManager {
 	protected Form getEmptyFormFromXml(){
     	Form form = null;
 		ClassLoader cl = getClass().getClassLoader();
-		logger.debug("-----> Parsing the xml to retrive a empty form 120");		
+		logger.info("-----> Parsing the xml to retrive a empty form 120");		
 		form = Parser.parseForm(cl.getResourceAsStream("forms/"+getXmlFormRepresentation()));
 		if (form == null)
 			logger.warn("NULL" + getXmlFormRepresentation());
-		logger.debug("-----> Finnish to parsing");	
+		logger.info("-----> Finnish to parsing");	
     	return form;
     
 	}	

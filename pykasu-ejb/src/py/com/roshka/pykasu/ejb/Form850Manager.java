@@ -63,7 +63,7 @@ public class Form850Manager extends GenericFormManagerEJB implements Form850Mana
 
     	logger.info("------------> Adding a new Form 850");
     	try {
-        	logger.debug("Finding principal user");
+        	logger.info("Finding principal user");
         	
         	User user = null;
         	try {

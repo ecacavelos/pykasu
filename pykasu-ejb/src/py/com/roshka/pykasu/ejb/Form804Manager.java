@@ -70,7 +70,7 @@ public class Form804Manager extends GenericFormManagerEJB implements
 	public String addForm(Form form) throws AddFormException {
     	logger.info("------------> Adding a new Form 804");
     	try {
-        	logger.debug("Finding principal user");
+        	logger.info("Finding principal user");
         	
         	User user = null;
         	try {

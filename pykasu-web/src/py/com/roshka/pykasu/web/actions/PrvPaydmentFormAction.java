@@ -1,8 +1,10 @@
 package py.com.roshka.pykasu.web.actions;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
@@ -47,11 +49,16 @@ public class PrvPaydmentFormAction extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm arg1, HttpServletRequest request, HttpServletResponse arg3) throws Exception {
 		
-		logger.debug("PrvPaydmentFormAction - EXECUTE");
+		logger.info("PrvPaydmentFormAction - EXECUTE");
 		HomeBankingItfV2 hbi = null;
-
+		Properties properties = null;
 		try {//TODO:(Mirna)Explicarle a pablo el problema que salia cuando no estaba correcto el número de cedula
 
+			
+			properties = new Properties();
+			URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			properties.load(url.openStream());
+			
 			InitialContext ic = new InitialContext();
 	        TaxManager taxMgr = (TaxManager) ic.lookup("pykasu/TaxesManager/local");   
 	
@@ -69,7 +76,7 @@ public class PrvPaydmentFormAction extends Action {
 			for(int i=0; i<20; i++,year--){
 				al.add(new LabelValueBean(new Integer(year), new Integer(year)));			
 			}
-			logger.debug("years: "+al.size());
+			logger.info("years: "+al.size());
 			request.setAttribute("years", al);
 
 			if(user.getPaymentAvaliable() == null || !user.getPaymentAvaliable().booleanValue()){
@@ -77,10 +84,15 @@ public class PrvPaydmentFormAction extends Action {
 				request.setAttribute("accounts",null);
 				//si no tiene habilitada la parte de pagos,
 				//entonces se le muestra el procedimiento para que pueda imprimir la boleta
-				//la lógica de esto
+				//la lógica de esto								
 				return mapping.findForward("success");
 			}			
-
+			
+			if(!Boolean.parseBoolean(properties.getProperty("MODULO_PAGOS", "true"))){
+				request.getSession().setAttribute(Globals.MESSAGE_WARNING, "Se ha deshabilitado temporalmente el servicio de Pago de Impuestos utilizando Cuentas Bancarias.");
+				return mapping.findForward("success");
+			}
+			
 			if(request.getSession().getAttribute("homeBanking") == null){
 				user = (User) request.getSession().getAttribute(Globals.LOGIN_USER);
 				
@@ -91,11 +103,11 @@ public class PrvPaydmentFormAction extends Action {
 				logger.info("Using existing Home Bancking Interface");
 			}
 			if(hbi.getAccunts() != null){
-				logger.debug("Account is not null!. Size:" + hbi.getAccunts().size());
+				logger.info("Account is not null!. Size:" + hbi.getAccunts().size());
 				request.setAttribute("accounts",hbi.getAccunts());
 				//coloco en la session la lista de cuentas, de tal manera que a la hora de hacer el pago, se recorran las cuentas y se extraigan los valores de pago ingresados por el usuario
 				request.getSession().setAttribute("accounts",hbi.getAccunts());
-			}else{
+			}else{				
 				request.setAttribute("accounts",null);
 				logger.warn(">>>>>>>>>>>>>>>>  hbi.getAccunts() is NULL");
 			}
@@ -109,10 +121,10 @@ public class PrvPaydmentFormAction extends Action {
 			mapping.findForward("info");
 			e.printStackTrace();
 		}
-		logger.debug("Putting HomeBankingItf Object in the Session");
+		logger.info("Putting HomeBankingItf Object in the Session");
 		request.getSession().setAttribute("homeBanking",hbi);
 
-		logger.debug("Going to mapped 'success'");
+		logger.info("Going to mapped 'success'");
 		return mapping.findForward("success");
 	}
 	

@@ -54,7 +54,7 @@ public class Form800Manager  extends GenericFormManagerEJB implements Form800Man
 	public String addForm(Form form) throws AddFormException {
     	logger.info("------------> Adding a new Form 800");
     	try {
-        	logger.debug("Finding principal user");
+        	logger.info("Finding principal user");
         	
         	User user = null;
         	try {

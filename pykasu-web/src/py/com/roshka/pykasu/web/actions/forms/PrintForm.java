@@ -62,7 +62,7 @@ public class PrintForm extends Action {
 		while(it.hasNext()){
 			cell = (Cell) it.next();
 			if((cell.getXmlTagName() != null) && (!cell.isNullData())){
-				logger.debug("PRINT: " + cell.getXmlTagName() + " ::: " + cell.getData());
+				logger.info("PRINT: " + cell.getXmlTagName() + " ::: " + cell.getData());
 				sb.append("<" + cell.getXmlTagName()+">");
 				obj = cell.getData();
 				if(obj instanceof Double){

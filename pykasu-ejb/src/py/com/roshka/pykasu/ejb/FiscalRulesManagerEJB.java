@@ -81,11 +81,11 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
        throws FiscalInfoException{
 	   
     	try {
-    		logger.debug("Computer fiscal Info.");
+    		logger.info("Computer fiscal Info.");
 			Date expiringDate = getExpiringDate(formType, ruc, fp);
 			
 			Integer diffDate = Utils.DateDiff(expiringDate,paydmentDate);
-			logger.debug("Difference in days: " + diffDate);
+			logger.info("Difference in days: " + diffDate);
 			 
 			Map map = new HashMap();
 			
@@ -103,14 +103,14 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			    map.put("CONTRAVENSION_CMOV", fcf.getContravertion());  //with movimient 	    	
 		    	
 		    	if(fcf.getMonthFrom().intValue() >= 3){
-		    		logger.debug("----> Retrive RUC to know is JURIDICA");
+		    		logger.info("----> Retrive RUC to know is JURIDICA");
 		    		try {
 						Ruc r = contributor.getInfo(ruc);
 						//if(r.getType().trim().toUpperCase().equals("JURIDICA")){
 						if(false){
 							//map.put("R7_IE_C2_WM", 100000);  //with movimient and JURIDICA
 							map.put("CONTRAVENSION_SMOV", new Double (100000.0));  //without movimient and JURIDICA
-							logger.debug("----> RUC " + ruc + " is JURIDICA");
+							logger.info("----> RUC " + ruc + " is JURIDICA");
 						}
 					} catch (GetContributorInfoException e) {
 						logger.error("Impossible to retrieve a Contributor Info.",e);
@@ -125,7 +125,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				nf.setMinimumFractionDigits(6);
 				nf.setGroupingUsed(false);
 
-				logger.debug("setting vinteres  -> " + vinteres + " with number format: " + nf);
+				logger.info("setting vinteres  -> " + vinteres + " with number format: " + nf);
 				
 				
 				map.put("PORC_INTERES",nf.format(vinteres));
@@ -153,7 +153,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
    
     protected FiscalPeriod getFiscalPeriod(Integer month, Integer year)
 	 throws FiscalPeriodNotFoundException{
-		logger.debug("Getting a Fiscal Period with month->" + month+  " year->"+year);
+		logger.info("Getting a Fiscal Period with month->" + month+  " year->"+year);
 		try{
 			FiscalPeriod fp = (FiscalPeriod) 
 				em.createQuery("select fp from FiscalPeriod fp " +
@@ -172,7 +172,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
     @SuppressWarnings("unchecked")
 	protected Map getFiscalInfo(Date paymentDate, String ruc, Integer formType, Integer advancedNumber, Integer clausureMonth,  Date expiringDate)
 	 throws FiscalInfoException{
-		logger.debug("Getting a Fiscal Info from Advanced data ->" + expiringDate);
+		logger.info("Getting a Fiscal Info from Advanced data ->" + expiringDate);
 		try{
 			
 			String lastLetter = ruc.substring(ruc.length()-1);
@@ -180,7 +180,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				lastLetter = "N";
 			}
 			
-			logger.debug("Getting lastLetterRuc: " + lastLetter);
+			logger.info("Getting lastLetterRuc: " + lastLetter);
 			
 			FiscalAdvanced ed = (FiscalAdvanced)
 								em.createQuery("select fa from FiscalAdvanced fa " +
@@ -202,7 +202,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				throw new FiscalInfoException("Fecha de vencimiento inválida.");
 			}
 			Integer diffDate = Utils.DateDiff(expiringDate , paymentDate);
-			logger.debug("Difference in days: " + diffDate);
+			logger.info("Difference in days: " + diffDate);
 			 
 			Map map = new HashMap();
 			
@@ -220,14 +220,14 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			    map.put("R7_IE_C2_WM", fcf.getContravertion());  //with movimient 	    	
 		    	
 		    	if(fcf.getMonthFrom().intValue() >= 3){
-		    		logger.debug("----> Retrive RUC to know is JURIDICA");
+		    		logger.info("----> Retrive RUC to know is JURIDICA");
 		    		try {
 						Ruc r = contributor.getInfo(ruc);
 						//if(r.getType().trim().toUpperCase().equals("JURIDICA")){
 						if(false){ //TODO esto ya no se aplicay se deberia de cambiar todo este método
 							//map.put("R7_IE_C2_WM", 100000);  //with movimient and JURIDICA
 							map.put("R7_IE_C2_WOM", new Double (100000.0));  //without movimient and JURIDICA
-							logger.debug("----> RUC " + ruc + " is JURIDICA");
+							logger.info("----> RUC " + ruc + " is JURIDICA");
 						}
 					} catch (GetContributorInfoException e) {
 						logger.error("Impossible to retrieve a Contributor Info.",e);
@@ -241,7 +241,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				nf.setMinimumFractionDigits(6);
 				nf.setGroupingUsed(false);
 
-				logger.debug("setting vinteres  -> " + vinteres + " with number format: " + nf);
+				logger.info("setting vinteres  -> " + vinteres + " with number format: " + nf);
 				
 				
 				map.put("R7_IJ_C2_VINTERES",nf.format(vinteres));
@@ -295,7 +295,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	
     protected Date getExpiringDate(Integer formType, String ruc, FiscalPeriod fiscalPeriod) 
 	 throws FailToGetExpiringDateException{
-		logger.debug("Getting a expiring date with: Ruc-> " + ruc + " formType-> " + formType + " fiscalPeriod->" + fiscalPeriod);												
+		logger.info("Getting a expiring date with: Ruc-> " + ruc + " formType-> " + formType + " fiscalPeriod->" + fiscalPeriod);												
 		String lastLetter = ruc.substring(ruc.length()-1);
 		if(lastLetter.equals("Ñ") || lastLetter.equals("ñ")){
 			lastLetter = "N";
@@ -303,7 +303,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 
     	try{
 			
-			logger.debug("Getting lastLetterRuc: " + lastLetter);
+			logger.info("Getting lastLetterRuc: " + lastLetter);
 			ExpiringDate ed = (ExpiringDate) 
 								em.createQuery("select ed from ExpiringDate ed " +
 											   "where ed.fiscalPeriod = :fiscalPeriod AND ed.formType = :formType AND "  +
@@ -342,7 +342,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		String key = null;
 		while(it.hasNext()){
 			key = it.next().toString();
-			logger.debug("Params: " + key + " => " + params.get(key));
+			logger.info("Params: " + key + " => " + params.get(key));
 		}
 		
 		Integer formType = (Integer) params.get(FISCAL_FORM_TYPE);		
@@ -521,7 +521,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				nf.setMinimumFractionDigits(6);
 				nf.setGroupingUsed(false);
 
-				logger.debug("setting vinteres  -> " + vinteres + " with number format: " + nf);		
+				logger.info("setting vinteres  -> " + vinteres + " with number format: " + nf);		
 				
 				map.put("PORC_INTERES",nf.format(vinteres));
 		    	
@@ -660,14 +660,14 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
     						.setParameter("year",year)
     						.getSingleResult();
     	
-    	logger.debug("Retrive Expirieng Dates with Fiscal Period ID = " + fp.getId());
+    	logger.info("Retrive Expirieng Dates with Fiscal Period ID = " + fp.getId());
     	
     	List list = em.createQuery("select ed from ExpiringDate ed where ed.fiscalPeriod = :fp" +
     							   " order by ed.formType, ed.charFrom")
     		.setParameter("fp",fp)
     		.getResultList();
 
-    	logger.debug("Retrive Expirieng Dates count: " + list.size());
+    	logger.info("Retrive Expirieng Dates count: " + list.size());
     	
     	return  list;
     }
@@ -701,11 +701,11 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		String ruc = (String) params.get(Globals.FORM90_RUC);
 
 		
-		logger.debug("Compute getFiscalInfoForm90 with params:");
-		logger.debug("Section : " + section);
-		logger.debug("Initial Date : " + initialDate);
-		logger.debug("Payment Date : " + paymentDate);
-		logger.debug("RUC : " + ruc);
+		logger.info("Compute getFiscalInfoForm90 with params:");
+		logger.info("Section : " + section);
+		logger.info("Initial Date : " + initialDate);
+		logger.info("Payment Date : " + paymentDate);
+		logger.info("RUC : " + ruc);
 		
 		int diffDate = 0;
 		if(section.equals("A")){
@@ -783,20 +783,20 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			nf.setMinimumFractionDigits(6);
 			nf.setGroupingUsed(false);
 
-			logger.debug("setting vinteres  -> " + vinteres + " with number format: " + nf);		
+			logger.info("setting vinteres  -> " + vinteres + " with number format: " + nf);		
 			
 			map.put("PORC_INTERES",nf.format(vinteres));
 	    	
 		}
 		
         Iterator it = map.keySet().iterator();
-        logger.debug(">>>>>>  getFiscalInfoForm90 return values:");
+        logger.info(">>>>>>  getFiscalInfoForm90 return values:");
         while (it.hasNext()) {
             String key = (String) it.next();
             logger.info(key + "->" + params.get(key));
 
         }
-        logger.debug(">>>>>>  End of getFiscalInfoForm90 return values:");
+        logger.info(">>>>>>  End of getFiscalInfoForm90 return values:");
 		return map;
 	}
     

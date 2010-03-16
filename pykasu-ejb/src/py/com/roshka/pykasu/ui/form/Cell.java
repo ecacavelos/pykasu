@@ -177,10 +177,10 @@ public class Cell implements Serializable, Comparable{
 				this.data = data;
 			}else if(type.equals(DATE)){
 				try {
-					logger.debug("parse date: "+data+" to date in pattern" + this.datePattern);
+					logger.info("parse date: "+data+" to date in pattern" + this.datePattern);
 					SimpleDateFormat sdf = new SimpleDateFormat(this.datePattern);
 					this.data = sdf.parse(data) ;
-					logger.debug("date value = " +sdf.format(this.data));
+					logger.info("date value = " +sdf.format(this.data));
 				} catch (ParseException e) {
 					logger.error(e);
 					throw new CellSetDataException();

@@ -9,6 +9,7 @@ package py.com.roshka.pykasu.web;
 public class Globals {
     public final static String LOGIN_USER  = "PYKASU.LOGIN.USER";
     public final static String MESSAGE = "PYKASU.MESSAGE";
+    public final static String MESSAGE_WARNING = "PYKASU.MESSAGE.WARNING";
     public final static String ERROR_MESSAGE = "errorMessage";
     public final static String ERROR = "PYKASU.ERROR";
     public static final String USER_PROGRAMS = "PYKASU.USER.PROGRAMS"; 

@@ -79,7 +79,7 @@ public class GetMoraInfoForm90 extends Action {
             params.put(Globals.FORM90_PAYDMENT_DATE, paydmentDate);
 
             Iterator it = params.keySet().iterator();
-            logger.debug("params to welti's function");
+            logger.info("params to welti's function");
             while (it.hasNext()) {
                 String key = (String) it.next();
                 logger.info(key + "->" + params.get(key));
@@ -114,7 +114,7 @@ public class GetMoraInfoForm90 extends Action {
 //            long currentDate = System.currentTimeMillis();
 //            long paymenDate = sdf.parse(request.getParameter(PAYDMENT_DATE))
 //                    .getTime();
-//            logger.debug(((currentDate - paymenDate) / (1000 * 60 * 60 * 24))
+//            logger.info(((currentDate - paymenDate) / (1000 * 60 * 60 * 24))
 //                    + "dias");
 //
 //            if ((currentDate - paymenDate) / (1000 * 60 * 60 * 24) > 0) {

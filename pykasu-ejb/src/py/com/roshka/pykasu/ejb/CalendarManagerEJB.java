@@ -53,7 +53,7 @@ public class CalendarManagerEJB implements CalendarManager{
 	}
 	
 	public Date getNextAvailable(Date date) throws CalendarException{
-		logger.debug("Buscando el siguiente dia habil para: " + date);
+		logger.info("Buscando el siguiente dia habil para: " + date);
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		int i = 0;
@@ -73,18 +73,18 @@ public class CalendarManagerEJB implements CalendarManager{
 				date = c.getTime();
 			}
 		
-		logger.debug("Siguiente dia habil para: " + date);
+		logger.info("Siguiente dia habil para: " + date);
 		return date;
 	}
 	
 	public Date getSuggestedPaymentDate(Date date) throws CalendarException{
-		logger.debug("Dia de pago sugerido para: " + date);
+		logger.info("Dia de pago sugerido para: " + date);
 		try {
 			Date suggestedDate = getNextAvailable(date);
 			//si cambio de día por ser feriado o día no habil 
 			//no hay que hacer caso de la hora
 			if(suggestedDate.compareTo(date)!=0){
-				logger.debug("Dia de pago sugerido para: " + date + " es " + suggestedDate.getTime());
+				logger.info("Dia de pago sugerido para: " + date + " es " + suggestedDate.getTime());
 				return suggestedDate;
 			}else{ //es el mismo día, entonces hay que ver la hora
 				Calendar actualServerDate = Calendar.getInstance();
@@ -110,7 +110,7 @@ public class CalendarManagerEJB implements CalendarManager{
 					actualServerDate.add(Calendar.DATE,1);												
 					return getNextAvailable(actualServerDate.getTime());
 				}else{
-					logger.debug("Dia de pago sugerido para: " + date + " es " + actualServerDate.getTime());
+					logger.info("Dia de pago sugerido para: " + date + " es " + actualServerDate.getTime());
 					return actualServerDate.getTime();
 				}
 				

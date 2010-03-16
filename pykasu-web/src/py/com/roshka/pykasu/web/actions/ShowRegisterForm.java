@@ -25,6 +25,7 @@ import py.com.roshka.pykasu.interfaces.AdmissionManager;
 import py.com.roshka.pykasu.interfaces.SystemRegistration;
 import py.com.roshka.pykasu.interfaces.UserManager;
 import py.com.roshka.pykasu.persistence.admission.Admission;
+import py.com.roshka.pykasu.scheduler.FormErrorNotification;
 import py.com.roshka.pykasu.web.Globals;
 import py.com.roshka.pykasu.web.forms.RegisterUserForm;
 import py.com.roshka.pykasu.web.forms.SelectUserType;
@@ -45,9 +46,11 @@ import py.com.roshka.pykasu.web.forms.SelectUserType;
  *                 
  */
 public class ShowRegisterForm extends Action{
-   
-    @Override
-    
+	
+	static org.apache.log4j.Logger logger = org.apache.log4j.Logger	
+		.getLogger(FormErrorNotification.class);
+	
+    @Override    
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
     	
@@ -91,6 +94,7 @@ public class ShowRegisterForm extends Action{
 	        
     	}catch (Exception e) {
     		request.setAttribute(Globals.ERROR,"La aplicación detectó un parámetro incorrecto en su solicitud");
+    		logger.error("La aplicación detectó un parámetro incorrecto en su solicitud", e);
     		return mapping.findForward("error");
 		}
     }

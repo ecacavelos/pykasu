@@ -156,7 +156,7 @@ public class CellTag extends TagSupport {
 				calculableFunction = "lostFocus(this);";
 
 			if (cell.getType().equals(py.com.roshka.pykasu.ui.form.Cell.NUMBER)) {
-				logger.debug(">>" + cell.getId() + " isStaticValue " + cell.isStaticValue());
+				logger.info(">>" + cell.getId() + " isStaticValue " + cell.isStaticValue());
 				if (!cell.isStaticValue()) {
 					if (cell.getData().getClass().equals(Double.class)) {
 						value = nf.format(((Double) cell.getData()).doubleValue());

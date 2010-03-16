@@ -70,7 +70,7 @@ public class Form90Manager extends GenericFormManagerEJB implements
 	public String addForm(Form form) throws AddFormException {
     	logger.info("------------> Adding a new Form 90");
     	try {
-        	logger.debug("Finding principal user");
+        	logger.info("Finding principal user");
         	
         	User user = null;
         	try {
