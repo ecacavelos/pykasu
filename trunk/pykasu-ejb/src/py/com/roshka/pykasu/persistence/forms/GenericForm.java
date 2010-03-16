@@ -34,21 +34,21 @@ public class GenericForm {
 					
 					
 					if (args[0] instanceof Double && pd.getPropertyType().equals(Integer.class)) {
-						logger.debug("-----> {"+ cell.getId() + "} Going to convert double into integer :  " + args[0]);
+						logger.info("-----> {"+ cell.getId() + "} Going to convert double into integer :  " + args[0]);
 						Double d = (Double)args[0];
 						int i = d.intValue();
 						args[0] = new Integer(i);
 					}
 	
 					if (args[0] instanceof Double && pd.getPropertyType().equals(String.class)) {
-						logger.debug("-----> {"+ cell.getId() + "} Going to convert double into string :  " + args[0]);
+						logger.info("-----> {"+ cell.getId() + "} Going to convert double into string :  " + args[0]);
 						Double d = (Double)args[0];
 						int i = d.intValue();
 						args[0] = new String(new Integer(i).toString());
 					}
 	
 					if (args[0] instanceof java.util.Date && pd.getPropertyType().equals(java.util.Calendar.class)) {
-						logger.debug("-----> {"+ cell.getId() + "} Going to convert java.util.Date into java.util.Calendar :  " + args[0]);
+						logger.info("-----> {"+ cell.getId() + "} Going to convert java.util.Date into java.util.Calendar :  " + args[0]);
 						Calendar c = Calendar.getInstance();
 						c.setTime((java.util.Date)args[0]);
 						args[0] = c;
@@ -58,13 +58,13 @@ public class GenericForm {
 				}
 				
 			} catch (IllegalArgumentException e) {
-				logger.info("Error to fill the cell "+ cell.getId() + "  " + e.getMessage());
+				logger.debug("Error to fill the cell "+ cell.getId() + "  " + e.getMessage());
 			} catch (IntrospectionException e) {
-				logger.info("Error to fill the cell "+ cell.getId(), e);
+				logger.debug("Error to fill the cell "+ cell.getId(), e);
 			} catch (IllegalAccessException e) {
-				logger.info("Error to fill the cell "+ cell.getId(), e);
+				logger.debug("Error to fill the cell "+ cell.getId(), e);
 			} catch (InvocationTargetException e) {
-				logger.info("Error to fill the cell "+ cell.getId(), e);
+				logger.debug("Error to fill the cell "+ cell.getId(), e);
 			}    		
 		}
 	}
@@ -80,7 +80,7 @@ public class GenericForm {
 				cell = (Cell)it.next();
 				if(!cell.isOpaque()){ 
 					PropertyDescriptor pd = new PropertyDescriptor(cell.getId(),this.getClass());
-					logger.debug(pd.getReadMethod().getName() + " value: " + pd.getReadMethod().invoke(this));
+					logger.info(pd.getReadMethod().getName() + " value: " + pd.getReadMethod().invoke(this));
 					cell.setData(pd.getReadMethod().invoke(this));
 				}
 	

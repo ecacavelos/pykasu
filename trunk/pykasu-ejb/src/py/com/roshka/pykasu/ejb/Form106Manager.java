@@ -76,7 +76,7 @@ public class Form106Manager extends GenericFormManagerEJB implements
 	public String addForm(Form form) throws AddFormException {
     	logger.info("------------> Adding a new Form 106");
     	try {
-        	logger.debug("Finding principal user");
+        	logger.info("Finding principal user");
         	
         	User user = null;
         	try {
@@ -164,7 +164,7 @@ public class Form106Manager extends GenericFormManagerEJB implements
 	@Override
 	public String uploadForm(SimpleForm simpleForm) throws PykasuGenericException {
     	User user = null;
-    	logger.debug("Session Context ~ User < cualquiera > Principal: " + sc.getCallerPrincipal());
+    	logger.info("Session Context ~ User < cualquiera > Principal: " + sc.getCallerPrincipal());
     	try {
     		user = userManager.findUserByName(sc.getCallerPrincipal().getName());
 		
@@ -177,7 +177,7 @@ public class Form106Manager extends GenericFormManagerEJB implements
 	    	
 			form106.setFirstLastName(thisRuc.getContributorName());
 			
-	    	logger.debug("~~~~ Saving from Simple Form");
+	    	logger.info("~~~~ Saving from Simple Form");
 	    	em.persist(form106);
 	    	form106.setPrePrintedNumber(form106.getId().toString());
 	    	logger.info("~~~~ Saving from Simple Form - New form id = " + form106.getId().toString());

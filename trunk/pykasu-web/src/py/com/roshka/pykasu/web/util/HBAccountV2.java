@@ -5,8 +5,6 @@ import java.text.DecimalFormatSymbols;
 
 import py.com.roshka.pykasu.exceptions.HBGenericException;
 
-
-
 public class HBAccountV2 {
 	
 	public static enum HBAccountV2Type {SAVING_ACCOUNT, CHECKING_ACCOUNT}
@@ -17,6 +15,7 @@ public class HBAccountV2 {
 	private Double toConfirmAmount = 0.0;
 	private Double overAmount = 0.0;
 	private short moneyCode;
+	private Double paymentAmount =0.0;
 	
 
 	public HBAccountV2(String number, HBAccountV2Type type, Double availableAmount, Double toConfirmAmount, Double overAmount, short moneyCode) {
@@ -69,25 +68,17 @@ public class HBAccountV2 {
 		return availableAmount;
 	}
 
-
 	public void setAvailableAmount(Double availableAmount) {
 		this.availableAmount = availableAmount;
 	}
-
 
 	public String getNumber() {
 		return number;
 	}
 
-
-
-
 	public void setNumber(String number) {
 		this.number = number;
 	}
-
-
-
 
 	public Double getOverAmount() {
 		if(overAmount == null)
@@ -96,41 +87,25 @@ public class HBAccountV2 {
 		return overAmount;
 	}
 
-
-
-
 	public void setOverAmount(Double overAmount) {
 		this.overAmount = overAmount;
 	}
-
-
-
 
 	public Double getToConfirmAmount() {
 		return toConfirmAmount;
 	}
 
-
-
-
 	public void setToConfirmAmount(Double toConfirmAmount) {
 		this.toConfirmAmount = toConfirmAmount;
 	}
-
-
-
 
 	public HBAccountV2Type getType() {
 		return type;
 	}
 
-
-
-
 	public void setType(HBAccountV2Type type) {
 		this.type = type;
 	}
-
 
 	public short getMoneyCode() {
 		return moneyCode;
@@ -138,6 +113,14 @@ public class HBAccountV2 {
 
 	public void setMoneyCode(short moneyCode) {
 		this.moneyCode = moneyCode;
+	}
+
+	public Double getPaymentAmount() {
+		return paymentAmount;
+	}
+
+	public void setPaymentAmount(Double paymentAmount) {
+		this.paymentAmount = paymentAmount;
 	}
 
 	public String getGeneralDescription(){

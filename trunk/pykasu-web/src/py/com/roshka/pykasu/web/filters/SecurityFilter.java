@@ -47,7 +47,7 @@ public class SecurityFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		logger.debug(">>>>>>>>>> Enter in SecurityFilter! <<<<<<<<<<");
+		logger.info(">>>>>>>>>> Enter in SecurityFilter! <<<<<<<<<<");
 		logger.info(((HttpServletRequest) request).getRequestURI());
 		try {
 			if ( ((HttpServletRequest) request).getParameter("j_username") != null || 
@@ -89,7 +89,7 @@ public class SecurityFilter implements Filter {
 				((HttpServletResponse) response).addHeader("Cache-Control", "must-revalidate");		
 				((HttpServletResponse) response).setDateHeader( "Expires", 0 );
 			}
-			logger.debug(">>>>>>>>>> Exit to SecurityFilter! <<<<<<<<<<");			
+			logger.info(">>>>>>>>>> Exit to SecurityFilter! <<<<<<<<<<");			
 		} catch (Throwable e) {
 			logger.error(e);
 			e.printStackTrace();

@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
+
 import py.com.roshka.pykasu.exceptions.HBUpdateException;
 import py.com.roshka.pykasu.interfaces.PaymentFormInterface;
 import py.com.roshka.pykasu.interfaces.RaffleTicketManager;
@@ -61,10 +63,10 @@ public class PaymentFormAction extends Action {
 		 * 
 		 */
 		try{
-			logger.debug(">>>>>>>>>>  PaymentAccionExecute");
+			logger.info(">>>>>>>>>>  PaymentAccionExecute");
 			PaymentFormWeb pfw = (PaymentFormWeb) form;
-			//logger.debug("PFW: SavingAccountNr -> " + pfw.getSavingAccountNr());
-			logger.debug("\n----- Formulario a guardarse : -----" + pfw + "\n------ FIN Formulario a guardarse -----" );
+			//logger.info("PFW: SavingAccountNr -> " + pfw.getSavingAccountNr());
+			logger.info("\n----- Formulario a guardarse : -----" + pfw + "\n------ FIN Formulario a guardarse -----" );
 			//guardar el formulario en DB.
 			// "pykasu/PaymentFormManager/local"
 			User user = (User) request.getSession().getAttribute(Globals.LOGIN_USER);
@@ -94,21 +96,51 @@ public class PaymentFormAction extends Action {
 				HomeBankingItfV2 hbi = (HomeBankingItfV2) request.getSession().getAttribute("homeBanking");
 				List<HBAccountV2> hbAccounts = (List<HBAccountV2>) request.getSession().getAttribute("accounts");
 				makeEPaid = true;
+				
+				int accountNumberToRegisterPay = 0;
+				
 				for(HBAccountV2 account : hbAccounts){
 					//por cada cuenta, veo si el usuario cargo un monto valido
 					String sPaidAmount = request.getParameter("paid_amount_"+ account.getNumber());
 					if(sPaidAmount != null && sPaidAmount.length() > 0){
 						Double paidAmount = Double.parseDouble(sPaidAmount);
+						account.setPaymentAmount(paidAmount);
+						paymentAmount = paymentAmount + paidAmount;
 						try{
-							hbi.performPayment(account, paidAmount, pf.getId());
-							paymentAmount = paymentAmount + paidAmount;
-						}catch (HBUpdateException e) {
-							logger.error("No se pudo realizar el pago en el WS",e);	
+							accountNumberToRegisterPay = Integer.parseInt(account.getNumber());
+						}catch (Exception e) {
+							accountNumberToRegisterPay = 0;
 						}
+//						try{
+//							hbi.performPayment(account, paidAmount, pf.getId());
+//							paymentAmount = paymentAmount + paidAmount;
+//						}catch (HBUpdateException e) {
+//							logger.error("No se pudo realizar el pago en el SP",e);	
+//						}
 					}
 				}
-				pf.setPaymentAmount(paymentAmount);
-				hbi.registerPayment(pf);
+				try{
+					pf.setPaymentAmount(paymentAmount);
+					hbi.performPayment(hbAccounts, pf, accountNumberToRegisterPay);
+					//hbi.performPayment(hbAccounts, pf.getId(), accountNumberToRegisterPay);
+				}catch (HBUpdateException e) {
+					logger.error("Error al pagar",e);
+					logger.error("No se pudo registrar el Pago en la Liquidacion");
+					request.getSession().setAttribute(Globals.ERROR_MESSAGE,"Se ha debitado el Pago de su Cuenta, sin embargo ha ocurrido un problema en registrar el pago como formulario impositivo.");					
+					return mapping.findForward("error");
+					
+				}
+				
+//				pf.setPaymentAmount(paymentAmount);
+//				try{
+//					hbi.registerPayment(pf, accountNumberToRegisterPay);
+//				}catch (HBUpdateException e) {					
+//					logger.error("No se pudo registrar el Pago en la Liquidacion");
+//
+//					request.getSession().setAttribute(Globals.ERROR_MESSAGE,"Se ha debitado el Pago de su Cuenta, sin embargo ha ocurrido un problema en registrar el pago como formulario impositivo.");					
+//					return mapping.findForward("error");
+//
+//				}
 			}
 
 			request.setAttribute("showAccount",user.getPaymentAvaliable());
@@ -133,14 +165,14 @@ public class PaymentFormAction extends Action {
 				msg = msg + " - Tiene 2 cupones, cuyos números son: "+tkt1.getId()+ " y "+ tkt2.getId()+", a su nombre para el sorteo electrónico de 5 notebook con internet movil gratis por 1 año.";
 			}
 			
-			request.setAttribute(Globals.MESSAGE,msg);
+			request.getSession().setAttribute(Globals.MESSAGE,msg);
 			return mapping.findForward("success");
 		
 			
 		}catch (Exception e){
 			logger.error("Error to Save PaymentForm !",e);
 			e.printStackTrace();
-			request.getSession().setAttribute("errorMessage", e.getMessage());
+			request.getSession().setAttribute(Globals.ERROR_MESSAGE, e.getMessage());
 			return mapping.findForward("error");
 		}
         

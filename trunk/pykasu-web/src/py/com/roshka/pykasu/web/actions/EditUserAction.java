@@ -75,7 +75,7 @@ public class EditUserAction extends Action {
 				}
 				um.save(newuser);
 				
-				request.getSession().setAttribute(Globals.MESSAGE, "Usario actualizado exitósamente.");
+				request.getSession().setAttribute(Globals.MESSAGE, "Usuario actualizado exitósamente.");
 
 				if(changePasswd){
 					return mapping.findForward("logout");

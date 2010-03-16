@@ -66,7 +66,7 @@ public class Form801Manager extends GenericFormManagerEJB implements Form801Mana
 	public String addForm(Form form) throws AddFormException {
     	logger.info("------------> Adding a new Form 801");
     	try {
-        	logger.debug("Finding principal user");
+        	logger.info("Finding principal user");
         	
         	User user = null;
         	try {

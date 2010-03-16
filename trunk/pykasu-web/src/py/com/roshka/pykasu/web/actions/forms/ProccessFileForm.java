@@ -70,9 +70,9 @@ public class ProccessFileForm extends Action {
         String fileName    = myFile.getFileName();
         int fileSize       = myFile.getFileSize();
 
-        logger.debug("contentType: " + contentType);
-        logger.debug("File Name: " + fileName);
-        logger.debug("File Size: " + fileSize);
+        logger.info("contentType: " + contentType);
+        logger.info("File Name: " + fileName);
+        logger.info("File Size: " + fileSize);
 
         InitialContext ic = new InitialContext();
 
@@ -87,19 +87,19 @@ public class ProccessFileForm extends Action {
         
         simpleForm.setXmlFile(getFileName(myFile.getFileName()));
         
-        logger.debug("Try to load simple form \n" + simpleForm);
+        logger.info("Try to load simple form \n" + simpleForm);
 
-        logger.debug("Getting Form Manager");
+        logger.info("Getting Form Manager");
         FormManager formManager = (FormManager) ic.lookup("pykasu/FormManager/local");
         
-        logger.debug("Getting Generic Form");
+        logger.info("Getting Generic Form");
         GenericFormManager genericForm = formManager.getFormManager(simpleForm.getId());
     	
 
     	Form emptyForm = genericForm.getEmptyForm();
     	    	
     	StringBuffer sb = new StringBuffer();
-    	//logger.debug(simpleForm);
+    	//logger.info(simpleForm);
     	for(Cell c : emptyForm.getCells()){
     		if(simpleForm.getCell(c.getId())!=null){
     			sb.append("var "+c.getId() +" = "+ simpleForm.getCell(c.getId()).getData().toString() +"; \n");
@@ -120,7 +120,7 @@ public class ProccessFileForm extends Action {
          try {
         	 Scriptable scope = cx.initStandardObjects();
         	 cx.evaluateString(scope, sb.toString(), "<cmd>", 1, null);        	 
-        	 logger.debug("RHINO >>>>>>>>>>" + sb.toString());
+        	 logger.info("RHINO >>>>>>>>>>" + sb.toString());
         	 
              String s = "";
              //Collection<Trigger> trigges = (Collection<Trigger>) simpleForm.getTriggers().values();
@@ -136,7 +136,7 @@ public class ProccessFileForm extends Action {
             		 s = "if("+trigger.getCondition().trim()+"){"+s+"}else{true;}";
             	 }            	 
                  Object result = cx.evaluateString(scope, s, "<cmd>", 1, null);
-                 logger.debug("RHINO >>>>>>>>>>" + s + " : " + Context.toString(result));
+                 logger.info("RHINO >>>>>>>>>>" + s + " : " + Context.toString(result));
                  
                  if((result instanceof Boolean)) {
 					if(!((Boolean)result).booleanValue()){
@@ -185,7 +185,7 @@ public class ProccessFileForm extends Action {
 	}
 	
 	public void saveFile(InputStream is, File file) throws IOException{
-		logger.debug("Save to File : " + file.getName());
+		logger.info("Save to File : " + file.getName());
 		DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
 
 		byte[] buf = new byte[1024];

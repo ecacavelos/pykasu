@@ -62,11 +62,11 @@ public class GetPreprinterNumberStatusAction extends Action {
             // fm.findForm850ByPrePrintedNumber(request.getParameter("preprinterNumber"));
             Form form = genericForm.getForm(prePrintedNumber);
 
-            logger.debug("----> There are exist a reference for "
+            logger.info("----> There are exist a reference for "
                     + prePrintedNumber);
             request.setAttribute("PREPRINTERNUMBER_STATUS", "EXIST");
         } catch (FormNotFoundException e) {
-            logger.debug("----> There are NOT exist a reference for "
+            logger.info("----> There are NOT exist a reference for "
                     + request.getParameter("preprinterNumber")
                     + ". Exception: " + e);
             request.setAttribute("PREPRINTERNUMBER_STATUS", "NO EXIST");

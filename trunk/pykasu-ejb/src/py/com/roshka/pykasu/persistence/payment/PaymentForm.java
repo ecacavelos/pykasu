@@ -186,10 +186,18 @@ public class PaymentForm  extends GenericForm implements Serializable{
 
 	@Transient
 	public String getFiscalPeriod() {
+
+		if(getFiscalPeriodYear() == null || getFiscalPeriodMonth()== null){
+			return "";
+		}
+
+		
 		String cero = "";
 		if(this.getFiscalPeriodMonth()!= null && this.getFiscalPeriodMonth()<10){
 			cero = "0";
 		}
+
+		
 		return ""+this.getFiscalPeriodYear()+cero+this.getFiscalPeriodMonth();
 	}
 

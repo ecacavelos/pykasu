@@ -70,7 +70,7 @@ public class SearchFormsEJB implements SearchFormsInterface{
 	public List<ItemSearch> getForms(User user, Map<CriteriaType, Object> criteria) {
 		
 		if(user == null || criteria == null){
-			throw new IllegalArgumentException("los paramentreos user, criteria no pueden ser ninguno de ellos nulos");
+			throw new IllegalArgumentException("Los parametros USER, CRITERIA no pueden ser ninguno de ellos nulos");
 		}
 		
 		String sql = "SELECT vf.*, ROW_NUMBER() OVER () AS RN FROM V_FORMULARIOS vf where BCOMPANY_IID = :bcompanyId ";
@@ -100,7 +100,7 @@ public class SearchFormsEJB implements SearchFormsInterface{
 		}
 		
 		if(criteria.get(CriteriaType.PRESENTATION_DATE_INIT)!= null && criteria.get(CriteriaType.PRESENTATION_DATE_END)!= null){ //between
-			sql = sql + " and PRESENTATIONDATE between (:presentationDateInit and :presentationDateEnd) ";			
+			sql = sql + " and (PRESENTATIONDATE >= :presentationDateInit and PRESENTATIONDATE <= :presentationDateEnd) ";			
 		}else if(criteria.get(CriteriaType.PRESENTATION_DATE_INIT)!= null){ //mayor que
 			sql = sql + " and PRESENTATIONDATE >= :presentationDateInit ";
 		}else if(criteria.get(CriteriaType.PRESENTATION_DATE_END)!= null){ //menor_que
@@ -114,7 +114,7 @@ public class SearchFormsEJB implements SearchFormsInterface{
 				sql = sql + " or RUC like '%"+(String)criteria.get(CriteriaType.RUC)+"%'";
 			
 			if(criteria.get(CriteriaType.RUC) != null)
-				sql = sql + " or upper(FIRSTLASTNAME) like upper('%"+(String)criteria.get(CriteriaType.NAME)+"%')";
+				sql = sql + " or (FIRSTLASTNAME) like ('%"+(String)criteria.get(CriteriaType.NAME)+"%')";
 			
 			sql = sql + ")";
 		}

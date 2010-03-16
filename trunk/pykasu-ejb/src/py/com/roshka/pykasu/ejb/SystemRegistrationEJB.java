@@ -357,7 +357,7 @@ public class SystemRegistrationEJB implements SystemRegistration{
 		try {
 			User user = userManager.findUserByName(sc.getCallerPrincipal().getName());
 			if(user.getBusinessCompany().getActivationKey().equals(activationKey)){
-				logger.debug("Before to check Activaton Key");
+				logger.info("Before to check Activaton Key");
 				
 //				BusinessCompany bc = user.getBusinessCompany();
 //				bc.setIsActive(Boolean.TRUE);
@@ -381,10 +381,10 @@ public class SystemRegistrationEJB implements SystemRegistration{
 	
 	private int getNextId(String fieldName, String persistenceClass){
 		String sql = "select max("+fieldName+") as max from "+persistenceClass+" tbl";
-		logger.debug(">>> Getting a new Id for " + persistenceClass + " with sql sentences: " + sql);
+		logger.info(">>> Getting a new Id for " + persistenceClass + " with sql sentences: " + sql);
 		Integer max =  (Integer)em.createQuery(sql).
 						getSingleResult();
-		logger.debug(">>> New Id for " + persistenceClass + "  = " + max.intValue()+1);
+		logger.info(">>> New Id for " + persistenceClass + "  = " + max.intValue()+1);
 
 		return max.intValue() + 1;
 	}

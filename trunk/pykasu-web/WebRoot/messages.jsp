@@ -12,3 +12,9 @@
 	</div>
 	<%request.getSession().removeAttribute(py.com.roshka.pykasu.web.Globals.MESSAGE);%>
 <%}%>
+<%if(request.getSession().getAttribute(py.com.roshka.pykasu.web.Globals.MESSAGE_WARNING)!=null){%>
+	<div id="showMsg" style="background-color: maroon; padding: 10px; width: 550px;">
+		<label style="color: white;font-weight: bold"><%=request.getSession().getAttribute(py.com.roshka.pykasu.web.Globals.MESSAGE_WARNING)%></label>
+	</div>
+	<%request.getSession().removeAttribute(py.com.roshka.pykasu.web.Globals.MESSAGE_WARNING);%>
+<%}%>

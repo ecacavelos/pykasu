@@ -202,8 +202,10 @@
 	
 	<body onload="loadForm()">
 	<jsp:include page="header.jsp"/> 
-	<jsp:include page="menu.jsp"/> 
-	<div id="main"> 
+	<jsp:include page="menu.jsp"/>
+	  
+	<div id="main">
+	<jsp:include page="messages.jsp"/> 
 	<h2>Formulario de Pagos</h2>
 	<%
 		if(accountList != null){			
