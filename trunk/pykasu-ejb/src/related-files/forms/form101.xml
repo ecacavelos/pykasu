@@ -350,17 +350,17 @@
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 
-			<line id="L5080" order="80" description="|h| Retenciones computables a favor del contribuyente" >
+			<line id="L5080" order="80" description="|h| Pago previo o pago a cuenta" >
 				<cell id="c78" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="78" xmlTagName="C78"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 
-			<line id="L5090" order="90" description="|i| Pago previo o pago a cuenta" >
+			<line id="L5090" order="90" description="|i| Pago con Créditos Fiscales Disponibles, Certificados de Créditos Tributario, Nota de Crédito Tributario y Bonos del Tesoro" >
 				<cell id="c79" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="79" xmlTagName="C79"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 
-			<line id="L5100" order="100" description="|j| Pago con Créditos Fiscales Disponibles, Certificados de Créditos Tributarios, Nota de Crédito Tributario y Bonos del Tesoro" >
+			<line id="L5100" order="100" description="|j| Retenciones y Percepciones computables a favor del Contribuyente" >
 				<cell id="c80" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="80" xmlTagName="C80"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
