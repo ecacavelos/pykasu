@@ -54,7 +54,8 @@ public class GetSalary extends Action {
         logger.info("Retrieve data to compute Salary: month:" + fpMonth + " year: " + fpYear);
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = sdf.parse("01/"+fpMonth+"/"+fpYear);
+        //Date date = sdf.parse("01/"+fpMonth+"/"+fpYear);
+        Date date = sdf.parse("31/12/"+fpYear);
         logger.info("Date is " + date);
         Salary s = fiscalRulesManager.getSalary(date);
 

@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import org.jboss.annotation.ejb.LocalBinding;
 import org.jboss.annotation.ejb.RemoteBinding;
 
+import py.com.roshka.pykasu.exceptions.ExcludedContributorException;
 import py.com.roshka.pykasu.exceptions.FailToGetExpiringDateException;
 import py.com.roshka.pykasu.exceptions.FiscalInfoException;
 import py.com.roshka.pykasu.exceptions.FiscalPeriodNotFoundException;
@@ -74,6 +75,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	public static final String FISCAL_INFO_TYPE = "fiscalInfoType";
 	public static final String FISCAL_PERIOD_MONTH = "fiscalPeriodMonth";
 	public static final String FISCAL_PERIOD_YEAR = "fiscalPeriodYear";
+	public static final String FISCAL_DECLARATION_TYPE = "declarationType";
 	
    
 	@SuppressWarnings("unchecked")
@@ -331,6 +333,10 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		}
 	
 	}
+    
+    private boolean isClaurura(String declarationType){
+    	return true;
+    }
 
 	@SuppressWarnings("unchecked")
 	public Map getFiscalInfo(Map params) throws FiscalInfoException{
@@ -351,6 +357,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		String fiscalInfoType = (String) params.get(FISCAL_INFO_TYPE);
 		Integer fiscalPeriodMonth = (Integer) params.get(FISCAL_PERIOD_MONTH);
 		Integer fiscalPeriodYear = (Integer) params.get(FISCAL_PERIOD_YEAR);
+		String declarationType = (String) params.get(FISCAL_DECLARATION_TYPE);
 
 		
 		Map result = null;	
@@ -360,33 +367,79 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			Calendar c = Calendar.getInstance();
 			c.set(fiscalPeriodYear.intValue(), fiscalPeriodMonth.intValue()-1, 5);
 			
-
-			
 			if(fs.getPeriodBegin() == null || fs.getPeriodEnd() == null){
 				logger.warn(">>>>>> TABLA DE FORMULARIOS - LIBRERIA TRIBUTO : " +
 						    "Faltan datos para determinación de periodo fiscal. " +
 						    "Formulario: " + formType.toString());
 			}else{
-				validPresentationDate =  c.getTime().after(fs.getPeriodBegin()) 
-								      && c.getTime().before(fs.getPeriodEnd()) 
-									  && c.getTime().before(new Date(System.currentTimeMillis()))
-									  && fiscalPeriodMonth >= 1 && fiscalPeriodMonth <= 12;
+				
+				result = new HashMap();
+
+				validPresentationDate = fiscalPeriodMonth >= 1 && fiscalPeriodMonth <= 12;
+				if(!validPresentationDate){
+					logger.warn("El mes del periodo no es valido " + fiscalPeriodMonth);
+					result.put("DECLARATION_DATE_NOT_VALID",true);
+					return result;					
+				}
+				
+				validPresentationDate =  c.getTime().after(fs.getPeriodBegin())&& c.getTime().before(fs.getPeriodEnd());//el formulario está dentro de su fecha de presentación
+				if(!validPresentationDate){
+					logger.warn("El formulario está fuera de su fecha de presentación " + fs.getPeriodBegin().getTime() + " : " + fs.getPeriodEnd().getTime());
+					result.put("DECLARATION_DATE_NOT_VALID",true);
+					return result;					
+				}
+				
+				
+				boolean f1, f2, f3,  f4;
+				
+				logger.info("Es anual? " + fs.isAnnual());
+				logger.info("Es clausura? " + isClaurura(declarationType));
+				logger.info("Presentación año: " + c.get(Calendar.YEAR));
+				logger.info("Presentación mes: " + c.get(Calendar.MONTH)+1);
+				
+				f1 = fs.isAnnual() && isClaurura(declarationType) &&  c.get(Calendar.YEAR) <= Calendar.getInstance().get(Calendar.YEAR);
+				logger.info(f1 + " --> Es anual, es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual" );
+				
+				f2 = fs.isAnnual() && !isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR);
+				logger.info(f2 + " --> Es anual, NO es de clausura, y el año de declaración (en la presentación) es menor al año actual");
+				
+
+				f3 = !fs.isAnnual() && isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR) || (c.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && c.get(Calendar.MONTH) <= Calendar.getInstance().get(Calendar.MONTH));
+				logger.info(f3 + " --> NO es anual, es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual y el mes de declaración (en la presentación) es menor o igual al mes actual");
+				
+				f4 = !fs.isAnnual() && !isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR) || (c.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && c.get(Calendar.MONTH) < Calendar.getInstance().get(Calendar.MONTH));
+				logger.info(f4 + " --> NO es anual, NO es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual y el mes de declaración (en la presentación) es menor  al mes actual");
+
+				if(!(f1 || f2 || f3 || f4)){
+					logger.warn("Todas las condiciones de las fechas son falsas");
+				}
+				
+				validPresentationDate = validPresentationDate && (f1 || f2 || f3 || f4);
+			
 			}
 			
 			
-			logger.info(">>>>>>>>>> Evaluate if valid Presentation Date.");
-			logger.info("Validate if " + c.getTime() + " is between " + fs.getPeriodBegin() + " and " + fs.getPeriodEnd());
-			logger.info("Compare if " + c.getTime() + " is lower than current date:" + new Date(System.currentTimeMillis()));
-			logger.info(">>>>>>>>>> End of evaluation. Presentation Date is valid? : " + validPresentationDate );
+//			logger.info(">>>>>>>>>> Evaluate if valid Presentation Date.");
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//			logger.info("Validate if " + sdf.format( c.getTime() ) + " is between " + fs.getPeriodBegin() + " and " + fs.getPeriodEnd() + " :: " + (c.getTime().after(fs.getPeriodBegin()) && c.getTime().before(fs.getPeriodEnd() )));
+//			logger.info("Compare if " + sdf.format( c.getTime() ) + " is lower than current date:" + sdf.format(new Date(System.currentTimeMillis())) + " :: " + c.getTime().before(new Date(System.currentTimeMillis())));
+//			logger.info(">>>>>>>>>> End of evaluation. Presentation Date is valid? : " + validPresentationDate );
 
 			if(!validPresentationDate){
-				result = new HashMap();
 				result.put("DECLARATION_DATE_NOT_VALID",true);
 				return result;
 			}
 			
 			
-			Ruc rucObj = contributor.getInfo(ruc);
+			Ruc rucObj = null;
+			try{
+				rucObj = contributor.getInfo(ruc);
+			}catch (ExcludedContributorException e) {
+				//result = new HashMap();
+				result.put("DECLARATION_RUC_EXLUDED",true);
+				return result;				
+			}
+			
 			logger.info("Going to examine form type to know is Active or not");
 			if(!fs.isActive().booleanValue()){		
 				logger.info("Form is InActive");

@@ -57,7 +57,9 @@ public class GetMoraInfo extends Action {
     public static final String FISCAL_EXPIRING_DATE = "expiringDate";
 
     public static final String FISCAL_MONTH_CLOSE = "clausureMonth";
-
+    
+    public static final String DECLARATION_TYPE = "declarationType";
+    
     static org.apache.log4j.Logger logger = org.apache.log4j.Logger
             .getLogger(GetMoraInfo.class);
 
@@ -116,6 +118,8 @@ public class GetMoraInfo extends Action {
 
             String ruc = request.getParameter("ruc");
 
+            String declarationType = request.getParameter("declarationType");
+            
             InitialContext ic = new InitialContext();
             FormManager formManager = (FormManager) ic
                     .lookup("pykasu/FormManager/local");
@@ -129,6 +133,7 @@ public class GetMoraInfo extends Action {
             params.put("paydmentDate", paydmentDate);
             params.put("fiscalPeriodMonth", month);
             params.put("fiscalPeriodYear", year);
+            params.put("declarationType", declarationType);
 
             if (advancedNumber != null)
                 params.put("advancedNumber", advancedNumber);
@@ -167,8 +172,10 @@ public class GetMoraInfo extends Action {
 
                 return mapping.findForward("success");
             }
-
+            
             long currentDate = System.currentTimeMillis();
+            
+            
             long paymenDate = sdf.parse(request.getParameter(PAYDMENT_DATE))
                     .getTime();
             logger.info(((currentDate - paymenDate) / (1000 * 60 * 60 * 24))
@@ -177,19 +184,22 @@ public class GetMoraInfo extends Action {
             if ((currentDate - paymenDate) / (1000 * 60 * 60 * 24) > 0) {
                 more.put("PAYMENT_DATE_NOT_VALID", "true");
             }
-            if (month != null && year != null) {
-                Calendar declaracion = new GregorianCalendar();
-
-                declaracion.set(Calendar.MONTH, month.intValue() - 1);
-                declaracion.set(Calendar.YEAR, year.intValue());
-                declaracion.set(Calendar.DATE, declaracion
-                        .getActualMaximum(Calendar.DATE));
-
-                if ((currentDate - declaracion.getTimeInMillis())
-                        / (1000 * 60 * 60 * 24) <= 0) {
-                    more.put("DECLARATION_DATE_NOT_VALID", "true");
-                }
-            }
+//            if (month != null && year != null) {
+//                Calendar declaracion = new GregorianCalendar();
+//
+//                declaracion.set(Calendar.MONTH, month.intValue() - 1);
+//                declaracion.set(Calendar.YEAR, year.intValue());
+//                declaracion.set(Calendar.DATE, declaracion
+//                        .getActualMaximum(Calendar.DATE));
+//                
+//                logger.info("Tiempo Actual: " + sdf.format(currentDate));
+//                logger.info("Tiempo Declaracion: " + sdf.format(declaracion.getTime()));
+//                
+//                if ((currentDate - declaracion.getTimeInMillis())
+//                        / (1000 * 60 * 60 * 24) <= 0) {
+//                    more.put("DECLARATION_DATE_NOT_VALID", "true");
+//                }
+//            }
         } catch (Throwable e) {
             infos = new HashMap();
             more.put("ERROR", e.getMessage());
@@ -211,16 +221,19 @@ public class GetMoraInfo extends Action {
     }
 
     public static void main(String[] args) {
-        for (int anho = 2000; anho < 2004; anho++) {
-            for (int month = 0; month < 12; month++) {
-                Calendar pago = new GregorianCalendar();
-                pago.set(Calendar.MONTH, month);
-                pago.set(Calendar.YEAR, anho);
-
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                Date d = new Date(pago.getTimeInMillis());
-                System.out.println(sdf.format(d));
-            }
-        }
+    	System.out.println(Calendar.getInstance().getTime());
+//        for (int anho = 2000; anho < 2004; anho++) {
+//            for (int month = 0; month < 12; month++) {
+//                Calendar pago = new GregorianCalendar();
+//                pago.set(Calendar.MONTH, month);
+//                pago.set(Calendar.YEAR, anho);
+//
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+//                Date d = new Date(pago.getTimeInMillis());
+//                System.out.println(sdf.format(d));
+//            }
+//        }
     }
+    
+    
 }

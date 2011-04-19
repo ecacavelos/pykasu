@@ -30,4 +30,7 @@ public class Globals {
     public static final String FORM90_INITIAL_DATE = "initialDate";
 
     public static final String FORM90_SECTION = "section";
+
+	public static final String PAYMENT_CLOSE_TIME = "PAYMENT_CLOSE_HOUR";
+	
 }

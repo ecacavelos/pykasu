@@ -62,7 +62,7 @@
 			
 			<jsp:include page="messages.jsp"/>
 			
-			<h3>Formuilario de Cambio de Contraseña</h3>
+			<h3>Formulario de Cambio de Contraseña</h3>
 
 			<logic:present name="firstTime">
 				Es la primera vez que ingresa al Sistema de Tributos Web con una contraseña provista por un administrador.<br/>

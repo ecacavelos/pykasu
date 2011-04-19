@@ -2,6 +2,7 @@ package py.com.roshka.pykasu.ejb;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.EJB;
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import org.jboss.annotation.ejb.LocalBinding;
 import org.jboss.annotation.ejb.RemoteBinding;
 
+import py.com.roshka.pykasu.exceptions.ExcludedContributorException;
 import py.com.roshka.pykasu.exceptions.FormManagerException;
 import py.com.roshka.pykasu.exceptions.GetContributorInfoException;
 import py.com.roshka.pykasu.exceptions.PykasuGenericException;
@@ -33,6 +35,7 @@ import py.com.roshka.pykasu.interfaces.Form118ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form120ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form122ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form123ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form125ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form130ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form800ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form801ManagerInterface;
@@ -82,6 +85,7 @@ public class FormManagerEJB implements FormManager {
 	@EJB private Form130ManagerInterface form130Mgr;
 	@EJB private Form848ManagerInterface form848Mgr;
 	@EJB private Form90ManagerInterface form90Mgr;
+	@EJB private Form125ManagerInterface form125Mgr;
 	
 	@EJB private ClientDataInterface clientDataMgr;
 	@EJB private Contributor contributor;
@@ -128,17 +132,18 @@ public class FormManagerEJB implements FormManager {
 			return form848Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_90)){
 			return form90Mgr;
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_125)){
+			return form125Mgr;
 		}
 		throw new FormManagerException(formType + " is not available.");
 	}
 
 	@SuppressWarnings("unchecked")
-	public HashMap getContributorInfo(String ruc, String formType){
+	public Map<String, String> getContributorInfo(String ruc, String formType) throws GetContributorInfoException{
 
 		HashMap hm = new HashMap();
-		Ruc thisRuc;
+		Ruc thisRuc = null;
 		try {
-				
 			thisRuc = contributor.getInfo(ruc);
 			hm.put("ruc",thisRuc.getNewRuc());	
 
@@ -152,12 +157,12 @@ public class FormManagerEJB implements FormManager {
 	
 			hm.put("additionalInfo","true");
 
+		}catch (ExcludedContributorException e) {
+			throw new ExcludedContributorException(e);
 		} catch (GetContributorInfoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.warn(e);
 		}
 		return hm;		
-
 	}
 
 	

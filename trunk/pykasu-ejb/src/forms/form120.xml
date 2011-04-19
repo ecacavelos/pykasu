@@ -426,8 +426,8 @@
 		<rule name="TRGS4L4"   order="185"  cellTargetId="c54" formula="(c34 / c35) * c43" condition="c35 &gt; 0" />
 		<rule name="TRGS4L5"   order="190"  cellTargetId="c56" formula="c51 + c52 + c53 + c54 + c55"/>
 		<!--<rule name="TRGS4L7"   order="195"  cellTargetId="c57" formula="c55 + c56"/>-->
-		<rule name="TRGS4L101" order="200"  cellTargetId="c59" formula="c56 - c57 - c58" condition="c56 &gt; (c57 + c58)" />  
-		<rule name="TRGS4L102" order="210"  cellTargetId="c59" formula="0" condition="c56 &lt;= (c57 + c58)" />  
+		<rule name="TRGS4L101" order="200"  cellTargetId="c59" formula="c56 - c57 - c58"  />  
+		<rule name="TRGS4L102" order="210"  cellTargetId="c59" formula="0" condition="c59 &lt; 0" />  
 				
 		<!-- RUBRO 5  -->
 		<rule name="TRGS5L1"  order="220"  cellTargetId="c70" formula="c61 * 0.1"/> <!--70 -->
@@ -449,35 +449,28 @@
 		<rule name="TRGS6L22"  order="360"  cellTargetId="c101" formula="c84"/> <!--101 -->
 		<rule name="TRGS6L31"  order="370"  cellTargetId="c87" formula="c57"/> <!--87 -->
 		<rule name="TRGS6L32"  order="380"  cellTargetId="c102" formula="c58"/> <!--102 -->
-		<rule name="TRGS6L511" order="390"  cellTargetId="c89" formula="((c86 + c87 + c88) - c85)" condition="(c85 &lt; (c86 + c87 + c88))"/> <!--89 -->
-		<rule name="TRGS6L512" order="393"  cellTargetId="c90" formula="0" condition="(c85 &lt; (c86 + c87 + c88))"/> <!--90 -->
-		<rule name="TRGS6L611" order="395"  cellTargetId="c90" formula="(c85 - (c86 + c87 + c88))" condition="(c85 &gt;= (c86 + c87 + c88))"/> <!--90 -->
-		<rule name="TRGS6L612" order="397"  cellTargetId="c89" formula="0" condition="(c85 &gt;= (c86 + c87 + c88))"/> <!--89 -->
-		<rule name="TRGS6L521" order="400"  cellTargetId="c104" formula="((c101 + c102 + c103) - c100)" condition="(c100 &lt; (c101 + c102 + c103))"/> <!--104 -->
-		<rule name="TRGS6L522" order="403"  cellTargetId="c105" formula="0" condition="(c100 &lt;= (c101 + c102 + c103))"/> <!--105 -->
-		<rule name="TRGS6L631" order="405"  cellTargetId="c105" formula="(c100 - (c101 + c102 + c103))" condition="(c100 &gt; (c101 + c102 + c102))"/> <!--105 -->
-		<rule name="TRGS6L6312" order="406" cellTargetId="c105" formula="0" condition="c105 &lt; 0"/> <!--105 -->		
-		<rule name="TRGS6L632" order="410"  cellTargetId="c104" formula="0" condition="(c100 &gt;= (c101 + c102 + c103))"/> <!--104 -->
-		
+		<rule name="TRGS6L511" order="390"  cellTargetId="c89" formula="((c86 + c87 + c88) - c85)" /> <!--89 -->
+		<rule name="TRGS6L512" order="395"  cellTargetId="c89" formula="0" condition="c89 &lt; 0"/> <!--89 -->
+		<rule name="TRGS6L521" order="400"  cellTargetId="c104" formula="((c101 + c102 + c103) - c100)" /> <!--104 -->
+		<rule name="TRGS6L522" order="405"  cellTargetId="c104" formula="0" condition="c104 &lt; 0"/> <!--104 -->
+		<rule name="TRGS6L612" order="410"  cellTargetId="c90" formula="(c85 - (c86 + c87 + c88))" /> <!--90 -->
+		<rule name="TRGS6L611" order="415"  cellTargetId="c90" formula="0" condition="c90 &lt; 0"/> <!--90 -->
+		<rule name="TRGS6L621" order="420"  cellTargetId="c105" formula="(c100 - (c101 + c102 + c103))"/> <!--105 -->
+		<rule name="TRGS6L622" order="425"  cellTargetId="c105" formula="0" condition="c105 &lt; 0"/> <!--105 -->
+	
 		<!-- RUBRO 7 -->
-		<rule name="TRG_C112"  order="420"  cellTargetId="c112" formula="c90 + c105"/> <!--112 -->
-		
-		<rule name="TRG_C110"  order="435"  cellTargetId="c110" formula="c106 + c107 + c108 + c109"/> 
-		<rule name="TRG_C114"  order="437"  cellTargetId="c114" formula="c112 + c113"/> 
+		<rule name="TRG_C112"  order="430"  cellTargetId="c112" formula="c90 + c105"/> <!--112 -->
+		<rule name="TRG_C110"  order="430"  cellTargetId="c110" formula="c106 + c107 + c108 + c109"/> 
+		<rule name="TRG_C114"  order="450"  cellTargetId="c114" formula="c112 + c113"/> 
 
-		<rule name="TRG_C111_1"  order="440"  cellTargetId="c111" formula="c110 - c114"  condition="c110 &gt;= c114"/> 
-		<rule name="TRG_C115_1"  order="445"  cellTargetId="c115" formula="0" condition="c110 &gt;= c114"/> 
+		<rule name="TRG_C111_1"  order="460"  cellTargetId="c111" formula="c110 - c114"  /> 
+		<rule name="TRG_C111_2"  order="465"  cellTargetId="c111" formula="0" condition="c114 &lt;= 0"/> 
+		<rule name="TRG_C115_1"  order="470"  cellTargetId="c115" formula="c114 - c110" />
+		<rule name="TRG_C115_2"  order="475"  cellTargetId="c115" formula="0" condition="c115 &lt;= 0"/> 		
+		<rule name="TRG_C116"  	 order="480"  cellTargetId="c116" formula="0" condition="c115 &lt; c113"/> 
+		<rule name="TRG_C117"  	 order="485"  cellTargetId="c117" formula="0" condition="c115 &lt; c113"/> 
 		
-		<rule name="TRG_C115_2"  order="450"  cellTargetId="c115" formula="c114 - c110" condition="c114 &gt;= c110"/>
-		<rule name="TRG_C111_2"  order="455"  cellTargetId="c111" formula="0" condition="c114 &gt;= c110"/> 
-		
-		<!--<rule name="TRG_C116_1"  order="460"  cellTargetId="c116" formula="c115 - c113" condition="c115 &gt;= c113"/> -->
-		<rule name="TRG_C116"  order="470"  cellTargetId="c116" formula="0" condition="c115 &lt; c113"/> 
-		
-		<!--<rule name="TRG_C117_1"  order="480"  cellTargetId="c117" formula="c115 - c113" condition="c115 &gt;= c113"/> -->
-		<rule name="TRG_C117"  order="485"  cellTargetId="c117" formula="0" condition="c115 &lt; c113"/> 
-		
-		<rule name="TRG_C118"  order="485"  cellTargetId="c118" formula="c115 + c116 + c117"/> 
+		<rule name="TRG_C118"  order="490"  cellTargetId="c118" formula="c115 + c116 + c117"/> 
 		
 	</rules>	
 

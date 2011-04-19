@@ -2,6 +2,7 @@
 <%@ page contentType="text/html" language="java"
 %>
 <jsp:directive.page import="py.com.roshka.pykasu.web.Globals"/>
+<%@page import="py.com.roshka.pykasu.util.PykasuConfig"%>
 
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
@@ -39,7 +40,12 @@
 		
 		<div id="main">
 			<jsp:include page="messages.jsp"/> 
-			<logic:notPresent name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>">				
+			<logic:notPresent name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>">
+				<%if(PykasuConfig.showInfo()){%>
+					<%=PykasuConfig.getInfoText()%>
+				<%}%>
+
+<%-- 
 				<div style="background-color:#444444; font-family:tahoma;font-size:12px;font-weight:bolder;padding:14px;width:550px" >
 					<label style="color: silver;  font-size: 14px;">Le informamos que hemos realizado mejoras en el Servicio de Tributos vía Internet, las mismas contribuirán a darle agilidad y mayor seguridad al proceso, para lo cual deberá registrar los datos solicitados, ingresando a la opción "Registrar una cuenta nueva" para el servicio de PRESENTACIÓN DE DECLARACIÓN JURADA.<br/><br/>
 					Si aún no tiene suscrito el Contrato de Cobro de Tributos vía Internet con Visión Banco S.A.E.C.A., le invitamos a imprimir este <a href="/pycasu/html/contrato.pdf" style="text-decoration: underline;color: silver;  font-size: 14px; ">contrato</a> y presentarlo en cualquiera de nuestros Centros de Atención al Cliente de forma a activar su cuenta y brindarles un servicio más seguro, rápido y cómodo.<br/><br/>
@@ -47,6 +53,8 @@
 					Ponemos a su disposición un <a href="/pycasu/html/procesoSolicitud.htm" target="_blank" style="text-decoration: underline;color: silver;  font-size: 14px; ">instructivo</a>  que lo ayudará a obtener mas detalles del servicio.<br/><br/>			
 					Ante consultas, le invitamos a comunicarse con nosotros al 414 3000 de 08:00 a 18:00 hs.</label>
 				</div>
+				
+--%>				
 				
 			</logic:notPresent>
 			

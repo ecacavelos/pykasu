@@ -76,29 +76,31 @@ public class CalendarManagerEJB implements CalendarManager{
 		logger.info("Siguiente dia habil para: " + date);
 		return date;
 	}
+
 	
-	public Date getSuggestedPaymentDate(Date date) throws CalendarException{
+	public Date getSuggestedForPaySlip(Date date) throws CalendarException{
 		logger.info("Dia de pago sugerido para: " + date);
 		try {
 			Date suggestedDate = getNextAvailable(date);
 			//si cambio de día por ser feriado o día no habil 
 			//no hay que hacer caso de la hora
-			if(suggestedDate.compareTo(date)!=0){
-				logger.info("Dia de pago sugerido para: " + date + " es " + suggestedDate.getTime());
-				return suggestedDate;
-			}else{ //es el mismo día, entonces hay que ver la hora
+//			if(suggestedDate.compareTo(date)!=0){
+//				logger.info("Dia de pago sugerido para: " + date + " es " + suggestedDate.getTime());
+//				return suggestedDate;
+//			}else{ //es el mismo día, entonces hay que ver la hora
+			{
 				Calendar actualServerDate = Calendar.getInstance();
 				actualServerDate.setTime(new Date(System.currentTimeMillis()));
 			
-				ClassLoader cl = getClass().getClassLoader();
 				Properties prop = new Properties();
-
-//				prop.load(cl.getResourceAsStream(Globals.PYKASU_PROPERTIES));
 				URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
-				prop.load(url.openStream());;
+				prop.load(url.openStream());
 				
-				Calendar closeDate = Calendar.getInstance();
-				String closeHour = prop.getProperty(Globals.CLOSE_HOUR);
+				Calendar closeDate = Calendar.getInstance();							
+				String closeHour = prop.getProperty(Globals.PAYMENT_CLOSE_TIME);
+				if(closeHour == null){
+					throw new CalendarException("No se puede obtener una hora de cierre. " + Globals.PAYMENT_CLOSE_TIME);
+				}
 				String[] ch = closeHour.split(":");
 				if(ch.length != 2){
 					throw new CalendarException("Formato de la hora de cierre mal establecido. Valor actual: " + closeHour + ". Recuerde que el formato de la hora de cierre debe ser HH:MM donde HH esta en el rango 01 ~ 24 y MM esta en el rango 00 ~ 59. Los dos puntos son requeridos.");
@@ -123,6 +125,61 @@ public class CalendarManagerEJB implements CalendarManager{
 			e.printStackTrace();
 			throw new CalendarException("Problemas al buscar fecha sugerida de pago");			
 		}
+		
 	}
+	
+	public Date getSuggestedPaymentDate(Date date) throws CalendarException{
+		logger.info("Dia de pago sugerido para: " + date);
+		try {
+			Date suggestedDate = getNextAvailable(date);
+			//si cambio de día por ser feriado o día no habil 
+			//no hay que hacer caso de la hora
+			if(suggestedDate.compareTo(date)!=0){
+				logger.info("Dia de pago sugerido para: " + date + " es " + suggestedDate.getTime());
+				return suggestedDate;
+			}else{ //es el mismo día, entonces hay que ver la hora
+				Calendar actualServerDate = Calendar.getInstance();
+				actualServerDate.setTime(new Date(System.currentTimeMillis()));
+			
+				ClassLoader cl = getClass().getClassLoader();
+				Properties prop = new Properties();
+
+//				prop.load(cl.getResourceAsStream(Globals.PYKASU_PROPERTIES));
+				URL url = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+				prop.load(url.openStream());;
+				
+				Calendar closeDate = Calendar.getInstance();							
+				String closeHour = prop.getProperty(Globals.CLOSE_HOUR);
+				if(closeHour == null){
+					throw new CalendarException("No se puede obtener una hora de cierre. " );
+				}
+				String[] ch = closeHour.split(":");
+				if(ch.length != 2){
+					throw new CalendarException("Formato de la hora de cierre mal establecido. Valor actual: " + closeHour + ". Recuerde que el formato de la hora de cierre debe ser HH:MM donde HH esta en el rango 01 ~ 24 y MM esta en el rango 00 ~ 59. Los dos puntos son requeridos.");
+				}
+				closeDate.set(Calendar.HOUR_OF_DAY,Integer.parseInt(ch[0]));
+				closeDate.set(Calendar.MINUTE,Integer.parseInt(ch[1]));
+
+				if(actualServerDate.after(closeDate)){
+					actualServerDate.add(Calendar.DATE,1);												
+					return getNextAvailable(actualServerDate.getTime());
+				}else{
+					logger.info("Dia de pago sugerido para: " + date + " es " + actualServerDate.getTime());
+					return actualServerDate.getTime();
+				}
+				
+			}
+			
+		} catch (CalendarException e) {
+			e.printStackTrace();
+			throw new CalendarException("Problemas al buscar fecha sugerida de pago");
+		}catch (IOException e) {
+			e.printStackTrace();
+			throw new CalendarException("Problemas al buscar fecha sugerida de pago");			
+		}
+		
+//		return getSuggestedPaymentDate(date, Globals.CLOSE_HOUR);
+	}
+
 	
 }
