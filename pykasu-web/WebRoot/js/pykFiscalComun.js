@@ -92,7 +92,7 @@ function getFiscalMoraInfo(){
 		return;
 	}
 	pm_ruc = document.getElementById('ruc').value.toUpperCase();
-	
+	pm_declaration_type = document.getElementById('declarationType').value.toUpperCase();
 	
 	if(document.getElementById('paymentDate') != null)//Le puse este if xq estaba matando algo cuando era null(Mirna)
 		pm_paymentDate = document.getElementById('paymentDate').value;
@@ -116,6 +116,7 @@ function getFiscalMoraInfo(){
 	url = url + '&paymentDate='+pm_paymentDate;
 	url = url + '&fiscalPeriodMounth='+pm_fiscalPeriodMounth;
 	url = url + '&fiscalPeriodYear='+pm_fiscalPeriodYear;
+	url = url + '&declarationType='+pm_declaration_type;
 	//alert(url);
 	request.onreadystatechange=changeMoraInfo;
 	request.open('POST',url,true);
@@ -233,7 +234,7 @@ function submitForm(action){
 			}
 			
 			//hay que ver si NO es rectificativa, en caso de que no sea, poner un valor nulo en el campo rectificativePPN
-			if((document.getElementById('declarationType').value == '| 1 | ORIGINAL')||(document.getElementById('declarationType').value == '| 5 | CLAUSURA')){
+			if((document.getElementById('declarationType').value == '| 1 | ORIGINAL')||(document.getElementById('declarationType').value == '| 5 | CLAUSURA')|| (declarationType=='| 3 | CLAUSURA')){
 				document.getElementById('rectificativePPN').value = "";
 			}
 		}
@@ -499,7 +500,19 @@ function confirmComentSender(){
 				
 				var key = values[0].childNodes[i].getAttributeNode('key').value;
 				var value = values[0].childNodes[i].getAttributeNode('value').value;
+				if (key == 'DECLARATION_RUC_EXLUDED' && value == 'true'){
+					document.getElementById('ruc').value = '';
+					
+					document.getElementById('firstLastName').readOnly = '';
+					document.getElementById('secondLastName').readOnly = '';
+					document.getElementById('firstName').readOnly = '';
+					document.getElementById('middleName').readOnly = '';
 
+					alert('El ruc ingresado queda excluido del servicio de presentación por CAJA. Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS');
+					return;
+				}
+
+		
 				if (key == 'RUCINFO_NOT_FOUND' && value == 'true'){
 					document.getElementById('firstLastName').readOnly = '';
 					document.getElementById('secondLastName').readOnly = '';
@@ -654,7 +667,7 @@ Para ser invocado en el OnBlur del campo mes de la cabecera y en el BeforeSave d
 		return false;
 	}
 	
-	if (declarationType=='| 3 | CLAUSURA'){
+	if (declarationType=='| 3 | CLAUSURA' || declarationType=='| 5 | CLAUSURA'){
 			if (periodDate > actualDate){
 				alert("ERROR!\n EL mes de presentación no puede ser mayor al mes actual");
 				document.getElementById('fiscalPeriodMounth').value='';
@@ -722,7 +735,7 @@ function validateFormYear() //EXCLUSIVO PARA CONTROL DE FORMULARIOS ANUALES.-
 	}
 	
 	
-	if (declarationType=='| 3 | CLAUSURA'){
+	if ((declarationType=='| 3 | CLAUSURA') || (declarationType=='| 5 | CLAUSURA')){
 		if (yearValue > actualYear){
 			alert("Error!\n El valor del año no debe ser mayor al año actual")
 			document.getElementById('fiscalPeriodYear').value='';

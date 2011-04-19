@@ -28,7 +28,8 @@
 	  <class>py.com.roshka.pykasu.persistence.forms.Form118</class>		  		  
 	  <class>py.com.roshka.pykasu.persistence.forms.Form120</class>		  		  
 	  <class>py.com.roshka.pykasu.persistence.forms.Form122</class>		  		  
-	  <class>py.com.roshka.pykasu.persistence.forms.Form123</class>		  		  
+	  <class>py.com.roshka.pykasu.persistence.forms.Form123</class>
+	  <class>py.com.roshka.pykasu.persistence.forms.Form125</class>
   	  <class>py.com.roshka.pykasu.persistence.forms.Form800</class>
   	  <class>py.com.roshka.pykasu.persistence.forms.Form801</class>
   	  <class>py.com.roshka.pykasu.persistence.forms.Form850</class>

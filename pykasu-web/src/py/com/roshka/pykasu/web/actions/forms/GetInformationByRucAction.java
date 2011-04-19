@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import py.com.roshka.pykasu.exceptions.ExcludedContributorException;
 import py.com.roshka.pykasu.interfaces.FormManager;
 
 /**
@@ -36,25 +37,33 @@ public class GetInformationByRucAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
+    	boolean excludedRuc = false;
+    	
         InitialContext ic = new InitialContext();
         FormManager formManager = null;
         formManager = (FormManager) ic.lookup("pykasu/FormManager/local");
 
-        HashMap infos = 
-        	formManager.getContributorInfo(
-        			request.getParameter("ruc"),
-        			request.getParameter("formType")
-        			);
+        Map<String, String> more = new HashMap<String, String>();//aqui van los mensajes
+        
+        Map<String, String> infos = new HashMap<String, String>();
+        try{
+	        infos =
+	        	 formManager.getContributorInfo(
+	        			request.getParameter("ruc"),
+	        			request.getParameter("formType")
+	        			);
+        }catch (ExcludedContributorException e) {
+			more.put("DECLARATION_RUC_EXLUDED", "true");
+			excludedRuc = true;
+		}
+        
 
-        Map more = new HashMap();
 
-        if (infos.size() == 0) {
+        if (infos.size() == 0 && !excludedRuc) {
             more.put("RUCINFO_NOT_FOUND", "true");
-        }
+        } 
 
-        if (infos.size() == 0) {
-            infos = new HashMap();
-        }
+
         request.setAttribute(py.com.roshka.pykasu.web.Globals.CONTRIBUTOR_INFO,
                 infos);
         request.setAttribute(py.com.roshka.pykasu.web.Globals.MORE_MESSAGES,

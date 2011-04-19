@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import org.jboss.annotation.ejb.LocalBinding;
 import org.jboss.annotation.ejb.RemoteBinding;
 
+import py.com.roshka.pykasu.exceptions.ExcludedContributorException;
 import py.com.roshka.pykasu.exceptions.GetContributorInfoException;
 import py.com.roshka.pykasu.interfaces.Contributor;
 import py.com.roshka.pykasu.persistence.ruc.Ruc;
@@ -56,6 +57,27 @@ public class ContributorEJB implements Contributor{
 					" where rucs."+columnRucName+" = :ruc")
 					.setParameter("ruc",ruc)
 					.getSingleResult();
+			
+			if(r!=null){
+				try{ 
+					String  excludedStr = "select 1 as excluido from ruc_exclusiones where status = 'A' and ruc = :ruc"; 
+					Integer exists = (Integer)em.createNativeQuery(excludedStr)
+					 						.setParameter("ruc", ruc)
+					 						.getSingleResult();
+	
+					if(exists == 1){
+						logger.warn("El ruc: "+ruc+" ingresado queda excluido del servicio de presentación por CAJA. " +
+								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS");
+						
+						throw new ExcludedContributorException("El ruc: "+ruc+" ingresado queda excluido del servicio de presentación por CAJA. " +
+								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS");
+						
+					}
+				}catch (NoResultException e) {
+					logger.info("El RUC " + ruc + " no esta en la lista de excluidos");
+				}
+				
+			}
 			return r;
 		}catch(NoResultException e){
 			throw new GetContributorInfoException(e.getMessage());

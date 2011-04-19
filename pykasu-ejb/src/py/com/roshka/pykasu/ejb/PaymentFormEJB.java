@@ -1,7 +1,11 @@
 package py.com.roshka.pykasu.ejb;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.annotation.EJB;
 import javax.annotation.Resource;
@@ -15,11 +19,14 @@ import javax.persistence.PersistenceContext;
 import org.jboss.annotation.ejb.LocalBinding;
 import org.jboss.annotation.ejb.RemoteBinding;
 import py.com.roshka.pykasu.exceptions.AddFormException;
+import py.com.roshka.pykasu.exceptions.CalendarException;
 import py.com.roshka.pykasu.exceptions.UpdateFormException;
+import py.com.roshka.pykasu.interfaces.CalendarManager;
 import py.com.roshka.pykasu.interfaces.PaymentFormInterface;
 import py.com.roshka.pykasu.interfaces.UserManager;
 import py.com.roshka.pykasu.persistence.payment.PaymentForm;
 import py.com.roshka.pykasu.persistence.users.User;
+import py.com.roshka.pykasu.util.Globals;
 
 @Stateless
 @Local ({PaymentFormInterface.class})
@@ -39,7 +46,8 @@ public class PaymentFormEJB implements
 	@PersistenceContext(unitName = "pykasu")
 	protected EntityManager em;
 	
-	
+	@EJB 
+	private CalendarManager cm;
 	
 	
 //	public String  
@@ -76,11 +84,14 @@ public class PaymentFormEJB implements
 //    	return pf.getId().toString();
 //	}
 	
+	
+	
 	public void savePayment(PaymentForm pf, User user) throws AddFormException {
 	    try{
 	    	em.refresh(user);
 	    	pf.setCreatedBy(user);
 	    	pf.setBusinessCompany(user.getBusinessCompany());
+	    	pf.setCreatedDate(cm.getSuggestedForPaySlip(new Date()));	    	
 	    	em.persist(pf);
 	    }catch(Exception e){
 	    	throw new AddFormException("Problem to save Payment Form \n" + e.getMessage());
