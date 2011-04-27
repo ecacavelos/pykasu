@@ -311,6 +311,10 @@ function CalcularVerdaderamenteAl45(){
 	refreshVars();
 	TRGc47();
 	TRGc47_0();
+	TRGc48();
+	TRGc48_0();
+	TRGc49();
+	TRGc49_0();
 
 }
 

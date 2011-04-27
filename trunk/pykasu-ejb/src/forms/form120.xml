@@ -464,7 +464,7 @@
 		<rule name="TRG_C114"  order="450"  cellTargetId="c114" formula="c112 + c113"/> 
 
 		<rule name="TRG_C111_1"  order="460"  cellTargetId="c111" formula="c110 - c114"  /> 
-		<rule name="TRG_C111_2"  order="465"  cellTargetId="c111" formula="0" condition="c114 &lt;= 0"/> 
+		<rule name="TRG_C111_2"  order="465"  cellTargetId="c111" formula="0" condition="c111 &lt;= 0"/> 
 		<rule name="TRG_C115_1"  order="470"  cellTargetId="c115" formula="c114 - c110" />
 		<rule name="TRG_C115_2"  order="475"  cellTargetId="c115" formula="0" condition="c115 &lt;= 0"/> 		
 		<rule name="TRG_C116"  	 order="480"  cellTargetId="c116" formula="0" condition="c115 &lt; c113"/> 
