@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="EJB"
+  name="pykasu-ejb"
+  id="myeclipse.1225256407647"
+  j2ee-spec="5.0"
+  archive="pykasu-ejb.jar" />
+
