@@ -27,7 +27,7 @@
 			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
 				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
 				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" />
-				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#controlInhabilitaCampo19"/>
+				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#controlInhabilitaCampo19#controlaAnho"/>
 				<!-- <cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#retriveSalary()"/> -->
 			</line>			
 		</section>

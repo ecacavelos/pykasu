@@ -6,4 +6,7 @@ import py.com.roshka.pykasu.persistence.ruc.Ruc;
 public interface Contributor {
 	public Ruc getInfo(String ruc) 
 	   throws GetContributorInfoException;
+	
+	public Ruc getInfo(String ruc, boolean checkExcludedRuc) 
+		throws GetContributorInfoException;
 }
