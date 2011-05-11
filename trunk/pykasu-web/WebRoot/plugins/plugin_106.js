@@ -148,6 +148,35 @@ function orirecti(){
 	}	
 
 }
+
+
+
+
+function controlaAnho(){
+	var anhoform = getValueFormatless('fiscalPeriodYear');
+
+	if(anhoform != 0){
+		fecha = new Date();
+		var anho = getActualYear();
+
+		if(
+			(
+				(document.getElementById('declarationType').value == '| 5 | CLAUSURA') 
+				&&(anho == anhoform)
+			) 
+		   || (anhoform < anho)  
+		){
+
+			getPorcentajeMoras(document.getElementById('fiscalPeriodYear'));  		  
+
+		}else{
+			alert("Año de presentación incorrecto. El año debe ser menor al año corriente. En el caso de CLAUSURA, el año puede ser el mismo que el corriente.");
+			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo año
+			document.getElementById('fiscalPeriodYear').focus();
+			return;
+		}
+	}
+}
 /*
 function controlaAnho(){
 	var fiscalYear = getValueFormatless('fiscalPeriodYear');

@@ -158,3 +158,24 @@ function orirecti(){
 	}	
 
 }
+
+function giveFormType(){
+ return 'mensual';
+}
+
+
+function periodControl(){
+	if (!controlFiscalPeriod(giveFormType())){
+		return false;
+	}
+	return true;
+}
+
+function beforeSave(){
+	if (!periodControl()){
+		return false;
+		}
+	return true;
+
+}
+

@@ -4,8 +4,6 @@ function inicializar(){
 	PORC_INTERES = 0;
 	CONTRAVENSION_SMOV = 0;
 	CONTRAVENSION_CMOV = 0;
-	
-	
 }
 
 /*plugins*/
@@ -26,6 +24,7 @@ var PORC_MORA = 0;
 var PORC_INTERES = 0;
 var CONTRAVENSION_CMOV = 0;
 var CONTRAVENSION_SMOV = 0;
+
 function getPorcentajeMoras(component){
 
 	if (component.value == valueOld){
@@ -234,7 +233,7 @@ function submitForm(action){
 			}
 			
 			//hay que ver si NO es rectificativa, en caso de que no sea, poner un valor nulo en el campo rectificativePPN
-			if((document.getElementById('declarationType').value == '| 1 | ORIGINAL')||(document.getElementById('declarationType').value == '| 5 | CLAUSURA')|| (declarationType=='| 3 | CLAUSURA')){
+			if((document.getElementById('declarationType').value == '| 1 | ORIGINAL')||(document.getElementById('declarationType').value == '| 5 | CLAUSURA')|| (document.getElementById('declarationType').value=='| 3 | CLAUSURA')){
 				document.getElementById('rectificativePPN').value = "";
 			}
 		}
@@ -242,6 +241,7 @@ function submitForm(action){
 		if(document.getElementById('fiscalPeriodYear') != null){
 			fpYear = (document.getElementById('fiscalPeriodYear'));
 		}
+		
 		if((fpYear.value == "")||(document.getElementById('fiscalPeriodYear').value == "")){
 			alert('La Declaración Jurada requiere tener un Periodo de Declaración');
 			fpYear.focus();
@@ -519,6 +519,7 @@ function confirmComentSender(){
 					document.getElementById('firstName').readOnly = '';
 					document.getElementById('middleName').readOnly = '';
 					alert('No se encontro información de RUC');
+					document.getElementById('ruc').value='';
 				}
 				
 			}//if comentario
@@ -645,15 +646,21 @@ function validateMonthlyForm(specialType){ //EXCLUSIVO PARA CONTROL DE FORMULARI
 Funcion que verifica el campo de mes de la declaración en la cabecera,
 Para ser invocado en el OnBlur del campo mes de la cabecera y en el BeforeSave del formulario.
 */
-	var monthValue = getValueFormatless('fiscalPeriodMounth');
-	var yearValue = getValueFormatless('fiscalPeriodYear');
-	var periodDate= new Date();
-	periodDate.setFullYear(yearValue,monthValue-1,1);
 	var declarationType = document.getElementById('declarationType').value;
+	var periodDate		= new Date();
+	var actualDate 		= new Date();
+	var actualYear		= getActualYear();
+	var monthValue 		= getValueFormatless('fiscalPeriodMounth');
+	var yearValue 		= getValueFormatless('fiscalPeriodYear');
 	
-	var actualDate = new Date();
 	actualDate=getServerDate();
-	var actualYear=getActualYear();
+	periodDate.setFullYear(yearValue,monthValue-1,periodDate.getDate());
+	periodDate.setHours(actualDate.getHours());
+	periodDate.setMinutes(actualDate.getMinutes());
+	periodDate.setSeconds(actualDate.getSeconds());
+	periodDate.setMilliseconds(actualDate.getMilliseconds());
+	
+	
 // si el caso es que no se tiene uno de los dos campos?
 	if(monthValue == 0 || yearValue == 0){
 		alert("Error!, Datos de periodo incompletos");

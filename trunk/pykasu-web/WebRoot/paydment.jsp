@@ -90,7 +90,7 @@
 				}
 			}
 			function getFormType(){
-				return "850";
+				return "PAYMENT";
 			}
 
 			function submitForm(){

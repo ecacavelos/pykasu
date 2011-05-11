@@ -143,8 +143,16 @@ public class FormManagerEJB implements FormManager {
 
 		HashMap hm = new HashMap();
 		Ruc thisRuc = null;
+		
+		
+		
 		try {
-			thisRuc = contributor.getInfo(ruc);
+			if(formType!= null && formType.trim().equalsIgnoreCase("PAYMENT")){
+				boolean notCheckExcludedRuc = false;
+				thisRuc = contributor.getInfo(ruc, notCheckExcludedRuc);
+			}else{
+				thisRuc = contributor.getInfo(ruc);
+			}
 			hm.put("ruc",thisRuc.getNewRuc());	
 
 			hm.put("firstLastName","<![CDATA[" +thisRuc.getContributorName() +"]]>");
