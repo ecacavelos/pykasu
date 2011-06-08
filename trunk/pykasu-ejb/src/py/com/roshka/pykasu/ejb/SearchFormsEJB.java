@@ -138,7 +138,7 @@ public class SearchFormsEJB implements SearchFormsInterface{
 		for(Object[] line : list){	
 			itemSearch = new ItemSearch(line);
 			
-			javax.persistence.Query d = em.createNativeQuery("select STATUS, AT from FORMS_WF where FORM_TYPE like :formType  and FORM_IID = :formId");
+			javax.persistence.Query d = em.createNativeQuery("select STATUS, AT from FORMS_WF where FORM_TYPE = :formType  and FORM_IID = :formId");
 			d.setParameter("formType", itemSearch.getValue(FieldName.FORM_TYPE));
 			d.setParameter("formId", itemSearch.getValue(FieldName.FORM_IID));
 			List <Object[]>details =  d.getResultList();

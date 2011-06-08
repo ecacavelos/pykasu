@@ -54,6 +54,7 @@ public class ShowForms extends Action {
     		Calendar init = Calendar.getInstance();
     		Calendar end = Calendar.getInstance();
     		init.setTime(new Date(System.currentTimeMillis()));
+    		init.roll(Calendar.YEAR, false);
     		end.setTime(new Date(System.currentTimeMillis()));
 
     		init.set(Calendar.HOUR, 0);
@@ -62,23 +63,38 @@ public class ShowForms extends Action {
     		end.set(Calendar.HOUR, 23);
     		end.set(Calendar.MINUTE, 59);
     		
-    		if(request.getParameter("init_date")!=null && request.getParameter("init_month")!=null && request.getParameter("init_year")!=null){
-    			init.set(Calendar.DATE, Integer.parseInt(request.getParameter("init_date")));
-    			init.set(Calendar.MONTH, Integer.parseInt(request.getParameter("init_month"))-1);
-    			init.set(Calendar.YEAR, Integer.parseInt(request.getParameter("init_year")));
-    			
-    			request.setAttribute("init_date", request.getParameter("init_date"));
-    			request.setAttribute("init_month", request.getParameter("init_month"));
-    			request.setAttribute("init_year", request.getParameter("init_year"));
+    		
+    		
+    		if(request.getParameter("init_date")!=null && request.getParameter("init_date").length()>0 &&
+    		   request.getParameter("init_month")!=null && request.getParameter("init_month").length()>0 &&
+    		   request.getParameter("init_year")!=null && request.getParameter("init_year").length()>0){
+    			try{
+	    			init.set(Calendar.DATE, Integer.parseInt(request.getParameter("init_date")));
+	    			init.set(Calendar.MONTH, Integer.parseInt(request.getParameter("init_month"))-1);
+	    			init.set(Calendar.YEAR, Integer.parseInt(request.getParameter("init_year")));
+	    			
+	    			request.setAttribute("init_date", request.getParameter("init_date"));
+	    			request.setAttribute("init_month", request.getParameter("init_month"));
+	    			request.setAttribute("init_year", request.getParameter("init_year"));
+    			}catch (Exception e) {
+					logger.warn(e);
+					request.getSession().setAttribute(Globals.ERROR_MESSAGE,"No se pudo interpretar la fecha de inicio");
+				}
     		}
-    		if(request.getParameter("end_date")!=null && request.getParameter("end_month")!=null && request.getParameter("end_year")!=null){
-    			end.set(Calendar.DATE, Integer.parseInt(request.getParameter("end_date")));
-    			end.set(Calendar.MONTH, Integer.parseInt(request.getParameter("end_month"))-1);
-    			end.set(Calendar.YEAR, Integer.parseInt(request.getParameter("end_year")));
+    		if(request.getParameter("end_date")!=null &&  request.getParameter("end_date").length()>0 && 
+    		   request.getParameter("end_month")!=null && request.getParameter("end_month").length()>0 && 
+    		   request.getParameter("end_year")!=null && request.getParameter("end_year").length()>0) {
+    			try{
+	    			end.set(Calendar.DATE, Integer.parseInt(request.getParameter("end_date")));
+	    			end.set(Calendar.MONTH, Integer.parseInt(request.getParameter("end_month"))-1);
+	    			end.set(Calendar.YEAR, Integer.parseInt(request.getParameter("end_year")));
+    			}catch (Exception e) {
+					logger.warn(e);
+					request.getSession().setAttribute(Globals.ERROR_MESSAGE,"No se pudo interpretar la fecha de fin");
+				}
+    			
     		}            
-            
             List forms = genericForm.getForms(init, end);
-
             
             String title = "Búsqueda de formularios " + formName;
             

@@ -30,12 +30,18 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 			.getLogger(TaxForm.class);
 	
 	
+	public static final String FORM_STATUS_PROCESS 		= "PROCESO";
+	public static final String FORM_STATUS_TOSEND  		= "PARA ENVIAR";
+	public static final String FORM_STATUS_SENDED  		= "CONFIRMADO";
+	public static final String FORM_STATUS_PAYED   		= "PRESENTADO";
+	public static final String FORM_STATUS_REJECTED		= "RECHAZADO";
+	//--
+	public static final String FORM_STATUS_VALID		= "VALIDADO";
+	public static final String FORM_STATUS_PRINT_CLIENT	= "IMPRESO_CLIENTE";
+	public static final String FORM_STATUS_PRINT_SET	= "IMPRESO_SET";
+	public static final String FORM_STATUS_ERROR		= "ERROR";
 	
-	public static final String FORM_STATUS_PROCESS = "PROCESO";
-	public static final String FORM_STATUS_TOSEND  = "PARA ENVIAR";
-	public static final String FORM_STATUS_SENDED  = "CONFIRMADO";
-	public static final String FORM_STATUS_PAYED   = "PRESENTADO";
-	public static final String FORM_STATUS_REJECTED= "RECHAZADO";
+	
 	
 	public static final String FORM_DECLARATION_TYPE_ORIGINAL   = "| 1 | ORIGINAL";
 	public static final String FORM_DECLARATION_TYPE_RECTIFICATIVA   = "| 2 | RECTIFICATIVA";
