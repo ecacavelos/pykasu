@@ -45,11 +45,16 @@ public class AdmissionManagerEJB implements AdmissionManager{
 	
 	public Integer addAdmission(Admission admission) throws PykasuGenericException {
 		try{
+			
+			if(admission.getOffice() == null || admission.getOffice().trim().length()==0){
+				throw new PykasuGenericException("No se puede Guardar una Solicitud sin un Centro de Atención al Cliente (CAC)");
+			}
+			
 			Double d = new Double(Math.random() * 10000000);
 			Integer i = new Integer(d.intValue());
 			admission.setId(i);
 			
-			if(admission.getStatus()==null || admission.getStatus().isEmpty()){
+			if(admission.getStatus()==null || admission.getStatus().trim().length()==0){
 				admission.setStatus(STATUS_REGISTRO);
 			}
 			em.persist(admission);

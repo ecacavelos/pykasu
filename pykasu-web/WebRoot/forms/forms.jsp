@@ -30,6 +30,7 @@
 		<br>
 		<input type="hidden" name="FORM" value="<%=request.getAttribute(py.com.roshka.pykasu.web.Globals.FORM_NAME)%>">
 		<input type="submit" value="Recuperar"/>
+		(Si no establece ninguna fecha, recuerará los formularios del último año)
 	</form>
 	
 	
