@@ -29,7 +29,7 @@
 		Hasta:<%@include file="../datemgr.jsp" %>
 		<br>
 		<input type="hidden" name="FORM" value="<%=request.getAttribute(py.com.roshka.pykasu.web.Globals.FORM_NAME)%>">
-		<input type="submit" value="Recuperar"/>
+		<input type="submit" name="form_action" value="Recuperar"/>
 		(Si no establece ninguna fecha, recuerará los formularios del último año)
 	</form>
 	
