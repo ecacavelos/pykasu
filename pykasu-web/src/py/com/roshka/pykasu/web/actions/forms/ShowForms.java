@@ -54,9 +54,12 @@ public class ShowForms extends Action {
     		Calendar init = Calendar.getInstance();
     		Calendar end = Calendar.getInstance();
     		init.setTime(new Date(System.currentTimeMillis()));
-    		init.roll(Calendar.YEAR, false);
     		end.setTime(new Date(System.currentTimeMillis()));
 
+    		if(request.getParameter("form_action")!=null)    			
+    			init.roll(Calendar.YEAR, false);
+
+    		
     		init.set(Calendar.HOUR, 0);
     		init.set(Calendar.MINUTE, 0);
 
