@@ -192,7 +192,8 @@ public class Admission {
 	public void setBcompanyId(Integer bcompanyId) {
 		this.bcompanyId = bcompanyId;
 	}
-
+	
+	@Column(nullable=false)
 	public String getOffice() {
 		return office;
 	}

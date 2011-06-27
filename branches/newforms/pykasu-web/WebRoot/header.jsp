@@ -7,8 +7,9 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td align="right" style="font-size: 10px; color: gray;">Versión: 1.5.2</td></td>
+				<td align="right" style="font-size: 10px; color: gray;">Versión: 1.6.0</td></td>
 			</tr>
+
 		</table>
 	</div>	
 </div>

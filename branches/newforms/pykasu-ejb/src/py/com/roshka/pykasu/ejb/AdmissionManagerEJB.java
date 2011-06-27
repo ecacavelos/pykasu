@@ -51,11 +51,12 @@ public class AdmissionManagerEJB implements AdmissionManager{
 				throw new PersistenceException("La solicitud de admisión requiere que especifique una CAC (Centro de Atención al Cliente).");
 			}
 			
+
 			Double d = new Double(Math.random() * 10000000);
 			Integer i = new Integer(d.intValue());
 			admission.setId(i);
 			
-			if(admission.getStatus()==null || admission.getStatus().isEmpty()){
+			if(admission.getStatus()==null || admission.getStatus().trim().length()==0){
 				admission.setStatus(STATUS_REGISTRO);
 			}
 			em.persist(admission);

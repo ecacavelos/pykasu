@@ -33,6 +33,7 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	Pasos para crear un nuevo formulario
 	------------------------------------
 	
+
 	1. crear el formxxx.xml
 	2. crear el Formxxx.java
 	3. -- en esta clase --
@@ -40,12 +41,20 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 		agregar una entrada para: public static final String FORM_xxx_CLASS_NAME  = "Formxxx";
 	4. Agragar la entrada en el Menú: menu.xml
  */
+
+	public static final String FORM_STATUS_PROCESS 		= "PROCESO";
+	public static final String FORM_STATUS_TOSEND  		= "PARA ENVIAR";
+	public static final String FORM_STATUS_SENDED  		= "CONFIRMADO";
+	public static final String FORM_STATUS_PAYED   		= "PRESENTADO";
+	public static final String FORM_STATUS_REJECTED		= "RECHAZADO";
+	//--
+	public static final String FORM_STATUS_VALID		= "VALIDADO";
+	public static final String FORM_STATUS_PRINT_CLIENT	= "IMPRESO_CLIENTE";
+	public static final String FORM_STATUS_PRINT_SET	= "IMPRESO_SET";
+	public static final String FORM_STATUS_ERROR		= "ERROR";
+
 	
-	public static final String FORM_STATUS_PROCESS = "PROCESO";
-	public static final String FORM_STATUS_TOSEND  = "PARA ENVIAR";
-	public static final String FORM_STATUS_SENDED  = "CONFIRMADO";
-	public static final String FORM_STATUS_PAYED   = "PRESENTADO";
-	public static final String FORM_STATUS_REJECTED= "RECHAZADO";
+	
 	
 	public static final String FORM_DECLARATION_TYPE_ORIGINAL   = "| 1 | ORIGINAL";
 	public static final String FORM_DECLARATION_TYPE_RECTIFICATIVA   = "| 2 | RECTIFICATIVA";
@@ -59,9 +68,11 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_TYPE_800  = "800";
 	public static final String FORM_TYPE_801  = "801";
 	public static final String FORM_TYPE_120  = "120";	
+
 	public static final String FORM_TYPE_101  = "101";	
 	public static final String FORM_TYPE_123  = "123";	
 	public static final String FORM_TYPE_125  = "125";
+
 	public static final String FORM_TYPE_110  = "110";
 	public static final String FORM_TYPE_117  = "117";
 	public static final String FORM_TYPE_122  = "122";

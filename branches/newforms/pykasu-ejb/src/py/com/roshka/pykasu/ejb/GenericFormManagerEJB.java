@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import py.com.roshka.pykasu.exceptions.AddFormException;
 import py.com.roshka.pykasu.exceptions.FindingException;
@@ -66,15 +67,23 @@ public abstract class GenericFormManagerEJB implements GenericFormManager {
 			user = userManager.findUserByName(sc.getCallerPrincipal().getName());
     	
 			logger.info("Recuperando forms en un rango de fechas. init:" + init.getTime() + " ~ end: " + end.getTime());
-			List <TaxForm>list = em.createQuery("select f from "+ getFormClassName() +" as f " +
-									   " where f.businessCompany = :bc " +
-									   " and f.createdDate between :init and :end" +
-									   " order by f.createdDate desc")
-    				.setParameter("bc",user.getBusinessCompany())
-    				.setParameter("init",init.getTime())
-    				.setParameter("end",end.getTime())
-    				.getResultList();
-    	
+
+			String sql = "select f from "+ getFormClassName() +" as f " +
+						 " where f.businessCompany = :bc ";
+			if(init != null)
+				sql = sql +" and f.createdDate >= :init";
+			if(end != null)
+				sql = sql +" and f.createdDate <= :end";			
+			sql = sql +" order by f.createdDate desc";
+			
+			Query query = em.createQuery(sql)
+    				.setParameter("bc",user.getBusinessCompany());			
+			if(init != null)
+				query.setParameter("init",init.getTime());
+			if(end != null)
+    			query.setParameter("end",end.getTime());
+			
+			List <TaxForm>list = query.getResultList();
 	    	ResultItem ri = null;
 	    	for(TaxForm taxForm : list){
 	    		 ri = new ResultItem(); 	
@@ -85,31 +94,47 @@ public abstract class GenericFormManagerEJB implements GenericFormManager {
 	    	    		                   "<br/>" + taxForm.getFirstLastName() + 
 	    	    		                   "<br/>" + taxForm.getStatus());
 	
-	    	     if(taxForm.getStatus().equals(TaxForm.FORM_STATUS_SENDED)){
+	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_SENDED)){
 	    	    	 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	    	    	 ri.setDescription(ri.getDescription().concat(" - Confirmado el:  " + sdf.format(taxForm.getCreatedDate())));
-	    	     }
+	    	     }else
 
-	    	     if(taxForm.getStatus().equals(TaxForm.FORM_STATUS_PROCESS)){
+	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PROCESS)){
 	    	    	 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	    	    	 ri.setDescription(ri.getDescription().concat(" - Creado el:  " + sdf.format(taxForm.getCreatedDate())));
-	    	     }
+	    	     }else
 
-	    	     if(taxForm.getStatus().equals(TaxForm.FORM_STATUS_PAYED)){
+	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PAYED)){
 	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
-	    	     }
+	    	     }else
 	    	     
-	    	     if(taxForm.getStatus().equals(TaxForm.FORM_STATUS_PROCESS)){
+	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_VALID)){
+	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
+	    	     }else
+	    	     
+	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PRINT_SET)){
+	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
+	    	     }else
+		    	     
+		    	 if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PRINT_CLIENT)){
+		    	    ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
+		    	 }else
+	    	     
+		    	 if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_ERROR)){
+			    	    ri.setDescription(ri.getDescription().concat(" - Motivo:  " + taxForm.getMessageInfo()) );
+		    	 }
+	    	     
+	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PROCESS)){
 	    	    	 ri.setDeleteable(true);
 	    	    	 ri.setEditable(true);
 	    	    	 ri.setShowDetails(true);
-	    	     }else if(taxForm.getStatus().equals(TaxForm.FORM_STATUS_TOSEND)){
+	    	     }else if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_TOSEND)){
 	    	    	 ri.setDeleteable(false);
 	    	    	 ri.setEditable(true);
 	    	    	 ri.setShowDetails(true);    	    	 
-	    	     }else if(taxForm.getStatus().equals(TaxForm.FORM_STATUS_SENDED) 
-	    	    		 	|| taxForm.getStatus().equals(TaxForm.FORM_STATUS_PAYED)
-	    	    		 	|| taxForm.getStatus().equals(TaxForm.FORM_STATUS_REJECTED)){
+	    	     }else if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_SENDED) 
+	    	    		 	|| taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PAYED)
+	    	    		 	|| taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_REJECTED)){
 	    	    	 ri.setDeleteable(false);
 	    	    	 ri.setEditable(false);
 	    	    	 ri.setShowDetails(true);    	    	 
