@@ -11,6 +11,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import org.jboss.annotation.ejb.LocalBinding;
 import org.jboss.annotation.ejb.RemoteBinding;
@@ -45,6 +46,11 @@ public class AdmissionManagerEJB implements AdmissionManager{
 	
 	public Integer addAdmission(Admission admission) throws PykasuGenericException {
 		try{
+			
+			if(admission.getOffice()==null || admission.getOffice().trim().length()==0){
+				throw new PersistenceException("La solicitud de admisión requiere que especifique una CAC (Centro de Atención al Cliente).");
+			}
+			
 			Double d = new Double(Math.random() * 10000000);
 			Integer i = new Integer(d.intValue());
 			admission.setId(i);

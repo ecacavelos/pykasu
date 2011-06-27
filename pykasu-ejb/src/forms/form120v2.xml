@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<form type="120" description="Formulario 120" >
+<form type="120v2" description="Formulario 120 version 2" >
 	<sections type="header">
 		<section id="H1" name="HEADER1" description="SET"  order="0">
 			<line id="L0" name="H1L0" order="-1">

@@ -29,7 +29,17 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	static org.apache.log4j.Logger logger = org.apache.log4j.Logger
 			.getLogger(TaxForm.class);
 	
+/*
+	Pasos para crear un nuevo formulario
+	------------------------------------
 	
+	1. crear el formxxx.xml
+	2. crear el Formxxx.java
+	3. -- en esta clase --
+		agregar una entrada para: public static final String FORM_TYPE_xxx  = "xxx";
+		agregar una entrada para: public static final String FORM_xxx_CLASS_NAME  = "Formxxx";
+	4. Agragar la entrada en el Menú: menu.xml
+ */
 	
 	public static final String FORM_STATUS_PROCESS = "PROCESO";
 	public static final String FORM_STATUS_TOSEND  = "PARA ENVIAR";
@@ -50,7 +60,7 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_TYPE_801  = "801";
 	public static final String FORM_TYPE_120  = "120";	
 	public static final String FORM_TYPE_101  = "101";	
-	public static final String FORM_TYPE_123  = "123";
+	public static final String FORM_TYPE_123  = "123";	
 	public static final String FORM_TYPE_125  = "125";
 	public static final String FORM_TYPE_110  = "110";
 	public static final String FORM_TYPE_117  = "117";
@@ -65,6 +75,14 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_TYPE_130  = "130";
 	public static final String FORM_TYPE_848  = "848";
 	public static final String FORM_TYPE_90  = "90";
+	//--
+	public static final String FORM_TYPE_124  = "124";
+	public static final String FORM_TYPE_90v2  = "90v2";
+	public static final String FORM_TYPE_120v2  = "120v2";
+	public static final String FORM_TYPE_103v2  = "103v2";
+	public static final String FORM_TYPE_107v2  = "107v2";
+	public static final String FORM_TYPE_111  = "111";
+	//--
 	
 	
 	public static final String FORM_850_CLASS_NAME  = "Form850";
@@ -87,6 +105,16 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_130_CLASS_NAME  = "Form130";
 	public static final String FORM_848_CLASS_NAME  = "Form848";
 	public static final String FORM_90_CLASS_NAME  = "Form90";
+	//--
+	public static final String FORM_124_CLASS_NAME    = "Form124";
+	public static final String FORM_90v2_CLASS_NAME   = "Form90v2";
+	public static final String FORM_120v2_CLASS_NAME  = "Form120v2";
+	public static final String FORM_103v2_CLASS_NAME  = "Form103v2";
+	public static final String FORM_107v2_CLASS_NAME  = "Form107v2";
+	public static final String FORM_111_CLASS_NAME  = "Form111";
+	//--
+	
+	
 	
 	private Integer id;
 	private Date createdDate;
@@ -393,3 +421,4 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	}
 		
 }
+

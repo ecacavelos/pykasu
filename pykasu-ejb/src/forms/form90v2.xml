@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<form type="90v2" description="Formulario 90 version 2" >
+	<sections type="header">
+		<section id="H1" name="HEADER1" description="SET"  order="0">
+			<line id="L0" name="H1L0" order="-1">
+				<cell id="paymentDate" col="0" type="DATE" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Día previsto de pago: dd/mm/aaaa" alignAddtionalDescription="TOP" events="onChange:getPorcentajeMoras;onblur:datesControl"/>
+				<cell id="prePrintedNumber" col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Identificador del formulario:" alignAddtionalDescription="TOP" events="onblur:removeZeros#updatePreprinterNumber" xmlTagName="numeroDocumento" colSpan="2"/>
+			</line>
+			
+			<line id="L1" name="H1L1" order="0">
+				<cell id="ruc" col="1" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="RUC:" alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="ruc"/>
+				<cell id="dv" col="2"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="DV:"  alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="dv" colSpan="2" staticValue="true"/>				
+			</line>
+			<line id="L2" name="H1L2" order="1">
+				<cell id="firstLastName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Razón Social o Primer Apellido:" alignAddtionalDescription="TOP" xmlTagName="PrimerApellido"/>
+				<cell id="secondLastName" col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Apellido:" alignAddtionalDescription="TOP" colSpan="2"/>				
+			</line>
+			<line id="L3" name="H1L3" order="2">
+				<cell id="firstName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Primer Nombre:" alignAddtionalDescription="LEFT"/>
+				<cell id="middleName"  col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Nombre:" alignAddtionalDescription="LEFT" colSpan="2"/>
+			</line>
+			<!--  <line id="L4" name="H1L4" order="3">
+				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/>
+				<cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" />
+				<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>
+			</line>	
+			-->
+			<line id="L5" name="H1L5" order="4" >
+
+				<cell id="fiscalPeriodDay"     col="1" type="NUMBER" value="" events="onblur:getFiscalInfoToForm90#datesControl" opaque="false" readOnly="false" calculable="false" additionalDescription="Dia" alignAddtionalDescription="LEFT" />
+				<cell id="fiscalPeriodMounth"  col="2" type="NUMBER" value="" events="onblur:getFiscalInfoToForm90#datesControl" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" />
+				<cell id="fiscalPeriodYear"    col="3" type="NUMBER" value="" events="onblur:getFiscalInfoToForm90#datesControl" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" />
+
+			</line>			
+		</section>
+		
+		
+	</sections>	
+
+	<sections type="body"  order="-1" >
+			<section  id="MOT_LIQ" order="10" >
+				<line id="L1010" order="10" description="SELECCIONAR MOTIVO DE LIQUIDACION." >
+					<cell id="liqMotive" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" events="onchange:changeEnableSections#getFiscalInfoToForm90" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="Elegir:" choices="| A | Ingresos ocasionales obtenidos por contribuyentes del IMAGRO, gravados.;
+																																																		| B | Ingresos ocasionales obtenidos por Personas Físicas sin representantes en el país, gravadas por el IRACIS;
+																																																		| C | Distribución de Utilidades o Pago de Dividendos;
+																																																		| D | Patente de Autovehículos;
+																																																		| E | Otros pagos a Solicitar" xmlTagName="liqMotiv"/>
+				</line>
+		
+			</section>
+			<section  id="R_1" order="10" >
+			
+			<line id="TLR1" name="TLR1" order="-1" description="A - INGRESOS OCASIONALES OBTENIDOS POR CONTRIBUYENTES DEL IMAGRO">
+				<cell id="LBL_R1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
+			</line>
+			
+			<line id="L1010" order="10" description="INGRESOS POR VENTA DE ACTIVO FIJO" >
+				<cell id="c15" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="15" xmlTagName="C15"/>
+			</line>
+
+			<line id="L1020" order="20" description="OTROS INGRESOS GRAVADOS POR EL IMPUESTO" >
+				<cell id="c16" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="16" xmlTagName="C16"/>
+			</line>
+
+			<line id="L1030" order="30" description="TOTAL DE INGRESOS OCACIONALES (SUMA DE LAS CASILLAS 15 +16)" >
+				<cell id="c17" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="17" xmlTagName="C17"/>
+			</line>
+
+			<line id="L1040" order="40" description="BASE IMPONIBLE (...% APLICABLE SOBRE LA CASILLA 17)" >
+				<cell id="c18" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="18" xmlTagName="C18"/>
+			</line>
+
+			<line id="L1050" order="50" description="FECHA DE VENTA" >
+				<cell id="c19" col="1" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="19" xmlTagName="C19" events="onblur:validDate#getFiscalInfoToForm90"/>
+			</line>
+
+		</section>
+		<section  id="R_2" order="20" >
+			<line id="TLR2" name="TLR2" order="-1" description="B - INGRESOS OCASIONALES OBTENIDOS POR PERSONAS FISICAS SIN REPRESENTANTES EN EL PAIS">
+				<cell id="LBL_R2" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="L2010" order="10" description="INGRESOS GRAVADOS POR EL IMPUESTO" >
+				<cell id="c20" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="20" xmlTagName="C20"/>
+			</line>
+
+			<line id="L2020" order="20" description="FECHA DE OPERACIÓN" >
+				<cell id="c21" col="1" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="21" events="onblur:validDate" xmlTagName="C21"/>
+			</line>
+
+		</section>
+		<section  id="R_3" order="30" >
+			<line id="TLR3" name="TLR3" order="-1" description="C - DISTRIBUCION DE UTILIDADES O PAGO DE DIVIDENDOS">
+				<cell id="LBL_R3_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="AÑO" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R3_C2" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="L3010" order="10" description="DISTRIBUCIÓN DE UTILIDADES A PAGO DE DIVIDENDOS CORRESPONDIENTE AL EJERCICIO FISCAL" >
+				<cell id="c22" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="22" xmlTagName="C22"/>
+				<cell id="c23" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="23" xmlTagName="C23"/>
+			</line>
+
+			<line id="L3020" order="20" description="DISTRIBUCIÓN DE UTILIDADES A PAGO DE DIVIDENDOS CORRESPONDIENTE AL EJERCICIO FISCAL" >
+				<cell id="c24" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="24" xmlTagName="C24"/>
+				<cell id="c25" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="25" xmlTagName="C25"/>
+			</line>
+
+			<line id="L3030" order="30" description="DISTRIBUCIÓN DE UTILIDADES A PAGO DE DIVIDENDOS CORRESPONDIENTE AL EJERCICIO FISCAL" >
+				<cell id="c26" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="26" xmlTagName="C26"/>
+				<cell id="c27" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="27" xmlTagName="C27"/>
+			</line>
+
+			<line id="L3040" order="40" description="MONTO TOTAL PAGADO O PUESTO A DISPOSICIÓN (SUMA DE LAS CASILLAS 23,25, Y 27)" >
+					<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c28" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="28" xmlTagName="C28"/>
+			</line>
+
+			<line id="L3050" order="50" description="FECHA DE PAGO" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c29" col="2" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="29" events="onblur:validDate#getFiscalInfoToForm90" xmlTagName="C29"/>
+			</line>
+
+		</section>
+		<section  id="R_4" order="40" >
+			<line id="TLR4" name="TLR4" order="-1" description="D - PATENTE DE AUTOVEHICULO" colSpan="4">
+				<cell id="LBL_R4_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="" alignAddtionalDescription="FILLED"/>
+
+			</line>
+			<line id="L4010" order="10"  >
+				<cell id="t30" col="0" type="LABEL"  value="" opaque="true" readOnly="false" calculable="false" additionalDescription="VALOR AFORO EN GUARANIES" alignAddtionalDescription="LEFT"/>
+				<cell id="c30" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="30" xmlTagName="C30"/>
+				<cell id="t31" col="3" type="LABEL"  value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Año que liquida el impuesto" alignAddtionalDescription="LEFT"/>
+				<cell id="c31" col="4" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" events="onblur:validYear" additionalDescription="31" xmlTagName="C31"/>
+			</line>
+
+			<!--  <line id="L4020" order="20" >
+				<cell id="c31" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="31" xmlTagName="C31"/>
+			</line>-->
+
+		</section>
+		<section  id="R_5" order="50" >
+			<line id="TLR5" name="TLR5" order="-1" description="E - OTROS PAGOS">
+				<cell id="LBL_R5_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="" alignAddtionalDescription="FILLED"/>
+
+			</line>
+			<line id="L5010" order="10" description="VALOR IMPONIBLE" >
+				<cell id="c32" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="32" xmlTagName="C32"/>
+			</line>
+
+			<line id="L5020" order="20" description="FECHA DE OPERACIÓN" >
+				<cell id="c33" col="1" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="33" events="onblur:validDate" xmlTagName="C33"/>
+			</line>
+
+		</section>
+		<section  id="R_6" order="60" >
+			<line id="TLR6" name="TLR6" order="-1" description="LIQUIDACION">
+				<cell id="LBL_R6_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="L6010" order="10" description="IMPUESTO LIQUIDADO APLICABLE SOBRE LA RENTA ALCANZADA POR EL RÉGIMEN GENERAL ...% SOBRE EL MONTO DE LA CASILLA 18" >
+				<cell id="c34" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="34" xmlTagName="C34"/>
+			</line>
+
+			<line id="L6020" order="20" description="IMPUESTO LIQUIDADO APLICABLE SOBRE LA RENTA ALCANZADA POR EL RÉGIMEN GENERAL ...% SOBRE EL MONTO DE LA CASILLA 20" >
+				<cell id="c35" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="35" xmlTagName="C35"/>
+			</line>
+
+			<line id="L6030" order="30" description="IMPUESTO LIQUIDADO EN CONCEPTO DE TASA ADICIONAL DEL IRACIS ...% APLICABLE SOBRE EL MONTO DE LA CASILLA 28" >
+				<cell id="c36" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="36" xmlTagName="C36"/>
+			</line>
+
+			<line id="L6040" order="40" description="IMPUESTO LOQUIDADO EN CONCEPTO DE PATENTE FISCAL DE AUTOVEHÍCULO ...% APLICABLE SOBRE EL MONTO DE LA CASILLA 30" >
+				<cell id="c37" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="37" xmlTagName="C37"/>
+			</line>
+
+			<line id="L6050" order="50" description="IMPUESTO LIQUIDADO ...% APLICABLE SOBRE EL MONTO DE LA CASILLA 32" >
+				<cell id="c38" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="38" xmlTagName="C38" events="onblur:mustBeMinor()"/>
+			</line>
+
+			<line id="L6060" order="60" description="MULTA POR PRESENTAR LA DECLARACIÓN JURADA CON POSTERIORIDAD AL VENCIMIENTO" >
+				<cell id="c39" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="39" xmlTagName="C39"/>
+			</line>
+
+			<line id="L6070" order="70" description="SALDO A FAVOR DEL FISCO (SUMA CASILLAS 34+35+36+37+38+39)" >
+				<cell id="c40" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="40" xmlTagName="C40"/>
+			</line>
+
+			<line id="L6080" order="80" description="MULTA POR MORA (...% DEL RESULTADO DE LA CASILLA 40 MENOS 39)(SE CALCULA CUANDO HAY SALDO A FAVOR DEL FISCO)" >
+				<cell id="c41" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="41" xmlTagName="C41"/>
+			</line>
+
+			<line id="L6090" order="90" description="INTERES (...% DEL RESULTADO DE CASILLA 40 MENOS 39) (SE CALCULA CUANDO HAY SALDO A FAVOR DEL FISCO)" >
+				<cell id="c42" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="42" xmlTagName="C42"/>
+			</line>
+
+			<line id="L6100" order="100" description="SALDO DEFINITIVO A PAGAR A FAVOR DEL FISCO (SUMA CASILLAS 40+41+42)" >
+				<cell id="c43" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="43" xmlTagName="C43"/>
+			</line>
+
+		</section>
+		<section  id="STATUS" name="STATUS" description="Estado" order="1000">
+			<line id="STATUSLINE" name="STATUS" order="1" description="Estado del presente documento:">
+				<cell id="status" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT" choices="PROCESO;CONFIRMADO"/>
+			</line>
+		</section>
+	</sections>
+
+	<rules>
+
+	<!--  	17	C[15]+C[16]-->
+			<rule name="TRGc17" 	order="10"  cellTargetId="c17" 	formula="c15+c16"/>	
+
+	<!-- 	18	C[17]*#BUSCARTASA(18)/100 -->
+			<rule name="TRGc18" 	order="20"  cellTargetId="c18" 	formula="c17*0.3" />
+
+	<!--	28	C[23]+C[25]+C[27]-->
+			<rule name="TRGc28" 	order="30"  cellTargetId="c28" 	formula="c23+c25+c27"/>	
+
+	<!--	34	C[18]*#BUSCARTASA(34)/100-->
+			<rule name="TRGc34" 	order="40"  cellTargetId="c34" 	formula="c18*0.1" />		
+
+	<!--	35	C[20]*#BUSCARTASA(35)/100-->
+			<rule name="TRGc35" 	order="50"  cellTargetId="c35" 	formula="c20*0.1" />		
+
+	<!-- 	36	C[28]*#BUSCARTASA(36)/100-->
+			<rule name="TRGc36" 	order="60"  cellTargetId="c36" 	formula="c28*0.05" />		
+
+	<!--	37	C[30]*#BUSCARTASA(37)/100-->
+			<rule name="TRGc37" 	order="70"  cellTargetId="c37" 	formula="c30*0.02" />		
+
+	<!--	40	C[34] + C[35] + C[36] + C[37]+ C[38] +C[39]-->
+			<rule name="TRGc40" 	order="80"  cellTargetId="c40" 	formula="c34+c35+c36+c37+c38+c39" />		
+
+	<!--	43	C[40]+C[41]+C[42]-->
+			<rule name="TRGc43" 	order="90"  cellTargetId="c43" 	formula="c40+c41+c42" />		
+	
+	</rules>
+</form>
