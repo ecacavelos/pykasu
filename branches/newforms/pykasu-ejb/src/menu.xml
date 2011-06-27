@@ -26,10 +26,22 @@
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
 
+		<action name="Formulario 90 version 2" order="12" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=90v2"  urlHelp="" description="" active="true" rolesAllowed=""/>
+			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90v2" urlHelp="" description="" active="true" rolesAllowed=""/>			
+		</action>
+
+
 		<action name="Formulario 101" order="20" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=101"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=101" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
+
+		<action name="Formulario 103 version 2" order="22" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=103v2"  urlHelp="" description="" active="true" rolesAllowed=""/>
+			<action name="Buscar formularios" order="20" url="findForms.do?FORM=103v2" urlHelp="" description="" active="true" rolesAllowed=""/>			
+		</action>
+
 
 		<action name="Formulario 105" order="30" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=105"  urlHelp="" description="" active="true" rolesAllowed=""/>
@@ -39,6 +51,11 @@
 		<action name="Formulario 106" order="40" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=106"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=106" urlHelp="" description="" active="true" rolesAllowed=""/>			
+		</action>
+
+		<action name="Formulario 107 version 2" order="45" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=107v2"  urlHelp="" description="" active="true" rolesAllowed=""/>
+			<action name="Buscar formularios" order="20" url="findForms.do?FORM=107v2" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
 		
 		<action name="Formulario 108" order="50" url="" urlHelp="" description="" active="true" rolesAllowed="users">
@@ -56,6 +73,11 @@
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=110" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
 
+		<action name="Formulario 111" order="75" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=111"  urlHelp="" description="" active="true" rolesAllowed=""/>
+			<action name="Buscar formularios" order="20" url="findForms.do?FORM=111" urlHelp="" description="" active="true" rolesAllowed=""/>			
+		</action>
+
 		<action name="Formulario 117" order="80" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=117"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=117" urlHelp="" description="" active="true" rolesAllowed=""/>			
@@ -71,6 +93,12 @@
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=120" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>	
 
+		<action name="Formulario 120 version 2" order="101" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=120v2"  urlHelp="" description="" active="true" rolesAllowed=""/>
+			<action name="Buscar formularios" order="20" url="findForms.do?FORM=120v2" urlHelp="" description="" active="true" rolesAllowed=""/>			
+		</action>	
+
+
 		<action name="Formulario 122" order="105" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=122"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=122" urlHelp="" description="" active="true" rolesAllowed=""/>			
@@ -79,6 +107,11 @@
 		<action name="Formulario 123" order="110" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=123"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=123" urlHelp="" description="" active="true" rolesAllowed=""/>			
+		</action>
+
+		<action name="Formulario 124" order="112" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=124"  urlHelp="" description="" active="true" rolesAllowed=""/>
+			<action name="Buscar formularios" order="20" url="findForms.do?FORM=124" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
 
 		<action name="Formulario 125" order="115" url="" urlHelp="" description="" active="true" rolesAllowed="users">

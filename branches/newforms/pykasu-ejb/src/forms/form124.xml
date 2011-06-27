@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<form type="120" description="Formulario 120" >
+<form type="124" description="Formulario 124" >
 	<sections type="header">
 		<section id="H1" name="HEADER1" description="SET"  order="0">
 			<line id="L0" name="H1L0" order="-1">
@@ -29,7 +29,7 @@
 			</line>			
 		</section>
 	</sections>
-	<sections type="body">	
+	<sections type="body">
 		<section id="R1" name="RUBRO1" description="Rubro 1. Monto de las operaciones del periodo y determinación del Débito Fiscal" order="10">
 			
 			<line id="TL1" name="TLS1" order="-1" description="RUBRO 1 - Monto de las operaciones del periodo y determinación del Débito fiscal">

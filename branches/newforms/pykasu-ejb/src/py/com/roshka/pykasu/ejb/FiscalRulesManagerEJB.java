@@ -351,7 +351,8 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			logger.info("Params: " + key + " => " + params.get(key));
 		}
 		
-		Integer formType = (Integer) params.get(FISCAL_FORM_TYPE);		
+		//Integer formType = (Integer) params.get(FISCAL_FORM_TYPE);		
+		String formType = (String) params.get(FISCAL_FORM_TYPE);
 		String ruc = (String) params.get(FISCAL_RUC);
 		Date paydmentDate = (Date) params.get(FISCAL_PAYMENT_DATE);
 		String fiscalInfoType = (String) params.get(FISCAL_INFO_TYPE);
@@ -447,11 +448,15 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				logger.info("Going to retrive old RUC from (" + ruc + ") to calculate tax");
 				ruc = rucObj.getOldRuc().replace('\\','N');
 			
+				//En este bloque se puede asumir que los formularios con INACTIVOS y se identifican solo por números: Ej: 850, ...
+				Integer formTypeNumber = Integer.parseInt(formType);
 				if(fiscalInfoType.equals(FISCAL_INFO_EXPIRING)){
 					//Integer fiscalPeriodMonth = (Integer) params.get("fiscalPeriodMonth");
 					//Integer fiscalPeriodYear = (Integer) params.get("fiscalPeriodYear");
 					FiscalPeriod fp = getFiscalPeriod(fiscalPeriodMonth, fiscalPeriodYear);
-					result = getFiscalInfo(ruc, paydmentDate, fp, formType);
+					
+					
+					result = getFiscalInfo(ruc, paydmentDate, fp, formTypeNumber);
 					if(!validPresentationDate){
 						result.put("DECLARATION_DATE_NOT_VALID",true);
 					}
@@ -461,7 +466,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 					Integer advancedNumber = (Integer) params.get("advancedNumber"); 
 					Integer clausureMonth = (Integer) params.get("clausureMonth");  
 					Date expiringDate = (Date) params.get("expiringDate");					
-					result = getFiscalInfo(paydmentDate, ruc, formType, advancedNumber, clausureMonth, expiringDate);
+					result = getFiscalInfo(paydmentDate, ruc, formTypeNumber, advancedNumber, clausureMonth, expiringDate);
 					if(!validPresentationDate){
 						result.put("DECLARATION_DATE_NOT_VALID",true);
 					}
@@ -510,7 +515,8 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	
 	
 	@SuppressWarnings("unchecked")
-	protected Map getFiscalInfoToNewForm(String ruc, Integer presentationMonth, Integer presentationYear, Date paymentDate, Integer formType) 
+//	protected Map getFiscalInfoToNewForm(String ruc, Integer presentationMonth, Integer presentationYear, Date paymentDate, Integer formType)
+	protected Map getFiscalInfoToNewForm(String ruc, Integer presentationMonth, Integer presentationYear, Date paymentDate, String formType)	
 		throws FiscalInfoException{
 		
 		
@@ -588,7 +594,8 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		return map;
 	}
 	
-	private Calendar getPermanentCalendar(String ruc, Integer presentationMonth, Integer presentationYear, Integer formType) 
+//	private Calendar getPermanentCalendar(String ruc, Integer presentationMonth, Integer presentationYear, Integer formType)
+	private Calendar getPermanentCalendar(String ruc, Integer presentationMonth, Integer presentationYear, String formType)	
 		throws FiscalInfoException{
 
 			logger.info(" Get Permanent Calendar ");
@@ -779,7 +786,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 
 			Calendar c = Calendar.getInstance();
 			c.setTime(initialDate);
-			c = getPermanentCalendar(ruc,c.get(Calendar.MONTH)+1, c.get(Calendar.YEAR),90);
+			c = getPermanentCalendar(ruc,c.get(Calendar.MONTH)+1, c.get(Calendar.YEAR),"90");
 			initialDate = c.getTime();
 			diffDate = Utils.DateDiff(initialDate, paymentDate);
 			

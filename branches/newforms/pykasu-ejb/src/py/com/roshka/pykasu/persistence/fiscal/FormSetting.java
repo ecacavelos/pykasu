@@ -36,7 +36,7 @@ public class FormSetting implements Serializable {
 	protected FormSetting(){		
 	}
 	
-	@Id @Column(name = "formulario")
+	@Id @Column(name = "pyk_codigo")
 	public String getFormType() {
 		return formType;
 	}

@@ -31,6 +31,7 @@ public class FormSettingManager implements FormSettingInterface {
 	public FormSetting getFormSetting(String formType)
 			throws FormSettingRetrieveException {
 		try{
+			
 			return (FormSetting) 
 				tributos.createQuery("select fs from FormSetting fs " +
 					"where fs.formType = :formType")
