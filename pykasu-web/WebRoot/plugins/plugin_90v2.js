@@ -71,7 +71,11 @@ function modifyEnableSection(section, enableMode){
 		document.getElementById('c32').disabled = enableModeValue;
 		document.getElementById('c33').disabled = enableModeValue;
 		document.getElementById('c38').disabled = enableModeValue;
-	}		 
+	}	
+	
+	if(!isOnLoad){
+		limpiarLiquidacion();
+	}
 }
 
 function changeEnableSections(section){
@@ -87,6 +91,14 @@ function changeEnableSections(section){
 
 	modifyEnableSection(option, 'ENABLE');	
 	
+}
+
+function clearDates(){
+	document.getElementById('c19').value = '';
+	document.getElementById('c21').value = '';
+	document.getElementById('c29').value = '';
+	document.getElementById('c33').value = '';
+
 }
 
 function onloadForm(){
@@ -107,7 +119,26 @@ function onloadForm(){
 	isOnLoad = true;
 	changeEnableSections(s);
 	isOnLoad = false;	
+	clearDates();
 }
+
+function limpiarLiquidacion(){
+	document.getElementById('c34').value = '';
+	document.getElementById('c35').value = '';
+	document.getElementById('c36').value = '';
+	document.getElementById('c37').value = '';
+	document.getElementById('c38').value = '';
+	document.getElementById('c44').value = '';
+	document.getElementById('c39').value = '';
+	document.getElementById('c40').value = '';
+	document.getElementById('c41').value = '';
+	document.getElementById('c42').value = '';
+	document.getElementById('c43').value = '';
+	
+	
+
+}
+
 
 function calculateBeforePlugin(){
 
@@ -150,12 +181,17 @@ function getFiscalInfoToForm90(){
 		}
 		fecha = getValueFormatless('fiscalPeriodDay') +'/'+ getValueFormatless('fiscalPeriodMounth') + '/' + getValueFormatless('fiscalPeriodYear');
 
-	}else if(option == 'B' || option == 'E'){
-		PORC_MORA = 0; 
-		PORC_INTERES = 0; 
-		CONTRAVENSION_CMOV = 0;
-		CONTRAVENSION_SMOV = 0;	
-		return;
+	}else if(option == 'B'){
+		if(document.getElementById('c21').value == ''){
+			return;
+		}
+		fecha = document.getElementById('c21').value;
+	
+	}else if(option == 'E'){
+		if(document.getElementById('c33').value == ''){
+			return;
+		}
+		fecha = document.getElementById('c33').value;
 	}
 	
 	var url = 'getMoraInfoForm90.do?section=' + option;
@@ -209,11 +245,12 @@ function calcPorcentajeMoras(){
 	}
 	refreshVars();
 	TRGc40();
+	
 	var tmp40 = document.getElementById('c40').value;
 	var tmp39 = document.getElementById('c39').value;	
 	var tmp35 = document.getElementById('c35').value;		
 	
-	var op = removeCommas(tmp40) - removeCommas(tmp39) - removeCommas(tmp35);
+	var op = removeCommas(tmp40) - removeCommas(tmp39);
 	if(op < 0){
 		op = 0;
 	}
@@ -242,7 +279,7 @@ function calcPorcentajeMoras(){
 
 
 function getFormType(){
-	return '90';
+	return '90v2';
 }
 
 

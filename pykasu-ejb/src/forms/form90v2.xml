@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<form type="90v2" description="Formulario 90 version 2" >
+<form type="90v2" description="Formulario 90 versión 2" >
 	<sections type="header">
 		<section id="H1" name="HEADER1" description="SET"  order="0">
 			<line id="L0" name="H1L0" order="-1">
@@ -38,17 +38,17 @@
 	</sections>	
 
 	<sections type="body"  order="-1" >
-			<section  id="MOT_LIQ" order="10" >
+		<section  id="MOT_LIQ" order="10" >
 				<line id="L1010" order="10" description="SELECCIONAR MOTIVO DE LIQUIDACION." >
-					<cell id="liqMotive" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" events="onchange:changeEnableSections#getFiscalInfoToForm90" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="Elegir:" choices="| A | Ingresos ocasionales obtenidos por contribuyentes del IMAGRO, gravados.;
-																																																		| B | Ingresos ocasionales obtenidos por Personas Físicas sin representantes en el país, gravadas por el IRACIS;
-																																																		| C | Distribución de Utilidades o Pago de Dividendos;
-																																																		| D | Patente de Autovehículos;
-																																																		| E | Otros pagos a Solicitar" xmlTagName="liqMotiv"/>
+					<cell id="liqMotive" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" events="onchange:changeEnableSections#getFiscalInfoToForm90" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="Elegir:" choices="| A | INGRESOS OCASIONALES OBTENIDOS POR CONTRIBUYENTES DEL IMAGRO, GRAVADOS POR EL IRACIS;
+																																																		| B | INGRESOS OCASIONALES OBTENIDOS POR PERSONAS FÍSICAS SIN REPRESENTANTES EN EL PAÍS, GRAVADAS POR EL IRACIS;
+																																																		| C | DISTRIBUCIÓN DE UTILIDADES;
+																																																		| D | PATENTE DE AUTOVEHÍCULOS;
+																																																		| E | OTROS PAGOS" xmlTagName="liqMotiv"/>
 				</line>
 		
 			</section>
-			<section  id="R_1" order="10" >
+		<section  id="R_1" order="20" >
 			
 			<line id="TLR1" name="TLR1" order="-1" description="A - INGRESOS OCASIONALES OBTENIDOS POR CONTRIBUYENTES DEL IMAGRO">
 				<cell id="LBL_R1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
@@ -62,11 +62,11 @@
 				<cell id="c16" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="16" xmlTagName="C16"/>
 			</line>
 
-			<line id="L1030" order="30" description="TOTAL DE INGRESOS OCACIONALES (SUMA DE LAS CASILLAS 15 +16)" >
+			<line id="L1030" order="30" description="OTROS INGRESOS OCASIONALES (SUMA DE LAS CASILLAS 15+16)" >
 				<cell id="c17" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="17" xmlTagName="C17"/>
 			</line>
 
-			<line id="L1040" order="40" description="BASE IMPONIBLE (...% APLICABLE SOBRE LA CASILLA 17)" >
+			<line id="L1040" order="40" description="BASE IMPONIBLE (.........% APLICABLE SOBRE LA CASILLA 17)" >
 				<cell id="c18" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="18" xmlTagName="C18"/>
 			</line>
 
@@ -75,8 +75,8 @@
 			</line>
 
 		</section>
-		<section  id="R_2" order="20" >
-			<line id="TLR2" name="TLR2" order="-1" description="B - INGRESOS OCASIONALES OBTENIDOS POR PERSONAS FISICAS SIN REPRESENTANTES EN EL PAIS">
+		<section  id="R_2" order="30" >
+			<line id="TLR2" name="TLR2" order="-1" description="B - INGRESOS OCASIONALES OBTENIDOS POR PERSONAS DOMICILIADAS O ENTIDADES CONSTITUIDAS EN EL EXTERIOR SIN REPRESENTACION EN EL EXTERIOR SIN REPRESENTACION EN EL PAIS, GRAVADAS POR EL IRACIS">
 				<cell id="LBL_R2" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
 			</line>
 			<line id="L2010" order="10" description="INGRESOS GRAVADOS POR EL IMPUESTO" >
@@ -84,31 +84,31 @@
 			</line>
 
 			<line id="L2020" order="20" description="FECHA DE OPERACIÓN" >
-				<cell id="c21" col="1" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="21" events="onblur:validDate" xmlTagName="C21"/>
+				<cell id="c21" col="1" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="21" events="onblur:validDate#getFiscalInfoToForm90" xmlTagName="C21"/>
 			</line>
 
 		</section>
-		<section  id="R_3" order="30" >
+		<section  id="R_3" order="40" >
 			<line id="TLR3" name="TLR3" order="-1" description="C - DISTRIBUCION DE UTILIDADES O PAGO DE DIVIDENDOS">
 				<cell id="LBL_R3_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="AÑO" alignAddtionalDescription="FILLED"/>
 				<cell id="LBL_R3_C2" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
 			</line>
-			<line id="L3010" order="10" description="DISTRIBUCIÓN DE UTILIDADES A PAGO DE DIVIDENDOS CORRESPONDIENTE AL EJERCICIO FISCAL" >
+			<line id="L3010" order="10" description="DISTRIBUCIÓN DE UTILIDADES CORRESPONDIENTE AL EJERCICIO FISCAL" >
 				<cell id="c22" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="22" xmlTagName="C22"/>
 				<cell id="c23" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="23" xmlTagName="C23"/>
 			</line>
 
-			<line id="L3020" order="20" description="DISTRIBUCIÓN DE UTILIDADES A PAGO DE DIVIDENDOS CORRESPONDIENTE AL EJERCICIO FISCAL" >
+			<line id="L3020" order="20" description="DISTRIBUCIÓN DE UTILIDADES CORRESPONDIENTE AL EJERCICIO FISCAL" >
 				<cell id="c24" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="24" xmlTagName="C24"/>
 				<cell id="c25" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="25" xmlTagName="C25"/>
 			</line>
 
-			<line id="L3030" order="30" description="DISTRIBUCIÓN DE UTILIDADES A PAGO DE DIVIDENDOS CORRESPONDIENTE AL EJERCICIO FISCAL" >
+			<line id="L3030" order="30" description="DISTRIBUCIÓN DE UTILIDADES CORRESPONDIENTE AL EJERCICIO FISCAL" >
 				<cell id="c26" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="26" xmlTagName="C26"/>
 				<cell id="c27" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="27" xmlTagName="C27"/>
 			</line>
 
-			<line id="L3040" order="40" description="MONTO TOTAL PAGADO O PUESTO A DISPOSICIÓN (SUMA DE LAS CASILLAS 23,25, Y 27)" >
+			<line id="L3040" order="40" description="IMPORTES NETOS ACREDITADOS O PAGADOS (SUMA DE LAS CASILLAS 23, 25 Y 27)" >
 					<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 				<cell id="c28" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="28" xmlTagName="C28"/>
 			</line>
@@ -119,8 +119,8 @@
 			</line>
 
 		</section>
-		<section  id="R_4" order="40" >
-			<line id="TLR4" name="TLR4" order="-1" description="D - PATENTE DE AUTOVEHICULO" colSpan="4">
+		<section  id="R_4" order="50" >
+			<line id="TLR4" name="TLR4" order="-1" description="D - PATENTE DE AUTOVEHICULO" >
 				<cell id="LBL_R4_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="" alignAddtionalDescription="FILLED"/>
 
 			</line>
@@ -136,7 +136,7 @@
 			</line>-->
 
 		</section>
-		<section  id="R_5" order="50" >
+		<section  id="R_5" order="60" >
 			<line id="TLR5" name="TLR5" order="-1" description="E - OTROS PAGOS">
 				<cell id="LBL_R5_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="" alignAddtionalDescription="FILLED"/>
 
@@ -146,11 +146,11 @@
 			</line>
 
 			<line id="L5020" order="20" description="FECHA DE OPERACIÓN" >
-				<cell id="c33" col="1" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="33" events="onblur:validDate" xmlTagName="C33"/>
+				<cell id="c33" col="1" type="DATE" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="33" events="onblur:validDate#getFiscalInfoToForm90" xmlTagName="C33"/>
 			</line>
 
 		</section>
-		<section  id="R_6" order="60" >
+		<section  id="R_6" order="70" >
 			<line id="TLR6" name="TLR6" order="-1" description="LIQUIDACION">
 				<cell id="LBL_R6_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTES" alignAddtionalDescription="FILLED"/>
 			</line>
@@ -173,24 +173,26 @@
 			<line id="L6050" order="50" description="IMPUESTO LIQUIDADO ...% APLICABLE SOBRE EL MONTO DE LA CASILLA 32" >
 				<cell id="c38" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="38" xmlTagName="C38" events="onblur:mustBeMinor()"/>
 			</line>
-
-			<line id="L6060" order="60" description="MULTA POR PRESENTAR LA DECLARACIÓN JURADA CON POSTERIORIDAD AL VENCIMIENTO" >
+			<line id="L6070" order="60" description="PAGOS CON CREDITOS FISCALES DISPONIBLES" >
+				<cell id="c44" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="44" xmlTagName="C44"/>
+			</line>
+			<line id="L6080" order="70" description="MULTA POR PRESENTAR LA DECLARACIÓN JURADA CON POSTERIORIDAD AL VENCIMIENTO" >
 				<cell id="c39" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="39" xmlTagName="C39"/>
 			</line>
 
-			<line id="L6070" order="70" description="SALDO A FAVOR DEL FISCO (SUMA CASILLAS 34+35+36+37+38+39)" >
+			<line id="L6090" order="80" description="SALDO A FAVOR DEL FISCO (SUMA CASILLAS 34+35+36+37+38+39)" >
 				<cell id="c40" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="40" xmlTagName="C40"/>
 			</line>
 
-			<line id="L6080" order="80" description="MULTA POR MORA (...% DEL RESULTADO DE LA CASILLA 40 MENOS 39)(SE CALCULA CUANDO HAY SALDO A FAVOR DEL FISCO)" >
+			<line id="L6100" order="90" description="MULTA POR MORA (...% DEL RESULTADO DE LA CASILLA 40 MENOS 39)(SE CALCULA CUANDO HAY SALDO A FAVOR DEL FISCO)" >
 				<cell id="c41" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="41" xmlTagName="C41"/>
 			</line>
 
-			<line id="L6090" order="90" description="INTERES (...% DEL RESULTADO DE CASILLA 40 MENOS 39) (SE CALCULA CUANDO HAY SALDO A FAVOR DEL FISCO)" >
+			<line id="L6110" order="100" description="INTERES (...% DEL RESULTADO DE CASILLA 40 MENOS 39) (SE CALCULA CUANDO HAY SALDO A FAVOR DEL FISCO)" >
 				<cell id="c42" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="42" xmlTagName="C42"/>
 			</line>
 
-			<line id="L6100" order="100" description="SALDO DEFINITIVO A PAGAR A FAVOR DEL FISCO (SUMA CASILLAS 40+41+42)" >
+			<line id="L6120" order="110" description="SALDO DEFINITIVO A PAGAR A FAVOR DEL FISCO (SUMA CASILLAS 40+41+42)" >
 				<cell id="c43" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="43" xmlTagName="C43"/>
 			</line>
 
@@ -225,8 +227,9 @@
 	<!--	37	C[30]*#BUSCARTASA(37)/100-->
 			<rule name="TRGc37" 	order="70"  cellTargetId="c37" 	formula="c30*0.02" />		
 
-	<!--	40	C[34] + C[35] + C[36] + C[37]+ C[38] +C[39]-->
-			<rule name="TRGc40" 	order="80"  cellTargetId="c40" 	formula="c34+c35+c36+c37+c38+c39" />		
+	<!--	40	C[34] + C[35] + C[36] + C[37]+ C[38] +C[39]- C[44]-->
+			<rule name="TRGc40" 	order="80"  cellTargetId="c40" 	formula="c34+c35+c36+c37+c38+c39-c44" />		
+			<rule name="TRGc40_0" 	order="85"  cellTargetId="c40" 	formula="0"	condition="c40 &lt; 0" />		
 
 	<!--	43	C[40]+C[41]+C[42]-->
 			<rule name="TRGc43" 	order="90"  cellTargetId="c43" 	formula="c40+c41+c42" />		

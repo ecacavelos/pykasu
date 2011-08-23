@@ -14,7 +14,7 @@ function onloadForm(){
 	v_onload = 1;
 	orirecti();
 	v_onload = 0; 
-
+	//document.getElementById('fiscalPeriodMounth').value = 3;
 }
 
 function calculateBeforePlugin(){
@@ -38,7 +38,7 @@ function calculateAfterPlugin(){
 	}	
 	
 	calcPorcentajeMoras();
-		
+	TRGc46();
 }
 
 /*
@@ -56,51 +56,44 @@ function calcPorcentajeMoras(){
 		norectificativa = 0;
 	}
 	if(CONTRAVENSION_CMOV && CONTRAVENSION_CMOV != null){//Si es rectificativa no hay contravenci?n
-		document.getElementById('c32').value =  CONTRAVENSION_CMOV * norectificativa;		
-		if(document.getElementById('c32').value != null)
-			colocarpuntos(document.getElementById('c32'));
+		document.getElementById('c40').value =  CONTRAVENSION_CMOV * norectificativa;		
+		if(document.getElementById('c40').value != null)
+  		   colocarpuntos(document.getElementById('c40'));
 	}else{
 	
 		if(oriRectiFlag){
-			document.getElementById('c32').value = norectificativa;
+			document.getElementById('c40').value = norectificativa;
 		
 		}
 	}
 	
-	var tmp1 = removeCommas(document.getElementById('c36').value);
-	var tmp2 = removeCommas(document.getElementById('c32').value);
+	var tmp1 = removeCommas(document.getElementById('c43').value);
+	var tmp2 = removeCommas(document.getElementById('c40').value);
+	
 	var op = tmp1 - tmp2;
 	if(op < 0){
 		op = 0;
 	}
 
 	if (PORC_MORA && PORC_MORA != null){
-		document.getElementById('c37').value =  (PORC_MORA * op).toFixed(0);
-		if(document.getElementById('c37').value != null)
-  		   colocarpuntos(document.getElementById('c37'));
+		document.getElementById('c44').value =  (PORC_MORA * op).toFixed(0);
+		if(document.getElementById('c44').value != null)
+  		   colocarpuntos(document.getElementById('c44'));
 	}		
 
 	if (PORC_INTERES && PORC_INTERES != null){
-		document.getElementById('c38').value =  (PORC_INTERES * op).toFixed(0);
-		if(document.getElementById('c38').value != null)
-  		   colocarpuntos(document.getElementById('c38'));
+		document.getElementById('c45').value =  (PORC_INTERES * op).toFixed(0);
+		if(document.getElementById('c45').value != null)
+  		   colocarpuntos(document.getElementById('c45'));
 	}
 	
 	refreshVars();
-	TRGc26();
-	TRGc27();
-	TRGc34();
-	TRGc35();
-	TRGc35_0();
-	TRGc36();
-	TRGc36_0();
-	TRGc39();
-	
 	
 	
 	var tmp = (0).toFixed(0);
 
 }
+
 
 function orirecti(){
 
@@ -129,69 +122,17 @@ function orirecti(){
 	}	
 
 }
-
-function TRGc26(){
-	var tmpC14= getValueFormatless('c14');
-	var tmpC27= getValueFormatless('c27');
-	var value = getValueFormatless('c26');
-	var op=0;
-	
-	if(tmpC27 == null || tmpC27==0){
-		if( tmpC14 != null) {
-			op= tmpC14 * 0.1;
-		}
-			
-		if(value <= op){
-			document.getElementById('c26').value=addCommas(value);
-		}else{
-			document.getElementById('c26').value=addCommas(op);
-		}
-	}else{
-		//alert('No se puede declarar el campo 26, si el campo 27 es mayor a cero');
-		document.getElementById('c26').value=0;
-	}
-	refreshVars();
-}
-
-
-function TRGc27(){
-	var tmpC14= getValueFormatless('c14');
-	var tmpC26= getValueFormatless('c26');
-	var value = getValueFormatless('c27');
-	var op=0;
-	
-	if(tmpC26== null || tmpC26==0){
-		if( tmpC14 != null) {
-			op= tmpC14 * 0.3;
-		}
-		
-		if(value <= op){
-			document.getElementById('c27').value=addCommas(value);
-		}else{
-			document.getElementById('c27').value=addCommas(op);
-		}
-	}else{
-		//alert('No se puede declarar el campo 27, si el campo 26 es mayor a cero');
-		document.getElementById('c27').value=0;
-	}
-	refreshVars();
-}
-
-function validateC26_C27(){
-	var campo26= getValueFormatless('c26');
-	var campo27= getValueFormatless('c27');
-	
-	if((campo26==null || campo26==0) && (campo27==null || campo27==0)){
-		alert('Debe declarar un valor para el campo 26 ó el 27 del RUBRO 2');
-		return false;
-	}
-	return true;
-}
+/*
+Retorna el mes valido de presentacion
+para el formulario (que es anual)
+Para el 125 el mes es ABRIL(4)
+*/
 
 
 function getFormType(){
-	return '103v2';
+	return '111';
 }
+
 /**##########################################################################################**/
 function giveFormType(){
  return 'mensual';
@@ -208,7 +149,7 @@ function beforeSave(){
 	if (!periodControl()){
 		return false;
 	}
-	
+		
 	return true;
 
 }

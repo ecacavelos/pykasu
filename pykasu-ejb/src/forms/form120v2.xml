@@ -349,23 +349,73 @@
 				<cell id="c118"  col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="118" alignAddtionalDescription="LEFT" xmlTagName="C118"/>
 			</line>
 		</section>
-		<section id="R8" name="RUBRO8" description="Rubro 8. Información complementaria" order="100">
-			<line id="TL8" name="TLS8" order="-1" description="RUBRO 8 - Información complementaria">
+		<section id="R8" name="RUBRO8" description="Rubro 8. Detalle de compras del periodo afectadas a operaciones exentas y gravadas importaciones y renta agropecuaria" order="100">
+			<line id="TL8" name="TLS8" order="-1" description="Rubro 8. Detalle de compras del periodo afectadas a operaciones exentas y gravadas importaciones y renta agropecuaria">
 				<cell id="LBL_R8_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Imporote" alignAddtionalDescription="FILLED" />
 			</line>
 			
-			<line id="IA" name="INC_A" order="0" description="| a | Credito fiscal del 10% de la adquisicion de bienes y servivios directamente vinculados a la act. Agrop. Desarrollada por la emp.  agro-indust.">
-				<cell id="c146" col="0"  type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="146" alignAddtionalDescription="LEFT" xmlTagName="C146"/>
+			<line id="IA" name="INC_A" order="0" description="| a | Compras con credito fiscal del 10% relacionadas exentas">
+				<cell id="c150" col="0"  type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="150" alignAddtionalDescription="LEFT" xmlTagName="C150"/>
+				<cell id="c165" col="0"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false"  additionalDescription="165" alignAddtionalDescription="LEFT" xmlTagName="C165"/>
 			</line>
-			<line id="IB" name="INC_B" order="1" description="| b | Credito fiscal del 5% de la adquisicion de bienes y servivios directamente vinculados a la act. Agrop. Desarrollada por la emp.  agro-indust.">
-				<cell id="c147" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="147" alignAddtionalDescription="LEFT" xmlTagName="C147"/>
+			<line id="IB" name="INC_B" order="1" description="| b | Compras con credito fiscal del 5% relaciones a operaciones exentas">
+				<cell id="c151" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="151" alignAddtionalDescription="LEFT" xmlTagName="C151"/>
+				<cell id="c166" col="1"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="166" alignAddtionalDescription="LEFT" xmlTagName="C166"/>
 			</line>
-			<line id="IC" name="INC_C" order="2" description="| c | Monto total de las ventas realizadas a personas fisicas no domiciliadas en el pais, por parte de contrib. Inscriptos en el registos DNA">
-				<cell id="c148" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="148" alignAddtionalDescription="LEFT" xmlTagName="C148"/>
+			<line id="IC" name="INC_C" order="2" description="| c | Compras exentas relacionadas a operaciones exentas">
+				<cell id="c152" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="152" alignAddtionalDescription="LEFT" xmlTagName="C152"/>
+				<cell id="co801" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
 			</line>
-			<line id="ID" name="INC_D" order="3" description="| d | Monto total de las ventas realizadas a personas fisicas o juridicas no domiciliadas en el pais, por parte de contrib. Inscriptos en el registos DNA">
-				<cell id="c149" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="149" alignAddtionalDescription="LEFT" xmlTagName="C149"/>
+			<line id="ID" name="INC_D" order="3" description="| d | Compras exentas relacionadas a opreaciones gravadas a la tasa del 10% ">
+				<cell id="c153" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="153" alignAddtionalDescription="LEFT" xmlTagName="C153"/>
+				<cell id="co802" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
 			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Compras exentas relacionadas a operaciones gravadas a la tasa del 5%">
+				<cell id="c154" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="154" alignAddtionalDescription="LEFT" xmlTagName="C154"/>
+				<cell id="co803" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IF" name="INC_F" order="5" description="| f | Compras exentas afectadas a exportacion y asimilables y a operaciones en el mercado interno gravadas">
+				<cell id="c155" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="155" alignAddtionalDescription="LEFT" xmlTagName="C155"/>
+				<cell id="co804" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IG" name="INC_G" order="6" description="| g | Compras exentas afectadas a operaciones en el mercado interno gravadas y no gravadas">
+				<cell id="c156" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="156" alignAddtionalDescription="LEFT" xmlTagName="C156"/>
+				<cell id="co805" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IH" name="INC_H" order="7" description="| h | Compras exentas afectadas a operaciones gravadas con tasa del 10% y 5%">
+				<cell id="c157" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="157" alignAddtionalDescription="LEFT" xmlTagName="C157"/>
+				<cell id="co806" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="II" name="INC_I" order="8" description="| i | Con credito fiscal del 10% relacionadas a Renta Agropecuaria">
+				<cell id="c158" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="158" alignAddtionalDescription="LEFT" xmlTagName="C158"/>
+				<cell id="c167" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false"  additionalDescription="167" alignAddtionalDescription="LEFT" xmlTagName="C167"/>
+			</line>
+			<line id="IJ" name="INC_J" order="9" description="| j | Con credito fiscal del 5% relacionadas a Renta Agropecuaria">
+				<cell id="c159" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="159" alignAddtionalDescription="LEFT" xmlTagName="C159"/>
+				<cell id="c168" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false"  additionalDescription="168" alignAddtionalDescription="LEFT" xmlTagName="C168"/>
+			</line>
+			<line id="IK" name="INC_K" order="10" description="| k | Compras Documentadas con Autofactura">
+				<cell id="c160" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="160" alignAddtionalDescription="LEFT" xmlTagName="C160"/>
+				<cell id="co808" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IL" name="INC_L" order="11" description="| l | Valor imponible de las importaciones para el IVA">
+				<cell id="c161" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="161" alignAddtionalDescription="LEFT" xmlTagName="C161"/>
+				<cell id="c169" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="169" alignAddtionalDescription="LEFT" xmlTagName="C169"/>
+			</line>
+			<line id="IM" name="INC_M" order="12" description="| m | Valor imponible aduanero">
+				<cell id="c162" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="162" alignAddtionalDescription="LEFT" xmlTagName="C162"/>
+				<cell id="co809" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IN" name="INC_N" order="13" description="| n | Valor Factura de las importaciones">
+				<cell id="c163" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="163" alignAddtionalDescription="LEFT" xmlTagName="C163"/>
+				<cell id="co810" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IO" name="INC_O" order="14" description="| o | Gastos de nacionalizacion de las importaciones">
+				<cell id="c164" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="164" alignAddtionalDescription="LEFT" xmlTagName="C164"/>
+				<cell id="c170" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="170" alignAddtionalDescription="LEFT" xmlTagName="C170"/>
+			</line>
+			
+			
 		</section>
 		<section  id="STATUS" name="STATUS" description="Estado" order="120">
 			<line id="STATUSLINE" name="STATUS" order="1" description="Estado del presente documento:">
@@ -400,7 +450,7 @@
 		<rule name="TRGS1L2"  order="20"  cellTargetId="c25" formula="c11 * 0.05"/>
 		<rule name="TRGS1L3"  order="30"  cellTargetId="c20" formula="c12 * 0.1"/>
 		<rule name="TRGS1L4"  order="40"  cellTargetId="c21" formula="c13 * 0.1"/>		
-		<rule name="TRGS1L9"  order="50"  cellTargetId="c18" formula="c10+c11+c12+c13+c14+c15"/>					
+		<rule name="TRGS1L9"  order="50"  cellTargetId="c18" formula="c10+c11+c12+c13+c14+c15+c16+c17"/>					
 		<rule name="TRGS1L10" order="60"  cellTargetId="c24" formula="c19+c20+c21+c22+c23"/>					
 		<rule name="TRGS1L11" order="70"  cellTargetId="c28" formula="c25+c26+c27"/>					
 		
@@ -467,8 +517,13 @@
 		<rule name="TRG_C115_2"  order="475"  cellTargetId="c115" formula="0" condition="c115 &lt;= 0"/> 		
 		<rule name="TRG_C116"  	 order="480"  cellTargetId="c116" formula="0" condition="c115 &lt; c113"/> 
 		<rule name="TRG_C117"  	 order="485"  cellTargetId="c117" formula="0" condition="c115 &lt; c113"/> 
-		
 		<rule name="TRG_C118"  order="490"  cellTargetId="c118" formula="c115 + c116 + c117"/> 
+		
+		<!--RUBRO 8 -->
+		<rule name="TRG_C165"  order="500"  cellTargetId="c165" formula="c150*0.1"  /> 
+		<rule name="TRG_C166"  order="510"  cellTargetId="c166" formula="c151*0.05" /> 
+		<rule name="TRG_C167"  order="520"  cellTargetId="c167" formula="c158*0.1" />
+		<rule name="TRG_C168"  order="530"  cellTargetId="c168" formula="c159*0.05" />
 		
 	</rules>	
 

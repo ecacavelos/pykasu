@@ -38,6 +38,18 @@ public class Form111 extends TaxForm {
 	private Double c32;
 	private Double c33;
 	private Double c34;
+	private Double c35;
+	private Double c36;
+	private Double c37;
+	private Double c38;
+	private Double c39;
+	private Double c40;
+	private Double c41;
+	private Double c42;
+	private Double c43;
+	private Double c44;
+	private Double c45;
+	private Double c46;
 
 	
 	protected Form111(){}
@@ -284,6 +296,102 @@ public class Form111 extends TaxForm {
 
 	public void setC34(Double c34) {
 		this.c34 = c34;
+	}
+
+	public Double getC35() {
+		return c35;
+	}
+
+	public void setC35(Double c35) {
+		this.c35 = c35;
+	}
+
+	public Double getC36() {
+		return c36;
+	}
+
+	public void setC36(Double c36) {
+		this.c36 = c36;
+	}
+
+	public Double getC37() {
+		return c37;
+	}
+
+	public void setC37(Double c37) {
+		this.c37 = c37;
+	}
+
+	public Double getC38() {
+		return c38;
+	}
+
+	public void setC38(Double c38) {
+		this.c38 = c38;
+	}
+
+	public Double getC39() {
+		return c39;
+	}
+
+	public void setC39(Double c39) {
+		this.c39 = c39;
+	}
+
+	public Double getC40() {
+		return c40;
+	}
+
+	public void setC40(Double c40) {
+		this.c40 = c40;
+	}
+
+	public Double getC41() {
+		return c41;
+	}
+
+	public void setC41(Double c41) {
+		this.c41 = c41;
+	}
+
+	public Double getC42() {
+		return c42;
+	}
+
+	public void setC42(Double c42) {
+		this.c42 = c42;
+	}
+
+	public Double getC43() {
+		return c43;
+	}
+
+	public void setC43(Double c43) {
+		this.c43 = c43;
+	}
+
+	public Double getC44() {
+		return c44;
+	}
+
+	public void setC44(Double c44) {
+		this.c44 = c44;
+	}
+
+	public Double getC45() {
+		return c45;
+	}
+
+	public void setC45(Double c45) {
+		this.c45 = c45;
+	}
+
+	public Double getC46() {
+		return c46;
+	}
+
+	public void setC46(Double c46) {
+		this.c46 = c46;
 	}
 
 	
