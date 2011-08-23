@@ -17,7 +17,7 @@ function onloadForm(){
 	//document.getElementById('c19').readOnly = true;
 	//document.getElementById('c19').className = "readonly";
 	//El form 106 es anual. Y el mes (fijo) de vencimiento es 3.
-	document.getElementById('fiscalPeriodMounth').value = 3;
+	//document.getElementById('fiscalPeriodMounth').value = 3;
 }
 
 function calculateBeforePlugin(){
@@ -59,67 +59,54 @@ function calcPorcentajeMoras(){
 		norectificativa = 0;
 	}
 	if(CONTRAVENSION_CMOV && CONTRAVENSION_CMOV != null){//Si es rectificativa no hay contravenci?n
-		document.getElementById('c23').value =  CONTRAVENSION_CMOV * norectificativa;		
-		if(document.getElementById('c23').value != null)
-  		   colocarpuntos(document.getElementById('c23'));
+		document.getElementById('c18').value =  CONTRAVENSION_CMOV * norectificativa;		
+		if(document.getElementById('c18').value != null)
+  		   colocarpuntos(document.getElementById('c18'));
 	}else{
 	
 		if(oriRectiFlag){
-			document.getElementById('c23').value = norectificativa;
+			document.getElementById('c18').value = norectificativa;
 		
 		}
 	}
 	
-	var tmp1 = removeCommas(document.getElementById('c27').value);
-	var tmp2 = removeCommas(document.getElementById('c23').value);
+	var tmp1 = removeCommas(document.getElementById('c22').value);
+	var tmp2 = removeCommas(document.getElementById('c18').value);
 	var op = tmp1 - tmp2;
 	if(op < 0){
 		op = 0;
 	}
 
 	if (PORC_MORA && PORC_MORA != null){
-		document.getElementById('c28').value =  (PORC_MORA * op).toFixed(0);
-		if(document.getElementById('c28').value != null)
-  		   colocarpuntos(document.getElementById('c28'));
+		document.getElementById('c23').value =  (PORC_MORA * op).toFixed(0);
+		if(document.getElementById('c23').value != null)
+  		   colocarpuntos(document.getElementById('c23'));
 	}		
 
 	if (PORC_INTERES && PORC_INTERES != null){
-		document.getElementById('c29').value =  (PORC_INTERES * op).toFixed(0);
-		if(document.getElementById('c29').value != null)
-  		   colocarpuntos(document.getElementById('c29'));
+		document.getElementById('c24').value =  (PORC_INTERES * op).toFixed(0);
+		if(document.getElementById('c24').value != null)
+  		   colocarpuntos(document.getElementById('c24'));
 	}
 	
 	refreshVars();
-	
+	TRGc11();
+	mayorC12();
+	TRGc13();
+	TRGc14();
+	TRGc20();
+	TRGc21();
+	TRGc21_0();
+	TRGc22();
+	TRGc22_0();
 	TRGc25();
-	TRGc26();
-	TRGc26_0();
-	TRGc27();
-	TRGc27_0();
-	TRGc30();
+	TRGc50();
+	TRGc14();
 	
+		
 	var tmp = (0).toFixed(0);
 
 }
-
-/*
-* La casilla 1 (c1) es la casilla con menor nro
-* (entre c19 y c20, c19 = c1 y c20 = c2)
-* Si c1 es mayor que c2 hay error, y c2 se pone en blanco.
-
-function controlIfValid(c1, c2){
-	var campo1 = getValueFormatless(c1);
-	var campo2 = getValueFormatless(c2);
-	if (campo1 == 0){
-	 	document.getElementById(c2).value='';
-	 	return;
-	}
-	if(campo1 <= campo2){
-		alert('El valor de la casilla '+ c2 + ' no puede ser mayor al valor de la casilla ' + c1);
-		document.getElementById(c2).value = "";
-	}		
-}
-*/
 
 function orirecti(){
 
@@ -149,109 +136,25 @@ function orirecti(){
 
 }
 
-
-
-
-function controlaAnho(){
-	var anhoform = getValueFormatless('fiscalPeriodYear');
-
-	if(anhoform != 0){
-		fecha = new Date();
-		var anho = getActualYear();
-
-		if(
-			(
-				(document.getElementById('declarationType').value == '| 5 | CLAUSURA') 
-				&&(anho == anhoform)
-			) 
-		   || (anhoform < anho)  
-		){
-
-			getPorcentajeMoras(document.getElementById('fiscalPeriodYear'));  		  
-
-		}else{
-			alert("Año de presentación incorrecto. El año debe ser menor al año corriente. En el caso de CLAUSURA, el año puede ser el mismo que el corriente.");
-			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo año
-			document.getElementById('fiscalPeriodYear').focus();
-			return;
-		}
-	}
-}
-/*
-function controlaAnho(){
-	var fiscalYear = getValueFormatless('fiscalPeriodYear');
-	var declaType = document.getElementById('declarationType').value;
-	var fecha = new Date();
-	var anhoActual = getActualYear();
+function mayorC12(){
+	var tmp10	= getValueFormatless('c10');
+	var tmp11	= getValueFormatless('c11');
 	
-	if(fiscalYear != 0){
-		//Si es clausura tiene que ser menor o igual q el año actual
-		if(declaType == '| 5 | CLAUSURA'){
-			if(fiscalYear > anhoActual){//Mayor o igual? O solo igual se permite
-				alert('Para las ddjj de tipo CLAUSURA, el año debe ser el menor o igual al año actual.');
-				document.getElementById('fiscalPeriodYear').value = "";
-				document.getElementById('fiscalPeriodYear').focus();
-				return;
-			}
-		}else{//Si no es clausura, el año tiene que ser menor al actual
-			if(fiscalYear >= anhoActual){
-				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el año debe ser menor al año actual.');
-				document.getElementById('fiscalPeriodYear').value = "";
-				document.getElementById('fiscalPeriodYear').focus();
-				return;
-			}
-		} 
+	if(tmp10>tmp11){
+		document.getElementById('c12').value= addCommas(tmp10);
+	}else{
+		document.getElementById('c12').value= addCommas(tmp11);
 	}
-	getPorcentajeMoras(document.getElementById('fiscalPeriodYear'));  		 
-}
-
-
-Retorna el mes valido de presentacion
-para el formulario (que es anual)
-Para el 106 el mes es Marzo(3)
-*/
-function getValidMonth(){
-	return 3;
+	refreshVars();
+	
 }
 
 function getFormType(){
-	return '106';
+	return '107v2';
 }
-/*CESQUIVEL 3-11-2007
-NO HACE FALTA HACER ESTA FUNCION
-function calculateC16(){
-
-	var campo13= getValueFormatless('c13');
-	var campo15= getValueFormatless('c15');
-	
-	if (campo13 < campo15){
-		document.getElementById('c16').value = document.getElementById('c13').value;
-	}else{
-		document.getElementById('c16').value = document.getElementById('c15').value;
-	}
-}
-*/
-/*
-Si el anho de declaracion es 2007,
-entonces se inhabilita el campo 19
-*/
-function controlInhabilitaCampo19(){
-	var anio = getValueFormatless('fiscalPeriodYear');
-	
-	if(anio == 2007){//Si es abril de 2007, se inhabilita
-		document.getElementById('c19').readOnly = true;
-		document.getElementById('c19').className = "readonly";
-		
-	}else{//Ya esta con estos valores por defecto, pero por si se vuelve a habilitar lo ponemos.
-		document.getElementById('c19').readOnly = false;
-		document.getElementById('c19').className = "default";
-	}
-
-}
-
 /**##########################################################################################**/
 function giveFormType(){
- return 'anual';
+ return 'mensual';
 }
 
 function periodControl(){

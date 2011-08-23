@@ -22,14 +22,16 @@
 			<line id="L4" name="H1L4" order="3">
 				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/>
 				<cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" />
+				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
 			</line>			
 			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
+				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
 				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
 				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
 			</line>			
 		</section>
 	</sections>
-	<sections type="body">	
+	<sections type="body">
 		<section id="R1" name="RUBRO1" description="Rubro 1. Monto de las operaciones del periodo y determinación del Débito Fiscal" order="10">
 			
 			<line id="TL1" name="TLS1" order="-1" description="RUBRO 1 - Monto de las operaciones del periodo y determinación del Débito fiscal">
@@ -174,7 +176,7 @@
 			</line>                                                
 			<line id="IG" name="INC_G" order="6" description="| g | Monto del Crédito Fiscal a ser utilizado en el período que se liquida para operaciones gravadas al 10%">
 				<cell id="co104" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
-				<cell id="c57" col="1" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="57" alignAddtionalDescription="LEFT" xmlTagName="C57" />
+				<cell id="c57" col="1" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="57" alignAddtionalDescription="LEFT" xmlTagName="C57" events="onblur:checkC57"/>
 			</line>                                                
 			<line id="IH" name="INC_H" order="7" description="| h | Monto del Crédito Fiscal a ser utilizado en el período que se liquida para operaciones gravadas al 5%">
 				<cell id="co105" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
@@ -423,7 +425,6 @@
 		<rule name="TRGS4L3"   order="183"  cellTargetId="c53" formula="(c34 / c35) * c42" condition="c35 &gt; 0" />
 		<rule name="TRGS4L4"   order="185"  cellTargetId="c54" formula="(c34 / c35) * c43" condition="c35 &gt; 0" />
 		<rule name="TRGS4L5"   order="190"  cellTargetId="c56" formula="c51 + c52 + c53 + c54 + c55"/>
-		<!--<rule name="TRGS4L7"   order="195"  cellTargetId="c57" formula="c55 + c56"/>-->
 		<rule name="TRGS4L101" order="200"  cellTargetId="c59" formula="c56 - c57 - c58"  />  
 		<rule name="TRGS4L102" order="210"  cellTargetId="c59" formula="0" condition="c59 &lt; 0" />  
 				

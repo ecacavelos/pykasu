@@ -78,6 +78,7 @@ function calcPorcentajeMoras(){
 	TRG_C116();
 	TRG_C117();
 	TRG_C118();
+	checkC57();
 
 	//alert("calcPorcentajeMoras() c113:" + document.getElementById('c113').value + "  c116:" + document.getElementById('c116').value + "  c117: "+ document.getElementById('c117').value);	
 
@@ -115,6 +116,27 @@ function orirecti(){
 
 }
 
+function checkC57(){
+	var tmp_c56= parseInt(removeCommas(document.getElementById("c56").value));
+	var tmp_c57= parseInt(removeCommas(document.getElementById("c57").value));
+	var tmp_c58= parseInt(removeCommas(document.getElementById("c58").value));
+	
+	if(tmp_c57 > tmp_c56){
+		alert('El valor del campo 57 no puede ser mayor al campo 56');
+		document.getElementById("c57").value='';
+		return -1;
+	}else{
+		if(tmp_c58+tmp_c57 > tmp_c56){
+			alert('La suma de los campos 57 y 58 no puede ser mayor al campo 56');
+			document.getElementById("c57").value='';
+			document.getElementById("c58").value='';
+			return -1;
+		}
+	
+	}
+	
+}
+
 function giveFormType(){
  return 'mensual';
 }
@@ -127,6 +149,10 @@ function periodControl(){
 }
 
 function beforeSave(){
+	if (checkC57()<0){
+		return false;
+	}
+	
 	if (!periodControl()){
 		return false;
 		}

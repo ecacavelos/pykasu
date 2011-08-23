@@ -1,5 +1,6 @@
 package py.com.roshka.pykasu.persistence.forms;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -44,6 +45,9 @@ public class Form90v2 extends TaxForm{
 	private Double c42;
 	private Double c43;
 	private Double c44;
+	
+	private Integer fiscalPeriodDay;
+	private String liqMotive;
 
 	protected Form90v2(){}
 
@@ -337,6 +341,23 @@ public class Form90v2 extends TaxForm{
 
 	public void setC44(Double c44) {
 		this.c44 = c44;
+	}
+
+	public Integer getFiscalPeriodDay() {
+		return fiscalPeriodDay;
+	}
+
+	public void setFiscalPeriodDay(Integer fiscalPeriodDay) {
+		this.fiscalPeriodDay = fiscalPeriodDay;
+	}
+	
+	@Column (name="motive")
+	public String getLiqMotive() {
+		return liqMotive;
+	}
+
+	public void setLiqMotive(String liqMotive) {
+		this.liqMotive = liqMotive;
 	}
 	
 	

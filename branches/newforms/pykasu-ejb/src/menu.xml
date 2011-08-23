@@ -21,11 +21,12 @@
 
 
 	<program name="Formularios" order="21" description="" active="true" rolesAllowed="users">
+<!-- 
 		<action name="Formulario 90" order="10" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=90"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
-
+ -->
 		<action name="Formulario 90 version 2" order="12" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=90v2"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90v2" urlHelp="" description="" active="true" rolesAllowed=""/>			

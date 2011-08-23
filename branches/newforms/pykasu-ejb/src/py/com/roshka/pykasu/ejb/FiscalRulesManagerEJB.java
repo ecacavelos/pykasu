@@ -602,8 +602,16 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			try {
 				logger.info("Going to retrieve Form Setting  with number " + formType.toString() );
 				FormSetting fs = formSettingMgr.getFormSetting(formType.toString());
+			if(ruc != null){
+				ruc = ruc.trim();
+			}
 			
-			int lastNumber = Integer.parseInt(ruc.substring(ruc.length()-1,ruc.length())); //ultimo número del ruc
+			int lastNumber = -1;
+			try{
+				lastNumber = Integer.parseInt(ruc.substring(ruc.length()-1,ruc.length())); //ultimo número del ruc
+			}catch (Exception e) {
+				throw new FiscalInfoException("Imposible recuperar valores del calendario perpetuo. RUC:" + ruc + " ~~ "+ e.getMessage());
+			}
 			logger.info("Evaluate expiring date with ruc: " + ruc + ". Last number: " + lastNumber);
 			int day = -1;
 			switch (lastNumber) {
@@ -776,14 +784,8 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			c.set(Calendar.DATE, c.get(Calendar.DATE) + 60);
 			initialDate = c.getTime();
 			diffDate = Utils.DateDiff(initialDate, paymentDate);
-//			if(diffDate <= 60){
-//				diffDate = 0;
-//			}else{
-//				diffDate = diffDate - 60;
-//			}
-		}else if(section.equals("C")){
+		}else if(section.equals("C") || section.equals("B") || section.equals("E")){
 			//Dias_atraso= fecha_pago – recuperarVto[Ruc, convertirFecha(c29)]
-
 			Calendar c = Calendar.getInstance();
 			c.setTime(initialDate);
 			c = getPermanentCalendar(ruc,c.get(Calendar.MONTH)+1, c.get(Calendar.YEAR),"90");
@@ -791,18 +793,6 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			diffDate = Utils.DateDiff(initialDate, paymentDate);
 			
 		}else if(section.equals("D")){
-			//Dias_atraso= periodo_declarado – fec_ref
-//			Calendar c = Calendar.getInstance();
-//			c.setTime(initialDate);
-//			c = getPermanentCalendar(ruc,c.get(Calendar.MONTH), c.get(Calendar.YEAR),90);
-//			paymentDate = c.getTime();
-//			
-//			c.set(Calendar.DATE,1);
-//			c.set(Calendar.MONTH, Calendar.JANUARY);
-//			c.set(Calendar.YEAR, 2007);
-//			
-//			initialDate = c.getTime();
-			
 			paymentDate = initialDate;
 			Calendar c = Calendar.getInstance();
 			c.set(Calendar.DATE,1);
