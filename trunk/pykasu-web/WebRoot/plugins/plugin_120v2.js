@@ -87,7 +87,7 @@ function calcPorcentajeMoras(){
 
 
 function getFormType(){
-	return '120';
+	return '120v2';
 }
 
 function orirecti(){

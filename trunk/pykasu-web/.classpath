@@ -15,5 +15,7 @@
 	<classpathentry kind="lib" path="C:/java/servers/jboss/jboss-4.0.4.GA/server/default/lib/wsvisioin2.jar"/>
 	<classpathentry kind="lib" path="/pykasu/lib/quartz-all-1.6.5.jar"/>
 	<classpathentry kind="lib" path="C:/java/servers/jboss/jboss-4.0.4.GA/server/default/lib/axis.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
