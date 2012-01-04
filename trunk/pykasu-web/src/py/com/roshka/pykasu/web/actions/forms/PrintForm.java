@@ -86,12 +86,16 @@ public class PrintForm extends Action {
 			if(!isAnual(f.getId())){
 				cell = f.getCell("fiscalPeriodMounth");
 				if(cell != null && !cell.isNullData()){
-					if(((Integer)cell.getData()) < 10){
-						period = period + "0" + cell.getData().toString();
-					}else{
-						period = period + cell.getData().toString();
+					try{
+						if(((Integer)cell.getData()) < 10){
+							period = period + "0" + cell.getData().toString();
+						}else{
+							period = period + cell.getData().toString();
+						}
+						logger.info(">>>>>>> Periodo: " + period + " : " + period.length());
+					}catch (NumberFormatException e) {
+						// TODO: handle exception
 					}
-					logger.info(">>>>>>> Periodo: " + period + " : " + period.length());
 				}
 			}
 			if(period.length() == 6 || period.length() == 4){
@@ -128,20 +132,33 @@ public class PrintForm extends Action {
 		if(formType == null){
 			throw new IllegalArgumentException("El tipo de formulario no puede ser nulo.");
 		}
-		
-		int ft =  Integer.parseInt(formType.trim());
-		switch (ft) {
-			case 101:
-			case 105:
-			case 106:
-			case 108:
-			case 110:
-			case 804:
-			case 848:				
-				return true;			
-			default:
-				return false;
+
+		String ft = formType.trim(); 
+		if(
+			"101".equalsIgnoreCase(ft) ||
+			"105".equalsIgnoreCase(ft) ||
+			"106".equalsIgnoreCase(ft) ||
+			"108".equalsIgnoreCase(ft) ||
+			"110".equalsIgnoreCase(ft) ||
+			"804".equalsIgnoreCase(ft) ||
+			"848".equalsIgnoreCase(ft)
+		 ){
+			return true;
 		}
+		return false;
+//		int ft =  Integer.parseInt(formType.trim());
+//		switch (ft) {
+//			case 101:
+//			case 105:
+//			case 106:
+//			case 108:
+//			case 110:
+//			case 804:
+//			case 848:				
+//				return true;			
+//			default:
+//				return false;
+//		}
 	}
 	
 }

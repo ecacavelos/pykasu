@@ -45,10 +45,14 @@ public class EditResultItem extends DispatchAction {
         FormManager formManager = null;
 
         formManager = (FormManager) ic.lookup("pykasu/FormManager/local");
-        GenericFormManager genericForm = formManager.getFormManager(request
-                .getParameter("form"));
+        String sform = request.getParameter("form");
+        System.out.println(sform);
+        GenericFormManager genericForm = formManager.getFormManager(sform);
+        
+        String id  = request.getParameter("id");
+        System.out.println(id);
 
-        Form formBean = genericForm.getForm(request.getParameter("id"));
+        Form formBean = genericForm.getForm(id);
 
         if (formBean == null){
             request.setAttribute(Globals.MESSAGE,"No se encontro el documento");
