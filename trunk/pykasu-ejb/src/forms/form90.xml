@@ -41,10 +41,10 @@
 			<section  id="MOT_LIQ" order="10" >
 				<line id="L1010" order="10" description="SELECCIONAR MOTIVO DE LIQUIDACION." >
 					<cell id="liqMotive" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" events="onchange:changeEnableSections#getFiscalInfoToForm90" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="Elegir:" choices="| A | Ingresos ocasionales obtenidos por contribuyentes del IMAGRO, gravados.;
-																																																		| B | Ingresos ocasionales obtenidos por Personas Físicas sin representantes en el país, gravadas por el IRACIS;
-																																																		| C | Distribución de Utilidades o Pago de Dividendos;
-																																																		| D | Patente de Autovehículos;
-																																																		| E | Otros pagos a Solicitar" xmlTagName="liqMotiv"/>
+																																																																	 | B | Ingresos ocasionales obtenidos por Personas Físicas sin representantes en el país, gravadas por el IRACIS;
+																																																																	 | C | Distribución de Utilidades o Pago de Dividendos;
+																																																																	 | D | Patente de Autovehículos;
+																																																																	 | E | Otros pagos a Solicitar" xmlTagName="liqMotiv"/>
 				</line>
 		
 			</section>

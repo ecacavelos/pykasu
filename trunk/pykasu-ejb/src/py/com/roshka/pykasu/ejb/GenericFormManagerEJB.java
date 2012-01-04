@@ -88,6 +88,16 @@ public abstract class GenericFormManagerEJB implements GenericFormManager {
 	    	for(TaxForm taxForm : list){
 	    		 ri = new ResultItem(); 	
 	    	     ri.setId(taxForm.getPrePrintedNumber());
+	    	     
+	    	     String nroOrden = ""+taxForm.getOrderNumber();
+	    	     String prefix = "43";
+	    	     if(taxForm.getOrderNumber()!=null){
+	    	    	 while( (prefix.length()+ nroOrden.length())< 11){
+	    	    		 nroOrden = "0"+nroOrden;
+	    	    	 }
+	    	    	 nroOrden = prefix + nroOrden;
+	    	     }
+	    	     
 	    	     ri.setDescription("ID:"+taxForm.getPrePrintedNumber() + 
 	    	    		                   "<br/>RUC: " + taxForm.getRuc() + 
 	    	    		                   "<br/>Periodo: " + taxForm.getFiscalPeriodYear() + "-" + taxForm.getFiscalPeriodMounth()+
@@ -105,19 +115,19 @@ public abstract class GenericFormManagerEJB implements GenericFormManager {
 	    	     }else
 
 	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PAYED)){
-	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
+	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + nroOrden) );
 	    	     }else
 	    	     
 	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_VALID)){
-	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
+	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + nroOrden) );
 	    	     }else
 	    	     
 	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PRINT_SET)){
-	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
+	    	    	 ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + nroOrden) );
 	    	     }else
 		    	     
 		    	 if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PRINT_CLIENT)){
-		    	    ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + taxForm.getOrderNumber()) );
+		    	    ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + nroOrden) );
 		    	 }else
 	    	     
 		    	 if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_ERROR)){

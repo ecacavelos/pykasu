@@ -414,7 +414,7 @@
 			<line id="TR6" name="TR6" order="-1" description="RUBRO 6 - Determinación del Anticipo para el siguiente Periodo Fiscal">
 			</line>
 
-			<line id="L6010" order="10" description="|a| Impuesto liquidado del ejeercicio " >
+			<line id="L6010" order="10" description="|a| Impuesto liquidado del ejercicio " >
 				<cell id="c90" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="90" xmlTagName="C90"/>
 			</line>
 

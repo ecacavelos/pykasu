@@ -219,7 +219,7 @@ public class SystemRegistrationEJB implements SystemRegistration{
 			Mailer.sendMail(properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
 					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
 					user.getEmail(),
-					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT),
+					properties.getProperty("MAIL_ACTIVATION_SUBJECT",Globals.MAIL_ACTIVATION_SUBJECT)+" - Nombre: "+ userFullName +" - CI: "+ user.getDocumentNumber(),
 					//cuerpo del correo
 					properties.getProperty("MAIL_ACTIVATION_BODY",Globals.MAIL_ACTIVATION_BODY) + 
 					"\nNombre de usuario:" +	user.getUserName() +

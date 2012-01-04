@@ -98,12 +98,12 @@ public class AdmissionManagerEJB implements AdmissionManager{
 			if(ads.getCompanyName()!=null && ads.getCompanyName().trim().length()>0){
 				mbody = mbody + "\nCorrespondiente a la Empresa: " + ads.getCompanyName();
 			}
-			
+			String s = "CI: " +  ads.getCiContactPerson() + " - Nombre: " + ads.getContactPerson(); 
 			Mailer.sendMail(
 					properties.getProperty("SMTP_HOST",  Globals.SMTP_HOST),
 					properties.getProperty("MAIL_ACTIVATION_SENDER",Globals.MAIL_ACTIVATION_SENDER),
 					properties.getProperty("MAIL_ACTIVATION_OPER"),
-					"Solicitud de Registro de Tribustos Web confiramda", 
+					"Solicitud de Registro de Tribustos Web confiramda. : " + s, 
 					mbody);
 			
 		} catch (Exception e) {

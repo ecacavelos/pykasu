@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import py.com.roshka.pykasu.interfaces.PaymentFormInterface;
 import py.com.roshka.pykasu.persistence.forms.GenericForm;
 import py.com.roshka.pykasu.persistence.users.BusinessCompany;
 import py.com.roshka.pykasu.persistence.users.User;
@@ -25,7 +26,7 @@ public class PaymentForm  extends GenericForm implements Serializable{
 	private Integer id;
 	private Date createdDate;
 	private User createdBy;
-	private String status =  "BEGIN"; 
+	private String status =  PaymentFormInterface.PAYMENT_FORM_BEGIN; 
 	private Boolean active = false;
 	private BusinessCompany businessCompany;
 
