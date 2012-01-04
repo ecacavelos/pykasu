@@ -62,17 +62,24 @@ public class PaymentFormAction extends Action {
 		 * 2.2.2 Se pudo hacer la extracción, se guarda en la db el nuevo estado
 		 * 
 		 */
+		PaymentFormInterface pfi = null;
+		InitialContext ic = new InitialContext();
+		try{			
+			pfi =  (PaymentFormInterface) ic.lookup("pykasu/PaymentFormManager/local");
+		}catch (Exception e) {
+			logger.error(e);
+			request.getSession().setAttribute(Globals.ERROR_MESSAGE, "Ocurrió un error al realizar el pago.");
+			return mapping.findForward("error");			
+		}
+		
+		PaymentForm pf = null;
 		try{
 			logger.info(">>>>>>>>>>  PaymentAccionExecute");
 			PaymentFormWeb pfw = (PaymentFormWeb) form;
-			//logger.info("PFW: SavingAccountNr -> " + pfw.getSavingAccountNr());
 			logger.info("\n----- Formulario a guardarse : -----" + pfw + "\n------ FIN Formulario a guardarse -----" );
 			//guardar el formulario en DB.
-			// "pykasu/PaymentFormManager/local"
 			User user = (User) request.getSession().getAttribute(Globals.LOGIN_USER);
-			InitialContext ic = new InitialContext();
-			PaymentFormInterface pfi =  (PaymentFormInterface) ic.lookup("pykasu/PaymentFormManager/local");
-			PaymentForm pf = new PaymentForm();
+			pf = new PaymentForm();
 
 			pf.setRuc(pfw.getRuc());
 			pf.setDv(pfw.getDv());
@@ -111,42 +118,26 @@ public class PaymentFormAction extends Action {
 						}catch (Exception e) {
 							accountNumberToRegisterPay = 0;
 						}
-//						try{
-//							hbi.performPayment(account, paidAmount, pf.getId());
-//							paymentAmount = paymentAmount + paidAmount;
-//						}catch (HBUpdateException e) {
-//							logger.error("No se pudo realizar el pago en el SP",e);	
-//						}
 					}
 				}
 				try{
 					pf.setPaymentAmount(paymentAmount);
 					hbi.performPayment(hbAccounts, pf, accountNumberToRegisterPay);
-					//hbi.performPayment(hbAccounts, pf.getId(), accountNumberToRegisterPay);
 				}catch (HBUpdateException e) {
+
 					logger.error("Error al pagar",e);
 					logger.error("No se pudo registrar el Pago en la Liquidacion");
-					request.getSession().setAttribute(Globals.ERROR_MESSAGE,"Se ha debitado el Pago de su Cuenta, sin embargo ha ocurrido un problema en registrar el pago como formulario impositivo.");					
-					return mapping.findForward("error");
 					
+					request.getSession().setAttribute(Globals.ERROR_MESSAGE,"Ocurrido un problema en registrar el pago como formulario impositivo.");					
+					return mapping.findForward("error");					
 				}
 				
-//				pf.setPaymentAmount(paymentAmount);
-//				try{
-//					hbi.registerPayment(pf, accountNumberToRegisterPay);
-//				}catch (HBUpdateException e) {					
-//					logger.error("No se pudo registrar el Pago en la Liquidacion");
-//
-//					request.getSession().setAttribute(Globals.ERROR_MESSAGE,"Se ha debitado el Pago de su Cuenta, sin embargo ha ocurrido un problema en registrar el pago como formulario impositivo.");					
-//					return mapping.findForward("error");
-//
-//				}
 			}
 
 			request.setAttribute("showAccount",user.getPaymentAvaliable());
 			
 			try{
-				pf.setStatus("FINISHED");
+				pfi.changeStatus(pf.getId(), PaymentFormInterface.PAYMENT_FORM_FINNISH);
 			}catch(Exception e){
 				logger.warn("Payment "+ pf.getId() +" Debitado pero en estado BEGIN todavia" + e.getMessage() + "\n" + e);
 				//aca se puede hacer un mapping o enviar un correo a alguien para que vea esto
@@ -172,7 +163,12 @@ public class PaymentFormAction extends Action {
 		}catch (Exception e){
 			logger.error("Error to Save PaymentForm !",e);
 			e.printStackTrace();
-			request.getSession().setAttribute(Globals.ERROR_MESSAGE, e.getMessage());
+			if(pf == null || pfi == null){
+				logger.error("Ocurrió un error y no se podrá registrar el PAGO con el estado ERROR. (Es probable que no se haya registrado el pago.)");
+			}else{
+				pfi.changeStatus(pf.getId(), PaymentFormInterface.PAYMENT_FORM_ERROR);
+			}
+			request.getSession().setAttribute(Globals.ERROR_MESSAGE, "Problemas al registar el pago."+e.getMessage());
 			return mapping.findForward("error");
 		}
         

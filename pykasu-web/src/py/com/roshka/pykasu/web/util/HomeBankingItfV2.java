@@ -586,7 +586,7 @@ public class HomeBankingItfV2 implements Serializable{
 //				throw new HBUpdateException("Codigo de respuesta devuelto: " + stmt.getBigDecimal(9));
 //			}
 		}catch (Exception e) {
-			logger.error(e.getMessage(),e);
+			logger.error(e.getMessage(),e);			
 			throw new HBUpdateException(e.getMessage(),e);
 		}
 	}

@@ -9,8 +9,7 @@
    <persistence-unit name="pykasu">
       <jta-data-source>java:/PykasuDS</jta-data-source>
       <class>py.com.roshka.pykasu.persistence.admission.Admission</class>
-      <class>py.com.roshka.pykasu.persistence.raffle.RaffleTicket</class>
-      <class>py.com.roshka.pykasu.persistence.payment.Account</class>
+      <class>py.com.roshka.pykasu.persistence.raffle.RaffleTicket</class>      
       <class>py.com.roshka.pykasu.persistence.payment.PaymentForm</class>
       <class>py.com.roshka.pykasu.persistence.fiscal.ExpiringDate</class>
       <class>py.com.roshka.pykasu.persistence.fiscal.FiscalAdvanced</class>      
@@ -37,7 +36,7 @@
   	  <class>py.com.roshka.pykasu.persistence.users.Role</class>
   	  <class>py.com.roshka.pykasu.persistence.users.User</class>	  	  
 	  <class>py.com.roshka.pykasu.persistence.uploadForm.UploadForm</class>
-	  <class>py.com.roshka.pykasu.persistence.admission.Admission</class>
+
       <properties>     
          <property name="hibernate.hbm2ddl.auto" value="update" />
          <property name="hibernate.show_sql" value="true" /> 

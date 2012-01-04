@@ -45,7 +45,6 @@ public class BranchOfficeManager {
 	            	Node node = nl.item(i);
 	            	zones.add(fromNode(node));
 	            }
-	           
 	            return zones;
 	            
 			} catch (FileNotFoundException e) {

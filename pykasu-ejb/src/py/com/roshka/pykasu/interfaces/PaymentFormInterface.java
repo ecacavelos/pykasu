@@ -14,7 +14,7 @@ public interface PaymentFormInterface  {
 	final public static String PAYMENT_FORM_CONSULTING =  "consulting";	
 	final public static String PAYMENT_FORM_WITHOUT_MONEY =  "wo_money";
 	final public static String PAYMENT_FORM_FINNISH =  "finnish";	
-
+	final public static String PAYMENT_FORM_ERROR =  "error";
 	
 	public void savePayment(PaymentForm pf, User user)
 	   throws AddFormException;

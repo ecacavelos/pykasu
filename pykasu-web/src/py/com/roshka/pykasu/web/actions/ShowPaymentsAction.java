@@ -1,5 +1,5 @@
 package py.com.roshka.pykasu.web.actions;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -38,15 +38,20 @@ public class ShowPaymentsAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		User user = (User) request.getSession().getAttribute(Globals.LOGIN_USER);
 		
-//		if(!user.getPaymentAvaliable().booleanValue()){
-//			return mapping.findForward("info");
-//		}
 		
 		InitialContext ic = new InitialContext();
 		PaymentFormInterface pfi =  (PaymentFormInterface) ic.lookup("pykasu/PaymentFormManager/local");
 
-		List list = pfi.getAll(user);
-		request.setAttribute("payments", list);
+		List<PaymentForm> list = pfi.getAll(user);
+		//voy a filtrar aca simplemente para que no pierda la semantica del getAll
+		List<PaymentForm> availPaymentForms = new ArrayList<PaymentForm>();
+		for(PaymentForm pf : list){
+			// se muestran solo los pagos que no están en estado de ERROR
+			if(!PaymentFormInterface.PAYMENT_FORM_ERROR.equalsIgnoreCase(pf.getStatus()))
+				availPaymentForms.add(pf);
+		}
+		//--
+		request.setAttribute("payments", availPaymentForms);
 		return mapping.findForward("success");
 	}
 	

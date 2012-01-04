@@ -24,9 +24,11 @@ var PORC_MORA = 0;
 var PORC_INTERES = 0;
 var CONTRAVENSION_CMOV = 0;
 var CONTRAVENSION_SMOV = 0;
+var ajaxProccessTerminate = true;
 
 function getPorcentajeMoras(component){
-
+	ajaxProccessTerminate = false;
+	
 	if (component.value == valueOld){
 		valueOld = null;
 		return;
@@ -65,6 +67,7 @@ function getPorcentajeMoras(component){
  	|| document.getElementById('fiscalPeriodYear').value == "" 	 	
  	|| document.getElementById('fiscalPeriodMounth').value == ""
 	){
+		ajaxProccessTerminate = true;
 		return;
 	}
 		
@@ -200,6 +203,8 @@ function changeMoraInfo(){
 		}//for i
 		pm_called = 1;
 		calcPorcentajeMoras()
+		
+		ajaxProccessTerminate = true;
 	}//if complete
 	
 }
@@ -209,6 +214,11 @@ function submitForm(action){
 	var form = document.GenericForm;
 
 	if(action == "send"){
+		if(!ajaxProccessTerminate){
+			alert('Aún se están procesando datos, no se puede guardar el formulario.\nIntente en unos momentos.');
+			return;
+		}
+		
 		if(!confirm('Esta a punto de Guardar el Formulario.\nSe encuentra seguro de realizar esta operación?')){
 			return;
 		}
