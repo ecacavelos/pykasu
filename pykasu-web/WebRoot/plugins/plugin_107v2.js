@@ -90,6 +90,18 @@ function calcPorcentajeMoras(){
 	}
 	
 	refreshVars();
+	TRGc11();
+	mayorC12();
+	TRGc13();
+	TRGc14();
+	TRGc20();
+	TRGc21();
+	TRGc21_0();
+	TRGc22();
+	TRGc22_0();
+	TRGc25();
+	TRGc50();
+	TRGc14();
 	
 		
 	var tmp = (0).toFixed(0);
@@ -122,6 +134,19 @@ function orirecti(){
 		//alert('error al calcular Origen');
 	}	
 
+}
+
+function mayorC12(){
+	var tmp10	= getValueFormatless('c10');
+	var tmp11	= getValueFormatless('c11');
+	
+	if(tmp10>tmp11){
+		document.getElementById('c12').value= addCommas(tmp10);
+	}else{
+		document.getElementById('c12').value= addCommas(tmp11);
+	}
+	refreshVars();
+	
 }
 
 function getFormType(){
