@@ -36,8 +36,7 @@
 	<sections type="body"  order="-1" >
 		
 		<section  id="R_1" order="10" >
-			<line id="R1L1" name="TLS1" order="-1">
-				<cell id="LBL_R1_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 1 DETERMINACION DE LA BASE IMPONIBLE"  alignAddtionalDescription="FILLED"/>
+			<line id="R1L1" name="TLS1" order="-1" description="RUBRO 1 DETERMINACION DE LA BASE IMPONIBLE">
 				<cell id="LBL_R1_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE"  alignAddtionalDescription="FILLED"/>
 			</line>
 			
@@ -51,7 +50,7 @@
 
 			<line id="L1030" order="30" description="|c| VENTA NETA IMPONIBLE: Cantidad mayor entre los Inc. a ó b (cuando sean iguales se tomarán
 cualesquiera de dichos montos)." >
-				<cell id="c12" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false"  alignAddtionalDescription="LEFT"  additionalDescription="12" xmlTagName="C12"/>
+				<cell id="c12" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="12" xmlTagName="C12"/>
 			</line>
 
 			<line id="L1040" order="40" description="|d| INGRESOS PROVENIENTES POR VENTAS EN EL MERCADO INTERNO: Suma total del detalle
@@ -61,8 +60,7 @@ consignado en el Rubro 4 Inc. c." >
 
 		</section>
 		<section  id="R_2" order="20" >
-			<line id="R2L1" name="TLS1" order="-1">
-					<cell id="LBL_R2_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 2 LIQUIDACION Y SALDO DEL IMPUESTO"  alignAddtionalDescription="FILLED"/>
+			<line id="R2L1" name="TLS1" order="-1" description="RUBRO 2 LIQUIDACION Y SALDO DEL IMPUESTO">
 					<cell id="LBL_R2_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="CONTRIBUYENTE -I-"  alignAddtionalDescription="FILLED"/>
 					<cell id="LBL_R2_L2_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="FISCO -II-"  alignAddtionalDescription="FILLED"/>
 			</line>
@@ -130,8 +128,7 @@ consignado en el Rubro 4 Inc. c." >
 
 		</section>
 		<section  id="R_3" order="30" >
-			<line id="R3L1" name="TLS1" order="-1">
-					<cell id="LBL_R3_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 3 VALOR AGREGADO NACIONAL (VAN)"  alignAddtionalDescription="FILLED"/>
+			<line id="R3L1" name="TLS1" order="-1" description="RUBRO 3 VALOR AGREGADO NACIONAL (VAN)">
 					<cell id="LBL_R3_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="MAQUILA -I-"  alignAddtionalDescription="FILLED"/>
 					<cell id="LBL_R3_L2_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="SUBMAQUILA -II-"  alignAddtionalDescription="FILLED"/>
 			</line>
@@ -184,8 +181,8 @@ consignado en el Rubro 4 Inc. c." >
 
 		</section>
 		<section  id="R_4" order="40" >
-			<line id="R4L1" name="R4L1" order="-1">
-				<cell id="LBL_R4_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 4 ENAJENACIONES EN EL MERCADO INTERNO." alignAddtionalDescription="FILLED"/>
+			<line id="R4L1" name="R4L1" order="-1" description="RUBRO 4 ENAJENACIONES EN EL MERCADO INTERNO.">
+				
 				<cell id="LBL_R4_L1_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="MAQUILA -I-" alignAddtionalDescription="FILLED"/>
 				<cell id="LBL_R4_L1_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="SUBMAQUILA -II" alignAddtionalDescription="FILLED"/>
 			</line>

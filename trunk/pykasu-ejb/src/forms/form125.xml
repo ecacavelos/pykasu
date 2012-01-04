@@ -186,7 +186,7 @@
 		<rule name= "TRGc20"  order= "50" cellTargetId= "c20" formula= "c16+c18"/>
 		<rule name= "TRGc17"  order= "60" cellTargetId= "c17" formula= "c16*0.073" />
 		<rule name= "TRGc19"  order= "70" cellTargetId= "c19" formula= "c18*0.073" />
-		<rule name= "TRGc21"  order= "80" cellTargetId= "c21" formula= "c17+19" />
+		<rule name= "TRGc21"  order= "80" cellTargetId= "c21" formula= "c17+c19" />
 		
 		<rule name= "TRGc22"  order= "90" cellTargetId= "c22" formula= "c15" />
 		<rule name= "TRGc23"  order= "100" cellTargetId= "c23" formula= "c21" />
@@ -195,7 +195,7 @@
 		<rule name= "TRGc25"  	order= "120" cellTargetId= "c25" formula= "c24" />
 		<rule name= "TRGc30" 	order= "130" cellTargetId= "c30" formula= "c27+c28" />
 		<rule name= "TRGc31" 	order= "140" cellTargetId= "c31" formula= "c25+c29" />
-		<rule name= "TRGc33" 	order= "150" cellTargetId= "c33" formula= "c31+c30" />
+		<rule name= "TRGc33" 	order= "150" cellTargetId= "c33" formula= "c31-c30" />
 		<rule name= "TRGc33_0" 	order= "155" cellTargetId= "c33" formula= "0" condition="c33 &lt;0"/>
 		<rule name= "TRGc36" 	order= "160" cellTargetId= "c36" formula= "c33+c34+c35"/>
 		

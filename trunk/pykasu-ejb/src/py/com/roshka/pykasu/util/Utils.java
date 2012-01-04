@@ -148,7 +148,7 @@ public class Utils {
 	}	
 	
 	public static Integer MonthDiff(Date dateFrom, Date dateTo){
-
+		//TODO: cambiar esta funcion. Si tiene valores decimales, es porque tiene que tener un mes de más Ej.: 3,0333 -> debería ser 4 meses
 		logger.info("Difference month between " + dateFrom + " and " + dateTo);
 
 		GregorianCalendar gcFrom = new GregorianCalendar();

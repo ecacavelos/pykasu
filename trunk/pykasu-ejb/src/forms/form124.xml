@@ -114,7 +114,8 @@
 		<rule name="TRGc15"  order="80"  cellTargetId="c15" formula="c14"/> <!--31 -->
 		<rule name="TRGc19"  order="90"  cellTargetId="c19" formula="c16+c17"/> <!--31 -->
 		<rule name="TRGc20"  order="100"  cellTargetId="c20" formula="c15+c18"/> <!--31 -->
-		<rule name="TRGc21"  order="110"  cellTargetId="c21" formula="c20-c19"/> <!--31 -->
+		<rule name="TRGc21"  order="110"  cellTargetId="c21" formula="c20-c19"/>
+		<rule name="TRGc21_0"  order="115"  cellTargetId="c21" formula="0" condition="c21 &lt; 0"/>		<!--31 -->
 		<rule name="TRGc24"  order="120"  cellTargetId="c24" formula="c21+c22+c23"/> <!--31 -->
 		
 	</rules>	

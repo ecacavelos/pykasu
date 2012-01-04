@@ -42,8 +42,7 @@
 		</section>
 	
 		<section  id="R_1" order="10" >
-			<line id="R1L1" name="TLS1" order="-1">
-				<cell id="LBL_R1_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 1 DETERMINACION DE LA RENTA NETA REAL DEL EJERCICIO"  alignAddtionalDescription="FILLED"/>
+			<line id="R1L1" name="TLS1" order="-1" description="RUBRO 1 DETERMINACION DE LA RENTA NETA REAL DEL EJERCICIO">
 				<cell id="LBL_R1_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE"  alignAddtionalDescription="FILLED"/>
 			</line>
 			
@@ -65,8 +64,7 @@
 
 		</section>
 		<section  id="R_2" order="20" >
-			<line id="R2L1" name="TLS1" order="-1">
-					<cell id="LBL_R2_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 2 DETERMINACION DE LA RENTA NETA PRESUNTA DEL EJERCICIO"  alignAddtionalDescription="FILLED"/>
+			<line id="R2L1" name="TLS1" order="-1" description="RUBRO 2 DETERMINACION DE LA RENTA NETA PRESUNTA DEL EJERCICIO">
 					<cell id="LBL_R2_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE"  alignAddtionalDescription="FILLED"/>
 			</line>
 			<line id="L2010" order="10" description="|a| FACTURACION BRUTA ANUAL DEL EJERCICIO: Suma de los importes preciidos durante el ejercicio, excluido el IVA, por venta de bienes o prestación de servicios, registrados en el Libro de Ventas" >
@@ -79,8 +77,8 @@
 
 		</section>
 		<section  id="R_3" order="30" >
-			<line id="R3L1" name="TLS1" order="-1">
-					<cell id="LBL_R3_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 3 DETERMINACION DEL IMPUESTO"  alignAddtionalDescription="FILLED"/>
+			<line id="R3L1" name="TLS1" order="-1" description="RUBRO 3 DETERMINACION DEL IMPUESTO">
+					
 					<cell id="LBL_R3_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE"  alignAddtionalDescription="FILLED"/>
 			</line>
 			<line id="L3010" order="10" description="|a| BASE IMPONIBLE: Copiar Inc. d Rubro 1 ó Inc.b Rubro 2 (El menor entre Rubro 1, Inc. d y Rubro 2, Inc. b)" >
@@ -93,8 +91,8 @@
 
 		</section>
 		<section  id="R_4" order="40" >
-			<line id="R4L1" name="R4L1" order="-1">
-				<cell id="LBL_R4_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 4 LIQUIDACION FINAL" alignAddtionalDescription="FILLED"/>
+			<line id="R4L1" name="R4L1" order="-1" description="RUBRO 4 LIQUIDACION FINAL">
+				
 				<cell id="LBL_R4_L1_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="&lt;div align=&quot;right&quot;&gt; MONTO A FAVOR DEL: &lt;/div&gt;&lt;BR&gt; CONTRIBUYENTE -I-" alignAddtionalDescription="FILLED"/>
 				<cell id="LBL_R4_L1_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="FISCO -II" alignAddtionalDescription="FILLED"/>
 			</line>
