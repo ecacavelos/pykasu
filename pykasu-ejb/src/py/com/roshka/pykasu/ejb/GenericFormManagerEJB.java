@@ -128,11 +128,11 @@ public abstract class GenericFormManagerEJB implements GenericFormManager {
 		    	     
 		    	 if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PRINT_CLIENT)){
 		    	    ri.setDescription(ri.getDescription().concat(" - Numero orden:  " + nroOrden) );
-		    	 }else
+		    	 }//else
 	    	     
-		    	 if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_ERROR)){
-			    	    ri.setDescription(ri.getDescription().concat(" - Motivo:  " + taxForm.getMessageInfo()) );
-		    	 }
+//		    	 if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_ERROR)){
+//			    	    ri.setDescription(ri.getDescription().concat(" - Motivo:  " + taxForm.getMessageInfo()) );
+//		    	 }
 	    	     
 	    	     if(taxForm.getStatus().equalsIgnoreCase(TaxForm.FORM_STATUS_PROCESS)){
 	    	    	 ri.setDeleteable(true);

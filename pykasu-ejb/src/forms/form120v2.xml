@@ -360,7 +360,7 @@
 			</line>
 			<line id="IB" name="INC_B" order="1" description="| b | Compras con credito fiscal del 5% relaciones a operaciones exentas">
 				<cell id="c151" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="151" alignAddtionalDescription="LEFT" xmlTagName="C151"/>
-				<cell id="c166" col="0"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="166" alignAddtionalDescription="LEFT" xmlTagName="C166"/>
+				<cell id="c166" col="1"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="166" alignAddtionalDescription="LEFT" xmlTagName="C166"/>
 			</line>
 			<line id="IC" name="INC_C" order="2" description="| c | Compras exentas relacionadas a operaciones exentas">
 				<cell id="c152" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="152" alignAddtionalDescription="LEFT" xmlTagName="C152"/>
@@ -450,7 +450,7 @@
 		<rule name="TRGS1L2"  order="20"  cellTargetId="c25" formula="c11 * 0.05"/>
 		<rule name="TRGS1L3"  order="30"  cellTargetId="c20" formula="c12 * 0.1"/>
 		<rule name="TRGS1L4"  order="40"  cellTargetId="c21" formula="c13 * 0.1"/>		
-		<rule name="TRGS1L9"  order="50"  cellTargetId="c18" formula="c10+c11+c12+c13+c14+c15"/>					
+		<rule name="TRGS1L9"  order="50"  cellTargetId="c18" formula="c10+c11+c12+c13+c14+c15+c16+c17"/>					
 		<rule name="TRGS1L10" order="60"  cellTargetId="c24" formula="c19+c20+c21+c22+c23"/>					
 		<rule name="TRGS1L11" order="70"  cellTargetId="c28" formula="c25+c26+c27"/>					
 		
