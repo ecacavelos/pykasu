@@ -61,6 +61,7 @@ function onloadForm(){
 }
 
 function calculateBeforePlugin(){
+	retriveSalary();
 
 }
 
@@ -222,13 +223,16 @@ function retriveSalary(){
 }
 
 function calculateC90(){
+	var	calcula90=0;
+	
 	if(request.readyState == 4 || request.readyState == 'complete'){
 		
 		var xmlDoc = request.responseXML;
 	
 		var values = xmlDoc.getElementsByTagName("salary-info");
 		
-				
+		var	tipoDeclara= document.getElementById('declarationType').value;		
+		
 		for (i=0; i<values[0].childNodes.length; i++){
 			if (values[0].childNodes[i].nodeName == 'salary'){
 				for (j = 0; j<values[0].childNodes[i].childNodes.length; j++){
@@ -238,13 +242,17 @@ function calculateC90(){
 				}
 			}//if comentario
 		}
-	//	alert('salaryAmount: ' + salaryAmount);
-		if(getValueFormatless('c76') > parseInt(salaryAmount)){
-			document.getElementById('c90').value = document.getElementById('c76').value;	
-		}else{
-			document.getElementById('c90').value = '';
-		}
+		//	alert('salaryAmount: ' + salaryAmount);
 		
+		if(tipoDeclara=="| 5 | CLAUSURA"){
+			document.getElementById('c90').value = '';
+		}else{
+			if(getValueFormatless('c76') > parseInt(salaryAmount)){
+				document.getElementById('c90').value = document.getElementById('c76').value;	
+			}else{
+				document.getElementById('c90').value = '';
+			}
+		}		
 	}
 	
 	//cesquivel 21-04-08: se llama a las funciones de calculo de los campos continuos al 90.

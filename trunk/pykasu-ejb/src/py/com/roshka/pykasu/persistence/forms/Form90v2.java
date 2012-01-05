@@ -1,5 +1,7 @@
 package py.com.roshka.pykasu.persistence.forms;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -19,9 +21,9 @@ public class Form90v2 extends TaxForm{
 	private Double c16;
 	private Double c17;
 	private Double c18;
-	private Double c19;
+	private Date   c19;
 	private Double c20;
-	private Double c21;
+	private Date   c21;
 	private Double c22;
 	private Double c23;
 	private Double c24;
@@ -29,11 +31,11 @@ public class Form90v2 extends TaxForm{
 	private Double c26;
 	private Double c27;
 	private Double c28;
-	private Double c29;
+	private Date   c29;
 	private Double c30;
 	private Double c31;
 	private Double c32;
-	private Double c33;
+	private Date   c33;
 	private Double c34;
 	private Double c35;
 	private Double c36;
@@ -135,12 +137,25 @@ public class Form90v2 extends TaxForm{
 		this.c18 = c18;
 	}
 
-	public Double getC19() {
+
+	public Date getC19() {
 		return c19;
 	}
 
-	public void setC19(Double c19) {
+	public void setC19(Date c19) {
 		this.c19 = c19;
+	}
+
+	public void setC21(Date c21) {
+		this.c21 = c21;
+	}
+
+	public void setC29(Date c29) {
+		this.c29 = c29;
+	}
+
+	public void setC33(Date c33) {
+		this.c33 = c33;
 	}
 
 	public Double getC20() {
@@ -151,13 +166,6 @@ public class Form90v2 extends TaxForm{
 		this.c20 = c20;
 	}
 
-	public Double getC21() {
-		return c21;
-	}
-
-	public void setC21(Double c21) {
-		this.c21 = c21;
-	}
 
 	public Double getC22() {
 		return c22;
@@ -215,13 +223,6 @@ public class Form90v2 extends TaxForm{
 		this.c28 = c28;
 	}
 
-	public Double getC29() {
-		return c29;
-	}
-
-	public void setC29(Double c29) {
-		this.c29 = c29;
-	}
 
 	public Double getC30() {
 		return c30;
@@ -247,13 +248,6 @@ public class Form90v2 extends TaxForm{
 		this.c32 = c32;
 	}
 
-	public Double getC33() {
-		return c33;
-	}
-
-	public void setC33(Double c33) {
-		this.c33 = c33;
-	}
 
 	public Double getC34() {
 		return c34;
@@ -358,6 +352,18 @@ public class Form90v2 extends TaxForm{
 
 	public void setLiqMotive(String liqMotive) {
 		this.liqMotive = liqMotive;
+	}
+
+	public Date getC21() {
+		return c21;
+	}
+
+	public Date getC29() {
+		return c29;
+	}
+
+	public Date getC33() {
+		return c33;
 	}
 	
 	

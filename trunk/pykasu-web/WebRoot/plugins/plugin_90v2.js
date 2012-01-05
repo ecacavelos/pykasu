@@ -119,7 +119,7 @@ function onloadForm(){
 	isOnLoad = true;
 	changeEnableSections(s);
 	isOnLoad = false;	
-	clearDates();
+	//clearDates();
 }
 
 function limpiarLiquidacion(){
@@ -134,9 +134,6 @@ function limpiarLiquidacion(){
 	document.getElementById('c41').value = '';
 	document.getElementById('c42').value = '';
 	document.getElementById('c43').value = '';
-	
-	
-
 }
 
 
