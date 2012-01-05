@@ -9,6 +9,7 @@
 				<td>&nbsp;</td>
 				<td align="right" style="font-size: 10px; color: gray;">Versión: 1.5.3</td></td>
 			</tr>
+
 		</table>
 	</div>	
 </div>

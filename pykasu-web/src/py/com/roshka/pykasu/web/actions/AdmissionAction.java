@@ -56,7 +56,7 @@ public class AdmissionAction extends Action {
 			InitialContext ic = new InitialContext();
 			AdmissionManager am =  (AdmissionManager) ic.lookup("pykasu/AdmissionManager/local");
 			try{	
-				AdmissionForm af = (AdmissionForm) form;	
+				AdmissionForm af = (AdmissionForm) form;
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				Date date = sdf.parse(af.getConstitution());

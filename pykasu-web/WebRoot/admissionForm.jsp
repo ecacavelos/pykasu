@@ -102,7 +102,7 @@
 					</optgroup>
 				<%}%>  			
 	  			</html:select><br/>
-	  			<html:errors property="userform.office.mandatory"/></td>
+	  			<html:errors property="userform.office.mandatory"/>
 	  		</td>  		
 	  	</tr>  	  	
 	  	<tr>
@@ -115,7 +115,7 @@
 	  	<tr>
 	  		<td>Fecha de constitución: (*)</td>
 	  		<td colspan="3"><html:text property="constitution"></html:text><br/>
-	  		<html:errors property="userform.date.mandatory"/></td></td>
+	  		<html:errors property="userform.date.mandatory"/></td>
 	  	</tr>  	
 		<tr><td colspan="4" align="center"><h3>Datos del Contacto</h3></td></tr>
 	  	<tr>
