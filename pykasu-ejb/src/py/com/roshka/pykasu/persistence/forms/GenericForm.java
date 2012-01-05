@@ -52,14 +52,9 @@ public class GenericForm {
 						Calendar c = Calendar.getInstance();
 						c.setTime((java.util.Date)args[0]);
 						args[0] = c;
-					}					
-
-					if (args[0] instanceof java.util.Date && pd.getPropertyType().equals(java.util.Date.class)) {
-						logger.info("-----> {"+ cell.getId() + "} Going to convert java.util.Date into java.util.Date :  " + args[0]);
-						Calendar c = Calendar.getInstance();
-						c.setTime((java.util.Date)args[0]);
-						args[0] = c.getTime();
 					}
+					
+					
 					
 					pd.getWriteMethod().invoke(this,args);
 				}
