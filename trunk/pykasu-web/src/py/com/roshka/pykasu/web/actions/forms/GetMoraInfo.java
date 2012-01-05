@@ -127,7 +127,8 @@ public class GetMoraInfo extends Action {
                     .getFormManager(formName);
 
             Map params = new HashMap();
-            params.put("formType", new Integer(formName));
+            //params.put("formType", new Integer(formName));
+            params.put("formType", formName);
             params.put("fiscalInfoType", infoType);
             params.put("ruc", ruc);
             params.put("paydmentDate", paydmentDate);
@@ -143,7 +144,8 @@ public class GetMoraInfo extends Action {
                 params.put("expiringDate", expiringDate);
             }
 
-            params.put("formType", new Integer(Integer.parseInt(formName)));
+//            params.put("formType", new Integer(Integer.parseInt(formName)));
+            params.put("formType", formName);
 
             Iterator it = params.keySet().iterator();
             logger.info("params to welti's function");

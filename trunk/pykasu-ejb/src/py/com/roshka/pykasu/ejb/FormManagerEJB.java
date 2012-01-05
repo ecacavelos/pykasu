@@ -24,17 +24,22 @@ import py.com.roshka.pykasu.exceptions.PykasuGenericException;
 import py.com.roshka.pykasu.interfaces.ClientDataInterface;
 import py.com.roshka.pykasu.interfaces.Contributor;
 import py.com.roshka.pykasu.interfaces.Form101ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form103v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form104ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form105ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form106ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form107v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form108ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form109ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form110ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form111ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form117ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form118ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form120ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form120v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form122ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form123ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form124ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form125ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form130ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form800ManagerInterface;
@@ -43,6 +48,7 @@ import py.com.roshka.pykasu.interfaces.Form804ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form848ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form850ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form90ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form90v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.FormManager;
 import py.com.roshka.pykasu.interfaces.FormSettingInterface;
 import py.com.roshka.pykasu.interfaces.GenericFormManager;
@@ -86,6 +92,13 @@ public class FormManagerEJB implements FormManager {
 	@EJB private Form848ManagerInterface form848Mgr;
 	@EJB private Form90ManagerInterface form90Mgr;
 	@EJB private Form125ManagerInterface form125Mgr;
+
+	@EJB private Form124ManagerInterface form124Mgr;
+	@EJB private Form90v2ManagerInterface form90v2Mgr;
+	@EJB private Form120v2ManagerInterface form120v2Mgr;
+	@EJB private Form103v2ManagerInterface form103v2Mgr;
+	@EJB private Form107v2ManagerInterface form107v2Mgr;
+	@EJB private Form111ManagerInterface form111Mgr;
 	
 	@EJB private ClientDataInterface clientDataMgr;
 	@EJB private Contributor contributor;
@@ -134,6 +147,20 @@ public class FormManagerEJB implements FormManager {
 			return form90Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_125)){
 			return form125Mgr;
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_124)){
+			return form124Mgr;
+			
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_90v2)){
+			return form90v2Mgr;
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_120v2)){
+			return form120v2Mgr;
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_103v2)){
+			return form103v2Mgr;
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_107v2)){
+			return form107v2Mgr;
+
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_111)){
+			return form111Mgr;
 		}
 		throw new FormManagerException(formType + " is not available.");
 	}

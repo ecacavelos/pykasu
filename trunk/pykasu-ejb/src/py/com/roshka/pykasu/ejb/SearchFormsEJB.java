@@ -145,6 +145,7 @@ public class SearchFormsEJB implements SearchFormsInterface{
 			itemSearch.setDetails(details);
 			
 			items.add(itemSearch);
+
 		}
 		 
         return items;
