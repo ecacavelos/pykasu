@@ -1,0 +1,16 @@
+<form-bean
+    name="LoginForm"
+    type="org.apache.struts.action.DynaActionForm">
+    <form-property
+        name="j_username"
+        type="java.lang.String"
+	/>
+    <form-property
+        name="j_password"
+        type="java.lang.String"
+	/>
+</form-bean>
+<form-bean
+      name="GenericForm"
+      type="py.com.roshka.pykasu.web.forms.GenericForm"
+    />
