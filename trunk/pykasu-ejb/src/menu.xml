@@ -26,13 +26,13 @@
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=90"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
- -->
+ 
 		<action name="Formulario 90 version 2" order="12" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=90v2"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90v2" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
 
-
+-->
 		<action name="Formulario 101" order="20" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=101"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=101" urlHelp="" description="" active="true" rolesAllowed=""/>			
