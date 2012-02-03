@@ -228,7 +228,9 @@
 			<rule name="TRGc37" 	order="70"  cellTargetId="c37" 	formula="c30*0.02" />		
 
 	<!--	40	C[34] + C[35] + C[36] + C[37]+ C[38] +C[39]- C[44]-->
-			<rule name="TRGc40" 	order="80"  cellTargetId="c40" 	formula="c34+c35+c36+c37+c38+c39-c44" />		
+			<rule name="TRGc40" 	order="80"  cellTargetId="c40" 	formula="c34+c35+c36+c37+c38+c39-c44" />	
+			
+			<rule name="TRGc40_0" 	order="85"  cellTargetId="c40" 	formula="0" condition="c40 &lt; 0"/>					
 
 	<!--	43	C[40]+C[41]+C[42]-->
 			<rule name="TRGc43" 	order="90"  cellTargetId="c43" 	formula="c40+c41+c42" />		
