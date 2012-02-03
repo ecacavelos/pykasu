@@ -346,8 +346,8 @@
 			</line>
 
 			<line id="L5110" order="110" description="|k| SUB TOTAL:(INC, A+B+C+D+E COL, II) ; (INC, F+G+H+I, COL, I) " >
-				<cell id="c99" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="" xmlTagName="R5_SUBT1"/>
-				<cell id="c999" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="" xmlTagName="R5_SUBT2"/>
+				<cell id="cSUB1" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="" xmlTagName="R5_SUBT1"/>
+				<cell id="cSUB2" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="" xmlTagName="R5_SUBT2"/>
 			</line>
 
 			<line id="L5120" order="120" description="|l| SALDO A FAVOR DEL CONTRIBUYENTE PARA EL SIGUIENTE PERIODO(INC,K, COL, I- INC K, COL II) " >
@@ -502,15 +502,15 @@
 		<rule name="TRGc70"  	order="200"  cellTargetId="c70" formula="c60*0.015"/>
 		<rule name="TRGc71"  	order="210"  cellTargetId="c71" formula="c61*0.15"/>
 		<rule name="TRGc72"  	order="220"  cellTargetId="c72" formula="c62*0.1"/>
-		<rule name="R5_SUB1_C1" order="230"  cellTargetId="c99" formula="c74+c75+c76+c77"/>
-		<rule name="R5_SUB1_C2" order="240"  cellTargetId="c999" formula="c69+c70+c71+c72+c73+c78"/>
+		<rule name="R5_SUB1_C1" order="230"  cellTargetId="cSUB1" formula="c74+c75+c76+c77"/>
+		<rule name="R5_SUB1_C2" order="240"  cellTargetId="cSUB2" formula="c69+c70+c71+c72+c73+c78"/>
 		<!-- C[74]+C[75]+C[76]+C[77])-(C[69]+C[70]+C[71]+C[72]+C[73]+C[78] -->
 		<rule name="TRGc79"  	order="250"  cellTargetId="c79" formula="(c74+c75+c76+c77)-(c69+c70+c71+c72+c73+c78)" />
 		<rule name="TRGc79_0"  	order="255"  cellTargetId="c79" formula="0" condition="c79 &lt; 0"/>
 		<!-- C[69]+C[70]+C[71]+C[72]+C[73]+C[78])-(C[74]+C[75]+C[76]+C[77] -->
 		<rule name="TRGc80"  	order="260"  cellTargetId="c80" formula="(c69+c70+c71+c72+c73+c78)-(c74+c75+c76+c77)" />		
 		<rule name="TRGc80_0"  	order="265"  cellTargetId="c80" formula="0" condition="c80 &lt; 0"/>		
-		<rule name="TRGc84"  	order="270"  cellTargetId="c84" formula="(c79+c83)-(c80-c81-c82)"/>
+		<rule name="TRGc84"  	order="270"  cellTargetId="c84" formula="(c79+c83)-(c80+c81+c82)"/>
 		<rule name="TRGc84_0"  	order="275"  cellTargetId="c84" formula="0" condition="c84 &lt; 0"/>
 		<rule name="TRGc85"  	order="280"  cellTargetId="c85" formula="(c80+c81+c82)-c83"/>
 		<rule name="TRGc85_0"  	order="285"  cellTargetId="c85" formula="0" condition="c85 &lt; 0"/>

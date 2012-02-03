@@ -514,10 +514,10 @@
 		<rule name="TRG_C111_1"  order="460"  cellTargetId="c111" formula="c110 - c114"  /> 
 		<rule name="TRG_C111_2"  order="465"  cellTargetId="c111" formula="0" condition="c111 &lt;= 0"/> 
 		<rule name="TRG_C115_1"  order="470"  cellTargetId="c115" formula="c114 - c110" />
-		<rule name="TRG_C115_2"  order="475"  cellTargetId="c115" formula="0" condition="c115 &lt;= 0"/> 		
+		<rule name="TRG_C115_2"  order="475"  cellTargetId="c115" formula="0" condition="c115 &lt;= 0"/><!-- 		
 		<rule name="TRG_C116"  	 order="480"  cellTargetId="c116" formula="0" condition="c115 &lt; c113"/> 
 		<rule name="TRG_C117"  	 order="485"  cellTargetId="c117" formula="0" condition="c115 &lt; c113"/> 
-		<rule name="TRG_C118"  order="490"  cellTargetId="c118" formula="c115 + c116 + c117"/> 
+		--><rule name="TRG_C118"  order="490"  cellTargetId="c118" formula="c115 + c116 + c117"/> 
 		
 		<!--RUBRO 8 -->
 		<rule name="TRG_C165"  order="500"  cellTargetId="c165" formula="c150*0.1"  /> 
