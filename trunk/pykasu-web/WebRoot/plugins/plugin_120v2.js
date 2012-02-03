@@ -35,6 +35,7 @@ function calculateAfterPlugin(){
 
 
 function calcPorcentajeMoras(){
+	
 	if (pm_called == 0){
 		getFiscalMoraInfo();
 		return;
@@ -49,12 +50,18 @@ function calcPorcentajeMoras(){
 		if(document.getElementById('c113').value != null)
   		   colocarpuntos(document.getElementById('c113'));
 	}
-	
+	refreshVars();
+	TRG_C114();
+	TRG_C111_1();
+	TRG_C111_2();
+	TRG_C115_1();
+	TRG_C115_2();
+		
 	var tmp115 = removeCommas(document.getElementById('c115').value);
 	var tmp113 = removeCommas(document.getElementById('c113').value);
-	var op = tmp115 - tmp113
+	var op = tmp115 - tmp113;
 	if(op < 0){
-		op = 0
+		op = 0;
 	}
 	
 	if (PORC_MORA && PORC_MORA != null){
@@ -70,13 +77,13 @@ function calcPorcentajeMoras(){
 
 	//alert("calcPorcentajeMoras() c113:" + document.getElementById('c113').value + "  c116:" + document.getElementById('c116').value + "  c117: "+ document.getElementById('c117').value);	
 	refreshVars();
-	TRG_C114();
+	/*TRG_C114();
 	TRG_C111_1();
 	TRG_C111_2();
 	TRG_C115_1();
 	TRG_C115_2();
 	TRG_C116();
-	TRG_C117();
+	TRG_C117();*/
 	TRG_C118();
 	checkC57();
 
