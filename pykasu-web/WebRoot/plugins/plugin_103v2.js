@@ -1,6 +1,7 @@
 var salaryAmount;
 oriRectiFlag=false;
 var pm_fiscalPeriodMounth = null;
+
 function onloadForm(){
 	loadScript('js/pykFiscalComun.js');
 	
@@ -36,9 +37,7 @@ function calculateAfterPlugin(){
 	{
 		pm_called = 0;	
 	}	
-	
 	calcPorcentajeMoras();
-		
 }
 
 /*
@@ -138,7 +137,7 @@ function TRGc26(){
 	
 	if(tmpC27 == null || tmpC27==0){
 		if( tmpC14 != null) {
-			op= tmpC14 * 0.1;
+			op= Math.round(tmpC14 * 0.1);
 		}
 			
 		if(value <= op){
@@ -151,6 +150,7 @@ function TRGc26(){
 		document.getElementById('c26').value=0;
 	}
 	refreshVars();
+	TRGc34();
 }
 
 
@@ -162,7 +162,7 @@ function TRGc27(){
 	
 	if(tmpC26== null || tmpC26==0){
 		if( tmpC14 != null) {
-			op= tmpC14 * 0.3;
+			op= Math.round(tmpC14 * 0.3);
 		}
 		
 		if(value <= op){
@@ -175,6 +175,7 @@ function TRGc27(){
 		document.getElementById('c27').value=0;
 	}
 	refreshVars();
+	TRGc34();
 }
 
 function validateC26_C27(){
@@ -201,10 +202,16 @@ function periodControl(){
 	if (!controlFiscalPeriod(giveFormType())){
 		return false;
 	}
+	
 	return true;
 }
 
 function beforeSave(){
+	
+	if(!validateC26_C27()){
+		return false;
+	}
+	
 	if (!periodControl()){
 		return false;
 	}
