@@ -135,8 +135,14 @@ public class Utils {
 //		cTo.set(Calendar.SECOND,0);
 //		long diff = cTo.getTime().getTime() - cFrom.getTime().getTime();
 		
+		
 		dateTo.setTime(dateTo.getTime()+ 12 *ONE_HOUR);
 		long diff = dateTo.getTime() - dateFrom.getTime();
+
+		
+//		dateTo.setTime(dateTo.getTime()/(24*ONE_HOUR));
+//		dateFrom.setTime(dateFrom.getTime()/(24*ONE_HOUR));
+//		long diff = dateTo.getTime() - dateFrom.getTime();
 		
 		logger.info("Difference days between " + dateFrom + " and " + dateTo);
 

@@ -26,13 +26,13 @@
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=90"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
- 
+-->
 		<action name="Formulario 90 version 2" order="12" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=90v2"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=90v2" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
 
--->
+
 		<action name="Formulario 101" order="20" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=101"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=101" urlHelp="" description="" active="true" rolesAllowed=""/>			
@@ -159,7 +159,6 @@
 		<action name="Subir un archivo de Formulario" order="10" url="uploadfileform.do" urlHelp="" description="" active="true" rolesAllowed="users"/>
 		<action name="Ver Formularios enviados por archivo" order="20" url="showuploadforms.do" urlHelp="" description="" active="true" rolesAllowed="users"/>
 	</program>
-<<<<<<< .working
 -->
 	<program name="Pagos" order="49" description="" active="true" rolesAllowed="pay_role">
 		<action name="Realizar Pagos" order="10" url="prvpaydmentform.do"  urlHelp="" description="" active="true" rolesAllowed=""/>		

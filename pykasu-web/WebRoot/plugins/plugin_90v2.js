@@ -94,10 +94,38 @@ function changeEnableSections(section){
 }
 
 function clearDates(){
-	document.getElementById('c19').value = '';
-	document.getElementById('c21').value = '';
-	document.getElementById('c29').value = '';
-	document.getElementById('c33').value = '';
+	var today = new Date();
+	
+	var curr_date = today.getDate();
+	if(curr_date<10) curr_date = '0' + curr_date;
+	var curr_month = today.getMonth();
+	curr_month = curr_month + 1;
+	if(curr_month<10){
+		curr_month = '0' + curr_month;
+	}
+	var curr_year = today.getFullYear();
+	var stoday = curr_date + '/'+ curr_month + '/'+ curr_year;;
+	
+	if(document.getElementById('c19').value == stoday){
+	   document.getElementById('c19').value = '';
+	}
+
+	if(document.getElementById('c21').value == stoday){
+		   document.getElementById('c21').value = '';
+	}
+
+	if(document.getElementById('c29').value == stoday){
+		   document.getElementById('c29').value = '';
+	}
+
+	if(document.getElementById('c33').value == stoday){
+		   document.getElementById('c33').value = '';
+	}
+
+//	document.getElementById('c19').value = '';
+//	document.getElementById('c21').value = '';
+//	document.getElementById('c29').value = '';
+//	document.getElementById('c33').value = '';
 
 }
 
@@ -119,7 +147,7 @@ function onloadForm(){
 	isOnLoad = true;
 	changeEnableSections(s);
 	isOnLoad = false;	
-	//clearDates();
+	clearDates();
 }
 
 function limpiarLiquidacion(){
@@ -144,8 +172,7 @@ function calculateBeforePlugin(){
 function getFiscalInfoToForm90(){
 
 	request= GetXmlHttpObject();
-
-
+	
 	if (request == null){
 		alert('El sitio no soporta AJAX');
 		return;
@@ -212,9 +239,6 @@ function calculateAfterPlugin(){
 	pm_fiscalPeriodMounth = document.getElementById('fiscalPeriodMounth').value;
 	pm_fiscalPeriodYear = removeCommas(document.getElementById('fiscalPeriodYear').value);
 	pm_called = 1;
-	
-	calcPorcentajeMoras();
-/*	
 
 	if( PORC_MORA == 0 || 
 		PORC_INTERES == 0 || 
@@ -223,7 +247,8 @@ function calculateAfterPlugin(){
 	{
 		pm_called = 0;	
 	}
-*/	
+
+	calcPorcentajeMoras();
 
 }
 
@@ -231,7 +256,7 @@ function calculateAfterPlugin(){
 function calcPorcentajeMoras(){
 
 	if (pm_called == 0){
-		getFiscalMoraInfo();
+		getFiscalInfoToForm90();
 		return;
 	}
 	
@@ -241,7 +266,6 @@ function calcPorcentajeMoras(){
   		   colocarpuntos(document.getElementById('c39'));
 	}
 	refreshVars();
-	TRGc40();
 	
 	var tmp40 = document.getElementById('c40').value;
 	var tmp39 = document.getElementById('c39').value;	
@@ -263,6 +287,8 @@ function calcPorcentajeMoras(){
   		   colocarpuntos(document.getElementById('c42'));
 	}
 	refreshVars();
+	TRGc40();
+	TRGc40_0();
 	TRGc43();
 
 /*
@@ -281,18 +307,64 @@ function getFormType(){
 
 
 function periodControl(){
+		
+	var section = document.getElementById('liqMotive');
+	var option = section.options[section.selectedIndex].value;
+	var dateValue='';
 	
-	/*
-	Pablo, acá agrega las lineas para que el periodo fiscal no sea 
-	mayor al PaymentDate
-	*/
+	
+	option = trim(option);
+	option = trim(option.substr(2, 2));
+	
+	switch(option){
+	case "A":
+		dateValue=trim(document.getElementById('c19').value);
+		if(dateValue.length==0 ){
+			alert('El campo 19 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
+			return false
+		}
+		break;
+	case "B":
+		dateValue= document.getElementById('c21').value;
+		if(dateValue.length==0 ){
+			alert('El campo 21 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
+			return false
+		}
+		break;
+	case "C":
+		dateValue= document.getElementById('c29').value;
+		if(dateValue.length==0 ){
+			alert('El campo 29 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
+			return false
+		}
+		break;
+	case "D":
+		dateValue= document.getElementById('c31').value;
+		if(dateValue.length==0 ){
+			alert('El campo 31 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
+			return false
+		}
+		break;
+	case "E":
+		dateValue= document.getElementById('c33').value;
+		if(dateValue.length==0 ){
+			alert('El campo 33 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
+			return false
+		}
+		break;
+	}
+
 	return true;
 }
 
 function beforeSave(){
-	if (!periodControl()){
+	if (!datesControl()){
 		return false;
-		}
+	}
+	
+	if(!periodControl()){
+		return false;
+	}
 		
 	return true;
 }
@@ -311,6 +383,7 @@ function validYear(){
 	
 	if(year != 2006 && year != 2005){
 		alert('El valor del campo 31 debe ser 2005 o 2006');
+		document.getElementById('c31').value=''	
 		return -1;
 	}
 }
@@ -368,9 +441,10 @@ function datesControl(){
 	
 	//la fecha de declaracion tiene que ser mayor a la del servidor y menor que la prevista de pago
 //	var b = (fpdate >= serverDate) && (fpdate <= paydate);
-	var b = (fpdate <= paydate);
+	var b = (fpdate.toDateString() == paydate.toDateString());
+	
 	if(!b){
-		alert('La fecha declarada en el perido fiscal debe ser  menor o igual a la fecha prevista de pago');
+		alert('La fecha declarada en el perido fiscal ser igual a la fecha prevista de pago');
 		day.value = '';
 		month.value = '';
 		year.value = '';

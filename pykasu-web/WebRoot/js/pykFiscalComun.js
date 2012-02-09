@@ -94,7 +94,9 @@ function getFiscalMoraInfo(){
 		return;
 	}
 	pm_ruc = document.getElementById('ruc').value.toUpperCase();
-	pm_declaration_type = document.getElementById('declarationType').value.toUpperCase();
+	if(document.getElementById('declarationType') != null){
+		pm_declaration_type = document.getElementById('declarationType').value.toUpperCase();
+	}
 	
 	if(document.getElementById('paymentDate') != null)//Le puse este if xq estaba matando algo cuando era null(Mirna)
 		pm_paymentDate = document.getElementById('paymentDate').value;
