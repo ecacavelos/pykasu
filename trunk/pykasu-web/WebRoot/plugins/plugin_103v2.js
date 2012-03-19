@@ -36,8 +36,10 @@ function calculateAfterPlugin(){
 		CONTRAVENSION_SMOV == 0)
 	{
 		pm_called = 0;	
-	}	
+	}
+
 	calcPorcentajeMoras();
+	
 }
 
 /*
@@ -65,6 +67,15 @@ function calcPorcentajeMoras(){
 		
 		}
 	}
+	refreshVars();
+	/*TRGc26();
+	TRGc27();*/
+	TRGc34();
+	TRGc35();
+	TRGc35_0();
+	TRGc36();
+	TRGc36_0();
+	
 	
 	var tmp1 = removeCommas(document.getElementById('c36').value);
 	var tmp2 = removeCommas(document.getElementById('c32').value);
@@ -86,19 +97,11 @@ function calcPorcentajeMoras(){
 	}
 	
 	refreshVars();
-	TRGc26();
-	TRGc27();
-	TRGc34();
-	TRGc35();
-	TRGc35_0();
-	TRGc36();
-	TRGc36_0();
 	TRGc39();
 	
 	
 	
 	var tmp = (0).toFixed(0);
-
 }
 
 function orirecti(){
@@ -150,7 +153,13 @@ function TRGc26(){
 		document.getElementById('c26').value=0;
 	}
 	refreshVars();
+	
 	TRGc34();
+	TRGc36();
+	TRGc36_0();
+	pm_called = 1;
+	calcPorcentajeMoras();
+	
 }
 
 
@@ -175,16 +184,26 @@ function TRGc27(){
 		document.getElementById('c27').value=0;
 	}
 	refreshVars();
+/*	pm_called = 1;
+	calcPorcentajeMoras();*/
 	TRGc34();
+	TRGc36();
+	TRGc36_0();
+	pm_called = 1;
+	calcPorcentajeMoras();
+	//calculateAfterPlugin();
 }
 
 function validateC26_C27(){
+	var	campo14= getValueFormatless('c14');	
 	var campo26= getValueFormatless('c26');
 	var campo27= getValueFormatless('c27');
 	
-	if((campo26==null || campo26==0) && (campo27==null || campo27==0)){
-		alert('Debe declarar un valor para el campo 26 ó el 27 del RUBRO 2');
-		return false;
+	if (campo14 != null && campo14 >0){
+		if((campo26==null || campo26==0) && (campo27==null || campo27==0)){
+			alert('Debe declarar un valor para el campo 26 ó el 27 del RUBRO 2');
+			return false;
+		}
 	}
 	return true;
 }

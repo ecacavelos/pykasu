@@ -111,7 +111,18 @@ function orirecti(){
 	}	
 
 }
-function controlPeriodo(){
+
+function isValidPeriod(nombreCampoPeriodo){
+	
+	periodValue = getValueFormatless(nombreCampoPeriodo);
+	
+	if(!(parseInt(periodValue,10) == 4 || parseInt(periodValue,10) == 8 || parseInt(periodValue,10) == 12)){
+		alert('El mes de declaración solo puede ser abril, agosto, o diciembre.');
+		document.getElementById(nombreCampoPeriodo).value = "";
+	}
+
+}
+/*function controlPeriodo(){
 	var month= getValueFormatless('fiscalPeriodMounth');
 	var year= getValueFormatless('fiscalPeriodYear');
 	
@@ -124,7 +135,7 @@ function controlPeriodo(){
 		
 	
 }
-
+*/
 
 function addValue(){
 	document.getElementById('c73_0').value='7.3';

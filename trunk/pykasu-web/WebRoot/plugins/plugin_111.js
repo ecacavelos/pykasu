@@ -66,6 +66,11 @@ function calcPorcentajeMoras(){
 		
 		}
 	}
+	refreshVars();
+	TRGc41();
+	TRGc42();
+	TRGc43();
+	TRGc43_0();
 	
 	var tmp1 = removeCommas(document.getElementById('c43').value);
 	var tmp2 = removeCommas(document.getElementById('c40').value);
@@ -88,8 +93,8 @@ function calcPorcentajeMoras(){
 	}
 	
 	refreshVars();
-	
-	
+	TRGc46();
+
 	var tmp = (0).toFixed(0);
 
 }
