@@ -26,7 +26,7 @@
 			</line>			
 			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
 				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
-				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" />
+				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
 				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
 				<!-- <cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#retriveSalary()"/> -->
 			</line>			
@@ -75,13 +75,13 @@ PAGO MENSUAL" alignAddtionalDescription="LEFT"/>
 			</line>
 			<line id="L2010" order="10" description="|a| Impuesto liquidado aplicable sobre la renta alcanzada por el régimen general del impuesto(.........% sobre el monto del Rubro 1 Inc. e)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c26" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="26" xmlTagName="C26" events="onChange:TRGc26(this.value)"/>
+				<cell id="c26" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="26" xmlTagName="C26" events="onblur:TRGc26"/>
 				
 			</line>
 
 			<line id="L2020" order="20" description="|b| Impuesto liquidado aplicable sobre la renta alcanzada por la tasa diferencial del impuesto (30% sobre el monto del Inc. e del Rubro 1)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c27" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="27" xmlTagName="C27" events="onChange:TRGc27(this.value)"/>
+				<cell id="c27" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="27" xmlTagName="C27" events="onblur:TRGc27"/>
 				
 			</line>
 

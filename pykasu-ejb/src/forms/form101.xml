@@ -272,7 +272,7 @@
 		
 			<line id="L4010" order="10" description="|a| Renta Neta Del Ejercicio (Proviene del Inc. d, Col. II Rubro 3)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c68" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="68" xmlTagName="C68"/>
+				<cell id="c68" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="68" xmlTagName="C68"/>
 			</line>
 
 			<line id="L4020" order="20" description="|b| Rentas alcanzadas por beneficios de la Ley  60/90" >
