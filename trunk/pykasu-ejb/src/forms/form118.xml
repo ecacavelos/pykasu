@@ -35,12 +35,16 @@
 
 	<sections type="body"  order="-1" >
 		<section  id="R_1" order="10" >
-			<line id="L1010" order="10" description="|a| Total ingres. Obt. Periodo q' se declara, exc.IVA (Libro de Ventas)" >
+		<line id="R1L1" name="TLS1" order="-1" description="RUBRO 1 DETERMINACION DE LA RENTA NETA REAL Y BASE DE CALCULO DEL ANTICIPO">
+				<cell id="LBL_R1_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription=""  alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R1_L2_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE"  alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="L1010" order="10" description="|a| Total ingres. Obt. Periodo que se declara, exc.IVA (Libro de Ventas)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 				<cell id="c10" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="10" xmlTagName="C10"/>
 			</line>
 
-			<line id="L1020" order="20" description="|b| Total egresos Obt. Periodo q' se declara, exc.IVA (Libro de Compras)" >
+			<line id="L1020" order="20" description="|b| Total egresos Obt. Periodo que se declara, exc.IVA (Libro de Compras)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 				<cell id="c11" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="11" xmlTagName="C11"/>
 			</line>
@@ -57,6 +61,10 @@
 
 		</section>
 		<section  id="R_2" order="20" >
+		<line id="R2L1" name="TLS2" order="-1" description="RUBRO 2 LIQUIDACION DEL IMPUESTO">
+				<cell id="LBL_R2_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="CONTRIBUYENTE -I-"  alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R2_L2_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="FISCO -II-"  alignAddtionalDescription="FILLED"/>
+			</line>
 			<line id="L2010" order="10" description="|a| Anticipo a ingresar (50% s/monto del R. 1 inc. D)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 				<cell id="c14" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="14" xmlTagName="C14"/>
@@ -64,7 +72,8 @@
 
 			<line id="L2020" order="20" description="|b| Saldo a favor contribuyente del periodo anterior" >
 				<cell id="c15" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="15" xmlTagName="C15"/>
-				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				
 			</line>
 
 			<line id="L2030" order="30" description="|c| Pago previo o pago a cuenta" >
@@ -94,7 +103,8 @@
 
 			<line id="L2080" order="80" description="|h| Saldo favor contrib. p/sgte. Periodo (dif. e/ Columnas inc. G si Col I sea > a Col II)" >
 				<cell id="c22" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="22" xmlTagName="C22"/>
-				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				
 			</line>
 
 			<line id="L2090" order="90" description="|i| Saldo favor fisco (dif. e/ Columnas inc. G si Col II sea > a Col I)" >

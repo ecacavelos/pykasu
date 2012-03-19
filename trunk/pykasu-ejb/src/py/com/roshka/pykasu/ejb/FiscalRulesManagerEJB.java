@@ -789,6 +789,19 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			Calendar c = Calendar.getInstance();
 			c.setTime(initialDate);
 			c = getPermanentCalendar(ruc,c.get(Calendar.MONTH)+1, c.get(Calendar.YEAR),"90");
+			/* * 
+			 * Mod: Cesquivel 
+			 * Fecha: 15-02-2012 
+			 * Se convierte a ceros los valores de tiempo para el calendar
+			 * de fecha de vto
+			 * */
+			c.set(	c.get(Calendar.YEAR),
+					c.get(Calendar.MONTH),
+					c.get(Calendar.DATE),
+					0,
+					0,
+					0);
+			//Fin Modificación Cesquivel.-
 			initialDate = c.getTime();
 			diffDate = Utils.DateDiff(initialDate, paymentDate);
 			
@@ -798,6 +811,16 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			c.set(Calendar.DATE,1);
 			c.set(Calendar.MONTH, Calendar.JANUARY);
 			c.set(Calendar.YEAR, 2007);
+			/* * 
+			 * Mod: Cesquivel 
+			 * Fecha: 16-02-2012 
+			 * Se convierte a ceros los valores de tiempo para el calendar
+			 * de fecha de vto
+			 * */
+			c.set(Calendar.HOUR, 0);
+			c.set(Calendar.MINUTE, 0);
+			c.set(Calendar.SECOND, 0);
+			//Fin Modificación Cesquivel.-
 			initialDate = c.getTime();
 
 			diffDate = Utils.DateDiff(initialDate, paymentDate);
