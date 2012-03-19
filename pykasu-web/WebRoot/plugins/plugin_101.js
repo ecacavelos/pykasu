@@ -123,18 +123,26 @@ function calcPorcentajeMoras(){
 	if (document.getElementById('declarationType').value=='| 2 | RECTIFICATIVA'){
 		norectificativa = 0;
 	}
+	
 	if(CONTRAVENSION_CMOV && CONTRAVENSION_CMOV != null){
 		document.getElementById('c84').value =  CONTRAVENSION_CMOV * norectificativa;		
 		if(document.getElementById('c84').value != null)
   		   colocarpuntos(document.getElementById('c84'));
 	}
 	
+	refreshVars();
+	TRGc85();
+	TRGc86();
+	TRGc86_0();
+	
 	var tmp86 = document.getElementById('c86').value;
 	var tmp84 = document.getElementById('c84').value;	
+	
 	var op = removeCommas(tmp86) - removeCommas(tmp84);
 	if(op < 0){
 		op = 0;
 	}
+	
 	
 	if (PORC_MORA && PORC_MORA != null){
 		document.getElementById('c87').value =  (PORC_MORA * op).toFixed(0);
@@ -144,6 +152,7 @@ function calcPorcentajeMoras(){
 		if(document.getElementById('c87').value != null)
   		   colocarpuntos(document.getElementById('c87'));
 	}		
+	
 	if (PORC_INTERES && PORC_INTERES != null){
 		document.getElementById('c88').value =  (PORC_INTERES * op).toFixed(0);
 		if(document.getElementById('c88').value < 0){
@@ -154,9 +163,6 @@ function calcPorcentajeMoras(){
 	}
 	
 	refreshVars();
-	TRGc85();
-	TRGc86();
-	TRGc86_0();
 	TRGc89();
 	
 	var tmp = (0).toFixed(0);
