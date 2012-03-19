@@ -28,6 +28,7 @@ function calculateAfterPlugin(){
 	pm_fiscalPeriodMounth = document.getElementById('fiscalPeriodMounth').value;
 	pm_fiscalPeriodYear = removeCommas(document.getElementById('fiscalPeriodYear').value);
 	pm_called = 1;
+	
 	if( PORC_MORA == 0 || 
 		PORC_INTERES == 0 || 
 		CONTRAVENSION_CMOV == 0 ||
@@ -138,7 +139,7 @@ function orirecti(){
 *	- el año de pres es año sigte si mes de declaración es 12
 */
 function controlaAnho(){
-	var mes = getValueFormatless('fiscalPeriodMounth');
+	/*var mes = getValueFormatless('fiscalPeriodMounth');
 	var anhoDecla = getValueFormatless('fiscalPeriodYear');
 	var anho = document.getElementById('paymentDate').value;
 	var partsAnho = anho.split('/');
@@ -201,7 +202,7 @@ function controlaAnho(){
 			asi mismo
 				
 			
-			*/
+			
 			//===== aqui viene el comentario del código
 //			if(anhoPago != anhoDecla)
 //				alert('El año de pago debe ser igual que el año de declaración.');
@@ -209,9 +210,6 @@ function controlaAnho(){
 	}else {
 		alert('El año de declaración no puede ser anterior al 2007.');
 	}		
-
-
-
 
 	/*if(  (document.getElementById('fiscalPeriodYear') != null) 
 	  && (document.getElementById('fiscalPeriodYear').value != 0)
