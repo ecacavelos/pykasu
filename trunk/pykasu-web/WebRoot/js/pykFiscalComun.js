@@ -31,6 +31,7 @@ function getPorcentajeMoras(component){
 	
 	if (component.value == valueOld){
 		valueOld = null;
+		ajaxProccessTerminate = true;
 		return;
 	}
 	if (component.id == 'ruc'){
@@ -158,11 +159,17 @@ function changeMoraInfo(){
 				}
 
 				if (key == 'PORC_MORA'){
-					PORC_MORA = parseFloat(value);				
+					PORC_MORA = parseFloat(value);		
+					if (PORC_MORA==0 || PORC_MORA==null){
+						PORC_MORA = parseFloat(value).toFixed(0);
+					}
 				}
 				
 				if (key == 'PORC_INTERES'){
 					PORC_INTERES = parseFloat(value);
+					if (PORC_INTERES==0 || PORC_INTERES==null){
+						PORC_INTERES = parseFloat(value).toFixed(0);
+					}
 					
 				}
 				if (key == 'CONTRAVENSION_CMOV'){
