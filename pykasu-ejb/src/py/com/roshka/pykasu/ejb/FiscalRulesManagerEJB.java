@@ -568,7 +568,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			}else{ //hay multa
 				logger.info("There are 'MORA'");
 				logger.info("Compute difference month");
-				Integer diffMonth = Utils.MonthDiff(expiringDate, paymentDate);
+				Integer diffMonth = Utils.MonthDiffInDays(expiringDate, paymentDate,diffDate);
 				logger.info("Difference month: " + diffMonth);
 				FiscalPercentOverdue fpo = getPercentOverdue(850,diffMonth);
 			    FiscalContravertionFee fcf = getFiscalContravertionFee(850,diffMonth);
@@ -843,7 +843,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		}else{ //hay multa
 			logger.info("There are 'MORA'");
 			logger.info("Compute difference month");
-			Integer diffMonth = Utils.MonthDiff(initialDate, paymentDate);
+			Integer diffMonth = Utils.MonthDiffInDays(initialDate, paymentDate, diffDate);
 			logger.info("Difference month: " + diffMonth);
 			FiscalPercentOverdue fpo = getPercentOverdue(850,diffMonth);
 		    FiscalContravertionFee fcf = getFiscalContravertionFee(850,diffMonth);
