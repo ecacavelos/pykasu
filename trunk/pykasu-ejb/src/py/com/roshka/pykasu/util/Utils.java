@@ -17,7 +17,7 @@ public class Utils {
 	static org.apache.log4j.Logger logger = org.apache.log4j.Logger
 			.getLogger(Utils.class);
 	
-	static final long ONE_HOUR = 60 * 60 * 1000L;
+	static final long ONE_HOUR = 60 * 60 * 1000L;//milisegundos
 
 	public static boolean isRaffleTime(java.util.Date date){
 		Calendar cal = Calendar.getInstance();
@@ -263,5 +263,19 @@ public class Utils {
 		sha1hash = md.digest();
 		return convertToHex(sha1hash);
     }
+    public static Integer MonthDiffInDays(Date dateFrom, Date dateTo, int diffDate){
+		
+		logger.info("Diferencia de meses tomando 1 mes como 30 dias" + dateFrom + " and " + dateTo);
 
+		/*Algoritmo: 1.Obtener la cantidad de dias que hay entre dateFrom y dateTo -> diffDate
+		 * 			 2.Loop de 30 en 30 comprobando si la diferencia corresponde a 1,2,3, etc. meses */
+		
+		int j = 1;
+		for (int i = 30; i<999999 ; i+=30){
+			if(diffDate <= i)
+				break;
+			else j++;
+		}
+		return new Integer(j);
+	}
 }

@@ -94,6 +94,7 @@ public class PaymentFormEJB implements
 	    	pf.setCreatedDate(cm.getSuggestedForPaySlip(new Date()));	    	
 	    	em.persist(pf);
 	    }catch(Exception e){
+	    	logger.error(e);
 	    	throw new AddFormException("Problem to save Payment Form \n" + e.getMessage());
 	    }
 	}
@@ -114,6 +115,7 @@ public class PaymentFormEJB implements
 			em.persist(pf);
 			
 		}catch (Exception e){
+			logger.error(e);
 			throw new UpdateFormException(e.getMessage());
 		}
 		

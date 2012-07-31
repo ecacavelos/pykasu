@@ -61,6 +61,11 @@ public class ShowForm extends Action {
                  || (request.getAttribute(Globals.FORM_BEAN)!= null)){
         
         	String formName = request.getParameter("FORM");
+        	if (formName.equals("800") || formName.equals("801") || formName.equals("804") || formName.equals("848") || formName.equals("850")  ){
+
+                return mapping.findForward("index");
+
+                }
         	
         	if(formName == null){
         		formName = (String)request.getAttribute(Globals.FORM_NAME);

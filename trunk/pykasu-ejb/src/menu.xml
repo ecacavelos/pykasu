@@ -127,7 +127,7 @@
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=130" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
 
-		<action name="Formulario 800" order="130" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+	<!-- 	<action name="Formulario 800" order="130" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=800"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=800" urlHelp="" description="" active="true" rolesAllowed=""/>		
 		</action>
@@ -151,7 +151,7 @@
 		<action name="Formulario 850" order="170" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=850"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=850" urlHelp="" description="" active="true" rolesAllowed=""/>			
-		</action>
+		</action> -->
 		
 	</program>
 <!-- 
