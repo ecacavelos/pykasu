@@ -61,15 +61,24 @@ public class ShowForm extends Action {
                  || (request.getAttribute(Globals.FORM_BEAN)!= null)){
         
         	String formName = request.getParameter("FORM");
-        	if (formName.equals("800") || formName.equals("801") || formName.equals("804") || formName.equals("848") || formName.equals("850")  ){
-
-                return mapping.findForward("index");
-
-                }
         	
+        	
+        	        	        	
         	if(formName == null){
         		formName = (String)request.getAttribute(Globals.FORM_NAME);
         	}
+        	
+        	if (formName != null){
+        		
+        		if ((formName.equals("800") || formName.equals("801") || formName.equals("804") || formName.equals("848") || formName.equals("850"))){
+        			logger.info("Se quiso editar o reabrir un formulario 800 " );
+                    return mapping.findForward("index");
+                 }
+        	}
+        	else{
+        		logger.info("formName: " + formName );
+        	}
+
         	
             Form formBean = null;
             
