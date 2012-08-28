@@ -1,0 +1,58 @@
+#main input.default{
+	background-color:#FFFFFF;
+}
+#main input.opaque{
+	background-color:#AAAAAA;
+}
+#main input.readonly{
+	background-color:#B7B3F0;
+}
+#main input.header{
+	width:100%;
+}
+#main td.header{
+	color: white;
+	font-weight: bold;
+	font-size: 10px;
+}
+#main th.header{
+	background-color: #990000;
+	color: white;
+	font-weight: bold;
+	font-size: 10px;
+	height:100%;
+}
+#main table.items{
+	padding: 0px;
+	margin: 0px;
+	background-color: #00FF00;
+}
+#main table.sections{
+	background-color:#FFFFFF;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	border-style:solid;	
+	border-color: #FF0000;
+	border-width:thin;
+}
+#main td.sections{
+	border-style:solid;	
+	border-color: #FF0000;
+	border-width:thin;
+	font-style: normal;
+	font-weight: normal;
+}
+#main th.sections{
+	border-style:solid;	
+	border-color: #FF0000;
+	border-width:thin;
+	background-color:#FFFFFF;
+}
+#main tr.line1{
+	/*background-color: #00FF00*/;
+}
+#main img.opaque{
+	height: 20px;
+	width: 100%;
+}
