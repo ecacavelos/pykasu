@@ -568,6 +568,7 @@
 	<rule name="TRGc94"   order="350" cellTargetId="c94" formula="c92 -c93"/>
 	<rule name="TRGc94_0" order="355" cellTargetId="c94" formula="0" condition="c94 &lt; 0"/>
 	<rule name="TRGc70"   order="360" cellTargetId="c70" formula="c93"/>
+	<rule name="TRGc71_2"   order="362" cellTargetId="c71" formula="c65+c66+ c67+c68+c69+c70"/>
 	<rule name="TRGc95"   order="370" cellTargetId="c95" formula="c39 * 0.025"/>
 	<rule name="TRGc96"   order="380" cellTargetId="c96" formula="c81*0.1"/>
 	<rule name="TRGc102"  order="390" cellTargetId="c102" formula="c88"/>
