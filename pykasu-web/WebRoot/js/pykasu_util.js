@@ -43,6 +43,18 @@ function colocarpuntos(field){
 	field.value = addCommas(removeCommas(value));
 
 }	
+function chequearCaraceteresValidos(field){ // Verifica si el nro ingresado es negativo
+	var value = field.value;
+	value = removeCommas(value);
+	if (isNaN(value)){ // si no es un numero
+		alert("Caracter no permitido, debe ingresar un numero positivo");
+		field.value = "";
+	}
+	else if (value < 0 ) {
+		alert("Debe ingresar un numero positivo");
+		field.value = "";
+	}
+}	
 
 function addCommas(nStr)
 {

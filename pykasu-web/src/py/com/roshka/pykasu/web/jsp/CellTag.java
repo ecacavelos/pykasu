@@ -337,7 +337,7 @@ public class CellTag extends TagSupport {
 								+ "\"");
 
 					if (cell.getType().equals(Cell.NUMBER)) {
-						pw.print(" onKeyUp=\"colocarpuntos(this)\"");
+						pw.print(" onKeyUp=\"colocarpuntos(this);chequearCaraceteresValidos(this)\"");
 					}
 
 					pw.print(" class = \"" + styleName + "\"");
