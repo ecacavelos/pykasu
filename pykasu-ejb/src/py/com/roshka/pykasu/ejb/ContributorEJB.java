@@ -77,6 +77,12 @@ public class ContributorEJB implements Contributor{
 				}
 				
 			}
+			//Agregado por Esteban Cacavelos - 26/10/2012. Control de grandes contribuyentes, los grandes contribuyentes  no pueden presentar por pykasu
+			if (r.getModalidadContribuyente() == 1){// 2 -> NO ES Gran contribuyente - 1 -> SI ES  Gran Contribuyente
+				logger.warn("EL CONTRIBUYENTE TIENE MODALIDAD DE GRAN CONTRIBUYENTE ~NO ESTA HABILITADO PARA OPERAR EN ERAS");
+				
+				throw new ExcludedContributorException("EL CONTRIBUYENTE TIENE MODALIDAD DE GRAN CONTRIBUYENTE ~NO ESTA HABILITADO PARA OPERAR EN ERAS");
+			}
 			return r;
 		}catch(NoResultException e){
 			throw new GetContributorInfoException(e.getMessage());
