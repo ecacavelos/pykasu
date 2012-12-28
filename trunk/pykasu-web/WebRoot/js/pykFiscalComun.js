@@ -245,16 +245,19 @@ function submitForm(action){
 		}
 		if(document.getElementById('declarationType') != null){
 			//hay que ver si es rectificativa, si es, controlar que este cargado el campo
-			if((document.getElementById('declarationType').value == '| 2 | RECTIFICATIVA')&&(document.getElementById('rectificativePPN').value == "")){
+			/*comentarios agregados por David Ayala y Esteban Cacavelos para eliminar el problema que se tiene cuando se elimina la opcion de RECTIFICATIVA en los forms.
+				Lineas afectadas: 251, 253, 257-260. 
+			*/
+			if((document.getElementById('declarationType').value == '| 2 | RECTIFICATIVA')/*&&(document.getElementById('rectificativePPN').value == "")*/){
 				alert('El tipo de Declaración Jurada es RECTIFICATIVA. Precisa un número de orden de la declaración a rectificar.');
-				document.getElementById('rectificativePPN').focus();
+				//document.getElementById('rectificativePPN').focus(); // Comentario agregado por D ayala y E cacavelos 
 				return;
 			}
 			
 			//hay que ver si NO es rectificativa, en caso de que no sea, poner un valor nulo en el campo rectificativePPN
-			if((document.getElementById('declarationType').value == '| 1 | ORIGINAL')||(document.getElementById('declarationType').value == '| 5 | CLAUSURA')|| (document.getElementById('declarationType').value=='| 3 | CLAUSURA')){
-				document.getElementById('rectificativePPN').value = "";
-			}
+/*			if((document.getElementById('declarationType').value == '| 1 | ORIGINAL')||(document.getElementById('declarationType').value == '| 5 | CLAUSURA')|| (document.getElementById('declarationType').value=='| 3 | CLAUSURA')){
+					document.getElementById('rectificativePPN').value = "";
+			}*/
 		}
 
 		if(document.getElementById('fiscalPeriodYear') != null){
