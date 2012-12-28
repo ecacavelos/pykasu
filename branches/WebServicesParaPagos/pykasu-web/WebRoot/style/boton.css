@@ -1,0 +1,27 @@
+.boton
+{
+	FONT-SIZE: 8pt;
+	COLOR: #005FA4;
+	FONT-FAMILY: Arial, Helvetica, sans-serif;
+	cursor:hand;
+	background-image: url(../imagenes/fondo-bot.gif);
+	background-repeat: repeat-x;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	padding: 3px;
+}
+
+.botonMenu{
+	FONT-SIZE: 8pt;
+	COLOR: #005FA4;
+	FONT-FAMILY: Arial, Helvetica, sans-serif;
+	cursor:hand;
+	background-image: url(../imagenes/fondo-bot.gif);
+	background-repeat: repeat-x;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	padding: 3px;
+	width: 200px;
+}

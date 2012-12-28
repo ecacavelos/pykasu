@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
+	<classpathentry kind="var" path="JBOSS_HOME/client/ejb3-persistence.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/default/deploy/ejb3.deployer/jboss-annotations-ejb3.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/default/deploy/ejb3.deployer/jboss-ejb3.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/default/deploy/ejb3.deployer/jboss-ejb3x.jar"/>
+	<classpathentry kind="var" path="LIB/log4j-1.2.9.jar"/>
+	<classpathentry kind="var" path="LIB/rhino/js.jar"/>
+	<classpathentry kind="var" path="LIB/rhino/js-14.jar"/>
+	<classpathentry kind="lib" path="/pykasu/lib/quartz-all-1.6.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/default/lib/mail.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/default/lib/rshkUtil.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<form type="120" description="Formulario 120" >
+	<sections type="header">
+		<section id="H1" name="HEADER1" description="SET"  order="0">
+			<line id="L0" name="H1L0" order="-1">
+				<cell id="paymentDate" col="0" type="DATE" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Día previsto de pago: dd/mm/aaaa" alignAddtionalDescription="TOP" events="onChange:getPorcentajeMoras"/>
+				<cell id="prePrintedNumber" col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Identificador del formulario:" alignAddtionalDescription="TOP" events="onblur:removeZeros#updatePreprinterNumber" xmlTagName="numeroDocumento" />
+			</line>
+			
+			<line id="L1" name="H1L1" order="0">
+				<cell id="ruc" col="1" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="RUC:" alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="ruc"/>
+				<cell id="dv" col="2"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="DV:"  alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="dv" colSpan="2" staticValue="true"/>				
+			</line>
+			<line id="L2" name="H1L2" order="1">
+				<cell id="firstLastName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Razón Social o Primer Apellido:" alignAddtionalDescription="TOP" xmlTagName="PrimerApellido"/>
+				<cell id="secondLastName" col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Apellido:" alignAddtionalDescription="TOP"/>				
+			</line>
+			<line id="L3" name="H1L3" order="2">
+				<cell id="firstName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Primer Nombre:" alignAddtionalDescription="LEFT"/>
+				<cell id="middleName"  col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Nombre:" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="L4" name="H1L4" order="3">
+				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/>
+				<cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" />
+				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
+			</line>			
+			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
+				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
+				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
+				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
+			</line>			
+		</section>
+	</sections>
+	<sections type="body">
+		<section id="R1" name="RUBRO1" description="Rubro 1. Monto de las operaciones del periodo y determinación del Débito Fiscal" order="10">
+			
+			<line id="TL1" name="TLS1" order="-1" description="RUBRO 1 - Monto de las operaciones del periodo y determinación del Débito fiscal">
+				<cell id="LBL_R1_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="Monto de las operaciones" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R1_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; Débito fiscal por &lt;/div&gt;&lt;BR&gt; 10%" alignAddtionalDescription="LEFT"/>
+				<cell id="LBL_R1_IA_C3" col="2" type="LABEL" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt; operaciones gravadas al &lt;/div&gt;&lt;BR&gt; 5%" alignAddtionalDescription="LEFT"/>
+			</line>
+			
+			<line id="IA" name="INC_A" order="0" description="| a | Enajenación de Bienes y Presentación de Servicios gravadas con tasa del 10%">
+				<cell id="c10" col="20"    type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="10" alignAddtionalDescription="LEFT" xmlTagName="C10"/>
+				<cell id="c19" col="40"    type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="19" alignAddtionalDescription="LEFT" xmlTagName="C19"/>
+				<cell id="cn1_1a" col="60" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription=""   alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Enajenación de Bienes y Presentación de Servicios gravadas con tasa del 5%">
+				<cell id="c11" col="0" 	type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="11" alignAddtionalDescription="LEFT" 	xmlTagName="C11"/>
+				<cell id="c0_1b" col="1" type="NUMBER" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c25" col="2" 	type="NUMBER" value="" opaque="false"  readOnly="true"  calculable="false" additionalDescription="25" alignAddtionalDescription="LEFT" 	xmlTagName="C25"/>
+			</line>
+			<line id="IC" name="INC_C" order="2" description="| c | Enajenación de autovehículos(Act. 25 del Dto. 6806/05)">
+				<cell id="c12" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="12" alignAddtionalDescription="LEFT"  xmlTagName="C12" />
+				<cell id="c20" col="1" type="NUMBER" value="" opaque="false"  readOnly="true"  calculable="false" additionalDescription="20" alignAddtionalDescription="LEFT" xmlTagName="C20"/>
+				<cell id="cn1_1c" col="2" type="NUMBER" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Remuneraciones que se autoasignan los propietarios de empresas unipersonales (Art. 6 Dto. 6806/05)">
+				<cell id="c13" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="13" alignAddtionalDescription="LEFT" xmlTagName="C13" />
+				<cell id="c21" col="1" type="NUMBER" value="" opaque="false"  readOnly="true"  calculable="false" additionalDescription="21" alignAddtionalDescription="LEFT" xmlTagName="C21"/>
+				<cell id="c0_1d" col="2" type="NUMBER" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Ajustes de precios, devoluciones realizadas y descuentos obtenidos por compras ya declaradas con crédito fiscal del 10% y recupero de impuesto por operaciones declaradas como incobrables">
+				<cell id="c14" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="14" alignAddtionalDescription="LEFT"  xmlTagName="C14"/>
+				<cell id="c22" col="1" type="NUMBER" value="" opaque="false" readOnly="flase"  calculable="true" additionalDescription="22" alignAddtionalDescription="LEFT" xmlTagName="C22"/>
+				<cell id="c26" col="2" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true" additionalDescription="26" alignAddtionalDescription="LEFT" xmlTagName="C26"/>
+			</line>
+			<line id="IF" name="INC_F" order="5" description="| f | Ajustes de precios, devoluciones realizadas y descuentos obtenidos por compras ya declaradas con crédito fiscal del 5% y recupero de impuesto por operaciones declaradas como incobrables">
+				<cell id="c15" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="15" alignAddtionalDescription="LEFT" xmlTagName="C15"/>
+				<cell id="c23" col="1" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true" additionalDescription="23" alignAddtionalDescription="LEFT" xmlTagName="C23"/>
+				<cell id="c27" col="2" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true" additionalDescription="27" alignAddtionalDescription="LEFT" xmlTagName="C27"/>
+			</line>
+			<line id="IG" name="INC_G" order="6" description="| g | Operaciones no garvadas o exentas del tributo.">
+				<cell id="c16" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="16" alignAddtionalDescription="LEFT" xmlTagName="C16"/>
+				<cell id="cn1_1g" col="1" type="NUMBER" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="cn2_1g" col="2" type="NUMBER" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IH" name="INC_H" order="7" description="| h | Operaciones de Exportación y Asimibiles (Art. 88 de la Ley)">
+				<cell id="c17" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="17" alignAddtionalDescription="LEFT" xmlTagName="C17"/>
+				<cell id="cn1_1h" col="1" type="NUMBER" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="cn2_1h" col="2" type="NUMBER" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="II" name="INC_I" order="8" description="| i | TOTAL">
+				<cell id="c18" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false"  additionalDescription="18" alignAddtionalDescription="LEFT" xmlTagName="C18"/>
+				<cell id="c24" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="24" alignAddtionalDescription="LEFT" xmlTagName="C24"/>
+				<cell id="c28" col="2" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="28" alignAddtionalDescription="LEFT" xmlTagName="C28"/>
+			</line>			
+		</section>
+		<section id="R2" name="RUBRO2" description="Rubro 2. Información complementaria sobre operaciones realizadas durante los últimos seis meses" order="20">
+			<line id="TL2" name="TLS2" order="-1" description="RUBRO 2 - Información complementaria sobre operaciones realizadas dureante los últimos seis (6) meses (incluido el periodo que se declara)">
+				<cell id="LBL_R2_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="Monto acumulado" alignAddtionalDescription="FILLED"/>
+			</line>
+			
+			<line id="IA" name="INC_A" order="0" description="| a | Enajenación de Bienes y Presentación de Servicios realizadas en el mercado interno gravadas con tasa del 10%">
+				<cell id="c29" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="29" alignAddtionalDescription="LEFT" xmlTagName="C29"/>
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Enajenación de Bienes y Presentación de Servicios realizadas en el mercado interno gravadas con tasa del 5%">
+				<cell id="c30" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="30" alignAddtionalDescription="LEFT" xmlTagName="C30"/>
+			</line>
+			<line id="IC" name="INC_C" order="2" description="| c | Total de operaciones gravadas">
+				<cell id="c31" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="31" alignAddtionalDescription="LEFT" xmlTagName="C31"/>
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Enajenaciones de bienes y presentación de servicios no gravadas o exentas del tributo">
+				<cell id="c32" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="32" alignAddtionalDescription="LEFT" xmlTagName="C32"/>
+			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Total de operaciones en el Mercado interno gravadas y no gravadas">
+				<cell id="c33" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="33" alignAddtionalDescription="LEFT" xmlTagName="C33"/>
+			</line>
+			<line id="IF" name="INC_F" order="5" description="| f | Operaciones de Exportación y asimilables (Art. 88 de la Ley)">
+				<cell id="c34" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="34" alignAddtionalDescription="LEFT" xmlTagName="C34"/>
+			</line>
+			<line id="IG" name="INC_G" order="6" description="| g | MONTO TOTAL DE LAS OPERACIONES">
+				<cell id="c35" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false"  additionalDescription="35" alignAddtionalDescription="LEFT" xmlTagName="C35"/>
+			</line>
+		</section>
+		<section id="R3" name="RUBRO3" description="Rubro 3. Detalle de compras e importaciones del periodo, afectadas indistintamente a diferentes operaciones del contribuyente " order="30">
+			<line id="TL3" name="TLS3" order="-1" description="RUBRO 3 - Detalle de compras e importaciones del periodo, afectadas indistintamente a diferentes operaciones del contribuyente">
+				<cell id="LBL_R3_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false"  additionalDescription="Monto de las compras" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R3_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="Crédito Fiscal" alignAddtionalDescription="LEFT"/>
+			</line>
+
+			<line id="IA" name="INC_A" order="0" description="| a | Con Crédito Fiscal del 10% indistintamente afectados a Exportaciones y asimilables y a operaciones en el Mercado Interno gravadas y no gravadas">
+				<cell id="c36" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="36" alignAddtionalDescription="LEFT" xmlTagName="C36" />
+				<cell id="c42" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="42" alignAddtionalDescription="LEFT" xmlTagName="C42" />
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Con Crédito Fiscal del 5% indistintamente afectados a Exportaciones y asimilables y a operaciones en el Mercado Interno gravadas y no gravadas">
+				<cell id="c37" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="37" alignAddtionalDescription="LEFT" xmlTagName="C37" />
+				<cell id="c43" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="43" alignAddtionalDescription="LEFT" xmlTagName="C43" />
+			</line>
+			<line id="IC" name="INC_C" order="2" description="| c | Con Crédito Fiscal del 10% indistintamente afectados a operaciones en el Mercado Interno gravadas y a operaciones en el Mercado Interno no gravadas o exentas">
+				<cell id="c38" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="38" alignAddtionalDescription="LEFT" xmlTagName="C38" />
+				<cell id="c44" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="44" alignAddtionalDescription="LEFT" xmlTagName="C44" />
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Con Crédito Fiscal del 5% indistintamente afectados a operaciones en el Mercado Interno gravadas y a operaciones en el Mercado Interno no gravadas o exentas">
+				<cell id="c39" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="39" alignAddtionalDescription="LEFT" xmlTagName="C39" />
+				<cell id="c45" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="45" alignAddtionalDescription="LEFT" xmlTagName="C45" />
+			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Con Crédito Fiscal del 10% indistintamente afectados a operaciones gravadas con Tasa del 10% y a operaciones gravadas con el 5%">
+				<cell id="c40" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="40" alignAddtionalDescription="LEFT" xmlTagName="C40" />
+				<cell id="c46" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="46" alignAddtionalDescription="LEFT" xmlTagName="C46" />
+			</line>
+			<line id="IF" name="INC_F" order="5" description="| f | Con Crédito Fiscal del 5% indistintamente afectados a operaciones gravadas con Tasa del 10% y a operaciones gravadas con el 5%">
+				<cell id="c41" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="41" alignAddtionalDescription="LEFT" xmlTagName="C41" />
+				<cell id="c47" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="false" additionalDescription="47" alignAddtionalDescription="LEFT" xmlTagName="C47" />
+			</line>
+		</section>
+		<section id="R4" name="RUBRO4" description="Rubro 4. Detalles de la compra del periodo y Credito Fiscal por Operaciones de exportación y asimilables" order="60">
+			<line id="TL4" name="TLS4" order="-1" description="RUBRO 4 - Detalles de la compra del periodo y Credito Fiscal por Operaciones de exportación y asimilables">
+				<cell id="LBL_R4_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Monto de las compras" alignAddtionalDescription="FILLED" />
+				<cell id="LBL_R4_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Crédito Fiscal" alignAddtionalDescription="LEFT" />
+			</line>
+				
+			<line id="IA" name="INC_A" order="0" description="| a | Compra de bienes (incluídas importaciones) y servicios con crédito fiscal del 10% directamente vinculadas a operaciones de Exportación y asimilables">
+				<cell id="c49" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" />
+				<cell id="c51" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true" additionalDescription="51" alignAddtionalDescription="LEFT" xmlTagName="C51" />
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Compra de bienes (incluídas importaciones) y servicios con crédito fiscal del 5% directamente vinculadas a operaciones de Exportación y asimilables">
+				<cell id="c50" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="50" alignAddtionalDescription="LEFT" xmlTagName="C50" />
+				<cell id="c52" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true" additionalDescription="52" alignAddtionalDescription="LEFT" xmlTagName="C52" />
+			</line>                       
+			<line id="IC" name="INC_C" order="2" description="| c | Crédito Fiscal del 10% atribuido proporcionalmente a operaciones de Exportación y asimilables">
+				<cell id="co100" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c53" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="53" alignAddtionalDescription="LEFT" xmlTagName="C53" />
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Crédito Fiscal del 5% atribuido proporcionalmente a operaciones de Exportación y asimilables">
+				<cell id="co101" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c54" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="54" alignAddtionalDescription="LEFT" xmlTagName="C54" />
+			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Saldo a favor del contribuyente del periodo anterior">
+				<cell id="co102" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c55" col="1" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="55" alignAddtionalDescription="LEFT" xmlTagName="C55" />
+			</line>                                                
+			<line id="IF" name="INC_F" order="5" description="| f | Total Acumulado de Credito Fiscal por exportaciones y asimilables">
+				<cell id="co103" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c56" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="56" alignAddtionalDescription="LEFT" xmlTagName="C56" />
+			</line>                                                
+			<line id="IG" name="INC_G" order="6" description="| g | Monto del Crédito Fiscal a ser utilizado en el período que se liquida para operaciones gravadas al 10%">
+				<cell id="co104" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c57" col="1" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="57" alignAddtionalDescription="LEFT" xmlTagName="C57" events="onblur:checkC57"/>
+			</line>                                                
+			<line id="IH" name="INC_H" order="7" description="| h | Monto del Crédito Fiscal a ser utilizado en el período que se liquida para operaciones gravadas al 5%">
+				<cell id="co105" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c58" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="58" alignAddtionalDescription="LEFT" xmlTagName="C58" />
+			</line>                                                
+			<line id="II" name="INC_I" order="8" description="| i | SALDO A FAVOR DEL EXPORTADOR Y ASIMILABLES:">
+				<cell id="co106" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c59" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="59" alignAddtionalDescription="LEFT" xmlTagName="C59" />
+			</line>                                                
+		</section>		
+		<section id="R5" name="RUBRO5" description="Rubro 5. Detalles de la compra del periodo y determinación del Crédito Fiscal para operaciones gravadas" order="70">
+			<line id="TL5" name="TLS5" order="-1" description="RUBRO 5 - Detalles de la compra del periodo y determinación del Crédito Fiscal para operaciones gravadas">
+				<cell id="LBL_R5_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Monto de las compras" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R5_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt;Crédito fiscal para &lt;/div&gt;&lt;BR&gt; 10%" alignAddtionalDescription="LEFT"/>
+				<cell id="LBL_R5_IA_C3" col="2" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt; operaciones gravadas al &lt;/div&gt;&lt;BR&gt;5%" alignAddtionalDescription="LEFT"/>
+			</line>
+
+			<line id="IA" name="INC_A" order="0" description="| a | Con crédito fiscal del 10% directamente vinculados a operaciones gravadas a la tasa del 10%">
+				<cell id="c61" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="61" alignAddtionalDescription="LEFT" xmlTagName="C61"/>
+				<cell id="c70" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="70" alignAddtionalDescription="LEFT" xmlTagName="C70"/>
+				<cell id="co107" col="2" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Con crédito fiscal del 5% directamente vinculados a operaciones gravadas a la tasa del 10%">
+				<cell id="c62" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="62" alignAddtionalDescription="LEFT" xmlTagName="C62"/>
+				<cell id="c71" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="71" alignAddtionalDescription="LEFT" xmlTagName="C71"/>
+				<cell id="co108" col="2" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>                       
+			<line id="IC" name="INC_C" order="2" description="| c | Con crédito fiscal del 10% directamente vinculados a operaciones gravadas a la tasa del 5%">
+				<cell id="c63" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="63" alignAddtionalDescription="LEFT" xmlTagName="C63"/>
+				<cell id="co109" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c79" col="2" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="79" alignAddtionalDescription="LEFT" xmlTagName="C79"/>
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Con crédito fiscal del 5% directamente vinculados a operaciones gravadas a la tasa del 5%">
+				<cell id="c64" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="64" alignAddtionalDescription="LEFT" xmlTagName="C64"/>
+				<cell id="co110" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c80" col="2" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="80" alignAddtionalDescription="LEFT" xmlTagName="C80"/>
+			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Crédito Fiscal del 10% atribuido proporcionalmente a operaciones gravadas a la tasa del 10%">
+				<cell id="co111" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c72" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="72" alignAddtionalDescription="LEFT" xmlTagName="C72"/>
+				<cell id="co112" col="2" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>                                           
+			<line id="IF" name="INC_F" order="5" description="| f | Crédito Fiscal del 5% atribuido proporcionalmente a operaciones gravadas a la tasa del 10%">
+				<cell id="c113" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c73" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="73" alignAddtionalDescription="LEFT" xmlTagName="C73"/>
+				<cell id="co114" col="2" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>                                           
+			<line id="IG" name="INC_G" order="6" description="| g | Crédito Fiscal del 10% atribuido proporcionalmente a operaciones gravadas a la tasa del 5%">
+				<cell id="co115" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="co116" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c81" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="81" alignAddtionalDescription="LEFT" xmlTagName="C81"/>
+			</line>                                           
+			<line id="IH" name="INC_H" order="7" description="| h | Crédito Fiscal del 5% atribuido proporcionalmente a operaciones gravadas a la tasa del 5%">
+				<cell id="co117" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="co118" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c82" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="82" alignAddtionalDescription="LEFT" xmlTagName="C82"/>
+			</line>                                           
+			<line id="II" name="INC_I" order="8" description="| i | Monto de la compra del autovehículo y Crédito Fiscal">
+				<cell id="c65" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="65" alignAddtionalDescription="LEFT" xmlTagName="C65"/>
+				<cell id="c74" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="74" alignAddtionalDescription="LEFT" xmlTagName="C74"/>
+				<cell id="co119" col="2" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>                                           
+			<line id="IJ" name="INC_J" order="9" description="| j | Crédito fiscal del 10% vinculado a remuneraciones que se autoasignan los propieratarios de empresas unipersonales">
+				<cell id="c66" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="66" alignAddtionalDescription="LEFT" xmlTagName="C66"/>
+				<cell id="c75" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="75" alignAddtionalDescription="LEFT" xmlTagName="C75"/>
+				<cell id="co120" col="2" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IK" name="INC_K" order="10" description="| k | Crédito fiscal del 5% vinculado a remuneraciones que se autoasignan los propieratarios de empresas unipersonales">
+				<cell id="c67" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="67" alignAddtionalDescription="LEFT" xmlTagName="C67"/>
+				<cell id="c76" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="76" alignAddtionalDescription="LEFT" xmlTagName="C76"/>
+				<cell id="co121" col="2" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IL" name="INC_L" order="11" description="| l | Ajustes de precios, devoluciones y descuentos otorgados, por ventas ya declaradas con tasa del 10% y operaciones gravadas con tasa del 10% declaradas incobrables">
+				<cell id="c68" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="68" alignAddtionalDescription="LEFT" xmlTagName="C68"/>
+				<cell id="c77" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="77" alignAddtionalDescription="LEFT" xmlTagName="C77"/>
+				<cell id="co122" col="2" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IM" name="INC_M" order="12" description="| m | Ajustes de precios, devoluciones y descuentos otorgados, por ventas ya declaradas con tasa del 5% y operaciones gravadas con tasa del 5% declaradas incobrables">
+				<cell id="c69" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="69" alignAddtionalDescription="LEFT" xmlTagName="C69"/>
+				<cell id="co123" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c83" col="2" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="83" alignAddtionalDescription="LEFT" xmlTagName="C83"/>
+			</line>
+			<line id="IN" name="INC_N" order="13" description="| n | TOTAL CRÉDITO FISCAL POR OPERACIONES GRAVADAS">
+				<cell id="c124" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c78" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="78" alignAddtionalDescription="LEFT" xmlTagName="C78"/>
+				<cell id="c84" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="84" alignAddtionalDescription="LEFT" xmlTagName="C84"/>
+			</line>				
+		</section>	
+		<section id="R6" name="RUBRO6" description="Rubro 6. Determinación del Impuesto" order="80">
+			<line id="TL6" name="TLS6" order="-1" description="RUBRO 6 - Determinación del Impuesto">
+				<cell id="LBL_R6_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt;Operaciones gravadas&lt;/div&gt;&lt;BR&gt;10%" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R6_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;con tasa del &lt;/div&gt; &lt;BR&gt;5%" alignAddtionalDescription="LEFT"/>
+			</line>
+			
+			<line id="IA" name="INC_A" order="0" description="| a | Dédito Fiscal">
+				<cell id="c85" col="0" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="85" alignAddtionalDescription="LEFT" xmlTagName="C85"/>
+				<cell id="c100" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true" additionalDescription="100" alignAddtionalDescription="LEFT" xmlTagName="C101"/>
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Cédito Fiscal por las operaciones gravadas">
+				<cell id="c86" col="0" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="86" alignAddtionalDescription="LEFT" xmlTagName="C86"/>
+				<cell id="c101" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="101" alignAddtionalDescription="LEFT" xmlTagName="C101"/>
+			</line>
+			<line id="IC" name="INC_C" order="2" description="| c | Crédito Fiscal por las operaciones de exportación">
+				<cell id="c87" col="0" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="87" alignAddtionalDescription="LEFT" xmlTagName="C87"/>
+				<cell id="c102" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="102" alignAddtionalDescription="LEFT" xmlTagName="C102"/>
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Saldo a favor del contribuyente del periodo anterior">
+				<cell id="c88" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="88" alignAddtionalDescription="LEFT"  xmlTagName="C88"/>
+				<cell id="c103" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="103" alignAddtionalDescription="LEFT" xmlTagName="C103"/>
+			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Saldo a favor del Contribuyente">
+				<cell id="c89" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false"  additionalDescription="89" alignAddtionalDescription="LEFT" xmlTagName="C89"/>
+				<cell id="c104" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="104" alignAddtionalDescription="LEFT" xmlTagName="C104"/>
+			</line>
+			<line id="IF" name="INC_F" order="5" description="| f | Impuesto determiando">
+				<cell id="c90" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="90" alignAddtionalDescription="LEFT"  xmlTagName="C90"/>
+				<cell id="c105" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="105" alignAddtionalDescription="LEFT" xmlTagName="C105"/>
+			</line>
+		</section>		
+		<section id="R7" name="RUBRO7" description="Rubro 7. Liquidación final" order="90">
+			<line id="TL7" name="TLS7" order="-1" description="RUBRO 7 - Liquidación final">
+				<cell id="LBL_R6_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt;Monto a&lt;/div&gt;&lt;BR&gt;Contribuyente" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R6_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;favor de&lt;/div&gt;&lt;BR&gt;Fisco" alignAddtionalDescription="LEFT"/>
+			</line>
+			
+			<line id="IA" name="INC_A" order="0" description="| a | Impuesto determinado para operaciones gravadas al 10% y 5%">
+				<cell id="co124" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c112" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true" additionalDescription="112" alignAddtionalDescription="LEFT" xmlTagName="C112"/>
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Saldo a favor del contribuyente del periodo anterior">
+				<cell id="c106" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="106" alignAddtionalDescription="LEFT" xmlTagName="C106"/>
+				<cell id="co125" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IC" name="INC_C" order="2" description="| c | Pago previo">
+				<cell id="c107" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="107" alignAddtionalDescription="LEFT" xmlTagName="C107"/>
+				<cell id="co126" col="1" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Pago con Créditos Fiscales Disponibles, Certificados de Créditos Tributario, Nota de Crédito Tributario y Bonos del Tesoro">
+				<cell id="c108" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="108" alignAddtionalDescription="LEFT" xmlTagName="C108"/>
+				<cell id="co127" col="1" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IE" name="INC_E" order="4" description="| e | Retenciones computables por operaciones gravadas al 10% y 5%">
+				<cell id="c109"  col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true" additionalDescription="109" alignAddtionalDescription="LEFT" xmlTagName="C109"/>
+				<cell id="co128" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IF" name="INC_F" order="5" description="| f | Multa por presentar la declaración jurada con posterioridad al vencimiento">
+				<cell id="co129" col="0" type="NUMBER" value="" opaque="true" readOnly="true" calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c113"  col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="113" alignAddtionalDescription="LEFT" xmlTagName="C113"/>
+			</line>
+			<line id="IG" name="INC_G" order="6" description="| g | Subtotales">
+				<cell id="c110" col="0" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="110" alignAddtionalDescription="LEFT" xmlTagName="C110"/>
+				<cell id="c114" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true" additionalDescription="114" alignAddtionalDescription="LEFT" xmlTagName="C114"/>
+			</line>
+			<line id="IH" name="INC_H" order="7" description="| h | Saldo a favor del Contribuyente">
+				<cell id="c111"  col="0" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="111" alignAddtionalDescription="LEFT" xmlTagName="C111"/>
+				<cell id="co130" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription=""    alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="II" name="INC_I" order="8" description="| i | Saldo a favor del Fisco">
+				<cell id="co131" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription=""    alignAddtionalDescription="LEFT"/>
+				<cell id="c115"  col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true"  additionalDescription="115" alignAddtionalDescription="LEFT" xmlTagName="C115"/>
+			</line>
+			<line id="IJ" name="INC_J" order="9" description="| j | Multa por mora ....% sobre el resultado de  ">
+				<cell id="co132" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c116" col="1" type="NUMBER" value="" opaque="false" readOnly="true"  calculable="true" additionalDescription="116" alignAddtionalDescription="LEFT" xmlTagName="C116"/>
+			</line>
+			<line id="IK" name="INC_K" order="10" description="| k | Intereses ....% sobre el resultado de">
+				<cell id="co133" col="0" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="true"  additionalDescription=""   alignAddtionalDescription="LEFT"/>
+				<cell id="c117"  col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="117" alignAddtionalDescription="LEFT" xmlTagName="C117"/>
+			</line>
+			<line id="IL" name="INC_L" order="11" description="| l | Saldo definitivo a pagar a favor del Fisco">
+				<cell id="co134" col="0" type="NUMBER" value="" opaque="true"  readOnly="true" calculable="false" additionalDescription=""    alignAddtionalDescription="LEFT"/>
+				<cell id="c118"  col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="118" alignAddtionalDescription="LEFT" xmlTagName="C118"/>
+			</line>
+		</section>
+		<section id="R8" name="RUBRO8" description="Rubro 8. Información complementaria" order="100">
+			<line id="TL8" name="TLS8" order="-1" description="RUBRO 8 - Información complementaria">
+				<cell id="LBL_R8_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Imporote" alignAddtionalDescription="FILLED" />
+			</line>
+			
+			<line id="IA" name="INC_A" order="0" description="| a | Credito fiscal del 10% de la adquisicion de bienes y servivios directamente vinculados a la act. Agrop. Desarrollada por la emp.  agro-indust.">
+				<cell id="c146" col="0"  type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="146" alignAddtionalDescription="LEFT" xmlTagName="C146"/>
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Credito fiscal del 5% de la adquisicion de bienes y servivios directamente vinculados a la act. Agrop. Desarrollada por la emp.  agro-indust.">
+				<cell id="c147" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="147" alignAddtionalDescription="LEFT" xmlTagName="C147"/>
+			</line>
+			<line id="IC" name="INC_C" order="2" description="| c | Monto total de las ventas realizadas a personas fisicas no domiciliadas en el pais, por parte de contrib. Inscriptos en el registos DNA">
+				<cell id="c148" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="148" alignAddtionalDescription="LEFT" xmlTagName="C148"/>
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Monto total de las ventas realizadas a personas fisicas o juridicas no domiciliadas en el pais, por parte de contrib. Inscriptos en el registos DNA">
+				<cell id="c149" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="149" alignAddtionalDescription="LEFT" xmlTagName="C149"/>
+			</line>
+		</section>
+		<section  id="STATUS" name="STATUS" description="Estado" order="120">
+			<line id="STATUSLINE" name="STATUS" order="1" description="Estado del presente documento:">
+				<cell id="status" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT" choices="PROCESO;CONFIRMADO"/>
+			</line>
+		</section>		
+	<!-- 
+		<section id="R9" name="RUBRO9" description="Rubro 8. Información complementaria" order="100">
+			<line id="TL8" name="TLS8" order="-1" description="RUBRO 8 - Información complementaria">
+				<cell id="LBL_R8_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Imporote" alignAddtionalDescription="FILLED" />
+			</line>
+			
+			<line id="IA" name="INC_A" order="0" description="| a | Credito fiscal del 10% de la adquisicion de bienes y servivios directamente vinculados a la act. Agrop. Desarrollada por la emp.  agro-indust.">
+				<cell id="c146" col="0"  type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="146" alignAddtionalDescription="LEFT" xmlTagName="C146"/>
+			</line>
+			<line id="IB" name="INC_B" order="1" description="| b | Credito fiscal del 5% de la adquisicion de bienes y servivios directamente vinculados a la act. Agrop. Desarrollada por la emp.  agro-indust.">
+				<cell id="c147" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="147" alignAddtionalDescription="LEFT" xmlTagName="C147"/>
+			</line>
+			<line id="IC" name="INC_C" order="2" description="| c | Monto total de las ventas realizadas a personas fisicas no domiciliadas en el pais, por parte de contrib. Inscriptos en el registos DNA">
+				<cell id="c148" col="0" type="NUMBER" value="" opaque="false" readOnly="false"  calculable="true"  additionalDescription="148" alignAddtionalDescription="LEFT" xmlTagName="C148"/>
+			</line>
+			<line id="ID" name="INC_D" order="3" description="| d | Monto total de las ventas realizadas a personas fisicas o juridicas no domiciliadas en el pais, por parte de contrib. Inscriptos en el registos DNA">
+				<cell id="c149" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="149" alignAddtionalDescription="LEFT" xmlTagName="C149"/>
+			</line>
+		</section>
+ -->	
+		</sections>
+
+	<rules>
+		<!-- RUBRO 1  -->
+		<rule name="TRGS1L1"  order="10"  cellTargetId="c19" formula="c10 * 0.1"/>
+		<rule name="TRGS1L2"  order="20"  cellTargetId="c25" formula="c11 * 0.05"/>
+		<rule name="TRGS1L3"  order="30"  cellTargetId="c20" formula="c12 * 0.1"/>
+		<rule name="TRGS1L4"  order="40"  cellTargetId="c21" formula="c13 * 0.1"/>		
+		<rule name="TRGS1L9"  order="50"  cellTargetId="c18" formula="c10+c11+c12+c13+c14+c15"/>					
+		<rule name="TRGS1L10" order="60"  cellTargetId="c24" formula="c19+c20+c21+c22+c23"/>					
+		<rule name="TRGS1L11" order="70"  cellTargetId="c28" formula="c25+c26+c27"/>					
+		
+		<!-- RUBRO 2  -->
+		<rule name="TRGS2L3"  order="80"  cellTargetId="c31" formula="c29 + c30"/> <!--31 -->
+		<rule name="TRGS2L5"  order="90"  cellTargetId="c33" formula="c31 + c32"/> <!--33 -->		
+		<rule name="TRGS2L7"  order="100" cellTargetId="c35" formula="c33 + c34"/> <!--35 -->
+		
+		<!-- RUBRO 3  -->
+		<rule name="TRGS3L1"  order="110"  cellTargetId="c42" formula="c36 * 0.1"/>
+		<rule name="TRGS3L2"  order="120"  cellTargetId="c43" formula="c37 * 0.05"/><!--43 -->
+		<rule name="TRGS3L3"  order="130"  cellTargetId="c44" formula="c38 * 0.1"/>
+		<rule name="TRGS3L4"  order="140"  cellTargetId="c45" formula="c39 * 0.05"/>		
+		<rule name="TRGS3L5"  order="150"  cellTargetId="c46" formula="c40 * 0.1"/>					
+		<rule name="TRGS3L6"  order="160"  cellTargetId="c47" formula="c41 * 0.05"/>	
+		
+		<!-- RUBRO 4  -->
+		<rule name="TRGS4L1"   order="170"  cellTargetId="c51" formula="c49 * 0.1"/>
+		<rule name="TRGS4L2"   order="180"  cellTargetId="c52" formula="c50 * 0.05"/>
+		<rule name="TRGS4L3"   order="183"  cellTargetId="c53" formula="(c34 / c35) * c42" condition="c35 &gt; 0" />
+		<rule name="TRGS4L4"   order="185"  cellTargetId="c54" formula="(c34 / c35) * c43" condition="c35 &gt; 0" />
+		<rule name="TRGS4L5"   order="190"  cellTargetId="c56" formula="c51 + c52 + c53 + c54 + c55"/>
+		<rule name="TRGS4L101" order="200"  cellTargetId="c59" formula="c56 - c57 - c58"  />  
+		<rule name="TRGS4L102" order="210"  cellTargetId="c59" formula="0" condition="c59 &lt; 0" />  
+				
+		<!-- RUBRO 5  -->
+		<rule name="TRGS5L1"  order="220"  cellTargetId="c70" formula="c61 * 0.1"/> <!--70 -->
+		<rule name="TRGS5L2"  order="230"  cellTargetId="c71" formula="c62 * 0.05"/><!--71 -->
+		<rule name="TRGS5L3"  order="240"  cellTargetId="c79" formula="c63 * 0.1"/><!--79 -->
+		<rule name="TRGS5L4"  order="250"  cellTargetId="c80" formula="c64 * 0.05"/><!--80 -->
+		<rule name="TRGS5L9"  order="260"  cellTargetId="c74" formula="c65 * 0.1"/> <!--74 -->
+		<rule name="TRGS5L10" order="270"  cellTargetId="c75" formula="c66 * 0.1"/> <!--75 -->
+		<rule name="TRGS5l11" order="280"  cellTargetId="c76" formula="c67 * 0.05"/><!--76 -->
+		<rule name="TRGS5L12" order="290"  cellTargetId="c77" formula="c68 * 0.1"/> <!--77 -->
+		<rule name="TRGS5L13" order="300"  cellTargetId="c83" formula="c69 * 0.05"/><!--83 -->
+		<rule name="TRGS5L141" order="310" cellTargetId="c78" formula="c70 + c71 + c72 + c73 + c74 + c75 + c76 + c77"/> <!--78 -->
+		<rule name="TRGS5L151" order="320" cellTargetId="c84" formula="c79 + c80 + c81 + c82 + c83"/><!--84 -->
+		
+		<!-- RUBRO 6  -->
+		<rule name="TRGS6L11"  order="330"  cellTargetId="c85" formula="c24"/> <!--85 -->
+		<rule name="TRGS6L12"  order="340"  cellTargetId="c100" formula="c28"/> <!--100 -->
+		<rule name="TRGS6L21"  order="350"  cellTargetId="c86" formula="c78"/> <!--86 -->
+		<rule name="TRGS6L22"  order="360"  cellTargetId="c101" formula="c84"/> <!--101 -->
+		<rule name="TRGS6L31"  order="370"  cellTargetId="c87" formula="c57"/> <!--87 -->
+		<rule name="TRGS6L32"  order="380"  cellTargetId="c102" formula="c58"/> <!--102 -->
+		<rule name="TRGS6L511" order="390"  cellTargetId="c89" formula="((c86 + c87 + c88) - c85)" /> <!--89 -->
+		<rule name="TRGS6L512" order="395"  cellTargetId="c89" formula="0" condition="c89 &lt; 0"/> <!--89 -->
+		<rule name="TRGS6L521" order="400"  cellTargetId="c104" formula="((c101 + c102 + c103) - c100)" /> <!--104 -->
+		<rule name="TRGS6L522" order="405"  cellTargetId="c104" formula="0" condition="c104 &lt; 0"/> <!--104 -->
+		<rule name="TRGS6L612" order="410"  cellTargetId="c90" formula="(c85 - (c86 + c87 + c88))" /> <!--90 -->
+		<rule name="TRGS6L611" order="415"  cellTargetId="c90" formula="0" condition="c90 &lt; 0"/> <!--90 -->
+		<rule name="TRGS6L621" order="420"  cellTargetId="c105" formula="(c100 - (c101 + c102 + c103))"/> <!--105 -->
+		<rule name="TRGS6L622" order="425"  cellTargetId="c105" formula="0" condition="c105 &lt; 0"/> <!--105 -->
+	
+		<!-- RUBRO 7 -->
+		<rule name="TRG_C112"  order="430"  cellTargetId="c112" formula="c90 + c105"/> <!--112 -->
+		<rule name="TRG_C110"  order="430"  cellTargetId="c110" formula="c106 + c107 + c108 + c109"/> 
+		<rule name="TRG_C114"  order="450"  cellTargetId="c114" formula="c112 + c113"/> 
+
+		<rule name="TRG_C111_1"  order="460"  cellTargetId="c111" formula="c110 - c114"  /> 
+		<rule name="TRG_C111_2"  order="465"  cellTargetId="c111" formula="0" condition="c111 &lt;= 0"/> 
+		<rule name="TRG_C115_1"  order="470"  cellTargetId="c115" formula="c114 - c110" />
+		<rule name="TRG_C115_2"  order="475"  cellTargetId="c115" formula="0" condition="c115 &lt;= 0"/> 		
+		<rule name="TRG_C116"  	 order="480"  cellTargetId="c116" formula="0" condition="c115 &lt; c113"/> 
+		<rule name="TRG_C117"  	 order="485"  cellTargetId="c117" formula="0" condition="c115 &lt; c113"/> 
+		
+		<rule name="TRG_C118"  order="490"  cellTargetId="c118" formula="c115 + c116 + c117"/> 
+		
+	</rules>	
+
+</form>
