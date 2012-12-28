@@ -66,6 +66,7 @@ function calcPorcentajeMoras(){
 		
 		}
 	}
+	c29 = parseInt(removeCommas(document.getElementById('c29').value));
 	
 	var tmp1 = removeCommas(document.getElementById('c33').value);
 	var tmp2 = removeCommas(document.getElementById('c29').value);
@@ -85,7 +86,9 @@ function calcPorcentajeMoras(){
 		if(document.getElementById('c35').value != null)
   		   colocarpuntos(document.getElementById('c35'));
 	}
-	
+	TRGc31();
+	TRGc33();
+	TRGc33_0();
 	TRGc36();
 	refreshVars();
 	
