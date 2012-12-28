@@ -24,7 +24,8 @@ public class Ruc implements Serializable{
 	private String oldRuc;
 	private Integer verifiedDigit;
 	private String contributorName;
-
+	private Integer modalidadContribuyente; //agregado por Esteban Cacavelos 25/10/2012
+	
 	protected Ruc(){
 	}
 
@@ -196,7 +197,18 @@ public class Ruc implements Serializable{
 	public void setVerifiedDigit(Integer verifiedDigit) {
 		this.verifiedDigit = verifiedDigit;
 	}
+	
+	//agregado por Esteban Cacavelos 25/10/2012
+	@Column (name="modalidad_contribuyente")	
+	public Integer getModalidadContribuyente() {
+		return modalidadContribuyente;
+	}
 
+
+	public void setModalidadContribuyente(Integer modalidadContribuyente) {
+		this.modalidadContribuyente = modalidadContribuyente;
+	}
+	/////fin modalidad contribuyente.
 
 	public String toString(){
 		return "RUC Nuevo: "+getNewRuc() + "RUC Nuevo: "+ getOldRuc() + " First Name" + getContributorName();  
