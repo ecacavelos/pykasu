@@ -78,6 +78,11 @@
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=111"  urlHelp="" description="" active="true" rolesAllowed=""/>
 			<action name="Buscar formularios" order="20" url="findForms.do?FORM=111" urlHelp="" description="" active="true" rolesAllowed=""/>			
 		</action>
+		
+		<action name="Formulario 112" order="76" url="" urlHelp="" description="" active="true" rolesAllowed="users">
+			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=112"  urlHelp="" description="" active="true" rolesAllowed=""/>
+			<action name="Buscar formularios" order="20" url="findForms.do?FORM=112" urlHelp="" description="" active="true" rolesAllowed=""/>			
+		</action>
 
 		<action name="Formulario 117" order="80" url="" urlHelp="" description="" active="true" rolesAllowed="users">
 			<action name="Nuevo formulario" order="10"   url="showForm.do?FORM=117"  urlHelp="" description="" active="true" rolesAllowed=""/>
