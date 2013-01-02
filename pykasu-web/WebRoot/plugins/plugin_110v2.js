@@ -312,7 +312,7 @@ function controlaAnho(){
 			}
 		}else{//Si no es clausura, el a–o tiene que ser menor al actual
 			if(fiscalYear >= anhoActual){
-				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el a–o debe ser menor al a–o actual');
+				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el anho debe ser menor al anho actual');
 				document.getElementById('fiscalPeriodYear').value = "";
 				document.getElementById('fiscalPeriodYear').focus();
 				return;
@@ -589,7 +589,7 @@ function beforeSave(){
 //				return false;
 //			}
 //	}	
-//	return true;
+	return true;
  }		
 
 function notNullVaule(value){

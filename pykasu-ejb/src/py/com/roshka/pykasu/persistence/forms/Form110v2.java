@@ -8,6 +8,7 @@ import py.com.roshka.pykasu.persistence.users.User;
 @Table (name = "form_110v2")
 public class Form110v2 extends TaxForm {
 
+	private Double c6;
 	private Double c10;
 	private Double c16;
 	private Double c22;
@@ -1061,6 +1062,11 @@ public class Form110v2 extends TaxForm {
 		this.c71 = c71;
 	}
 	
-	
+	public Double getC6() {
+		return c6;
+	}
 
+	public void setC6(Double c6) {
+		this.c6 = c6;
+	}
 }

@@ -20,9 +20,10 @@
 				<cell id="middleName"  col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Nombre:" alignAddtionalDescription="LEFT"/>
 			</line>
 			<line id="L4" name="H1L4" order="3">
-				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/>
-				<cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" />
-				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="DeclaraciÃ³n jurada en carÃ¡cter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
+				<!-- <cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/> -->
+				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 5 | CLAUSURA" events="onChange: calculate;"/>
+				<!-- <cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" /> -->
+				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
 			</line>			
 			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
 				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
@@ -240,7 +241,7 @@
 			<line id="L5020" order="20" >
 				<cell id="t56" col="1" type="LABEL"  value="" opaque="true" readOnly="true" calculable="true" additionalDescription="|a| Caja" alignAddtionalDescription="LEFT"/>
 				<cell id="c56" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="56" xmlTagName="C56"/>
-				<cell id="t68" col="3" type="LABEL"  value="" opaque="true" readOnly="true" calculable="false" additionalDescription="|m| No corriente" alignAddtionalDescription="LEFT"/>
+				<cell id="t68" col="3" type="LABEL"  value="" opaque="false" readOnly="true" calculable="false" additionalDescription="|m| No corriente" alignAddtionalDescription="LEFT"/>
 				<cell id="c68" col="4" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="68" xmlTagName="C68"/>
 			</line>
 			
