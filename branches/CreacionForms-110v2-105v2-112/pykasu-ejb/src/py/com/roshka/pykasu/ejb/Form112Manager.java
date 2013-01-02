@@ -38,7 +38,7 @@ public class Form112Manager extends GenericFormManagerEJB implements
 	static org.apache.log4j.Logger logger = org.apache.log4j.Logger
 			.getLogger(Form112Manager.class);
 	
-	public static final String FILE_Form112_XML = "Form112.xml"; 
+	public static final String FILE_Form112_XML = "form112.xml"; 
 
 	@EJB protected UserManager userManager;
 	@EJB protected Contributor contributor;	
