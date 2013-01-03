@@ -138,7 +138,7 @@
 				<cell id="c40" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="40" xmlTagName="C40" />
 			</line>
 			
-			<line id="L2050" order="50" description="|e| Impuesto liquidado en el ejercicio (Inc. a -€“ b -€“ d cuando Inc. a sea mayor a sumatoria de Inc. b y d, caso contrario consignar cero)" >
+			<line id="L2050" order="50" description="|e| Impuesto liquidado en el ejercicio (Inc. a - b - d cuando Inc. a sea mayor a sumatoria de Inc. b y d, caso contrario consignar cero)" >
 				<cell id="c41" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="41" xmlTagName="C41" />
 			</line>			
 
@@ -186,7 +186,7 @@
 				<cell id="c48" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="48" xmlTagName="C48"/>				
 			</line>
 
-			<line id="L4080" order="45" description="|h| Subtotal (Inc. b + c + d + e + f, Col. I); (Inc. a + g, Col. II) : Subtotal (Inc. b + c + d + e + f, Col. I); (Inc. a + g, Col. II)" >
+			<line id="L4080" order="45" description="|h| Subtotal (Inc. b + c + d + e + f, Col. I); (Inc. a + g, Col. II)" >
 				<cell id="c49" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="49" xmlTagName="C49"/>
 				<cell id="c50" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="50" xmlTagName="C50"/>				
 			</line>
@@ -309,7 +309,7 @@
 			<line id="L50120" order="120" >
 				<cell id="t65" col="1" type="LABEL"  value="" opaque="true" readOnly="true" calculable="true" additionalDescription="|j| Otros Activos No Corrientes (importe neto, incluido intangibles)" alignAddtionalDescription="LEFT"/>
 				<cell id="c65" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="65" xmlTagName="C65"/>
-				<cell id="t77" col="3" type="LABEL"  value="" opaque="true" readOnly="true" calculable="false" additionalDescription="|v| Total Patrimonio Neto (Cas. 70+71+72+73+74+75-76)" alignAddtionalDescription="LEFT"/>
+				<cell id="t77" col="3" type="LABEL"  value="" opaque="true" readOnly="true" calculable="false" additionalDescription="|v| Total Patrimonio Neto (Cas. 70 + 71 + 72 + 73 + 74 + 75 - 76)" alignAddtionalDescription="LEFT"/>
 				<cell id="c77" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="77" xmlTagName="C77"/>
 			</line>
 
@@ -325,11 +325,11 @@
 		<section  id="R_6" order="60" >
 		
 			<line id="R6L1" name="R6L1" order="5">
-				<cell id="LBL_R6_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 6: DECLARACION JURADA PATRIMONIAL - PARTE 2 DATOS DEL INMUEBLE Y DETERMINACION SAU" alignAddtionalDescription="FILLED" colSpan="3"/>
+				<cell id="LBL_R6_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 6: DECLARACION JURADA PATRIMONIAL - PARTE 2" alignAddtionalDescription="FILLED" colSpan="3"/>
 			</line>
 			
 			<line id="R6L2" name="R6L2" order="10">
-				<cell id="LBL_R6_L2_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="DETALLE DEL INMUEBLE Y DETERMINACION SAU" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R6_L2_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="DATOS DEL INMUEBLE Y DETERMINACION SAU" alignAddtionalDescription="FILLED"/>
 				<cell id="LBL_R6_L2_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="INMUEBLES" alignAddtionalDescription="FILLED" colSpan="3" />
 			</line>
 
@@ -363,12 +363,12 @@
 				<cell id="c88" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="88" xmlTagName="C88"/>				
 			</line>
 
-			<line id="L6060" order="70" description="|f| Menos: Áreas marginales no aptas para el cultivo (Art. 32 Inc. b)" >
+			<line id="L6060" order="70" description="|f| Menos: Áreas marginales no aptas para el cultivo &lt;BR&gt; (Art. 32 Inc. b)" >
 				<cell id="c89" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="89" xmlTagName="C89" />
 				<cell id="c90" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="90" xmlTagName="C90"/>				
 			</line>
 
-			<line id="L6070" order="80" description="|g| Menos: Áreas marginales no aptas para el cultivo (Art. 32 Inc. b)" >
+			<line id="L6070" order="80" description="|g| Menos: Áreas silvestres protegidas bajo dominio privado y sujetas a Leyes (Art. 32 Inc. c)" >
 				<cell id="c91" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="91" xmlTagName="C91" />
 				<cell id="c92" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="92" xmlTagName="C92"/>				
 			</line>
@@ -378,7 +378,7 @@
 				<cell id="c94" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="94" xmlTagName="C94"/>				
 			</line>
 
-			<line id="L6090" order="100" description="|i| Menos: Áreas destinadas a servicios ambientales (Art. 32 Inc. e)" >
+			<line id="L6090" order="100" description="|i| Menos: Áreas destinadas a servicios ambientales &lt;BR&gt; (Art. 32 Inc. e)" >
 				<cell id="c95" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="95" xmlTagName="C95" />
 				<cell id="c96" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="96" xmlTagName="C96"/>				
 			</line>
