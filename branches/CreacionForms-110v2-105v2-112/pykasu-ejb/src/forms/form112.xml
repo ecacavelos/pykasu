@@ -65,7 +65,7 @@
 			<line id="L2030" order="30" description="|c| Saldo del Crédito IVA a favor del Contribuyente, correspondiente al ejercicio fiscal 2011" >
 				<cell id="c14" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="14" xmlTagName="C14" />
 			</line>
-			<line id="L2040" order="40" description="|d| Impuesto Liquidado (Inc. b - c)" >
+			<line id="L2040" order="40" description="|d| Impuesto Liquidado (Inc. b - c cuando el Inc. b sea mayor, caso contrario consignar cero)" >
 				<cell id="c15" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="15" xmlTagName="C15" />
 			</line>
 		</section>
@@ -174,6 +174,9 @@
 			<line id="L40100" order="100" description="|j| TOTAL SUPERFICIE AGROLÓGICAMENTE ÚTIL (Inc. d - e - f - g - h - i)" >
 				<cell id="c48" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="48" xmlTagName="C48" />
 				<cell id="c49" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="49" xmlTagName="C49" />
+			</line>
+			<line id="PGL50" name="TLS_PG50" order="105">
+				<cell id="LBL_PG_L50_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="VALOR INMUEBLE RURAL PROPIEDAD DEL DECLARANTE"  alignAddtionalDescription="FILLED" colSpan="4" />
 			</line>
 			<line id="L40110" order="110" description="|k| Valor total en Guaraníes del o los inmuebles rurales propiedad del declarante, sin incluir las construcciones, instalaciones y mejoras." >
 				<cell id="c50" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="50" xmlTagName="C50" />

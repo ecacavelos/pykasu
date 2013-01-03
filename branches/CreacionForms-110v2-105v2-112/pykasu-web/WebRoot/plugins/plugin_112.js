@@ -121,6 +121,9 @@ function calcPorcentajeMoras() {
 	}
 
 	refreshVars();
+	TRGc24();
+	TRGc26a();
+	TRGc26b();
 	TRGc29();
 
 	var tmp = (0).toFixed(0);
