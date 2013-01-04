@@ -309,7 +309,7 @@
 			<line id="L50120" order="120" >
 				<cell id="t65" col="1" type="LABEL"  value="" opaque="true" readOnly="true" calculable="true" additionalDescription="|j| Otros Activos No Corrientes (importe neto, incluido intangibles)" alignAddtionalDescription="LEFT"/>
 				<cell id="c65" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="65" xmlTagName="C65"/>
-				<cell id="t77" col="3" type="LABEL"  value="" opaque="true" readOnly="true" calculable="false" additionalDescription="|v| Total Patrimonio Neto (Cas. 70 + 71 + 72 + 73 + 74 + 75 - 76)" alignAddtionalDescription="LEFT"/>
+				<cell id="t77" col="3" type="LABEL"  value="" opaque="true" readOnly="true" calculable="false" additionalDescription="|v| Total Patrimonio Neto (Cas. 70 + 71 + 72 + 73 - 74 + 75 - 76)" alignAddtionalDescription="LEFT"/>
 				<cell id="c77" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="77" xmlTagName="C77"/>
 			</line>
 
