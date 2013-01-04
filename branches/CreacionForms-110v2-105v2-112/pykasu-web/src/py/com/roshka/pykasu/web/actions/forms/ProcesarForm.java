@@ -140,9 +140,9 @@ public class ProcesarForm extends Action{
 	                    if(user.getBusinessCompany().getClient().booleanValue()){ //es cliente de VISION, se debe generar el ticket correspondiente
 	                    	RaffleTicket ticket = raffleTicketManager.generateTicket(user);	                    	
 	                    	msg = msg + "" +user.getBusinessCompany().getName() + 
-	                    				" tiene 1 cupón número: "+ ticket.getId() + " a su nombre" +
-	                    				" para el sorteo electrónico de 5 notebook" +
-	                    				" con internet movil gratis por 1 año.";
+	                    				" tiene 1 cup—n nœmero: "+ ticket.getId() + " a su nombre" +
+	                    				" para el sorteo electr—nico de 5 notebook" +
+	                    				" con internet movil gratis por 1 a–o.";
 	                    }
 					}
 				}
@@ -154,12 +154,12 @@ public class ProcesarForm extends Action{
                 logger.error("Error al editar el formulario! ", e );
             }
             catch (Throwable e) {
-                request.setAttribute(Globals.ERROR, "Error al editar el formulario: Informar error a Administración del Sistema");
+                request.setAttribute(Globals.ERROR, "Error al editar el formulario: Informar error a Administraci—n del Sistema");
                 logger.error("Error al editar el formulario! ", e );
             }
         }
         else{
-            request.setAttribute(Globals.MESSAGE, "Se canceló la edicion del formulario");
+            request.setAttribute(Globals.MESSAGE, "Se cancel— la edicion del formulario");
         }
         return mapping.findForward("index");
         

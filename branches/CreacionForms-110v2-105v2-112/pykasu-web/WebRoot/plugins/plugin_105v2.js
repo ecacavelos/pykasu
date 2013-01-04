@@ -141,6 +141,9 @@ function calcPorcentajeMoras(){
 	}
 	
 	refreshVars();
+	TRGc84();
+	TRGc83();
+	TRGc86();
 	TRGc89();
 	
 	
