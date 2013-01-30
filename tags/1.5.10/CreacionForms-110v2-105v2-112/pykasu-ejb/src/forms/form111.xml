@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<form type="111" description="Formulario 111" >
+	<sections type="header">
+		<section id="H1" name="HEADER1" description="SET"  order="0">
+			<line id="L0" name="H1L0" order="-1">
+				<cell id="paymentDate" col="0" type="DATE" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Día previsto de pago: dd/mm/aaaa" alignAddtionalDescription="TOP" events="onChange:getPorcentajeMoras"/>
+				<cell id="prePrintedNumber" col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Identificador del formulario:" alignAddtionalDescription="TOP" events="onblur:removeZeros#updatePreprinterNumber" xmlTagName="numeroDocumento" />
+			</line>
+			
+			<line id="L1" name="H1L1" order="0">
+				<cell id="ruc" col="1" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="RUC:" alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="ruc"/>
+				<cell id="dv" col="2"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="DV:"  alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="dv" colSpan="2" staticValue="true"/>				
+			</line>
+			<line id="L2" name="H1L2" order="1">
+				<cell id="firstLastName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Razón Social o Primer Apellido:" alignAddtionalDescription="TOP" xmlTagName="PrimerApellido"/>
+				<cell id="secondLastName" col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Apellido:" alignAddtionalDescription="TOP"/>				
+			</line>
+			<line id="L3" name="H1L3" order="2">
+				<cell id="firstName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Primer Nombre:" alignAddtionalDescription="LEFT"/>
+				<cell id="middleName"  col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Nombre:" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="L4" name="H1L4" order="3">
+				<!-- <cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/> -->
+				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 5 | CLAUSURA" events="onChange: calculate;"/>
+				<!-- <cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" /> -->
+				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
+			</line>			
+			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
+				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
+				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#disabledByYear" />
+				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#controlaAnho#disabledByYear"/>
+				<!-- <cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#retriveSalary()"/> -->
+			</line>			
+		</section>
+	</sections>	
+
+	<sections type="body"  order="-1" >
+		<section  id="R1" order="0" description="INC RUBRO 1 IMPUESTO A LA RENTA COMERCIAL, INDUSTRIAL O DE SERVICIOS">
+			<line id="R1L1" name="R1L1" order="-1" description="INC RUBRO 1 DETERMINACION DE LA RENTA NETA REAL DEL PERIODO">
+				<cell id="LBL_R1_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE" alignAddtionalDescription="FILLED"/>
+			</line>
+			
+			<line id="IA" order="10" description="|a| Retenciones en carácter de Pago Único y Definido por distribución de utilidades o dividendos, remesados a personas o entidades del exterior que no posean sucursales en el país" >
+				<cell id="c10" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="10" xmlTagName="C10"/>
+			</line>
+
+			<line id="IB" order="20" description="|b| Retenciones en carácter de Pago Único y Definido por servicios de flete a empresas del exterior que no posean sucursales en el país" >
+				<cell id="c11" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="11" xmlTagName="C11"/>
+			</line>
+
+			<line id="IC" order="30" description="|c| Retenciones en carácter de Pago Único y Definido por primas de seguro a empresas del exterior que no posean sucursales en el país" >
+				<cell id="c12" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="12" xmlTagName="C12"/>
+			</line>
+
+			<line id="ID" order="40" description="|d| Retenciones en carácter de Pago Único y Definitivo por la venta de bienes inmuebles loteados" >
+				<cell id="c13" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="13" xmlTagName="C13"/>
+			</line>
+			
+			<line id="IE" order="50" description="|e| Retenciones en caracter de Pago único y Definitivo por la prestación de servicios o enajenación de bienes documentados con la autofactura" >
+				<cell id="c14" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="14" xmlTagName="C14"/>
+			</line>
+			
+			<line id="IF" order="60" description="|f| Retenciones y Percepciones en caracter de Pago Único y Definitivo por otros conceptos no incluídos en los incisos anteriores" >
+				<cell id="c15" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="15" xmlTagName="C15"/>
+			</line>
+			
+			<line id="IG" order="70" description="|g| Total de retenciones en carácter de pago único y definitivo (Inc. a+b+c+d+e+f)" >
+				<cell id="c16" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="16" xmlTagName="C16"/>
+			</line>	
+			
+			<line id="IH" order="80" description="|h| Pago a cuenta en caracter de retenciones, para Contribuyentes obligados por el impuesto" >
+				<cell id="c17" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="17" xmlTagName="C17"/>
+			</line>
+			
+			<line id="II" order="90" description="|i| Pago a cuenta en caracter de precepciones, para Contribuyentes obligados por el impuesto" >
+				<cell id="c18" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="18" xmlTagName="C18"/>
+			</line>
+			
+			<line id="IJ" order="100" description="|j| Base de cálculo p/ anticipo (10% s/monto de inc. C)" >
+				<cell id="c19" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="19" xmlTagName="C19"/>
+			</line>
+			
+			<line id="IK" order="110" description="|k| Base de cálculo p/ anticipo (10% s/monto de inc. C)" >
+				<cell id="c20" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="20" xmlTagName="C20"/>
+			</line>
+
+		</section>
+		<section  id="R2" order="10" >
+			<line id="R2L1" name="R2L1" order="-1" description="INC RUBRO 2 IMPUESTO A LA RENTA DEL PEQUEÑO CONTRIBUYENTE">
+				<cell id="LBL_R2_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE" alignAddtionalDescription="FILLED"/>
+			</line>
+		
+			<line id="IA" order="10" description="|a| Retenciones en carácter de pago único y definitivo por actividades gravadas por el impuesto" >
+				<cell id="c21" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="21" xmlTagName="C21"/>
+				
+			</line>
+
+			<line id="IB" order="20" description="|b| Pago a cuenta para Contribuyentes obligados por el impuesto" >
+				<cell id="c22" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="22" xmlTagName="C22"/>
+				
+			</line>
+
+			<line id="IC" order="30" description="|c| Total retenciones (Inc. a+b)" >
+				<cell id="c23" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="23" xmlTagName="C23"/>
+			</line>
+
+			
+		</section>
+		<section  id="R3" order="20" >
+			<line id="R3L1" name="R3L1" order="-1" description="INC RUBRO 3 IMPUESTO A LA RENTA DEL SERVICIO DE CARACTER PERSONAL">
+				<cell id="LBL_R3_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE" alignAddtionalDescription="FILLED"/>
+			</line>
+		
+			<line id="IA" order="10" description="|a| Retenciones en carácter de Pago Único y Definitivo por actividades gravadas por el impuesto realizadas por personas sin domicilio en el país" >
+				<cell id="c24" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="24" xmlTagName="C24"/>
+				
+			</line>
+
+			<line id="IB" order="20" description="|b| Pago a cuenta para Contribuyentes obligados por el Impuesto" >
+				<cell id="c25" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="25" xmlTagName="C25"/>
+				
+			</line>
+
+			<line id="IC" order="30" description="|c| Total retenciones (Inc. a+b)" >
+				<cell id="c26" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="26" xmlTagName="C26"/>
+			</line>
+
+			
+		</section>
+		<section  id="R4" order="30" >
+			<line id="R4L1" name="R4L1" order="-1" description="INC RUBRO 4 IMPUESTO A LA RENTA POR ACTIVIDADES AGROPECUARIAS">
+				<cell id="LBL_R4_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="IMPORTE" alignAddtionalDescription="FILLED"/>
+			</line>
+		
+			<line id="IA" order="10" description="|a| Retenciones en carácter de Pago Único y Definitivo por distribución de utilidades o dividendos remesados a personas o entidades del exterior que no posean sucursales en el país" >
+				<cell id="c27" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="27" xmlTagName="C27"/>
+				
+			</line>
+
+			<line id="IB" order="20" description="|b| Pago a cuenta para Contribuyentes obligados por el Impuesto" >
+				<cell id="c28" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="28" xmlTagName="C28"/>
+				
+			</line>
+
+			<line id="IC" order="30" description="|c| Total retenciones (Inc. a+b)" >
+				<cell id="c29" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="29" xmlTagName="C29"/>
+			</line>
+
+			
+		</section>
+		<section  id="R5" order="40" >
+			<line id="R5L1" name="R5L1" order="-1" description="INC RUBRO 5 LIQUIDACION Y SALDO DEL IMPUESTO">
+				<cell id="LBL_R5_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="CONTRIBUYENTE -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R5_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="FISCO -II-" alignAddtionalDescription="FILLED"/>
+			</line>
+		
+			<line id="IA" order="10" description="|a| Retenciones en concepto de Impuesto a la Renta Comercial (Proviene del Inc. k Rubro 1)" >
+				<cell id="co100" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c30" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="30" xmlTagName="C30"/>
+				
+			</line>
+
+			<line id="IB" order="20" description="|b| Retenciones en concepto de Impuesto a la Renta Pequeño Contribuyente (Proviene del Inc. c Rubro 2)" >
+				<cell id="co110" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c31" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="31" xmlTagName="C31"/>
+			</line>
+
+			<line id="IC" order="30" description="|c| Retenciones en concepto de Impuesto a la Renta de Servicios de Caracter Personal (Proviene del Inc. c Rubro 3)" >
+				<cell id="co120" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c32" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="32" xmlTagName="C32"/>
+			</line>
+			
+			<line id="ID" order="40" description="|d| Retenciones en concepto de Impuesto a la Renta a las Actividades Agropecuarias (Proviene del Inc. c Rubro 3)" >
+				<cell id="co130" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c33" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="33" xmlTagName="C33"/>
+			</line>
+			
+			<line id="IE" order="50" description="|e| SUB TOTALES (Inc. a+b+c+d)" >
+				<cell id="co140" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c34" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="34" xmlTagName="C34"/>
+			</line>
+		
+			<line id="IF" order="60" description="|f| Pago previo o pago a cuenta por el Impuesto a la Renta Comercial, Ind. o de Servicios" >
+				<cell id="c35" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="35" xmlTagName="C35"/>
+				<cell id="co150" col="1" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			
+			<line id="IG" order="70" description="|f| Pago previo o pago a cuenta por el Impuesto a la Renta Pequeño Contribuyente" >
+				<cell id="c36" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="36" xmlTagName="C36"/>
+				<cell id="co160" col="1" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IH" order="80" description="|h| Pago previo o pago a cuenta por el Impuesto a la Renta de Servicios de Caracter Personal" >
+				<cell id="c37" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="37" xmlTagName="C37"/>
+				<cell id="co170" col="1" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="II" order="90" description="|i| Pago previo o pago a cuenta por el Impuesto a la Renta de Actividades Agropecuarias" >
+				<cell id="c38" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="38" xmlTagName="C38"/>
+				<cell id="co180" col="1" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IJ" order="100" description="|j| Pago con Créditos Fiscales disponibles, Certificados de Créditos Tributarios, Nota de Crédito Tributario y Bonos del Tesoro" >
+				<cell id="c39" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="39" xmlTagName="C39"/>
+				<cell id="co190" col="1" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IK" order="110" description="|k| Multa por presentar la Declaración con posterioridad al vencimiento" >
+				<cell id="co200" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c40" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="40" xmlTagName="C40"/>
+			</line>
+			<line id="IL" order="120" description="|l| SUBTOTALES (Inc. f+g+h+i+j Col. I); (Inc. e+k, Col. II)" >
+				<cell id="c41" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="41" xmlTagName="C41"/>
+				<cell id="c42" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="42" xmlTagName="C42"/>
+			</line>
+			<line id="IM" order="130" description="|m| Saldo a favor del Fisco (Diferencia entre Columnas del Inc. I, cuando Col. II sea mayor que Col. I" >
+				<cell id="co300" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c43" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="43" xmlTagName="C43"/>
+			</line>
+			<line id="IN" order="140" description="|n| Multa por Mora (...% del resultado del Inc. m menos el inc. k) (Sólo se calculará cuando exista saldo a favor del Fisco)" >
+				<cell id="co400" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c44" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="44" xmlTagName="C44"/>
+			</line>
+			<line id="IO" order="150" description="|o| Intereses (...% del resultado del Inc. m menos el inc. k) (Sólo se calculará cuando exista saldo a favor del Fisco)" >
+				<cell id="co500" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c45" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="45" xmlTagName="C45"/>
+			</line>
+			<line id="IP" order="160" description="|p| Saldo definitivo a pagar a favor del Fisco (Inc. m+n+o)" >
+				<cell id="co500" col="0" type="NUMBER" value="" opaque="true"  readOnly="false" calculable="false" additionalDescription="" alignAddtionalDescription="LEFT"/>
+				<cell id="c46" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="46" xmlTagName="C46"/>
+			</line>
+		</section>
+		<section  id="STATUS" name="STATUS" description="Estado" order="1000">
+			<line id="STATUSLINE" name="STATUS" order="1" description="Estado del presente documento:">
+				<cell id="status" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT" choices="PROCESO;CONFIRMADO"/>
+			</line>
+		</section>
+	</sections>
+
+	<rules>
+	<!-- Rules 1 -->
+	
+		<rule name="TRGc16"  order="10"  cellTargetId="c16" formula="c10+c11+c12+c13+c14+c15"/>	
+		<rule name="TRGc19"  order="15"  cellTargetId="c19" formula="c17+c18"/>	
+		<rule name="TRGc20"  order="20"  cellTargetId="c20" formula="c16+c19" />
+		<rule name="TRGc23"  order="30"  cellTargetId="c23" formula="c21+c22"/>
+		<rule name="TRGc26"  order="40"  cellTargetId="c26" formula="c24+c25"/>	
+		<rule name="TRGc29"  order="50"  cellTargetId="c29" formula="c27+c28"/>	
+		<rule name="TRGc30"  order="60"  cellTargetId="c30" formula="c20"/>
+		<rule name="TRGc31"  order="65"  cellTargetId="c31" formula="c23"/>
+		<rule name="TRGc32"  order="70"  cellTargetId="c32" formula="c26"/>
+		<rule name="TRGc33"  order="75"  cellTargetId="c33" formula="c29" />
+		<rule name="TRGc34"  order="80"  cellTargetId="c34" formula="c30+c31+c32+c33"/>
+		<rule name="TRGc41"  order="85"  cellTargetId="c41" formula="c35+c36+c37+c38+c39"/>
+		<rule name="TRGc42"  order="90"  cellTargetId="c42" formula="c34+c40"/>
+		<rule name="TRGc43"  order="95"  cellTargetId="c43" formula="c42-c41"/>
+		<rule name="TRGc43_0"  order="100"  cellTargetId="c43" formula="0" condition="c43 &lt; 0"/>
+		<rule name="TRGc46"  order="110"  cellTargetId="c46" formula="c43+c44+c45"/>
+		
+	</rules>
+</form>
+

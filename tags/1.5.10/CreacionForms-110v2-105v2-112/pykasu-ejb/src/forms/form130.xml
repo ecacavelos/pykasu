@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<form type="130" description="Formulario 130" >
+	<sections type="header">
+		<section id="H1" name="HEADER1" description="SET"  order="0">
+			<line id="L0" name="H1L0" order="-1">
+				<cell id="paymentDate" col="0" type="DATE" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Día previsto de pago: dd/mm/aaaa" alignAddtionalDescription="TOP" events="onChange:getPorcentajeMoras"/>
+				<cell id="prePrintedNumber" col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Identificador del formulario:" alignAddtionalDescription="TOP" events="onblur:removeZeros#updatePreprinterNumber" xmlTagName="numeroDocumento" />
+			</line>
+			
+			<line id="L1" name="H1L1" order="0">
+				<cell id="ruc" col="1" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="RUC:" alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="ruc"/>
+				<cell id="dv" col="2"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="DV:"  alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="dv" colSpan="2" staticValue="true"/>				
+			</line>
+			<line id="L2" name="H1L2" order="1">
+				<cell id="firstLastName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Razón Social o Primer Apellido:" alignAddtionalDescription="TOP" xmlTagName="PrimerApellido"/>
+				<cell id="secondLastName" col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Apellido:" alignAddtionalDescription="TOP"/>				
+			</line>
+			<line id="L3" name="H1L3" order="2">
+				<cell id="firstName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Primer Nombre:" alignAddtionalDescription="LEFT"/>
+				<cell id="middleName"  col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Nombre:" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="L4" name="H1L4" order="3">
+				<!-- <cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/> -->
+				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 5 | CLAUSURA" events="onChange: calculate;"/>
+				<!-- <cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" /> -->
+				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
+			</line>			
+			<line id="L5" name="H1L5" order="4" description="| 04 | Periodo Fiscal">
+				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
+				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras" />
+				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
+				<!-- <cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#retriveSalary()"/> -->
+			</line>			
+		</section>
+	</sections>	
+
+	<sections type="body"  order="-1" >
+		<section  id="R_1" order="10" >
+			  <line id="TL1" name="TLS1" order="-1" description="RUBRO 1: DETALLE DE LOS BIENES ENAJENADOS">
+ 				<cell id="LBL_R1_IA_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="NUMERAL" alignAddtionalDescription="FILLED"/> 
+				<cell id="LBL_R1_IA_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="BASE IMPONIBLE -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R1_IA_C3" col="3" type="LABEL" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="TASA -II-" alignAddtionalDescription="LEFT"/>
+				<cell id="LBL_R1_IA_C4" col="4" type="LABEL" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="IMPUESTO -III" alignAddtionalDescription="LEFT"/>
+			</line>
+
+		
+		
+			<line id="L1010" order="10" description="|a| ">
+				<cell id="c93" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="93" xmlTagName="C93" events="onblur:getPercentByFieldContent('c93',this.value,'c113')"/>
+				<cell id="c103" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="103" xmlTagName="C103"/>
+				<cell id="c113" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="113" xmlTagName="C113"/>
+				<cell id="c123" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="123" xmlTagName="C123"/>
+			</line>
+
+			<line id="L1020" order="20" description="|b| ">
+				<cell id="c94" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="94" xmlTagName="C94" events="onblur:getPercentByFieldContent('c94',this.value,'c114')"/>
+				<cell id="c104" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="104" xmlTagName="C104"/>
+				<cell id="c114" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="114" xmlTagName="C114"/>
+				<cell id="c124" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="124" xmlTagName="C124"/>
+			</line>
+
+
+			<line id="L1030" order="30" description="|c| ">
+				<cell id="c95" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="95" xmlTagName="C95" events="onblur:getPercentByFieldContent('c95',this.value,'c115')"/>
+				<cell id="c105" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="105" xmlTagName="C105"/>
+				<cell id="c115" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="115" xmlTagName="C115"/>
+				<cell id="c125" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="125" xmlTagName="C125"/>
+			</line>
+
+			<line id="L1040" order="40" description="|d| ">
+				<cell id="c96" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="96" xmlTagName="C96" events="onblur:getPercentByFieldContent('c96',this.value,'c116')"/>
+				<cell id="c106" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="106" xmlTagName="C106"/>
+				<cell id="c116" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="116" xmlTagName="C116"/>
+				<cell id="c126" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="126" xmlTagName="C126"/>
+			</line>
+
+			<line id="L1050" order="50" description="|e| " >
+				<cell id="c97" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="97" xmlTagName="C97" events="onblur:getPercentByFieldContent('c97',this.value,'c117')"/>
+				<cell id="c107" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="107" xmlTagName="C107"/>
+				<cell id="c117" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="117" xmlTagName="C117"/>
+				<cell id="c127" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="127" xmlTagName="C127"/>
+			</line>
+			<line id="L1060" order="60" description="|f| " >
+				<cell id="c98" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="98" xmlTagName="C98" events="onblur:getPercentByFieldContent('c98',this.value,'c118')"/>
+				<cell id="c108" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="108" xmlTagName="C108"/>
+				<cell id="c118" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="118" xmlTagName="C118"/>
+				<cell id="c128" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="128" xmlTagName="C128"/>
+			</line>
+			<line id="L1070" order="70" description="|g| " >
+				<cell id="c99" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="99" xmlTagName="C99" events="onblur:getPercentByFieldContent('c99',this.value,'c119')"/>
+				<cell id="c109" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="109" xmlTagName="C109"/>
+				<cell id="c119" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="119" xmlTagName="C119"/>
+				<cell id="c129" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="129" xmlTagName="C129"/>
+			</line>
+			<line id="L1080" order="80" description="|h| " >
+				<cell id="c100" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="100" xmlTagName="C100" events="onblur:getPercentByFieldContent('c100',this.value,'c120')"/>
+				<cell id="c110" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="110" xmlTagName="C110"/>
+				<cell id="c120" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="120" xmlTagName="C120"/>
+				<cell id="c130" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="130" xmlTagName="C130"/>
+			</line>
+			<line id="L1090" order="90" description="|i| " >
+				<cell id="c101" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="101" xmlTagName="C101" events="onblur:getPercentByFieldContent('c101',this.value,'c121')"/>
+				<cell id="c111" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="111" xmlTagName="C111"/>
+				<cell id="c121" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="121" xmlTagName="C121"/>
+				<cell id="c131" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="131" xmlTagName="C131"/>
+			</line>
+			<line id="L1100" order="100" description="|j| " >
+				<cell id="c102" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="102" xmlTagName="C102" events="onblur:getPercentByFieldContent('c102',this.value,'c122')"/>
+				<cell id="c112" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="112" xmlTagName="C112"/>
+				<cell id="c122" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="122" xmlTagName="C122"/>
+				<cell id="c132" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="132" xmlTagName="C132"/>
+			</line>
+			<line id="L1110" order="110" description="TOTAL " >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"/>
+				<cell id="c999_0" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"/>
+				<cell id="c999_1" col="3" type="NUMBER" value="" opaque="true" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c60" col="4" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="60" xmlTagName="C60"/>
+			</line>
+		</section>
+		<section  id="R_2" order="20" >
+			<line id="R2L1" name="R2L1" order="-1">
+				<cell id="LBL_R2_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 2: DETALLE DE ANTICIPOS DEL I.S.C. - PARA USO DE EMPRESAS FABRICANTES." alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R2_L1_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="&lt;div align=&quot;right&quot;&gt; IMPORTE &lt;/div&gt;&lt;BR&gt; COLUMNA -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R2_L1_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="COLUMNA -II-" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="L2010" order="10" description="|a| Saldo de Anticipos del período anterior (Corresponde al monto declarado en el Inc. j del Rubro 2 correspondiente al período anterior)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c61" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="61" xmlTagName="C61"/>
+			</line>
+			<line id="L2020" order="20" description="|b| Monto de Anticipos incluidos por compra en el mercado local en concepto de adquisiciones de materia prima" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c62" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="62" xmlTagName="C62"/>
+			</line>
+			<line id="L2030" order="30" description="|c| Monto de Anticipos incluidos por las importaciones gravadas por el Impuesto en concepto de adquisiciones de materia prima" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c63" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="63" xmlTagName="C63"/>
+			</line>
+			<line id="L2040" order="40" description="|d| Monto de los Anticipos del I.S.C. incluido en las materias primas utilizadas en la fabricación de productos enajenados en el mercado local" >
+				<cell id="c64" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="64" xmlTagName="C64"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="L2050" order="50" description="|e| Monto de los Anticipos del I.S.C. incluidos en las materias primas utilizadas en la fabricación de productos enajenados en el mercado internacional " >
+				<cell id="c65" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="65" xmlTagName="C65"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="L2060" order="60" description="|f| SUB TOTALES (Inc. d+e, Col. I a ser trasladados al Rubro 3 Inc. f ) (Inc. a+b+c, Col. II)" >
+				<cell id="c66" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="66" xmlTagName="C66"/>
+				<cell id="c67" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="67" xmlTagName="C67"/>
+			</line>
+			
+			<line id="L2070" order="70" description="|g| Remanente de anticipos del ISC incluido en las mat. primas utilizadas en la fab. de prod. enajenados en el merc. internacional cuya devolución o reembolso será solicitado a través de Cert. de " >
+				<cell id="c68" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="68" xmlTagName="C68"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L2080" order="80" description="|h| Anticipos por materias primas que no seran utilizables dentro del proceso productivo (enajenacion de materia prima, obsolescencia u otras causas)" >
+				<cell id="c69" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="69" xmlTagName="C69"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L2090" order="90" description="|i| Total de anticipos utilizados en el periodo (Inc. f + g + h a Col. I)" >
+				<cell id="c70" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="70" xmlTagName="C70"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L2100" order="100" description="|j| Saldo a favor del contribuyente a transladar en el siguiente periodo fiscal (Inc. f Col. II menos Inc. i Col. I)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c71" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="71" xmlTagName="C71"/>
+			</line>
+
+		</section>
+		<section  id="R_3" order="30" >
+			<line id="R3L1" name="R3L1" order="-1">
+				<cell id="LBL_R3_L1_C0" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="RUBRO 3: LIQUIDACION Y SALDO DEL IMPUESTO." alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R3_L1_C1" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="&lt;div align=&quot;right&quot;&gt; IMPORTE &lt;/div&gt;&lt;BR&gt; CONTRIBUYENTE -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R3_L1_C2" col="2" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="FISCO -II-" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="L3010" order="10" description="|a| Impuesto liquidado (Rubro 1 Col. II Campo 60)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c72" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="72" xmlTagName="C72"/>
+			</line>
+
+			<line id="L3020" order="20" description="|b| Saldo a favor del periodo anterior" >
+				<cell id="c73" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="73" xmlTagName="C73"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L3030" order="30" description="|c| Retenciones del Impuesto Selectivo al Consumo a favor computables" >
+				<cell id="c74" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="74" xmlTagName="C74"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L3040" order="40" description="|d| Pago previo" >
+				<cell id="c75" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="75" xmlTagName="C75"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L3050" order="50" description="|e| Pago con créditos Fiscales Disponibles, Certificados de Créditos Tributario, Nota de Crédito Tribitario y Bonos del Tesoro" >
+				<cell id="c76" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="76" xmlTagName="C76"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L3060" order="60" description="|f| Anticipos ISC (Rubro 2 Inc. f Col. I)" >
+				<cell id="c77" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="77" xmlTagName="C77"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+
+			<line id="L3070" order="70" description="|g| Multa por presentar la declaracion jurada con posterioridad al vencimiento" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c78" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="78" xmlTagName="C78"/>
+			</line>
+
+			<line id="L3080" order="80" description="|h| Subtotal (Inc. b + c + d + e+f a Col. I; Inc. a + g  a Col. II)" >
+				<cell id="c79" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="79" xmlTagName="C79"/>
+				<cell id="c80" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="80" xmlTagName="C80"/>
+			</line>
+
+			<line id="L3090" order="90" description="|i| Saldo a favor del Contribuyente (Diferencia entre Columnas del Inc. h cuando Col.I sea mayor a Col.II)" >
+				<cell id="c81" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="81" xmlTagName="C81"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			
+			<line id="L3100" order="100" description="|j| Saldo a favor del Fisco (Diferencia entre las Columnas del Inc. h cuando Col. II sea mayor a Col. I)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c82" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="82" xmlTagName="C82"/>
+			</line>
+			
+			<line id="R3L11" name="R3L11" order="120">
+				<cell id="LBL_R3_L11" col="1" type="LABEL"  value="" opaque="true" readOnly="false" calculable="false" additionalDescription="PAGOS" alignAddtionalDescription="LEFT" COLSPAN="2"/>
+			</line>
+			<line id="L3120" order="125" description="|k| Multa por mora (....% del resultado del Inc. j menos el Inc. g) (Sólo se calculará cuando haya saldo a favor del Fisco)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c83" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="83" xmlTagName="C83"/>
+			</line>
+
+			<line id="L3130" order="130" description="|l| Intereses (.........% del resultado del Inc. j menos el Inc. g) (Sólo se calculará cuando exista saldo a favor del Fisco)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c84" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="84" xmlTagName="C84"/>
+			</line>
+
+			<line id="L3140" order="140" description="|m| Saldo definitivo a pagar a favor del Fisco (Inc. j+k+l)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c85" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="85" xmlTagName="C85"/>
+			</line>
+
+		</section>
+		<section  id="R_4" order="40" >
+			<line id="TL4" name="TLS4" order="-1" description="RUBRO 4: INFORMACION COMPLEMENTARIA">
+				<cell id="LBL_R4_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true"  calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt;&lt;/div&gt;&lt;BR&gt; IMPORTE" alignAddtionalDescription="LEFT"/>
+			</line>  
+			<line id="L4010" order="10" description="|a| Monto total de Compras en el mercado total por productos gravados por el impuesto, en concepto de materias primas" >
+				<cell id="c86" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="86" xmlTagName="C86"/>
+			</line>
+
+			<line id="L4020" order="20" description="|b| Monto total de las importaciones gravadas por el impuesto, en concepto de materias primas" >
+				<cell id="c87" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="87" xmlTagName="C87"/>
+			</line>
+
+			<line id="L4030" order="30" description="|c| Monto total por enajenaciones de materia prima sin su transformacion en productos terminados, en el periodo que se declara" >
+				<cell id="c88" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="88" xmlTagName="C88"/>
+			</line>
+
+			<line id="L4040" order="40" description="|d| Monto de las materias primas que seran utilizables dentro del proceso productivo por obsolescencia u otras causas" >
+				<cell id="c89" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="89" xmlTagName="C89"/>
+			</line>
+
+			<line id="L4050" order="50" description="|e| Monto de las operaciones de productos fabricados, en el periodo que se declara." >
+				<cell id="c90" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="90" xmlTagName="C90"/>
+			</line>
+
+			<line id="L4060" order="60" description="|f| Total (suma de Inc. a + b + c + d + e)" >
+				<cell id="c91" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="91" xmlTagName="C91"/>
+			</line>
+
+		</section>
+		<section  id="R_5" order="50" >
+			
+		
+			<line id="L5010" order="10" description="|a| Numero de recibo expedido por el Depto. de Crédito Tributario" >
+				<cell id="c92" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="92" xmlTagName="C92"/>
+			</line>
+
+		</section>
+		<section  id="STATUS" name="STATUS" description="Estado" order="1000">
+			<line id="STATUSLINE" name="STATUS" order="1" description="Estado del presente documento:">
+				<cell id="status" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT" choices="PROCESO;CONFIRMADO"/>
+			</line>
+		</section>
+	</sections>
+
+	<rules>
+	<!--  123	(C[103]*C[113])/100-->
+	<rule name="TRGc123"  order="10"  cellTargetId="c123" formula="(c103*c113)/100"/>	
+	<!--  124	(C[104]*C[114])/100-->
+	<rule name="TRGc124"  order="20"  cellTargetId="c124" formula="(c104*c114)/100"/>	
+	<!--  125	(C[105]*C[115])/100-->
+	<rule name="TRGc125"  order="30"  cellTargetId="c125" formula="(c105*c115)/100"/>	
+	<!--  126	(C[106]*C[116])/100-->
+	<rule name="TRGc126"  order="40"  cellTargetId="c126" formula="(c106*c116)/100"/>	
+	<!--  127	(C[107]*C[117])/100-->
+	<rule name="TRGc127"  order="50"  cellTargetId="c127" formula="(c107*c117)/100"/>	
+	<!--  128	(C[108]*C[118])/100-->
+	<rule name="TRGc128"  order="60"  cellTargetId="c128" formula="(c108*c118)/100"/>	
+	<!--  129	(C[109]*C[119])/100-->
+	<rule name="TRGc129"  order="70"  cellTargetId="c129" formula="(c109*c119)/100"/>	
+	<!--  130	(C[110]*C[120])/100-->
+	<rule name="TRGc130"  order="80"  cellTargetId="c130" formula="(c110*c120)/100"/>	
+	<!--  131	(C[111]*C[121])/100-->
+	<rule name="TRGc131"  order="90"  cellTargetId="c131" formula="(c111*c121)/100"/>	
+	<!--  132	(C[112]*C[122])/100-->
+	<rule name="TRGc132"  order="100"  cellTargetId="c132" formula="(c112*c122)/100"/>	
+	<!-- 	60	C[123]+C[124]+C[125]+C[126]+C[127]+C[128]+C[129]+C[130]+C[131]+C[132] -->
+	<rule name="TRGc60"  order="110"  cellTargetId="c60" formula="c123+c124+c125+c126+c127+c128+c129+c130+c131+c132"/>	
+	<!-- 	66	C[64]+C[65] -->
+	<rule name="TRGc66"  order="120"  cellTargetId="c66" formula="c64+c65"/>	
+	<!--	67	C[61]+C[62]+C[63] -->
+	<rule name="TRGc67"  order="130"  cellTargetId="c67" formula="c61+c62+c63"/>	
+	<!--	70	C[66]+C[68]+C[69]-->
+	<rule name="TRGc70"  order="140"  cellTargetId="c70" formula="c66+c68+c69"/>	
+	<!--	71	#MAYOR(C[67]-C[70],0)-->
+	<rule name="TRGc71"  order="150"  cellTargetId="c71" formula="c67-c70"/>	
+	<rule name="TRGc71_0"  order="155"  cellTargetId="c71" formula="0" condition="c71 &lt; 0"/>	
+	<!--	72	C[60]-->
+	<rule name="TRGc72"  order="160"  cellTargetId="c72" formula="c60"/>	
+	<!--	77	C[66]-->
+	<rule name="TRGc77"  order="170"  cellTargetId="c77" formula="c66"/>	
+	<!--	79	C[73]+C[74]+C[75]+C[76]+C[77]-->
+	<rule name="TRGc79"  order="180"  cellTargetId="c79" formula="c73+c74+c75+c76+c77"/>	
+	<!--	80	C[72]+C[78]-->
+	<rule name="TRGc80"  order="190"  cellTargetId="c80" formula="c72+c78"/>	
+	<!--	81	#MAYOR(C[79]-C[80],0)-->
+	<rule name="TRGc81"  order="200"  cellTargetId="c81" formula="c79-c80"/>	
+	<rule name="TRGc81_0"  order="205"  cellTargetId="c81" formula="0" condition="c81 &lt; 0"/>	
+	<!--	82	#MAYOR(C[80]-C[79],0)-->
+	<rule name="TRGc82"  order="210"  cellTargetId="c82" formula="c80-c79"/>	
+	<rule name="TRGc82_0"  order="215"  cellTargetId="c82" formula="0" condition="c82 &lt; 0"/>	
+	<!--	85	C[82]+C[83]+C[84]-->
+	<rule name="TRGc85"  order="220"  cellTargetId="c85" formula="c82+c83+c84"/>	
+	<!--	91	C[86]+C[87]+C[88]+C[89]+C[90]-->
+	<rule name="TRGc91"  order="230"  cellTargetId="c91" formula="c86+c87+c88+c89+c90"/>	
+	
+	
+	
+	</rules>
+</form>
