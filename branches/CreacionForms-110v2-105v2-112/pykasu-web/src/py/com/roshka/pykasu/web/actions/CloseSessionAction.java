@@ -35,7 +35,7 @@ public class CloseSessionAction extends Action {
                         Globals.LOGIN_USER);
                 request.getSession(false).invalidate();
                 request.setAttribute(Globals.MESSAGE, user.getFullName()
-                        + ": Se ha Cerrado tu sesión.");
+                        + ": Se ha Cerrado tu sesi—n.");
 
             } else {
                 request.setAttribute(Globals.MESSAGE,
