@@ -32,8 +32,10 @@ import py.com.roshka.pykasu.interfaces.Form107v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form108ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form109ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form110ManagerInterface;
-import py.com.roshka.pykasu.interfaces.Form111ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form110v2ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form105v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form112ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form111ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form117ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form118ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form120ManagerInterface;
@@ -100,8 +102,9 @@ public class FormManagerEJB implements FormManager {
 	@EJB private Form103v2ManagerInterface form103v2Mgr;
 	@EJB private Form107v2ManagerInterface form107v2Mgr;
 	@EJB private Form111ManagerInterface form111Mgr;
-	
-	@EJB private Form112ManagerInterface form112Mgr;
+	@EJB private Form110v2ManagerInterface form110v2Mgr; //Agregado por esteban cacavelos 18-12-2012
+	@EJB private Form105v2ManagerInterface form105v2Mgr; //Agregado por esteban cacavelos 18-12-2012
+	@EJB private Form112ManagerInterface form112Mgr; //Agregado por esteban cacavelos 18-12-2012
 	
 	@EJB private ClientDataInterface clientDataMgr;
 	@EJB private Contributor contributor;
@@ -164,7 +167,13 @@ public class FormManagerEJB implements FormManager {
 
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_111)){
 			return form111Mgr;
-		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_112)){
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_110v2)){
+			return form110v2Mgr;
+		}
+		else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_105v2)){
+			return form105v2Mgr;
+		}
+		else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_112)){
 			return form112Mgr;
 		}
 		throw new FormManagerException(formType + " is not available.");

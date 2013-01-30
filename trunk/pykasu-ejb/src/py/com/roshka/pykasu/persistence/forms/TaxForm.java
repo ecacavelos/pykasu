@@ -93,6 +93,11 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_TYPE_103v2  = "103v2";
 	public static final String FORM_TYPE_107v2  = "107v2";
 	public static final String FORM_TYPE_111  = "111";
+	public static final String FORM_TYPE_110v2  = "110v2"; // Agregado por Esteban Cacavelos 18-12-2012
+	public static final String FORM_TYPE_105v2  = "105v2"; // Agregado por Esteban Cacavelos 19-12-2012
+	public static final String FORM_TYPE_112  = "112"; // Agregado por Esteban Cacavelos 19-12-2012
+	
+	
 	//--
 	public static final String FORM_TYPE_112  = "112";
 	
@@ -103,6 +108,9 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_101_CLASS_NAME  = "Form101";
 	public static final String FORM_123_CLASS_NAME  = "Form123";
 	public static final String FORM_110_CLASS_NAME  = "Form110";
+	public static final String FORM_110v2_CLASS_NAME  = "Form110v2"; // Agregado por Esteban Cacavelos 19-12-2012
+	public static final String FORM_105v2_CLASS_NAME  = "Form105v2"; // Agregado por Esteban Cacavelos 19-12-2012
+	public static final String FORM_112_CLASS_NAME  = "Form112";	 // Agregado por Esteban Cacavelos 19-12-2012
 	public static final String FORM_117_CLASS_NAME  = "Form117";
 	public static final String FORM_122_CLASS_NAME  = "Form122";
 	public static final String FORM_804_CLASS_NAME  = "Form804";
