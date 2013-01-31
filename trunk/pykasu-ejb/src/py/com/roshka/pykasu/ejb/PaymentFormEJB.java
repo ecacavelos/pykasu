@@ -106,7 +106,7 @@ public class PaymentFormEJB implements
 		try{
 			PaymentForm pf = 
 				(PaymentForm ) 
-					em.createQuery("select pf from PaymentForm where pf.id = :id")
+					em.createQuery("select pf from PaymentForm pf where pf.id = :id")
 						.setParameter("id", paymentId)
 						.getSingleResult();
 			
