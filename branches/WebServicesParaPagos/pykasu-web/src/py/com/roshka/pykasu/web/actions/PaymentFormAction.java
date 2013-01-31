@@ -23,7 +23,7 @@ import py.com.roshka.pykasu.util.Utils;
 import py.com.roshka.pykasu.web.Globals;
 import py.com.roshka.pykasu.web.forms.PaymentFormWeb;
 import py.com.roshka.pykasu.web.util.HBAccountV2;
-import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
+import py.com.roshka.pykasu.web.util.HomeBankingItfV3;
 
 /**
  * 
@@ -100,7 +100,7 @@ public class PaymentFormAction extends Action {
 			Double paymentAmount = Double.parseDouble(pfw.getAmount().toString());
 			if(user.getPaymentAvaliable().booleanValue()){
 				paymentAmount = 0.0;
-				HomeBankingItfV2 hbi = (HomeBankingItfV2) request.getSession().getAttribute("homeBanking");
+				HomeBankingItfV3 hbi = (HomeBankingItfV3) request.getSession().getAttribute("homeBanking");
 				List<HBAccountV2> hbAccounts = (List<HBAccountV2>) request.getSession().getAttribute("accounts");
 				makeEPaid = true;
 				
@@ -153,7 +153,7 @@ public class PaymentFormAction extends Action {
 			if(makeEPaid && Utils.isRaffleTime(new java.util.Date(System.currentTimeMillis())) &&  user.getBusinessCompany().getClient().booleanValue()){
 				RaffleTicket tkt1 = raffleTicketManager.generateTicket(user);
 				RaffleTicket tkt2 = raffleTicketManager.generateTicket(user);
-				msg = msg + " - Tiene 2 cupones, cuyos números son: "+tkt1.getId()+ " y "+ tkt2.getId()+", a su nombre para el sorteo electrónico de 5 notebook con internet movil gratis por 1 año.";
+				msg = msg + " - Tiene 2 cupones, cuyos nœmeros son: "+tkt1.getId()+ " y "+ tkt2.getId()+", a su nombre para el sorteo electr—nico de 5 notebook con internet movil gratis por 1 a–o.";
 			}
 			
 			request.getSession().setAttribute(Globals.MESSAGE,msg);
