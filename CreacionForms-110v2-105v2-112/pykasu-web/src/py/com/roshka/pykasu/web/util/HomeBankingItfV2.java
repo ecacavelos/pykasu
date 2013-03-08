@@ -535,6 +535,17 @@ public class HomeBankingItfV2 implements Serializable{
 			if(pf.getResolution() != null){
 				resolucion = pf.getResolution();
 			}
+			/*Introducido por Esteban Cacavelos. Fecha: 08/03/2013
+			 * Problema: Aparente problema con el driver JDBC para db2 en as400
+			 * at com.ibm.as400.access.AS400JDBCPreparedStatement.testDataTruncation(AS400JDBCPreparedStatement.java:2890)
+	at com.ibm.as400.access.AS400JDBCPreparedStatement.setValue(AS400JDBCPreparedStatement.java:2856)
+	at com.ibm.as400.access.AS400JDBCPreparedStatement.setBigDecimal(AS400JDBCPreparedStatement.java:1685)
+	at org.jboss.resource.adapter.jdbc.WrappedPreparedStatement.setBigDecimal(WrappedPreparedStatement.java:303)
+	at py.com.roshka.pykasu.web.util.HomeBankingItfV2.registerPayment(HomeBankingItfV2.java:572)
+			 	OCURRIA CUANDO el nro de resolucion tenia 11 digitos. Se trunco a 10, pero el formulario se guarda igual con los 11 digitos correspondientes
+			 	
+			 	*/
+			resolucion = resolucion.substring(0, Math.min(resolucion.length(), 10)); 
 			
 
 			//logger y yo somos amigos
