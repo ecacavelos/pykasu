@@ -140,7 +140,7 @@ function checkIfContent(cellToTest, targetCellId){
 	}
 	// Si existe un valor, habilitamos la celda dependiente.
 	else {
-	        cellCondition.value="";
+//	        cellCondition.value="";
 	        cellCondition.disabled = '';
 	        cellCondition.focus();
 	}
