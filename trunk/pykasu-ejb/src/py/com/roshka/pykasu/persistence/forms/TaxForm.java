@@ -98,6 +98,9 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_TYPE_112  = "112"; // Agregado por Esteban Cacavelos 19-12-2012
 	
 	
+	//--
+	
+	
 	public static final String FORM_850_CLASS_NAME  = "Form850";
 	public static final String FORM_800_CLASS_NAME  = "Form800";
 	public static final String FORM_801_CLASS_NAME  = "Form801";
