@@ -80,16 +80,20 @@ function calculateAfterPlugin(){
 		setTimeout("retriveSalary()",1500);		
 	}
 	
-	if(getValueFormatless('c76') > parseInt(salaryAmount)){
-//		document.getElementById('c90').value = getValueFormatless('c76');	
-		
-		document.getElementById('c90').value = document.getElementById('c76').value;	
-		
-	}else{
-			
-		document.getElementById('c90').value = '';
-		
-	}
+	/*Aca tengo que llamar a calculateC90 en vez de establecer el valor de c90 directamente. 
+	 * A causa de este calculo directo, c90 estaba quedando con un valor si la declararcion es clausura.
+	 * */
+//	if(getValueFormatless('c76') > parseInt(salaryAmount)){
+////		document.getElementById('c90').value = getValueFormatless('c76');	
+//		
+//		document.getElementById('c90').value = document.getElementById('c76').value;	
+//		
+//	}else{
+//			
+//		document.getElementById('c90').value = '';
+//		
+//	}
+	calculateC90();
 	
 	
 	
