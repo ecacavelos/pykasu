@@ -30,7 +30,7 @@ function checkIfContent(cellToTest, targetCellId){
 		cellCondition.disabled = 'true';
 	}
 	else {
-		cellCondition.value="";
+//		cellCondition.value="";
 		cellCondition.disabled = '';
 		cellCondition.focus();
 	}
