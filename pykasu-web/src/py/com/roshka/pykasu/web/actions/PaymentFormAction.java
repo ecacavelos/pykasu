@@ -23,7 +23,7 @@ import py.com.roshka.pykasu.util.Utils;
 import py.com.roshka.pykasu.web.Globals;
 import py.com.roshka.pykasu.web.forms.PaymentFormWeb;
 import py.com.roshka.pykasu.web.util.HBAccountV2;
-import py.com.roshka.pykasu.web.util.HomeBankingItfV3;
+import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
 
 /**
  * 
@@ -100,7 +100,7 @@ public class PaymentFormAction extends Action {
 			Double paymentAmount = Double.parseDouble(pfw.getAmount().toString());
 			if(user.getPaymentAvaliable().booleanValue()){
 				paymentAmount = 0.0;
-				HomeBankingItfV3 hbi = (HomeBankingItfV3) request.getSession().getAttribute("homeBanking");
+				HomeBankingItfV2 hbi = (HomeBankingItfV2) request.getSession().getAttribute("homeBanking");
 				List<HBAccountV2> hbAccounts = (List<HBAccountV2>) request.getSession().getAttribute("accounts");
 				makeEPaid = true;
 				
