@@ -659,8 +659,8 @@
 			</line>
 
 			<line id="L7100" order="110" description="|j| TOTALES (Inc. a + b + c + d + e + f + g + h + i)" >
-				<cell id="c155" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="155" xmlTagName="C155" />
-				<cell id="c156" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156" />				
+				<cell id="c155" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="155" xmlTagName="C155" />
+				<cell id="c156" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156" />				
 			</line>
 
 		</section>			
