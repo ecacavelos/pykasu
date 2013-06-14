@@ -144,6 +144,10 @@ function checkIfContent(cellToTest, targetCellId){
 	        cellCondition.disabled = '';
 	        cellCondition.focus();
 	}
+	refreshVars();
+	TRGc72();
+	TRGc73();
+	
 }
 
 function getFormType() {

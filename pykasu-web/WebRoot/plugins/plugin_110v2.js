@@ -17,15 +17,16 @@ function onloadForm(){
 	
 	//El form 110 es anual. Y el mes (fijo) de vencimiento es 5.
 	document.getElementById('fiscalPeriodMounth').value = 5;
-	checkIfContent(document.getElementById('c103'),'c104');
-	checkIfContent(document.getElementById('c105'),'c106');
-	checkIfContent(document.getElementById('c107'),'c108');
-	checkIfContent(document.getElementById('c109'),'c110');
-	checkIfContent(document.getElementById('c111'),'c112');
-	checkIfContent(document.getElementById('c113'),'c114');
-	checkIfContent(document.getElementById('c115'),'c116');
-	checkIfContent(document.getElementById('c117'),'c118');
-	checkIfContent(document.getElementById('c119'),'c120');
+	
+	document.getElementById('c104').disabled = 'true';
+	document.getElementById('c106').disabled = 'true';
+	document.getElementById('c108').disabled = 'true';
+	document.getElementById('c110').disabled = 'true';
+	document.getElementById('c112').disabled = 'true';
+	document.getElementById('c114').disabled = 'true';
+	document.getElementById('c116').disabled = 'true';
+	document.getElementById('c118').disabled = 'true';
+	document.getElementById('c120').disabled = 'true';
 }
 
 function calculateBeforePlugin(){
@@ -147,6 +148,9 @@ function checkIfContent(cellToTest, targetCellId){
 		cellCondition.disabled = '';
 		cellCondition.focus();
 	}
+	refreshVars();
+	TRGc121();
+	TRGc122();
 }
 
 /*

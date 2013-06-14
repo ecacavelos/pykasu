@@ -34,6 +34,10 @@ function checkIfContent(cellToTest, targetCellId){
 		cellCondition.disabled = '';
 		cellCondition.focus();
 	}
+	refreshVars();
+	TRGc155();
+	TRGc156();
+
 }
 
 function onloadForm(){
@@ -55,16 +59,17 @@ function onloadForm(){
 	disabledByCondition105(document.getElementById('c15'), 'c23');
 	disabledByCondition105(document.getElementById('c15'), 'c24');
 	disabledByCondition105(document.getElementById('c40'), 'c53');
+
 	
-	checkIfContent(document.getElementById('c137'),'c138');
-	checkIfContent(document.getElementById('c139'),'c140');
-	checkIfContent(document.getElementById('c141'),'c142');
-	checkIfContent(document.getElementById('c143'),'c144');
-	checkIfContent(document.getElementById('c145'),'c146');
-	checkIfContent(document.getElementById('c147'),'c148');
-	checkIfContent(document.getElementById('c149'),'c150');
-	checkIfContent(document.getElementById('c151'),'c152');
-	checkIfContent(document.getElementById('c153'),'c154');
+	document.getElementById('c138').disabled = 'true';
+	document.getElementById('c140').disabled = 'true';
+	document.getElementById('c142').disabled = 'true';
+	document.getElementById('c144').disabled = 'true';
+	document.getElementById('c146').disabled = 'true';
+	document.getElementById('c148').disabled = 'true';
+	document.getElementById('c150').disabled = 'true';
+	document.getElementById('c152').disabled = 'true';
+	document.getElementById('c154').disabled = 'true';
 	
 	
 	document.getElementById('fiscalPeriodMounth').value =getValidMonth();
