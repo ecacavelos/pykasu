@@ -25,6 +25,9 @@
 				<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>
 			</line>	
 			-->
+			<line id="L4" name="H1L4" order="3">
+			    <cell id="nroCedula"  col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Cédula de identidad:" alignAddtionalDescription="LEFT" xmlTagName="nroCedula" events="" /> 
+			</line>
 			<line id="L5" name="H1L5" order="4" >
 
 				<cell id="fiscalPeriodDay"     col="1" type="NUMBER" value="" events="onblur:getFiscalInfoToForm90#datesControl" opaque="false" readOnly="false" calculable="false" additionalDescription="Dia" alignAddtionalDescription="LEFT" />
