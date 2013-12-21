@@ -167,7 +167,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
  			
 		}catch (NoResultException e){
 			logger.error("No result exception",e);
-			throw new FiscalPeriodNotFoundException("No se puede recuperar un periodo fiscal de las características solicitadas.");
+			throw new FiscalPeriodNotFoundException("No se puede recuperar un periodo fiscal de las caracterï¿½sticas solicitadas.");
 		}
 	}
    
@@ -178,7 +178,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		try{
 			
 			String lastLetter = ruc.substring(ruc.length()-1);
-			if(lastLetter.equals("Ñ") || lastLetter.equals("ñ")){
+			if(lastLetter.equals("ï¿½") || lastLetter.equals("ï¿½")){
 				lastLetter = "N";
 			}
 			
@@ -201,7 +201,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			
 			if(!sdf.format(ed.getExpiringDate()).equals(sdf.format(expiringDate))){
 				logger.error("Expiring Date is not valid");
-				throw new FiscalInfoException("Fecha de vencimiento inválida.");
+				throw new FiscalInfoException("Fecha de vencimiento invï¿½lida.");
 			}
 			Integer diffDate = Utils.DateDiff(expiringDate , paymentDate);
 			logger.info("Difference in days: " + diffDate);
@@ -226,7 +226,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		    		try {
 						Ruc r = contributor.getInfo(ruc);
 						//if(r.getType().trim().toUpperCase().equals("JURIDICA")){
-						if(false){ //TODO esto ya no se aplicay se deberia de cambiar todo este método
+						if(false){ //TODO esto ya no se aplicay se deberia de cambiar todo este mï¿½todo
 							//map.put("R7_IE_C2_WM", 100000);  //with movimient and JURIDICA
 							map.put("R7_IE_C2_WOM", new Double (100000.0));  //without movimient and JURIDICA
 							logger.info("----> RUC " + ruc + " is JURIDICA");
@@ -299,7 +299,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	 throws FailToGetExpiringDateException{
 		logger.info("Getting a expiring date with: Ruc-> " + ruc + " formType-> " + formType + " fiscalPeriod->" + fiscalPeriod);												
 		String lastLetter = ruc.substring(ruc.length()-1);
-		if(lastLetter.equals("Ñ") || lastLetter.equals("ñ")){
+		if(lastLetter.equals("ï¿½") || lastLetter.equals("ï¿½")){
 			lastLetter = "N";
 		}
 
@@ -341,7 +341,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	@SuppressWarnings("unchecked")
 	public Map getFiscalInfo(Map params) throws FiscalInfoException{
 		//El RUC siempre va a ser el ruc nuevo, dependiendo del tipo de formulario
-		//hay que recuperar el ruc viejo para realizar los cálculos en base al calendario anterior
+		//hay que recuperar el ruc viejo para realizar los cï¿½lculos en base al calendario anterior
 
 		logger.info(">>>>>> Begin to Fiscal Info Procedure ");
 		Iterator it = params.keySet().iterator();
@@ -361,7 +361,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		String declarationType = (String) params.get(FISCAL_DECLARATION_TYPE);
 
 		
-		Map result = null;	
+		Map result = new HashMap(); 	
 		boolean validPresentationDate = true;
 		try {
 			FormSetting fs = formSettingMgr.getFormSetting(formType.toString());
@@ -370,11 +370,17 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			
 			if(fs.getPeriodBegin() == null || fs.getPeriodEnd() == null){
 				logger.warn(">>>>>> TABLA DE FORMULARIOS - LIBRERIA TRIBUTO : " +
-						    "Faltan datos para determinación de periodo fiscal. " +
+						    "Faltan datos para determinaciÃ³n de periodo fiscal. " +
 						    "Formulario: " + formType.toString());
+				logger.error("NO se pudo determinar el periodo de inicio y fin: => Period begin: "
+						+ fs.getPeriodBegin()
+						+ "=> Period End: "
+						+ fs.getPeriodEnd());
+				result.put("ERROR_INTERNO",true);
+				return result;					
 			}else{
 				
-				result = new HashMap();
+//				result = new HashMap(); 
 
 				validPresentationDate = fiscalPeriodMonth >= 1 && fiscalPeriodMonth <= 12;
 				if(!validPresentationDate){
@@ -383,9 +389,9 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 					return result;					
 				}
 				
-				validPresentationDate =  c.getTime().after(fs.getPeriodBegin())&& c.getTime().before(fs.getPeriodEnd());//el formulario está dentro de su fecha de presentación
+				validPresentationDate =  c.getTime().after(fs.getPeriodBegin())&& c.getTime().before(fs.getPeriodEnd());//el formulario estï¿½ dentro de su fecha de presentaciï¿½n
 				if(!validPresentationDate){
-					logger.warn("El formulario está fuera de su fecha de presentación " + fs.getPeriodBegin().getTime() + " : " + fs.getPeriodEnd().getTime());
+					logger.warn("El formulario estï¿½ fuera de su fecha de presentaciï¿½n " + fs.getPeriodBegin().getTime() + " : " + fs.getPeriodEnd().getTime());
 					result.put("DECLARATION_DATE_NOT_VALID",true);
 					return result;					
 				}
@@ -395,21 +401,21 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				
 				logger.info("Es anual? " + fs.isAnnual());
 				logger.info("Es clausura? " + isClaurura(declarationType));
-				logger.info("Presentación año: " + c.get(Calendar.YEAR));
-				logger.info("Presentación mes: " + c.get(Calendar.MONTH)+1);
+				logger.info("Presentaciï¿½n aï¿½o: " + c.get(Calendar.YEAR));
+				logger.info("Presentaciï¿½n mes: " + c.get(Calendar.MONTH)+1);
 				
 				f1 = fs.isAnnual() && isClaurura(declarationType) &&  c.get(Calendar.YEAR) <= Calendar.getInstance().get(Calendar.YEAR);
-				logger.info(f1 + " --> Es anual, es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual" );
+				logger.info(f1 + " --> Es anual, es de clausura, y el aï¿½o de declaraciï¿½n (en la presentaciï¿½n) es menor o igual al aï¿½o actual" );
 				
 				f2 = fs.isAnnual() && !isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR);
-				logger.info(f2 + " --> Es anual, NO es de clausura, y el año de declaración (en la presentación) es menor al año actual");
+				logger.info(f2 + " --> Es anual, NO es de clausura, y el aï¿½o de declaraciï¿½n (en la presentaciï¿½n) es menor al aï¿½o actual");
 				
 
 				f3 = !fs.isAnnual() && isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR) || (c.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && c.get(Calendar.MONTH) <= Calendar.getInstance().get(Calendar.MONTH));
-				logger.info(f3 + " --> NO es anual, es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual y el mes de declaración (en la presentación) es menor o igual al mes actual");
+				logger.info(f3 + " --> NO es anual, es de clausura, y el aï¿½o de declaraciï¿½n (en la presentaciï¿½n) es menor o igual al aï¿½o actual y el mes de declaraciï¿½n (en la presentaciï¿½n) es menor o igual al mes actual");
 				
 				f4 = !fs.isAnnual() && !isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR) || (c.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && c.get(Calendar.MONTH) < Calendar.getInstance().get(Calendar.MONTH));
-				logger.info(f4 + " --> NO es anual, NO es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual y el mes de declaración (en la presentación) es menor  al mes actual");
+				logger.info(f4 + " --> NO es anual, NO es de clausura, y el aï¿½o de declaraciï¿½n (en la presentaciï¿½n) es menor o igual al aï¿½o actual y el mes de declaraciï¿½n (en la presentaciï¿½n) es menor  al mes actual");
 
 				if(!(f1 || f2 || f3 || f4)){
 					logger.warn("Todas las condiciones de las fechas son falsas");
@@ -448,7 +454,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				logger.info("Going to retrive old RUC from (" + ruc + ") to calculate tax");
 				ruc = rucObj.getOldRuc().replace('\\','N');
 			
-				//En este bloque se puede asumir que los formularios con INACTIVOS y se identifican solo por números: Ej: 850, ...
+				//En este bloque se puede asumir que los formularios con INACTIVOS y se identifican solo por nï¿½meros: Ej: 850, ...
 				Integer formTypeNumber = Integer.parseInt(formType);
 				if(fiscalInfoType.equals(FISCAL_INFO_EXPIRING)){
 					//Integer fiscalPeriodMonth = (Integer) params.get("fiscalPeriodMonth");
@@ -547,7 +553,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				permanentCalendar.roll(Calendar.DATE,1);
 
 				i++;
-				if(i>30){ //para que no entre en loop infinito en ningún caso
+				if(i>30){ //para que no entre en loop infinito en ningï¿½n caso
 					throw new FiscalInfoException("Problemas al buscar feriados");
 				}
 				
@@ -608,7 +614,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			
 			int lastNumber = -1;
 			try{
-				lastNumber = Integer.parseInt(ruc.substring(ruc.length()-1,ruc.length())); //ultimo número del ruc
+				lastNumber = Integer.parseInt(ruc.substring(ruc.length()-1,ruc.length())); //ultimo nï¿½mero del ruc
 			}catch (Exception e) {
 				throw new FiscalInfoException("Imposible recuperar valores del calendario perpetuo. RUC:" + ruc + " ~~ "+ e.getMessage());
 			}
@@ -634,13 +640,13 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			c.set(presentationYear.intValue(), presentationMonth.intValue()-1, day);
 			
 			if(fs.isMonthy() || fs.isFourMonthy() || fs.isSixMonthy())
-				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentación
+				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentaciï¿½n
 				c.add(Calendar.MONTH,1);
 			else if(fs.isAnnual())
-				//c.roll(Calendar.YEAR,1); //hay que poner el siguiente a~no a la de presentación
+				//c.roll(Calendar.YEAR,1); //hay que poner el siguiente a~no a la de presentaciï¿½n
 				c.add(Calendar.YEAR,1); 
 			else if(fs.isOccassionaly()){
-				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentación
+				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentaciï¿½n
 				c.add(Calendar.MONTH,1);
 			}else
 				throw new FiscalInfoException("Tipo de Periodicidad de Formulario no reconocido");
@@ -757,7 +763,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	}
 
 	public Map getFiscalInfoForm90(Map params) throws FiscalInfoException {
-		//el formulario 90 es un formulario que se puede presentar en cualquier momento, por eso no se hace un control si es una fecha válida de presentación
+		//el formulario 90 es un formulario que se puede presentar en cualquier momento, por eso no se hace un control si es una fecha vï¿½lida de presentaciï¿½n
 		Map map = new HashMap();
 		
 		String section = (String) params.get(Globals.FORM90_SECTION);
@@ -777,7 +783,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 		
 		int diffDate = 0;
 		if(section.equals("A")){
-			//Dias_atraso= [fecha_pago - convertirFecha(c19)] – 60
+			//Dias_atraso= [fecha_pago - convertirFecha(c19)] ï¿½ 60
 			Calendar c = Calendar.getInstance();
 			c.setTime(initialDate);
 			c.setLenient(true);
@@ -785,7 +791,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			initialDate = c.getTime();
 			diffDate = Utils.DateDiff(initialDate, paymentDate);
 		}else if(section.equals("C") || section.equals("B") || section.equals("E")){
-			//Dias_atraso= fecha_pago – recuperarVto[Ruc, convertirFecha(c29)]
+			//Dias_atraso= fecha_pago ï¿½ recuperarVto[Ruc, convertirFecha(c29)]
 			Calendar c = Calendar.getInstance();
 			c.setTime(initialDate);
 			c = getPermanentCalendar(ruc,c.get(Calendar.MONTH)+1, c.get(Calendar.YEAR),"90");
@@ -801,7 +807,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 					0,
 					0,
 					0);
-			//Fin Modificación Cesquivel.-
+			//Fin Modificaciï¿½n Cesquivel.-
 			initialDate = c.getTime();
 			diffDate = Utils.DateDiff(initialDate, paymentDate);
 			
@@ -820,7 +826,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			c.set(Calendar.HOUR, 0);
 			c.set(Calendar.MINUTE, 0);
 			c.set(Calendar.SECOND, 0);
-			//Fin Modificación Cesquivel.-
+			//Fin Modificaciï¿½n Cesquivel.-
 			initialDate = c.getTime();
 
 			diffDate = Utils.DateDiff(initialDate, paymentDate);

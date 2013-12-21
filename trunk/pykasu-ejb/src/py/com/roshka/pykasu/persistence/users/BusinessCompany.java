@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import py.com.roshka.pykasu.exceptions.InvalidRucException;
 
 //TODO Hacer que exista una empresa administradora
-//TODO Cambio de contraseña
+//TODO Cambio de contrase–a
 
 @Entity (name = "BusinessCompany") 
 @Table (name = "bcompany")

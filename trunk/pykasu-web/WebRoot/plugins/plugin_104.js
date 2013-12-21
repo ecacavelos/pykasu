@@ -271,14 +271,14 @@ function controlaAnho(){
 		//Si es clausura tiene que ser el a?o actual
 		if(declaType == '| 5 | CLAUSURA'){
 			if(fiscalYear > anhoActual){//Mayor o igual? O solo igual se permite
-				alert('Para las ddjj de tipo CLAUSURA, el a?o debe ser el menor o igual al a?o actual.');
+				alert('Para las ddjj de tipo CLAUSURA, el año debe ser el menor o igual al año actual.');
 				document.getElementById('fiscalPeriodYear').value = "";
 				document.getElementById('fiscalPeriodYear').focus();
 				return;
 			}
 		}else{//Si no es clausura, el a?o tiene que ser menor al actual
 			if(fiscalYear >= anhoActual){
-				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el a?o debe ser menor al a?o actual.');
+				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el año debe ser menor al año actual.');
 				document.getElementById('fiscalPeriodYear').value = "";
 				document.getElementById('fiscalPeriodYear').focus();
 				return;

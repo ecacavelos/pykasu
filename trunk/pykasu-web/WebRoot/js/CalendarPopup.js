@@ -19,7 +19,7 @@
 // ===================================================================
 
 /* SOURCE FILE: date.js */
-var MONTH_NAMES=new Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');var DAY_NAMES=new Array('Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Dom','Lun','Mar','Mié','Jue','Vie','Sáb');
+var MONTH_NAMES=new Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');var DAY_NAMES=new Array('Domingo','Lunes','Martes','MiÃ©rcoles','Jueves','Viernes','SÃ¡bado','Dom','Lun','Mar','MiÃ©','Jue','Vie','SÃ¡b');
 function LZ(x){return(x<0||x>9?"":"0")+x}
 function isDate(val,format){var date=getDateFromFormat(val,format);if(date==0){return false;}return true;}
 function compareDates(date1,dateformat1,date2,dateformat2){var d1=getDateFromFormat(date1,dateformat1);var d2=getDateFromFormat(date2,dateformat2);if(d1==0 || d2==0){return -1;}else if(d1 > d2){return 1;}return 0;}

@@ -19,9 +19,8 @@ import py.com.roshka.pykasu.exceptions.HBQueryException;
 import py.com.roshka.pykasu.interfaces.TaxManager;
 import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.web.Globals;
-import py.com.roshka.pykasu.web.util.HomeBankingItf;
 import py.com.roshka.pykasu.web.util.HomeBankingItfV3;
-import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
+//import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
 import py.com.roshka.pykasu.web.util.LabelValueBean;
 
 /**
@@ -53,7 +52,7 @@ public class PrvPaydmentFormAction extends Action {
 		logger.info("PrvPaydmentFormAction - EXECUTE");
 		HomeBankingItfV3 hbi = null;
 		Properties properties = null;
-		try {//TODO:(Mirna)Explicarle a pablo el problema que salia cuando no estaba correcto el número de cedula
+		try {//TODO:(Mirna)Explicarle a pablo el problema que salia cuando no estaba correcto el nï¿½mero de cedula
 
 			
 			properties = new Properties();
@@ -70,7 +69,7 @@ public class PrvPaydmentFormAction extends Action {
 			
 			Calendar c = Calendar.getInstance();
 			int year = c.get(Calendar.YEAR);	        
-	        //int year = 2007; //a pedido de EA segun correo del 06/06/2008  -- 25/07/2008 : EA solicito a través de AW que se indique el año actual
+	        //int year = 2007; //a pedido de EA segun correo del 06/06/2008  -- 25/07/2008 : EA solicito a travï¿½s de AW que se indique el aï¿½o actual
 			
 			ArrayList<LabelValueBean> al = new ArrayList<LabelValueBean>();
 			al.add(new LabelValueBean(null, null));
@@ -85,7 +84,7 @@ public class PrvPaydmentFormAction extends Action {
 				request.setAttribute("accounts",null);
 				//si no tiene habilitada la parte de pagos,
 				//entonces se le muestra el procedimiento para que pueda imprimir la boleta
-				//la lógica de esto								
+				//la lï¿½gica de esto								
 				return mapping.findForward("success");
 			}			
 			
@@ -103,11 +102,11 @@ public class PrvPaydmentFormAction extends Action {
 				hbi = (HomeBankingItfV3) request.getSession().getAttribute("homeBanking");
 				logger.info("Using existing Home Bancking Interface");
 			}
-			if(hbi.getAccunts() != null){
-				logger.info("Account is not null!. Size:" + hbi.getAccunts().size());
-				request.setAttribute("accounts",hbi.getAccunts());
+			if(hbi.getAccounts() != null){
+				logger.info("Account is not null!. Size:" + hbi.getAccounts().size());
+				request.setAttribute("accounts",hbi.getAccounts());
 				//coloco en la session la lista de cuentas, de tal manera que a la hora de hacer el pago, se recorran las cuentas y se extraigan los valores de pago ingresados por el usuario
-				request.getSession().setAttribute("accounts",hbi.getAccunts());
+				request.getSession().setAttribute("accounts",hbi.getAccounts());
 			}else{				
 				request.setAttribute("accounts",null);
 				logger.warn(">>>>>>>>>>>>>>>>  hbi.getAccunts() is NULL");

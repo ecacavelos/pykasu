@@ -34,7 +34,7 @@ public class AdmissionActivationAction extends Action {
 			throws Exception {
 
 		if(request.getParameter("sn") == null){
-			request.setAttribute("error", "Número de activación de Solicitud de Regitro inválido.");
+			request.setAttribute("error", "NÃºmero de activaciÃ³n de Solicitud de Regitro invÃ¡lido.");
 		}else{
 			InitialContext ic = new InitialContext();
 			AdmissionManager am =  (AdmissionManager) ic.lookup("pykasu/AdmissionManager/local");
@@ -42,7 +42,7 @@ public class AdmissionActivationAction extends Action {
 				Integer sn = Integer.parseInt(request.getParameter("sn"));			
 				am.activateAdmission(sn);
 				
-				request.setAttribute("success", "La activación de su solicitud de registro se ha realizado con éxito<br/>");
+				request.setAttribute("success", "La activaciÃ³n de su solicitud de registro se ha realizado con Ã©xito<br/>");
 			}catch (PykasuGenericException e) {
 				request.setAttribute("error", e.getMessage());	
 			}catch (Exception e) {

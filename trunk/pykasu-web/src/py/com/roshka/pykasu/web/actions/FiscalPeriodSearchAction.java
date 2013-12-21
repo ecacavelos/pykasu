@@ -81,7 +81,7 @@ public class FiscalPeriodSearchAction extends Action {
 				
 				i = new Integer(i.intValue() + 1);
 			}
-			logger.info("Cantidad de detalles en la búsqueda : " + expiringDates.values());
+			logger.info("Cantidad de detalles en la bÃºsqueda : " + expiringDates.values());
 			//request.setAttribute("details",list);
 			request.setAttribute("month",fps.getMonth());
 			request.setAttribute("year",fps.getYear());

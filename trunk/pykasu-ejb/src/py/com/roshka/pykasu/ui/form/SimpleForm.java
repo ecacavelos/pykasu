@@ -10,7 +10,16 @@ public class SimpleForm extends Form {
 	private String ruc;
 	private String dv;
 	private String version;
+	private String cedula;
 	
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
 	private String xmlFile;
 	
 	public SimpleForm(){
@@ -62,6 +71,7 @@ public class SimpleForm extends Form {
 		sb.append("FORMULARIO: " + getId() + "\n");
 		sb.append("RUC: " + getRuc() + "\n");
 		sb.append("DV: " + getDv() + "\n");
+		sb.append("CI: " + getCedula() + "\n");
 		if(getDate()!=null){
 			sb.append("Fecha: " + 
 					getDate().get(Calendar.DAY_OF_MONTH) + "/" + 

@@ -9,10 +9,10 @@
 <%@page import="java.util.Locale"%>
 <html:html>
 	<head>
-		<script LANGUAGE="JavaScript" SRC="menus.js"></script>
-		<script LANGUAGE="JavaScript" SRC="js/sha1.js"></script>
-		<script LANGUAGE="JavaScript" SRC="js/pykFiscalComun.js"></script>
-		<script LANGUAGE="JavaScript" SRC="js/pykasu_util.js"></script>		
+		<script LANGUAGE="JavaScript" charset="UTF-8" SRC="menus.js"></script>
+		<script LANGUAGE="JavaScript" charset="UTF-8" SRC="js/sha1.js"></script>
+		<script LANGUAGE="JavaScript" charset="UTF-8" SRC="js/pykFiscalComun.js"></script>
+		<script LANGUAGE="JavaScript" charset="UTF-8" SRC="js/pykasu_util.js"></script>		
 		<script LANGUAGE="JavaScript">
 
 								
@@ -99,6 +99,11 @@
 					alert('Fecha de Declaración NO VALIDA');
 					return;
 				}
+				if (document.getElementById('resolutionNr').value.length > 11){
+					alert('El número de resolución debe ser menor o igual a 11 dígitos');
+					return false;					
+				}
+				
 				
 				if(document.getElementById('dv').value == ""){
 					alert("RUC Incorrecto.");

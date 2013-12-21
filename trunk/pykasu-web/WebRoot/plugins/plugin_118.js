@@ -133,10 +133,10 @@ function orirecti(){
 
 }
 
-/*Se controla que año de declaración sea mayor o igual a 2007
-* Se controla que año de presentacion y declaración sean:
-*	- iguales si mes de declaración es 04, 08
-*	- el año de pres es año sigte si mes de declaración es 12
+/*Se controla que aï¿½o de declaraciï¿½n sea mayor o igual a 2007
+* Se controla que aï¿½o de presentacion y declaraciï¿½n sean:
+*	- iguales si mes de declaraciï¿½n es 04, 08
+*	- el aï¿½o de pres es aï¿½o sigte si mes de declaraciï¿½n es 12
 */
 function controlaAnho(){
 	/*var mes = getValueFormatless('fiscalPeriodMounth');
@@ -145,50 +145,50 @@ function controlaAnho(){
 	var partsAnho = anho.split('/');
 	var anhoPago = partsAnho[2];
 	
-	//Controla que año sea mayor o igual a 2007
+	//Controla que aï¿½o sea mayor o igual a 2007
 	if (anhoDecla == 0 || anhoDecla == null){
 	return;
 	}
 	if(anhoDecla >= 2007){
 		if(mes == 12){
 			if(anhoPago <= anhoDecla)
-				alert('El año de declaración no puede ser posterior al de pago.');			
+				alert('El aï¿½o de declaraciï¿½n no puede ser posterior al de pago.');			
 		}else if(mes == 4 || mes == 8){
 			/*
-				=== voy a comentar algo del código, por eso traigo a colación la fuente de est0
+				=== voy a comentar algo del cï¿½digo, por eso traigo a colaciï¿½n la fuente de est0
 			18/01/2008
 			Carlos: 
-			sale una alerta al salir del campo del periodo fiscal que dice "El año de pago debe ser igual a la de declaración"
-			Es una Observación nomás
+			sale una alerta al salir del campo del periodo fiscal que dice "El aï¿½o de pago debe ser igual a la de declaraciï¿½n"
+			Es una Observaciï¿½n nomï¿½s
 			porque se grabo el form sin inconvenientes
 			
 			Pablo: 
-			entiendo. y qué debería hacer?
+			entiendo. y quï¿½ deberï¿½a hacer?
 			
 			Carlos: 
 			el tema es que
 			se declaro como 8/2007
 			y la fecha de pago era 18/01/2008
-			la verdad que no entiendo el porqué del mensaje
-			en todo caso lo que no se debería dar es
+			la verdad que no entiendo el porquï¿½ del mensaje
+			en todo caso lo que no se deberï¿½a dar es
 			fecha de pago: 20/12/2006
 			perdon
 			fecha de pago: 20/12/2007
 			periodo fiscal: 08/2008
 			o sea
-			no podes poner que vas a pagar ayer algo de mañana
+			no podes poner que vas a pagar ayer algo de maï¿½ana
 			entre parentesis
-			esta de más ese mensaje me parece
+			esta de mï¿½s ese mensaje me parece
 			
 			Pablo: 
-			eso último entiendo.
+			eso ï¿½ltimo entiendo.
 			
 			Carlos: 
-			en lineas generales el form está ok
-			sólo ese tema
+			en lineas generales el form estï¿½ ok
+			sï¿½lo ese tema
 			
 			Pablo: 
-			perfecto, eso habría que hacerlo en el plugin_118.js,
+			perfecto, eso habrï¿½a que hacerlo en el plugin_118.js,
 			
 			Carlos: 
 			ok
@@ -203,12 +203,12 @@ function controlaAnho(){
 				
 			
 			
-			//===== aqui viene el comentario del código
+			//===== aqui viene el comentario del cï¿½digo
 //			if(anhoPago != anhoDecla)
-//				alert('El año de pago debe ser igual que el año de declaración.');
+//				alert('El aï¿½o de pago debe ser igual que el aï¿½o de declaraciï¿½n.');
 		}		
 	}else {
-		alert('El año de declaración no puede ser anterior al 2007.');
+		alert('El aï¿½o de declaraciï¿½n no puede ser anterior al 2007.');
 	}		
 
 	/*if(  (document.getElementById('fiscalPeriodYear') != null) 
@@ -271,7 +271,7 @@ function isValidPeriod(nombreCampoPeriodo){
 	periodValue = getValueFormatless(nombreCampoPeriodo);
 	
 	if(!(parseInt(periodValue,10) == 4 || parseInt(periodValue,10) == 8 || parseInt(periodValue,10) == 12)){
-		alert('El mes de declaración solo puede ser abril, agosto, o diciembre.');
+		alert('El mes de declaraciÃ³n solo puede ser abril, agosto, o diciembre.');
 		document.getElementById(nombreCampoPeriodo).value = "";
 	}
 
@@ -305,6 +305,29 @@ function beforeSave(){
 	if (!periodControl()){
 		return false;
 		}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
+	var isEmpty = true;
+	for (i = 10 ; i <= 26 ; i++) // Recorrer todas las celdas
+	{
+		if(document.getElementById("c"+i) != null) 
+			if (document.getElementById("c"+i).value != ''){ // hay ALGO en el campo
+				if (document.getElementById("c"+i).value != '0' ){ // Hay un monto diferente a 0 
+					isEmpty = false; // existe un mvto.
+					break;
+				}
+			}		
+	}
+	if (isEmpty){//Sin movimientos
+		alert ('Sr. usuario, les informamos que por disposiciÃ³n de la resoluciÃ³n general nro. 107 del Ministerio de Hacienda, no se pueden presentar declaraciones juradas SIN MOVIMIENTO por este medio.');
+		return false; 
+	}
+	if (document.getElementById("estado-ruc").value == "SUSPENSION TEMPORAL"){
+		alert ('Sr. usuario, les informamos que por disposiciÃ³n de la resoluciÃ³n general nro. 107 del Ministerio de Hacienda, los contribuyentes cuyos RUCs se encuentren en estado de SuspensiÃ³n Temporal, no podrÃ¡n presentar DDJJ por este medio.');
+		return false; 
+	}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
 		
 	return true;
 

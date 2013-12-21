@@ -49,7 +49,7 @@ public class SdtTriLiqIn {
 	@XmlElement(name = "Documento", required = true)
 	protected String documento;
 	@XmlElement(name = "Resolucion")
-	protected int resolucion;
+	protected long resolucion;
 	@XmlElement(name = "Impuesto")
 	protected short impuesto;
 	@XmlElement(name = "Usuario", required = true)
@@ -112,7 +112,7 @@ public class SdtTriLiqIn {
 	 * Gets the value of the resolucion property.
 	 * 
 	 */
-	public int getResolucion() {
+	public long getResolucion() {
 		return resolucion;
 	}
 
@@ -120,7 +120,7 @@ public class SdtTriLiqIn {
 	 * Sets the value of the resolucion property.
 	 * 
 	 */
-	public void setResolucion(int value) {
+	public void setResolucion(long value) {
 		this.resolucion = value;
 	}
 

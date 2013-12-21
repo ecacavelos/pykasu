@@ -83,11 +83,11 @@ public class AdmissionAction extends Action {
 				
 				am.addAdmission(ads);
 				
-				request.getSession().setAttribute(Globals.MESSAGE, "Solicitud de AdmisiÛn ingresado correctamente.<br/>Se enviar· un correo a: " + af.getMail() + " con las instrucciones necesarias para activar esta solicitud de adminisÛn.");
+				request.getSession().setAttribute(Globals.MESSAGE, "Solicitud de Admisi√≥n ingresado correctamente.<br/>Se enviar√° un correo a: " + af.getMail() + " con las instrucciones necesarias para activar esta solicitud de adminis√≥n.");
 				return mapping.findForward("success");
 				
 			}catch (Exception e) {
-				request.getSession().setAttribute(Globals.ERROR_MESSAGE, "OcurriÛ un error al registrar su solicitud.");
+				request.getSession().setAttribute(Globals.ERROR_MESSAGE, "Ocurri√≥ un error al registrar su solicitud.");
 				return mapping.findForward("admission");
 			}
 		}

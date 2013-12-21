@@ -98,7 +98,7 @@ public class UserManagerEJB implements UserManager {
 		if(!user.getPasswordDigest().equals(passwdDigest)){
 			logger.info("DB Password:" + user.getPasswordDigest());
 			logger.info("User Password:" + passwdDigest);
-			throw new LoginFailureException("La contraseña provista para autenticar al usuario  " + user.getUserName() + " no corresponde." );
+			throw new LoginFailureException("La contrase–a provista para autenticar al usuario  " + user.getUserName() + " no corresponde." );
 		}
 
 		return user;
@@ -116,7 +116,7 @@ public class UserManagerEJB implements UserManager {
 			em.persist(user);
 			
 		}catch (UserNotFoundException userNotFound) {
-			throw new LoginFailureException("No se ha encontrado un usuario con la contraseña provista");
+			throw new LoginFailureException("No se ha encontrado un usuario con la contrase–a provista");
 			
 		}catch (LoginFailureException lfe){
 			throw lfe;	

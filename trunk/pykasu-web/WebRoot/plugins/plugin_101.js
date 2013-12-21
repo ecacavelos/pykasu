@@ -293,8 +293,8 @@ function controlaAnho(){
 			getPorcentajeMoras(document.getElementById('fiscalPeriodYear'));  		  
 
 		}else{
-			alert("A�o de presentaci�n incorrecto. El a�o debe ser menor al a�o corriente. En el caso de CLAUSURA, el a�o puede ser el mismo que el corriente.");
-			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo a�o
+			alert("Año de presentación incorrecto. El año debe ser menor al año corriente. En el caso de CLAUSURA, el año puede ser el mismo que el corriente.");
+			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo a	o
 			document.getElementById('fiscalPeriodYear').focus();
 			return;
 		}
@@ -302,26 +302,26 @@ function controlaAnho(){
 }
 
 function beforeSave(){
-
+	
 	fecha = new Date();
 	var anho = fecha.getYear()+1900;
 	var anhoform = getValueFormatless('fiscalPeriodYear');	
 	
 	var v120 = removeCommas(document.getElementById("c120").value);
 	if(v120!='' && v120.length != 4){
-		alert('El a�o debe tener cuatro d�gitos.');
+		alert('El año debe tener cuatro dígitos.');
 		return false;
 	}
 	
 	if(parseInt(v120)< 1900){
-		alert('El a�o debe ser mayor al 1900.');
+		alert('El año debe ser mayor al 1900.');
 		return false;		
 	}
 	
 	var server = document.getElementById("serverActualDate").value;
 	sp = server.split('/');
 	if(v120.replace(' ','') > sp[2].replace(' ','')){
-		alert('El valor del campo 120 debe ser menor que el a�o actual.');
+		alert('El valor del campo 120 debe ser menor que el año actual.');
 		return false;
 	}
 
@@ -332,9 +332,30 @@ function beforeSave(){
 		) 
 	   || (anhoform < anho)  )
 	){
-		alert('A�o de presentaci�n incorrecto. El a�o debe ser menor al a�o corriente. En el caso de CLAUSURA, el a�o puede ser el mismo que el corriente.');
+		alert('Año de presentación incorrecto. El año debe ser menor al año corriente. En el caso de CLAUSURA, el año puede ser el mismo que el corriente.');
 		document.getElementById('fiscalPeriodYear').focus();
 		return false;
+	}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
+	var isEmpty = true;
+	for (i = 10 ; i <= 121 ; i++) // Recorrer todas las celdas
+	{
+		if(document.getElementById("c"+i) != null) 
+			if (document.getElementById("c"+i).value != ''){ // hay ALGO en el campo
+				if (document.getElementById("c"+i).value != '0' ){ // Hay un monto diferente a 0 
+					isEmpty = false; // existe un mvto.
+					break;
+				}
+			}		
+	}
+	if (isEmpty){//Sin movimientos
+		alert ('Sr. usuario, les informamos que por disposición de la resolución general nro. 107 del Ministerio de Hacienda, no se pueden presentar declaraciones juradas SIN MOVIMIENTO por este medio.');
+		return false; 
+	}
+	if (document.getElementById("estado-ruc").value == "SUSPENSION TEMPORAL"){
+		alert ('Sr. usuario, les informamos que por disposición de la resolución general nro. 107 del Ministerio de Hacienda, los contribuyentes cuyos RUCs se encuentren en estado de Suspensión Temporal, no podrán presentar DDJJ por este medio.');
+		return false; 
 	}
 
 	return true;
@@ -392,20 +413,4 @@ function reCalculate(campo){
 
 function giveFormType(){
  return 'anual';
-}
-
-function periodControl(){
-	if (!controlFiscalPeriod(giveFormType())){
-		return false;
-	}
-	return true;
-}
-
-function beforeSave(){
-	if (!periodControl()){
-		return false;
-		}
-		
-	return true;
-
 }

@@ -170,8 +170,8 @@ function controlaAnho(){
 			getPorcentajeMoras(document.getElementById('fiscalPeriodYear'));  		  
 
 		}else{
-			alert("Año de presentación incorrecto. El año debe ser menor al año corriente. En el caso de CLAUSURA, el año puede ser el mismo que el corriente.");
-			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo año
+			alert("AÃ±o de presentaciÃ³n incorrecto. El aÃ±o debe ser menor al aÃ±o corriente. En el caso de CLAUSURA, el aÃ±o puede ser el mismo que el corriente.");
+			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo aï¿½o
 			document.getElementById('fiscalPeriodYear').focus();
 			return;
 		}
@@ -185,17 +185,17 @@ function controlaAnho(){
 	var anhoActual = getActualYear();
 	
 	if(fiscalYear != 0){
-		//Si es clausura tiene que ser menor o igual q el año actual
+		//Si es clausura tiene que ser menor o igual q el aï¿½o actual
 		if(declaType == '| 5 | CLAUSURA'){
 			if(fiscalYear > anhoActual){//Mayor o igual? O solo igual se permite
-				alert('Para las ddjj de tipo CLAUSURA, el año debe ser el menor o igual al año actual.');
+				alert('Para las ddjj de tipo CLAUSURA, el aï¿½o debe ser el menor o igual al aï¿½o actual.');
 				document.getElementById('fiscalPeriodYear').value = "";
 				document.getElementById('fiscalPeriodYear').focus();
 				return;
 			}
-		}else{//Si no es clausura, el año tiene que ser menor al actual
+		}else{//Si no es clausura, el aï¿½o tiene que ser menor al actual
 			if(fiscalYear >= anhoActual){
-				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el año debe ser menor al año actual.');
+				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el aï¿½o debe ser menor al aï¿½o actual.');
 				document.getElementById('fiscalPeriodYear').value = "";
 				document.getElementById('fiscalPeriodYear').focus();
 				return;
@@ -265,6 +265,29 @@ function beforeSave(){
 	if (!periodControl()){
 		return false;
 		}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
+	var isEmpty = true;
+	for (i = 10 ; i <= 30 ; i++) // Recorrer todas las celdas
+	{
+		if(document.getElementById("c"+i) != null) 
+			if (document.getElementById("c"+i).value != ''){ // hay ALGO en el campo
+				if (document.getElementById("c"+i).value != '0' ){ // Hay un monto diferente a 0 
+					isEmpty = false; // existe un mvto.
+					break;
+				}
+			}		
+	}
+	if (isEmpty){//Sin movimientos
+		alert ('Sr. usuario, les informamos que por disposiciÃ³n de la resoluciÃ³n general nro. 107 del Ministerio de Hacienda, no se pueden presentar declaraciones juradas SIN MOVIMIENTO por este medio.');
+		return false; 
+	}
+	if (document.getElementById("estado-ruc").value == "SUSPENSION TEMPORAL"){
+		alert ('Sr. usuario, les informamos que por disposiciÃ³n de la resoluciÃ³n general nro. 107 del Ministerio de Hacienda, los contribuyentes cuyos RUCs se encuentren en estado de SuspensiÃ³n Temporal, no podrÃ¡n presentar DDJJ por este medio.');
+		return false; 
+	}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
 		
 	return true;
 

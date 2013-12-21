@@ -155,7 +155,7 @@ public class HomeBankingItfV2 implements Serializable{
 				String datosCuenta = respuesta.substring(j,j+83);
 				
 				if(datosCuenta == null || datosCuenta.trim() == "" || datosCuenta.trim().length() == 0){
-					//ya no vienne más datos
+					//ya no vienne mï¿½s datos
 					return hbAccounts;
 				}
 				
@@ -438,8 +438,6 @@ public class HomeBankingItfV2 implements Serializable{
 					}
 				}
 			}
-			
-			
 			//registerPayment(conn, pf, accountNbr);
 			conn.commit();
 			
@@ -450,7 +448,7 @@ public class HomeBankingItfV2 implements Serializable{
 				logger.error("Error al realizar el rolback -- ",e1);
 				
 			}
-			throw new HBUpdateException("Ocurrió un error al realizar el pago.", e);
+			throw new HBUpdateException("OcurriÃ³ un error al realizar el pago.", e);
 		} catch (NamingException e) {
 			logger.error(e);
 			throw new HBUpdateException(e.getMessage());
@@ -545,7 +543,7 @@ public class HomeBankingItfV2 implements Serializable{
 			 	OCURRIA CUANDO el nro de resolucion tenia 11 digitos. Se trunco a 10, pero el formulario se guarda igual con los 11 digitos correspondientes
 			 	
 			 	*/
-			resolucion = resolucion.substring(0, Math.min(resolucion.length(), 10)); 
+//			resolucion = resolucion.substring(0, Math.min(resolucion.length(), 10)); 
 			
 
 			//logger y yo somos amigos

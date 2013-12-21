@@ -25,6 +25,8 @@ public class Ruc implements Serializable{
 	private Integer verifiedDigit;
 	private String contributorName;
 	private Integer modalidadContribuyente; //agregado por Esteban Cacavelos 25/10/2012
+	private String estado; //agregado por ESteban Cacavelos el 28/08/2013.
+	private String tipoSociedad;
 	
 	protected Ruc(){
 	}
@@ -213,5 +215,26 @@ public class Ruc implements Serializable{
 	public String toString(){
 		return "RUC Nuevo: "+getNewRuc() + "RUC Nuevo: "+ getOldRuc() + " First Name" + getContributorName();  
 	}
+	
+	//agregado por Esteban Cacavelos 28/08/2013
+	@Column (name="estado")	
+	public String getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	//agregado por Esteban Cacavelos 10/09/2013
+	@Column (name="tipo_sociedad")	
+	public String getTipoSociedad() {
+		return tipoSociedad;
+	}
+	
+	public void setTipoSociedad(String tipoSociedad) {
+		this.tipoSociedad = tipoSociedad;
+	}
+	/////fin tipo_sociedad
 		
 }

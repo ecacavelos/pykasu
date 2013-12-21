@@ -154,7 +154,7 @@ public class ProccessFileForm extends Action {
     	
          String formId = genericForm.uploadForm(simpleForm);
 	    //System.out.println(simpleForm);
-	    request.setAttribute("message", "El formulario se ha procesado exitósamente. El identificador del formulario en el sistema es: " + formId);
+	    request.setAttribute("message", "El formulario se ha procesado exitosamente. El identificador del formulario en el sistema es: " + formId);
         return mapping.findForward("success");
 	}
 	

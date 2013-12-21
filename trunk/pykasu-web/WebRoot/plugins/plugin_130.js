@@ -235,7 +235,7 @@ function setPercent(){
 		}
 		if(percent == "NOT_EXIST" && applyPercentTargetField != -1){
 			document.getElementById(applyPercentTargetField).value = "";
-			alert("El valor num閞ico ingresado no existe o es inv醠ido!");
+			alert("El valor num茅rico ingresado no existe o es inv谩lido!");
 			document.getElementById(numFieldName).value = "";
 			
 		}
@@ -274,6 +274,29 @@ function beforeSave(){
 	if (!periodControl()){
 		return false;
 		}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
+	var isEmpty = true;
+	for (i = 10 ; i <= 92 ; i++) // Recorrer todas las celdas
+	{
+		if(document.getElementById("c"+i) != null) 
+			if (document.getElementById("c"+i).value != ''){ // hay ALGO en el campo
+				if (document.getElementById("c"+i).value != '0' ){ // Hay un monto diferente a 0 
+					isEmpty = false; // existe un mvto.
+					break;
+				}
+			}		
+	}
+	if (isEmpty){//Sin movimientos
+		alert ('Sr. usuario, les informamos que por disposici贸n de la resoluci贸n general nro. 107 del Ministerio de Hacienda, no se pueden presentar declaraciones juradas SIN MOVIMIENTO por este medio.');
+		return false; 
+	}
+	if (document.getElementById("estado-ruc").value == "SUSPENSION TEMPORAL"){
+		alert ('Sr. usuario, les informamos que por disposici贸n de la resoluci贸n general nro. 107 del Ministerio de Hacienda, los contribuyentes cuyos RUCs se encuentren en estado de Suspensi贸n Temporal, no podr谩n presentar DDJJ por este medio.');
+		return false; 
+	}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
 	return true;
 }
 

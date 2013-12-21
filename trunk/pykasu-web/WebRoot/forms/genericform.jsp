@@ -9,18 +9,17 @@
 <%py.com.roshka.pykasu.ui.form.Form form = (py.com.roshka.pykasu.ui.form.Form)
 	request.getAttribute(py.com.roshka.pykasu.web.Globals.FORM_BEAN);%>
 
-
 <html>
 <head>
 
 <title>Sistema</title>
-
-<script id="pykUtil" language="JavaScript" src="js/pykasu_util.js"></script>
-<script id="pykJS_1" language="JavaScript" src="plugins/plugin_<%=form.getId()%>.js"></script>
-<script id="pykJS_2" language="JavaScript"></script>
-<script id="pykJS_3" language="JavaScript"></script>
-<script id="pykJS_4" language="JavaScript"></script>
-<script id="pykJS_5" language="JavaScript"></script>
+<meta http-equiv="Content-Type" content=" charset=utf-8" />
+<script id="pykUtil" language="JavaScript" src="js/pykasu_util.js" charset="UTF-8"></script>
+<script id="pykJS_1" language="JavaScript" src="plugins/plugin_<%=form.getId()%>.js" charset="UTF-8"></script>
+<script id="pykJS_2" language="JavaScript" charset="UTF-8"></script>
+<script id="pykJS_3" language="JavaScript" charset="UTF-8"></script>
+<script id="pykJS_4" language="JavaScript" charset="UTF-8"></script>
+<script id="pykJS_5" language="JavaScript" charset="UTF-8"></script>
 
 <link href="styles/pykasu.css" rel="stylesheet" type="text/css">
 <link href="styles/form.css" rel="stylesheet" type="text/css">
@@ -42,7 +41,7 @@ function setField(obj){
 function lostFocus(obj){
 
 	if (!isCorrectHead()){
-		alert("Favor completar datos de la cabecera (RUC, Periodo Fiscal, Fecha Presentacion) antes de completar este campo.");
+		alert("Favor completar datos de la cabecera (RUC, Periodo Fiscal, Fecha Presentación) antes de completar este campo.");
 		obj.value = "";
 		return;		
 	}
@@ -186,7 +185,8 @@ function lostFocus(obj){
 	<input type="hidden" id="formStatus" value="<%=(String)request.getAttribute(py.com.roshka.pykasu.web.Globals.FORM_STATUS)%>"/>
 	<input type="hidden" id="serverActualDate" value="<%=(String)request.getAttribute("serverActualDate")%>"/>
 	<input type="hidden" id="suggestedPaymentDate" value="<%=(String)request.getAttribute("suggestedPaymentDate")%>"/>
-
+	<input type="hidden" id="estado-ruc" name="field(estado-ruc)" value=""/>
+	<input type="hidden" id="tipo-sociedad" name="field(tipo-sociedad)" value=""/>
 	<table width="95%" align="center">
 	<tr>
 	<td>	
