@@ -191,7 +191,7 @@ function checkValidMonth(){
  	
  	if ( tmpFiscalMonth != 4 && tmpFiscalMonth != 6 && tmpFiscalMonth != 12){
  		
- 		alert("Mes de presentación inválido!.\n Sólo válido para Abril, Junio y Diciembre");
+ 		alert("Mes de presentaciÃ³n invÃ¡lido!.\n SÃ³lo vÃ¡lido para Abril, Junio y Diciembre");
  		document.getElementById('fiscalPeriodMounth').value='';
  		return;
  	}
@@ -271,8 +271,8 @@ function controlaAnho(){
 			getPorcentajeMoras(document.getElementById('fiscalPeriodYear'));  		  
 
 		}else{
-			alert("Año de presentación incorrecto. El año debe ser menor al año corriente. En el caso de CLAUSURA, el año puede ser el mismo que el corriente.");
-			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo año
+			alert("Aï¿½o de presentaciï¿½n incorrecto. El aï¿½o debe ser menor al aï¿½o corriente. En el caso de CLAUSURA, el aï¿½o puede ser el mismo que el corriente.");
+			document.getElementById('fiscalPeriodYear').value = '';//Borro el campo aï¿½o
 			document.getElementById('fiscalPeriodYear').focus();
 			return;
 		}
@@ -314,19 +314,19 @@ function beforeSave(){
 	
 	var v120 = removeCommas(document.getElementById("c120").value);
 	if(v120!='' && v120.length != 4){
-		alert('El año debe tener cuatro dígitos.');
+		alert('El aï¿½o debe tener cuatro dï¿½gitos.');
 		return false;
 	}
 	
 	if(parseInt(v120)< 1900){
-		alert('El año debe ser mayor al 1900.');
+		alert('El aï¿½o debe ser mayor al 1900.');
 		return false;		
 	}
 	
 	var server = document.getElementById("serverActualDate").value;
 	sp = server.split('/');
 	if(v120.replace(' ','') > sp[2].replace(' ','')){
-		alert('El valor del campo 120 debe ser menor que el año actual.');
+		alert('El valor del campo 120 debe ser menor que el aï¿½o actual.');
 		return false;
 	}
 
@@ -337,7 +337,7 @@ function beforeSave(){
 		) 
 	   || (anhoform < anho)  )
 	){
-		alert('Año de presentación incorrecto. El año debe ser menor al año corriente. En el caso de CLAUSURA, el año puede ser el mismo que el corriente.');
+		alert('Aï¿½o de presentaciï¿½n incorrecto. El aï¿½o debe ser menor al aï¿½o corriente. En el caso de CLAUSURA, el aï¿½o puede ser el mismo que el corriente.');
 		document.getElementById('fiscalPeriodYear').focus();
 		return false;
 	}

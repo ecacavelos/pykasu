@@ -98,7 +98,7 @@ public class RegisterUserAction extends DispatchAction{
 	            	amgr.admitedAdmission(Integer.parseInt(request.getParameter("admissionId")), user.getBusinessCompany());
 	            	}catch (PykasuGenericException e) {
 	            		logger.error(e);
-	            		request.setAttribute(Globals.ERROR,"OcurriÛ un error al establecer el estado de esta AdmisiÛn a " + AdmissionManagerEJB.STATUS_CONFIGURADO+". Esto no le afectar· al usuario.");
+	            		request.setAttribute(Globals.ERROR,"Ocurri√≥ un error al establecer el estado de esta Admisi√≥n a " + AdmissionManagerEJB.STATUS_CONFIGURADO+". Esto no le afectar√° al usuario.");
 					}
 	            }
 	            

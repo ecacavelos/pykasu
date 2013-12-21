@@ -39,7 +39,7 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	3. -- en esta clase --
 		agregar una entrada para: public static final String FORM_TYPE_xxx  = "xxx";
 		agregar una entrada para: public static final String FORM_xxx_CLASS_NAME  = "Formxxx";
-	4. Agragar la entrada en el Menú: menu.xml
+	4. Agragar la entrada en el Menï¿½: menu.xml
  */
 
 	public static final String FORM_STATUS_PROCESS 		= "PROCESO";
@@ -50,7 +50,7 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	//--
 	public static final String FORM_STATUS_VALID		= "VALIDADO";
 	public static final String FORM_STATUS_PRINT_CLIENT	= "IMPRESO_CLIENTE";
-	public static final String FORM_STATUS_PRINT_SET	= "IMPRESO_SET";
+	public static final String FORM_STATUS_PRINT_SET	= "IMPRESO";
 	public static final String FORM_STATUS_ERROR		= "ERROR";
 
 	
@@ -151,8 +151,18 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	private String middleName;
 	private String firstLastName;
 	private String secondLastName;
+	private String nroCedula;
 
-	
+
+	@Column (name="nro_cedula")
+	public String getNroCedula() {
+		return nroCedula;
+	}
+
+	public void setNroCedula(String nroCedula) {
+		this.nroCedula = nroCedula;
+	}
+
 	private String declarationType = TaxForm.FORM_DECLARATION_TYPE_ORIGINAL; 
 	private String rectificativePPN;
 	private Boolean clausureType;
@@ -168,6 +178,7 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	private String messageInfo;
 
 	protected TaxForm(){
+//		this.nroCedula="0";
 		this.active = true;
 		this.status = TaxForm.FORM_STATUS_PROCESS;
 		this.createdDate = new Date(System.currentTimeMillis());
@@ -179,7 +190,6 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 		this.createdBy = userCreator;
 		this.businessCompany = userCreator.getBusinessCompany();
 	}
-
 	
 	@Column(name="is_active")
 	public Boolean getActive() {
@@ -422,11 +432,12 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 
 		setDv(Integer.parseInt(simpleForm.getDv()));		
 		setRuc(simpleForm.getRuc());
+		setNroCedula(simpleForm.getCedula());
 		logger.info("Antes de consultar el cierre");
 		if(!Utils.afterCloseHour()){
 			setPresentationDate(new java.util.Date(System.currentTimeMillis()));
 			setPaymentDate(new java.util.Date(System.currentTimeMillis()));
-		}else{//paso la hora del cierre, debería de computarse como el día siguiente.
+		}else{//paso la hora del cierre, deberï¿½a de computarse como el dï¿½a siguiente.
 			Calendar c = Calendar.getInstance();
 			c.setTime(new java.util.Date(System.currentTimeMillis()));
 			c.add(Calendar.DATE, 1);

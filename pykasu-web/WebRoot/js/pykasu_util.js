@@ -107,7 +107,7 @@ function getValueFormatless(nombreCampo){
 }
 
 /*
-Devuelve el año actual.
+Devuelve el aÃ±o actual.
 (Patch para distintas interpretaciones
 de los navegadores...)
 */

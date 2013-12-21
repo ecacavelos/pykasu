@@ -55,7 +55,7 @@ public class ShowRegisterForm extends Action{
             HttpServletResponse response) throws Exception {
     	
     	if(request.getParameter("admissionId")==null){
-    		request.setAttribute(Globals.ERROR,"La aplicaciÛn detectÛ un par·metro incorrecto en su solicitud");
+    		request.setAttribute(Globals.ERROR,"La aplicaci√≥n detect√≥ un par√°metro incorrecto en su solicitud");
     		return mapping.findForward("error");
     	}
     	
@@ -83,7 +83,7 @@ public class ShowRegisterForm extends Action{
 				}
 			}
 	    	
-			if(value<0){ //no se encontrÛ ningun buen nombre, entonces va a ser la primera letra de su nombre + su apellldo + los ultimos 3 dÌgitos de su clave de admision.
+			if(value<0){ //no se encontrÔøΩ ningun buen nombre, entonces va a ser la primera letra de su nombre + su apellldo + los ultimos 3 dÔøΩgitos de su clave de admision.
 				request.setAttribute("userName", admission.getFname().toLowerCase().substring(0,1)+admission.getLname().toLowerCase()+""+admission.getId().toString().substring(admission.getId().toString().length()-3,admission.getId().toString().length()));
 			}else{
 				request.setAttribute("userName", unames.get(value));
@@ -93,8 +93,8 @@ public class ShowRegisterForm extends Action{
 	        return mapping.findForward("userForm");
 	        
     	}catch (Exception e) {
-    		request.setAttribute(Globals.ERROR,"La aplicaciÛn detectÛ un par·metro incorrecto en su solicitud");
-    		logger.error("La aplicaciÛn detectÛ un par·metro incorrecto en su solicitud", e);
+    		request.setAttribute(Globals.ERROR,"La aplicaci√≥n detect√≥ un par√°metro incorrecto en su solicitud");
+    		logger.error("La aplicaci√≥n detect√≥ un par√°metro incorrecto en su solicitud", e);
     		return mapping.findForward("error");
 		}
     }

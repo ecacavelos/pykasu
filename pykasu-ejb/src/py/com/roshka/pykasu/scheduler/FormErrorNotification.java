@@ -101,7 +101,7 @@ public class FormErrorNotification implements Job {
 							   + "\nRUC: " + ntf.getRuc() 
 							   + "\nDV: " + ntf.getDv()  
 							   + "\nMes fiscal: " + ntf.getMonth() 
-							   + "\nAño fiscal: " + ntf.getYear()
+							   + "\nA–o fiscal: " + ntf.getYear()
 							   + "\nMonto: " + ntf.getAmount() 
 							   + "\nRegistro el siguiente mensaje: " + ntf.getMessage()  
 							   + "\nsiendo las: " + ntf.getArrivalTime() 

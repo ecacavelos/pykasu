@@ -2,73 +2,41 @@ package py.com.roshka.pykasu.web.util;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.StringWriter;
-import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.rmi.RemoteException;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Types;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
-import javax.xml.rpc.ServiceException;
 
-import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
-
-import py.com.roshka.pykasu.web.Globals;
-import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
-import py.com.cbi.pykasu.web.ws.cuentas.*;
-//import py.com.cbi.pykasu.web.ws.debitos.ArrayOfSdtTriLiqInDetalle;
-//import py.com.cbi.pykasu.web.ws.debitos.SdtTriLiqIn;
-//import py.com.cbi.pykasu.web.ws.debitos.SdtTriLiqInDetalle;
-//import py.com.cbi.pykasu.web.ws.debitos.WsTriLiq;
-//import py.com.cbi.pykasu.web.ws.debitos.WsTriLiqExecute;
-//import py.com.cbi.pykasu.web.ws.debitos.WsTriLiqExecuteResponse;
-//import py.com.cbi.pykasu.web.ws.debitos.WsTriLiqSoapPort;
-//import py.com.cbi.pykasu.web.ws.debitos.ObjectFactory;
-
-
-
-
-import py.com.roshka.pykasu.ejb.GenericFormManagerEJB;
+import py.com.cbi.pykasu.web.ws.cuentas.SdtTriSalIn;
+import py.com.cbi.pykasu.web.ws.cuentas.SdtTriSalOutDet;
+import py.com.cbi.pykasu.web.ws.cuentas.WsTriSal;
+import py.com.cbi.pykasu.web.ws.cuentas.WsTriSalExecute;
+import py.com.cbi.pykasu.web.ws.cuentas.WsTriSalExecuteResponse;
+import py.com.cbi.pykasu.web.ws.cuentas.WsTriSalSoapPort;
+import py.com.cbi.pykasu.web.ws.debitos.ArrayOfSdtTriLiqInDetalle;
+import py.com.cbi.pykasu.web.ws.debitos.SdtTriLiqIn;
+import py.com.cbi.pykasu.web.ws.debitos.SdtTriLiqInDetalle;
+import py.com.cbi.pykasu.web.ws.debitos.WsTriLiq;
+import py.com.cbi.pykasu.web.ws.debitos.WsTriLiqExecute;
+import py.com.cbi.pykasu.web.ws.debitos.WsTriLiqExecuteResponse;
+import py.com.cbi.pykasu.web.ws.debitos.WsTriLiqSoapPort;
 import py.com.roshka.pykasu.exceptions.HBGenericException;
 import py.com.roshka.pykasu.exceptions.HBQueryException;
 import py.com.roshka.pykasu.exceptions.HBUpdateException;
-import py.com.roshka.pykasu.exceptions.WSDLCuentasException;
 import py.com.roshka.pykasu.persistence.payment.PaymentForm;
 import py.com.roshka.pykasu.persistence.users.User;
-import services.Liqui_in;
-import services.WsliquidacionExecute;
-import services.WsliquidacionLocator;
-import services.WsliquidacionSoapPort;
-import wservision.WsimpuestosExecute;
-import wservision.WsimpuestosLocator;
-import wservision.WsimpuestosSoapPort;
-import cc_services.Ctacte_salExecute;
-import cc_services.Ctacte_salExecuteResponse;
-import cc_services.Ctacte_salLocator;
-import cc_services.Ctacte_salSoapPort;
-import cc_services.Serv_sal_in;
 
 
 public class HomeBankingItfV3 implements Serializable{
@@ -79,16 +47,10 @@ public class HomeBankingItfV3 implements Serializable{
 	static org.apache.log4j.Logger logger = org.apache.log4j.Logger
 			.getLogger(HomeBankingItfV3.class);
 	
-	private static final int WS_RESPONSE_OK = 0;
-	
 	private User user;
 	
 	Properties properties = null;
 	
-	private URL queryAccountURL = null;
-	private URL paymentCheckingAccountURL = null;
-	private URL paymentSavingAccountURL = null;
-	private URL savePaymentURL = null;
 	
 	public HomeBankingItfV3(User user) throws HBGenericException {
 
@@ -112,7 +74,7 @@ public class HomeBankingItfV3 implements Serializable{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<HBAccountV2> getAccunts() throws HBQueryException{
+	public List<HBAccountV2> getAccounts() throws HBQueryException{
 		
 		logger.info("Attemp to get account to " + user.getUserName() + " with document "+ user.getDocumentNumber());
 		Properties properties = new Properties();
@@ -140,10 +102,10 @@ public class HomeBankingItfV3 implements Serializable{
 			 logger.info("\n  SdtTriSalIn creado"); 
 			 
 			 // PARAMETROS DE ENTRADA. El dato a partir del cual se obtienen las cuentas es el NUMERO DE CEDULA
-//			 parametrosEntrada.setNroDoc(this.user.getDocumentNumber()/*"000000002345476"*/); // Nro_Doc
-			 parametrosEntrada.setNroDoc("000000004027322");
+			 parametrosEntrada.setNroDoc(this.user.getDocumentNumber()); // Nro_Doc
+//			 parametrosEntrada.setNroDoc("000000004027322");
 			 parametrosEntrada.setServicio((byte)7); //Servicio -> 7-> TRIBUTOS
-			 parametrosEntrada.setTipoConsulta((byte)0);//Tipo_Consulta - 1-> TODOS
+			 parametrosEntrada.setTipoConsulta((byte)1);//Tipo_Consulta - 1-> TODOS
 			 parametrosEntrada.setTipoDoc("CI"); //Tipo_Doc
 			 logger.info("\n\nUser: " + this.user.getDocumentNumber());
 			 execute.setSdtIn(parametrosEntrada);
@@ -402,7 +364,7 @@ public class HomeBankingItfV3 implements Serializable{
 						"La lista de cuentas, no puede ser vacia");
 			} else {
 				// setear todos los parametros de entrada que son propios
-				parametrosEntrada.setDocumento(this.user.getDocumentNumber()); // DOCUMENTO
+				parametrosEntrada.setDocumento(pf.getRuc()); // DOCUMENTO DEL FORM
 				parametrosEntrada.setIDFORMULARIO((long) pf.getId()); // ID
 																		// FORMULARIO
 				parametrosEntrada.setImporteTotal(pf.getPaymentAmount()); // IMPORTE
@@ -418,7 +380,9 @@ public class HomeBankingItfV3 implements Serializable{
 				}
 				
 				if (pf.getResolution() != null) { // Puede ser que este campo este o no.
-					int resolucion = Integer.parseInt(pf.getResolution());
+					if (pf.getResolution().length() > 11)
+						throw new IllegalArgumentException("ResoluciÃ³n mayor a 11 dÃ­gitos");
+					long resolucion = Long.parseLong(pf.getResolution());
 					parametrosEntrada.setResolucion(resolucion); 
 																
 				} else {
@@ -428,7 +392,7 @@ public class HomeBankingItfV3 implements Serializable{
 																// campo
 				}
 
-				parametrosEntrada.setUsuario(this.user.getUserName());
+				parametrosEntrada.setUsuario(properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
 				parametrosEntrada.setComprobante(pf.getId());
 
 				// fecha
@@ -438,15 +402,16 @@ public class HomeBankingItfV3 implements Serializable{
 				fec = DatatypeFactory.newInstance().newXMLGregorianCalendar(
 						gcal);
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Calendar cal = Calendar.getInstance();
-				String fecha_actual = dateFormat.format(cal.getTime());
-				String[] fec_part = fecha_actual.split("-");
-				fec.setYear(Integer.parseInt(fec_part[0]));
-				fec.setMonth(Integer.parseInt(fec_part[1]));
-				fec.setDay(Integer.parseInt(fec_part[2]));
-				fec.setHour(DatatypeConstants.FIELD_UNDEFINED);
-				fec.setMinute(DatatypeConstants.FIELD_UNDEFINED);
+				Date date = new Date(); // your date
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+				cal.setTime(date);
+				fec.setYear(cal.get(Calendar.YEAR));
+				fec.setMonth(cal.get(Calendar.MONTH)+1);
+				fec.setDay(cal.get(Calendar.DAY_OF_MONTH));
+				fec.setHour(cal.get(Calendar.HOUR));
+				fec.setMinute(cal.get(Calendar.MINUTE));
+				fec.setSecond(cal.get(Calendar.SECOND));
 				parametrosEntrada.setFechaLiquidacion(fec);
 				// fecha
 
@@ -459,7 +424,8 @@ public class HomeBankingItfV3 implements Serializable{
 						    "\nidFormulario: " + parametrosEntrada.getIDFORMULARIO()+
 						    "\nresolucion: " + parametrosEntrada.getResolucion()+
 						    "\nPeriodo: " + parametrosEntrada.getPeriodo()+
-						    "\ncomprobante: " + parametrosEntrada.getComprobante());
+						    "\ncomprobante: " + parametrosEntrada.getComprobante()+
+						    "\n fecha: " + parametrosEntrada.getFechaLiquidacion());
 				
 				// Cuentas
 				ArrayOfSdtTriLiqInDetalle detalleCuentas = new ArrayOfSdtTriLiqInDetalle();
@@ -588,215 +554,24 @@ public class HomeBankingItfV3 implements Serializable{
 								"Web service de pago de liquidicacion devolvio un error");
 					}
 				}
-				 
-				
-				
 			}
 		} catch (DatatypeConfigurationException eFormatDate) {
 			eFormatDate.printStackTrace();
 			logger.error("ERROR al formatear la fecha" + eFormatDate);
-			throw new HBUpdateException("Ocurri— un error al realizar el pago.-> "+ eFormatDate.getMessage());
+			throw new HBUpdateException("OcurriÃ³ un error al realizar el pago.-> "+ eFormatDate.getMessage());
 		}
 		catch (HBUpdateException eHB) {
 			eHB.printStackTrace();
 			logger.error("ERROR  al consumir el WS de debito->"+eHB.getMessage());
-			throw new HBUpdateException("Ocurri— un error al realizar el pago->", eHB);
+			throw new HBUpdateException("OcurriÃ³ un error al realizar el pago->", eHB);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);
-			throw new HBUpdateException("Ocurri— un error al realizar el pago->"+ e.getMessage());
+			throw new HBUpdateException("OcurriÃ³ un error al realizar el pago->"+ e.getMessage());
 		}
 	
 	
 
 	}
-
-//	@Deprecated
-//	public void performPayment(HBAccountV2 account, Double amount, Integer transaccionNumber) throws HBUpdateException{
-//		logger.info("  VOY A PAGAR: " + account.getNumber() + " - Tipo: "+account.getAccountType() + " la suma de: " + amount.doubleValue());
-//
-//		Connection conn = null;
-//		try {
-//			Context ctx = new InitialContext();
-//			DataSource ds = (DataSource) ctx.lookup("java:PykasuDS");
-//			conn = ds.getConnection();
-//			conn.setAutoCommit(false);			
-//
-//			switch (account.getType()) {
-//				case SAVING_ACCOUNT:
-////					paySavingAccount(conn, account, account.getPaymentAmount(), transaccionNumber);
-//					break;
-//				case CHECKING_ACCOUNT:
-////					payChekingAccount(conn, account, account.getPaymentAmount(), transaccionNumber);
-//					break;
-//				default:
-//					throw new HBUpdateException("El tipo de cuenta " + account.getType().toString() + " no se puede procesar.");
-//			}
-//			
-//			
-//			conn.commit();
-//			
-//		} catch (HBUpdateException e) {
-//			try {
-//				conn.rollback();
-//			} catch (SQLException e1) {
-//				logger.error("Error al realizar el rolback -- ",e1);
-//				
-//			}
-//		} catch (NamingException e) {
-//			logger.error(e);
-//			throw new HBUpdateException(e.getMessage());
-//		} catch (SQLException e) {
-//			logger.error(e);
-//			throw new HBUpdateException(e.getMessage());
-//		} finally {
-//			if(conn != null){
-//				try {
-//					conn.close();
-//				} catch (SQLException e) {
-//					logger.error("Error al cerrar la conexion a base de datos.",e);
-//				}
-//			}
-//		}
-//
-//		
-//	}
-
-//	private void registerPayment(Connection conn, PaymentForm pf, int account, double amount) throws HBUpdateException{
-//		CallableStatement stmt = null;
-//		try{
-//			int d = 0;
-//			String lib = properties.getProperty("SP_REGISTRA_DATOS_SET_LIB","PROTPGM");
-//			String sql = "{call "+lib+".ATRILQ00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
-//			logger.info("---------------------");			
-//			logger.info(sql);
-//			stmt = conn.prepareCall(sql);
-//			logger.info("---------------------");
-//
-//			String resolucion = "0";
-//			if(pf.getResolution() != null){
-//				resolucion = pf.getResolution();
-//			}
-//			
-//
-//			//logger y yo somos amigos
-//			String fiscalPeriod = pf.getFiscalPeriod();
-//			if(fiscalPeriod.equalsIgnoreCase("")){
-//				fiscalPeriod = "000000";
-//			}
-//			
-//			logger.info("Parametro 1-"+d+": "+ fiscalPeriod);
-//			logger.info("Parametro 2-"+d+": "+ pf.getRuc());
-//			logger.info("Parametro 3-"+d+": "+ new BigDecimal(amount));
-//			logger.info("Parametro 4-"+d+": "+ new BigDecimal(resolucion));
-//			logger.info("Parametro 5-"+d+": "+ new BigDecimal(pf.getObligation()));
-//			logger.info("Parametro 6-"+d+": "+ properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
-//			logger.info("Parametro 7-"+d+": "+ new BigDecimal(pf.getId()));
-//			logger.info("Parametro 8-"+d+": "+ new BigDecimal(account));
-//			logger.info("Parametro 9-"+d+": "+ new BigDecimal(pf.getId()));
-//			logger.info("Parametro 10-"+d+": -- Parametro de salida ");
-//			
-//			//Los parametros del SP son INOUT, por lo que hay 
-//			stmt.registerOutParameter(1+d, Types.CHAR);
-//			stmt.registerOutParameter(2+d, Types.CHAR);
-//			stmt.registerOutParameter(3+d, Types.DECIMAL);
-//			stmt.registerOutParameter(4+d, Types.DECIMAL);
-//			stmt.registerOutParameter(5+d, Types.DECIMAL);
-//			stmt.registerOutParameter(6+d, Types.CHAR);
-//			stmt.registerOutParameter(7+d, Types.DECIMAL);
-//			stmt.registerOutParameter(8+d, Types.DECIMAL);
-//			stmt.registerOutParameter(9+d, Types.DECIMAL);
-//			stmt.registerOutParameter(10+d, Types.CHAR);
-//			
-//			stmt.setString(1+d, fiscalPeriod);//periodo fiscal
-//			stmt.setString(2+d, pf.getRuc()); //ruc
-//			stmt.setBigDecimal(3+d, new BigDecimal(amount)); //monto
-//			stmt.setBigDecimal(4+d, new BigDecimal(resolucion));
-//			stmt.setBigDecimal(5+d, new BigDecimal(pf.getObligation()));				
-//			stmt.setString(6+d, properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
-//			stmt.setBigDecimal(7+d, new BigDecimal(pf.getId()));
-//			stmt.setBigDecimal(8+d,  new BigDecimal(account));
-//			stmt.setBigDecimal(9+d, new BigDecimal(pf.getId()));
-//			stmt.setString(10+d, "");
-//			
-//			stmt.setQueryTimeout(10);
-//			
-//			stmt.execute();
-////			logger.info("El valor de retorno: " + stmt.getBigDecimal(9+d));	
-////	
-////			if(stmt.getBigDecimal(9) == null || stmt.getBigDecimal(9).intValue() != 0){				
-////				throw new HBUpdateException("Codigo de respuesta devuelto: " + stmt.getBigDecimal(9));
-////			}
-//		}catch (Exception e) {
-//			logger.error(e.getMessage(),e);			
-//			throw new HBUpdateException(e.getMessage(),e);
-//		}
-//	}
-	
-//	@Deprecated
-//	public void registerPayment(PaymentForm pf, int account) throws HBUpdateException{
-//		try {
-//			logger.info("Realizando pago: " + pf);
-//			//WsimpuestosLocator liqLocator = new WsimpuestosLocator();
-//			WsliquidacionLocator liqLocator = new WsliquidacionLocator();
-//			
-//			//WsliquidacionLocator liqLocator = new WsliquidacionLocator();
-//			WsliquidacionSoapPort liqPort =  liqLocator.getwsliquidacionSoapPort(savePaymentURL);
-//			//WsliquidacionSoapPort liqPort = liqLocator.getwsliquidacionSoapPort(savePaymentURL);
-//			
-//			logger.info("Creando liquidacion");
-//			Liqui_in liquidacion = new Liqui_in();
-//			
-//			//Liqui_in liquidacion = new Liqui_in();
-//			
-//			
-//			logger.info("Asignando usuario: " + properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
-//			liquidacion.setUsuario(properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
-//			logger.info("Asignando ruc: " + pf.getRuc());
-//			liquidacion.setNumero_Ruc(pf.getRuc());
-//			logger.info("Asignando monto a pagar: " + pf.getPaymentAmount());			
-//			liquidacion.setMonto(pf.getPaymentAmount());
-//			logger.info("Asignando tipo de importe: " + pf.getObligation());
-//			if(pf.getObligation() != null){
-//				liquidacion.setTp_Importe((short)Integer.parseInt(pf.getObligation()));
-//			}
-//			logger.info("Asignando periodo fiscal: " + pf.getFiscalPeriod());			
-//			liquidacion.setPeriodo(pf.getFiscalPeriod());			
-//			if(pf.getResolution()!= null){
-//				logger.info("Asignando resolucion: " + Integer.parseInt(pf.getResolution()));
-//				liquidacion.setResolucion(Integer.parseInt(pf.getResolution()));
-//			}
-//			logger.info("Asignando FormIID: " + pf.getId());
-//			liquidacion.setFORM_IID(new Long(pf.getId()));
-//			logger.info("Asignando Comprobante: " + pf.getId());
-//			liquidacion.setComprobante(pf.getId());
-//			logger.info("Asignando Cuenta: " + account);
-//			liquidacion.setCuenta(account);
-//			
-//			
-//			logger.info("Creando y estableciendo parametros");
-//			WsliquidacionExecute parameters = new WsliquidacionExecute();
-//			
-//			//WsliquidacionExecute parameters = new WsliquidacionExecute();
-//			
-//			parameters.setLiquidacion(liquidacion);
-//			logger.info("Ejecutando pago");
-//			liqPort.execute(parameters);
-//			
-//			logger.info("Finalizo el PAGO");
-//			
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//			logger.error("Error al consumir el WebServices",e);
-//			throw new HBUpdateException(e.getMessage());
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//			logger.error("Error al consumir el WebServices",e);
-//			throw new HBUpdateException(e.getMessage());
-//		}
-//		
-//	}
-//	
-
 }

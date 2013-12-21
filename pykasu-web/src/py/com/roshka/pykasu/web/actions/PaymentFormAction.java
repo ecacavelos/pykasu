@@ -11,8 +11,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
-
 import py.com.roshka.pykasu.exceptions.HBUpdateException;
 import py.com.roshka.pykasu.interfaces.PaymentFormInterface;
 import py.com.roshka.pykasu.interfaces.RaffleTicketManager;
@@ -23,7 +21,8 @@ import py.com.roshka.pykasu.util.Utils;
 import py.com.roshka.pykasu.web.Globals;
 import py.com.roshka.pykasu.web.forms.PaymentFormWeb;
 import py.com.roshka.pykasu.web.util.HBAccountV2;
-import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
+import py.com.roshka.pykasu.web.util.HomeBankingItfV3;
+//import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
 
 /**
  * 
@@ -58,8 +57,8 @@ public class PaymentFormAction extends Action {
 		 * 2. Hay que consultar si tiene saldo.
 		 * 2.1 No tiene saldo, se le avisa.
 		 * 2.2 Tiene Saldo, entonces se intenta retirar el dinero.
-		 * 2.2.1 Ocurrió un error, por tanto se le avisa al usaurio
-		 * 2.2.2 Se pudo hacer la extracción, se guarda en la db el nuevo estado
+		 * 2.2.1 Ocurriï¿½ un error, por tanto se le avisa al usaurio
+		 * 2.2.2 Se pudo hacer la extracciï¿½n, se guarda en la db el nuevo estado
 		 * 
 		 */
 		PaymentFormInterface pfi = null;
@@ -68,7 +67,7 @@ public class PaymentFormAction extends Action {
 			pfi =  (PaymentFormInterface) ic.lookup("pykasu/PaymentFormManager/local");
 		}catch (Exception e) {
 			logger.error(e);
-			request.getSession().setAttribute(Globals.ERROR_MESSAGE, "Ocurrió un error al realizar el pago.");
+			request.getSession().setAttribute(Globals.ERROR_MESSAGE, "OcurriÃ³ un error al realizar el pago.");
 			return mapping.findForward("error");			
 		}
 		
@@ -100,7 +99,7 @@ public class PaymentFormAction extends Action {
 			Double paymentAmount = Double.parseDouble(pfw.getAmount().toString());
 			if(user.getPaymentAvaliable().booleanValue()){
 				paymentAmount = 0.0;
-				HomeBankingItfV2 hbi = (HomeBankingItfV2) request.getSession().getAttribute("homeBanking");
+				HomeBankingItfV3 hbi = (HomeBankingItfV3) request.getSession().getAttribute("homeBanking");
 				List<HBAccountV2> hbAccounts = (List<HBAccountV2>) request.getSession().getAttribute("accounts");
 				makeEPaid = true;
 				
@@ -153,7 +152,7 @@ public class PaymentFormAction extends Action {
 			if(makeEPaid && Utils.isRaffleTime(new java.util.Date(System.currentTimeMillis())) &&  user.getBusinessCompany().getClient().booleanValue()){
 				RaffleTicket tkt1 = raffleTicketManager.generateTicket(user);
 				RaffleTicket tkt2 = raffleTicketManager.generateTicket(user);
-				msg = msg + " - Tiene 2 cupones, cuyos nœmeros son: "+tkt1.getId()+ " y "+ tkt2.getId()+", a su nombre para el sorteo electr—nico de 5 notebook con internet movil gratis por 1 a–o.";
+				msg = msg + " - Tiene 2 cupones, cuyos nÃºmeros son: "+tkt1.getId()+ " y "+ tkt2.getId()+", a su nombre para el sorteo electrÃ³nico de 5 notebook con internet movil gratis por 1 aÃ±o.";
 			}
 			
 			request.getSession().setAttribute(Globals.MESSAGE,msg);
@@ -164,7 +163,7 @@ public class PaymentFormAction extends Action {
 			logger.error("Error to Save PaymentForm !",e);
 			e.printStackTrace();
 			if(pf == null || pfi == null){
-				logger.error("Ocurrió un error y no se podrá registrar el PAGO con el estado ERROR. (Es probable que no se haya registrado el pago.)");
+				logger.error("OcurriÃ³ un error y no se podrÃ¡ registrar el PAGO con el estado ERROR. (Es probable que no se haya registrado el pago.)");
 			}else{
 				pfi.changeStatus(pf.getId(), PaymentFormInterface.PAYMENT_FORM_ERROR);
 			}

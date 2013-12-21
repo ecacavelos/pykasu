@@ -99,7 +99,7 @@ public class ShowForms extends Action {
     		}            
             List forms = genericForm.getForms(init, end);
             
-            String title = "Bœsqueda de formularios " + formName;
+            String title = "BÃºsqueda de formularios " + formName;
             
             request.setAttribute(Globals.FORM_NAME,formName);
             request.setAttribute(Globals.FORMS_RESULTSET, forms);

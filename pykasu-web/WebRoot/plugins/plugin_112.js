@@ -191,14 +191,14 @@ function controlaAnho() {
 		// Si es clausura tiene que ser el a?o actual
 		if (declaType == '| 5 | CLAUSURA') {
 			if (fiscalYear != anhoActual) {
-				alert('Para las ddjj de tipo CLAUSURA, el anho debe ser el anho actual');
+				alert('Para las ddjj de tipo CLAUSURA, el anho debe ser el año actual');
 				document.getElementById('fiscalPeriodYear').value = "";
 				document.getElementById('fiscalPeriodYear').focus();
 				return;
 			}
 		} else {// Si no es clausura, el a?o tiene que ser menor al actual
 			if (fiscalYear >= anhoActual) {
-				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el a?o debe ser menor al a?o actual');
+				alert('Para las ddjj ORIGINALES y RECTIFICATIVAS, el año debe ser menor al año actual');
 				document.getElementById('fiscalPeriodYear').value = "";
 				document.getElementById('fiscalPeriodYear').focus();
 				return;
@@ -225,6 +225,28 @@ function getValidMonth() {
  */
 
 function beforeSave() {
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
+	var isEmpty = true;
+	for (i = 10 ; i <= 170 ; i++) // Recorrer todas las celdas
+	{
+		if(document.getElementById("c"+i) != null) 
+			if (document.getElementById("c"+i).value != ''){ // hay ALGO en el campo
+				if (document.getElementById("c"+i).value != '0' ){ // Hay un monto diferente a 0 
+					isEmpty = false; // existe un mvto.
+					break;
+				}
+			}		
+	}
+	if (isEmpty){//Sin movimientos
+		alert ('Sr. usuario, les informamos que por disposición de la resolución general nro. 107 del Ministerio de Hacienda, no se pueden presentar declaraciones juradas SIN MOVIMIENTO por este medio.');
+		return false; 
+	}
+	if (document.getElementById("estado-ruc").value == "SUSPENSION TEMPORAL"){
+		alert ('Sr. usuario, les informamos que por disposición de la resolución general nro. 107 del Ministerio de Hacienda, los contribuyentes cuyos RUCs se encuentren en estado de Suspensión Temporal, no podrán presentar DDJJ por este medio.');
+		return false; 
+	}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
 	return true;
 }
 

@@ -56,12 +56,12 @@ public class ChangePasswordAction extends Action {
 			User user = (User) request.getSession().getAttribute(Globals.LOGIN_USER);
 			
 			if(!user.getPasswordDigest().equalsIgnoreCase(actual)){
-				request.getSession().setAttribute(Globals.ERROR_MESSAGE, "La contraseña provista no coincide con la contraseña del usuario.");
+				request.getSession().setAttribute(Globals.ERROR_MESSAGE, "La contraseÃ±a provista no coincide con la contraseÃ±a del usuario.");
 				return mapping.findForward("changePasswd");
 			}
 			
 			if(!newPasswd.equalsIgnoreCase(newPasswdConf)){
-				request.getSession().setAttribute(Globals.ERROR_MESSAGE, "La nueva contraseña no coincide con la confirmación de la misma. Sea tan amable de ingresar nuevamente los datos.");
+				request.getSession().setAttribute(Globals.ERROR_MESSAGE, "La nueva contraseÃ±a no coincide con la confirmaciÃ³n de la misma. Sea tan amable de ingresar nuevamente los datos.");
 				return mapping.findForward("changePasswd");
 			}
 			
@@ -76,7 +76,7 @@ public class ChangePasswordAction extends Action {
 			}
 
 			user.setPasswordDigest(newPasswd);
-			request.getSession().setAttribute(Globals.MESSAGE, "Contraseña establecida correctamente");
+			request.getSession().setAttribute(Globals.MESSAGE, "ContraseÃ±a establecida correctamente");
 			return mapping.findForward("index");	
 		}
 		return mapping.findForward("changePasswd");

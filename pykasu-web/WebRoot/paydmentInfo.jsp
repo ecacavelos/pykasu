@@ -59,7 +59,6 @@
 					alert('Fecha de Declaración NO VALIDA');
 					return;
 				}
-				
 				var amount = document.getElementById('amount');
 				amount.value = removeCommas(amount.value);
 				

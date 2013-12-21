@@ -185,8 +185,6 @@ public class FormManagerEJB implements FormManager {
 		HashMap hm = new HashMap();
 		Ruc thisRuc = null;
 		
-		
-		
 		try {
 			if(formType!= null && formType.trim().equalsIgnoreCase("PAYMENT")){
 				boolean notCheckExcludedRuc = false;
@@ -198,6 +196,8 @@ public class FormManagerEJB implements FormManager {
 
 			hm.put("firstLastName","<![CDATA[" +thisRuc.getContributorName() +"]]>");
 			hm.put("dv",thisRuc.getVerifiedDigit().toString());
+			hm.put("estado", thisRuc.getEstado());
+			hm.put("tipo_sociedad", thisRuc.getTipoSociedad());
 			hm.put("secondLastName","");
 			hm.put("firstName","");
 			hm.put("middleName","");

@@ -215,7 +215,7 @@ public class HomeBankingItf implements Serializable{
 		} catch (RemoteException e){
 			e.printStackTrace();
 			//return null;
-			throw new HBGenericException("Error al intentar conectar al Web Service. Verificar la Conexión "+e);	
+			throw new HBGenericException("Error al intentar conectar al Web Service. Verificar la ConexiÃ³n "+e);	
 		}
 	}
 		

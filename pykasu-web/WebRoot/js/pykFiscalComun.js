@@ -82,6 +82,7 @@ function isCorrectHead(){
 	&&  (document.getElementById('fiscalPeriodMounth').value != "")
 	&&  (document.getElementById('fiscalPeriodYear').value != "")
 	&&  (document.getElementById('paymentDate').value != "")
+	&&  (document.getElementById('nroCedula').value != "");
 			
 }
 
@@ -147,7 +148,7 @@ function changeMoraInfo(){
 				var value = values[0].childNodes[i].getAttributeNode('value').value;
 
 				if (key == 'DECLARATION_DATE_NOT_VALID'){
-					alert('Fecha de declaración no válida');
+					alert('Fecha de declaraciÃ³n no vÃ¡lida');
 					try{
 						document.getElementById('fiscalPeriodMounth').value = getValidMonth();
 					}catch(e){
@@ -188,11 +189,11 @@ function changeMoraInfo(){
 				var value = values[0].childNodes[i].getAttributeNode('value').value;
 
 				if (key == 'PAYMENT_DATE_NOT_VALID'){
-					alert('Fecha incorrecta. Puede que la fecha prevista de pago sea menor a la actual, o sea una fecha no válida');
+					alert('Fecha incorrecta. Puede que la fecha prevista de pago sea menor a la actual, o sea una fecha no vÃ¡lida');
 					document.getElementById('paymentDate').focus();
 				}
 				if (key == 'DECLARATION_DATE_NOT_VALID'){
-					alert('Fecha de declaración no válida');
+					alert('Fecha de declaraciÃ³n no vÃ¡lida');
 					try{
 						document.getElementById('fiscalPeriodMounth').value = getValidMonth();
 					}catch(e){
@@ -224,22 +225,22 @@ function submitForm(action){
 
 	if(action == "send"){
 		if(!ajaxProccessTerminate){
-			alert('Aún se están procesando datos, no se puede guardar el formulario.\nIntente en unos momentos.');
+			alert('AÃºn se estÃ¡n procesando datos, no se puede guardar el formulario.\nIntente en unos momentos.');
 			return;
 		}
 		
-		if(!confirm('Esta a punto de Guardar el Formulario.\nSe encuentra seguro de realizar esta operación?')){
+		if(!confirm('Esta a punto de Guardar el Formulario.\nSe encuentra seguro de realizar esta operaciÃ³n?')){
 			return;
 		}
 		
 		if(document.getElementById('ruc').value == ""){
-			alert('El RUC no es válido');
+			alert('El RUC no es vÃ¡lido');
 			document.getElementById('ruc').focus();
 			return;
 		}
 		
 		if(document.getElementById('dv').value == ""){
-			alert('El RUC no es válido');
+			alert('El RUC no es vÃ¡lido');
 			document.getElementById('ruc').focus();
 			return;
 		}
@@ -249,7 +250,7 @@ function submitForm(action){
 				Lineas afectadas: 251, 253, 257-260. 
 			*/
 			if((document.getElementById('declarationType').value == '| 2 | RECTIFICATIVA')/*&&(document.getElementById('rectificativePPN').value == "")*/){
-				alert('El tipo de Declaración Jurada es RECTIFICATIVA. Precisa un número de orden de la declaración a rectificar.');
+				alert('El tipo de DeclaraciÃ³n Jurada es RECTIFICATIVA. Precisa un nÃºmero de orden de la declaraciÃ³n a rectificar.');
 				//document.getElementById('rectificativePPN').focus(); // Comentario agregado por D ayala y E cacavelos 
 				return;
 			}
@@ -265,7 +266,7 @@ function submitForm(action){
 		}
 		
 		if((fpYear.value == "")||(document.getElementById('fiscalPeriodYear').value == "")){
-			alert('La Declaración Jurada requiere tener un Periodo de Declaración');
+			alert('La DeclaraciÃ³n Jurada requiere tener un Periodo de DeclaraciÃ³n');
 			fpYear.focus();
 			return;
 		}
@@ -275,13 +276,13 @@ function submitForm(action){
 		}
 		
 		if((fpMonth.value == "")||(document.getElementById('fiscalPeriodMounth').value == "")){
-			alert('La Declaración Jurada requiere tener un Periodo de Declaración');
+			alert('La DeclaraciÃ³n Jurada requiere tener un Periodo de DeclaraciÃ³n');
 			fpMonth.focus();
 			return;
 		}
 		
 		if(!isValidDate(document.getElementById('paymentDate').value)){
-			alert('La fecha prevista de pago es inválida.');
+			alert('La fecha prevista de pago es invÃ¡lida.');
 			document.getElementById('paymentDate').focus();
 			return;
 		}		
@@ -309,7 +310,7 @@ function submitForm(action){
 
 		form.submit();	
 	}else if(action == "cancel"){
-		if(!confirm('Está a punto de Cancelar la edicion del presente Formulario.\nSi presiona el boton Aceptar NO se guardarán los cambios\n Está seguro de realizar esta operación?')){
+		if(!confirm('EstÃ¡ a punto de Cancelar la edicion del presente Formulario.\nSi presiona el boton Aceptar NO se guardarÃ¡n los cambios\n EstÃ¡ seguro de realizar esta operaciÃ³n?')){
 			return;
 		}else{
 			document.location = '../pycasu/';
@@ -481,6 +482,7 @@ function confirmComentSender(){
 		var row = null;
 		var field = null;
 		var additionalInfo = false;
+		var excludedByrucActivoOrTipoSociedad = false;
 		
 		document.getElementById('firstLastName').value = '';
 		document.getElementById('secondLastName').value = '';
@@ -498,6 +500,21 @@ function confirmComentSender(){
 					
 					if (values[0].childNodes[i].childNodes[j].nodeName == 'field-value'){
 						try{
+							if (field == 'estado'){
+								document.getElementById("estado-ruc").value = values[0].childNodes[i].childNodes[j].firstChild.nodeValue;
+								if (document.getElementById("estado-ruc").value != 'ACTIVO'){
+									alert('Estimado usuario, le comunicamos que los RUCs que no esten ACTIVOS, no podrÃ¡n presentar declaraciones por este medio.');
+									excludedByrucActivoOrTipoSociedad = true;
+								}
+							}
+							if (field == 'tipo_sociedad'){
+								document.getElementById("tipo-sociedad").value = values[0].childNodes[i].childNodes[j].firstChild.nodeValue;
+								if (document.getElementById("tipo-sociedad").value === 'SRL' || document.getElementById("tipo-sociedad").value === 'SOCIEDAD_ANONIMA'){
+									alert('Estimado usuario, le comunicamos que los RUCs correspondientes a S.A o S.R.L no podrÃ¡n presentar declaraciones juradas por este medio.');
+									excludedByrucActivoOrTipoSociedad = true;
+								}
+
+							}
 							if (field == 'additionalInfo'){
 								if (values[0].childNodes[i].childNodes[j].firstChild.nodeValue == 'false'){
 									additionalInfo = false;
@@ -523,14 +540,13 @@ function confirmComentSender(){
 				var key = values[0].childNodes[i].getAttributeNode('key').value;
 				var value = values[0].childNodes[i].getAttributeNode('value').value;
 				if (key == 'DECLARATION_RUC_EXLUDED' && value == 'true'){
-					document.getElementById('ruc').value = '';
-					
+					document.getElementById('ruc').value = '';					
 					document.getElementById('firstLastName').readOnly = '';
 					document.getElementById('secondLastName').readOnly = '';
 					document.getElementById('firstName').readOnly = '';
 					document.getElementById('middleName').readOnly = '';
 
-					alert('El ruc ingresado queda excluido del servicio de presentación por CAJA. Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS');
+					alert('El ruc ingresado queda excluido del servicio de presentaciÃ³n por CAJA. Solo puede presentar DDJJ por Sistema Web de Hacienda ResoluciÃ³n de la SET para las ERAS');
 					return;
 				}
 
@@ -540,13 +556,28 @@ function confirmComentSender(){
 					document.getElementById('secondLastName').readOnly = '';
 					document.getElementById('firstName').readOnly = '';
 					document.getElementById('middleName').readOnly = '';
-					alert('No se encontro información de RUC');
+					alert('No se encontro informaciÃ³n de RUC');
 					document.getElementById('ruc').value='';
 				}
 				
 			}//if comentario
 			
 		}//for i
+		
+		if (excludedByrucActivoOrTipoSociedad){
+
+			document.getElementById('firstLastName').readOnly = '';
+			document.getElementById('secondLastName').readOnly = '';
+			document.getElementById('firstName').readOnly = '';
+			document.getElementById('middleName').readOnly = '';
+			document.getElementById('firstLastName').value = '';
+			document.getElementById('dv').value='';
+			document.getElementById('ruc').readOnly = '';
+			document.getElementById('ruc').value='';
+			document.getElementById('ruc').focus();
+//			return;
+
+		}
 		if (additionalInfo == false){
 //			if (confirm('No tiene informacion sobre'+document.getElementById('ruc').value+'. Llenar ahora mismo?')){
 //					window.open('showForm.do?FORM=ClientData','Imprimir','status=1,location=0,toolbar=0, resizable=1, scrollbars=2, width=700, height=500');
@@ -591,15 +622,15 @@ function disabledByCondition(cell, cellConditionId){
 	}
 }
 
-/*····································································
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 Cesquivel 1/09/2007:
 Bloque de controles de periodo en cabecera para todos los formularios.-
 Control de meses para formularios mensuales.
-Control de año para formularios mensuales y anuales.
-····································································*/
+Control de aï¿½o para formularios mensuales y anuales.
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 function validateMonthValue(){
 /*
-	Verifica que el dato de mes ingresado sea válido
+	Verifica que el dato de mes ingresado sea vï¿½lido
 */
 	var monthValue = getValueFormatless('fiscalPeriodMounth');
 
@@ -627,14 +658,14 @@ function validateMonthByType(monthValue, specialType){
 */
 	if (specialType=='semestral'){
 		if (monthValue != 6 && monthValue != 12){
-			alert("Periodo incorrecto! \n Sólo válido para Junio y Diciembre");
+			alert("Periodo incorrecto! \n SÃ³lo vÃ¡lido para Junio y Diciembre");
 			document.getElementById('fiscalPeriodMounth').value='';
 			return false;
 		}
 		
 	}else if(specialType=='cuatrimestral'){
 		if (monthValue != 4 && monthValue != 8 &&  monthValue!=12 ){
-			alert("Periodo incorrecto! \n Sólo válido para Abril, Agosto y Diciembre");
+			alert("Periodo incorrecto! \n SÃ³lo vÃ¡lido para Abril, Agosto y Diciembre");
 			document.getElementById('fiscalPeriodMounth').value='';
 			return false;
 		}
@@ -642,7 +673,7 @@ function validateMonthByType(monthValue, specialType){
 	return true;
 }
 
-function validateYearForMonthly(){//VALIDACIÓN DE AÑO PARA FORMULARIOS MENSUALES.-
+function validateYearForMonthly(){//VALIDACIï¿½N DE Aï¿½O PARA FORMULARIOS MENSUALES.-
 	var yearValue = getValueFormatless('fiscalPeriodYear');
 	var declarationType = document.getElementById('declarationType').value;
 	
@@ -655,7 +686,7 @@ function validateYearForMonthly(){//VALIDACIÓN DE AÑO PARA FORMULARIOS MENSUALES
 	
 	
 	if (yearValue > actualYear){
-		alert("Error! \nEl año no puede ser mayor que el año actual!");
+		alert("Error! \nEl aÃ±o no puede ser mayor que el aÃ±o actual!");
 		document.getElementById('fiscalPeriodYear').value='';
 		return false;
 	}
@@ -665,7 +696,7 @@ function validateYearForMonthly(){//VALIDACIÓN DE AÑO PARA FORMULARIOS MENSUALES
 
 function validateMonthlyForm(specialType){ //EXCLUSIVO PARA CONTROL DE FORMULARIOS MENSUALES.-
 /*
-Funcion que verifica el campo de mes de la declaración en la cabecera,
+Funcion que verifica el campo de mes de la declaraciï¿½n en la cabecera,
 Para ser invocado en el OnBlur del campo mes de la cabecera y en el BeforeSave del formulario.
 */
 	var declarationType = document.getElementById('declarationType').value;
@@ -691,20 +722,20 @@ Para ser invocado en el OnBlur del campo mes de la cabecera y en el BeforeSave d
 	}
 	
 	if(!validateMonthValue()){
-		alert("Error!\n Valor incorrecto para mes de presentación.");
+		alert("Error!\n Valor incorrecto para mes de presentaciÃ³n.");
 		document.getElementById('fiscalPeriodMounth').value='';
 		return false;
 	}
 	
 	if (declarationType=='| 3 | CLAUSURA' || declarationType=='| 5 | CLAUSURA'){
 			if (periodDate > actualDate){
-				alert("ERROR!\n EL mes de presentación no puede ser mayor al mes actual");
+				alert("ERROR!\n EL mes de presentaciÃ³n no puede ser mayor al mes actual");
 				document.getElementById('fiscalPeriodMounth').value='';
 				return false;
 			}
 	}else{
 			 if (periodDate >= actualDate){
-				alert("ERROR!\n Para Declaraciones Originales y Rectificativas, el mes de presentación debe ser menor al mes actual");
+				alert("ERROR!\n Para Declaraciones Originales y Rectificativas, el mes de presentaciÃ³n debe ser menor al mes actual");
 				document.getElementById('fiscalPeriodMounth').value='';
 				return false;
 			 }
@@ -721,13 +752,13 @@ Para ser invocado en el OnBlur del campo mes de la cabecera y en el BeforeSave d
 		
 		if (declarationType=='| 3 | CLAUSURA'){
 			if (monthValue > actualDate.getMonth()+1){
-				alert("ERROR!\n EL mes de presentación no puede ser mayor al mes actual");
+				alert("ERROR!\n EL mes de presentaciï¿½n no puede ser mayor al mes actual");
 				document.getElementById('fiscalPeriodMounth').value='';
 				return false;
 			}
 		}else{
 			 if (monthValue >= actualDate.getMonth()+1){
-				alert("ERROR!\n Para Declaraciones Originales y Rectificativas, el mes de presentación debe ser menor al mes actual");
+				alert("ERROR!\n Para Declaraciones Originales y Rectificativas, el mes de presentaciï¿½n debe ser menor al mes actual");
 				document.getElementById('fiscalPeriodMounth').value='';
 				return false;
 			 }
@@ -747,8 +778,8 @@ Para ser invocado en el OnBlur del campo mes de la cabecera y en el BeforeSave d
 function validateFormYear() //EXCLUSIVO PARA CONTROL DE FORMULARIOS ANUALES.-
 {
 	/*
-	Funcion que controla la validez del año de presentación en la cabecera,
-	 para ser invocada en el evento Onblur del año de declaración y en el Before Save.-
+	Funcion que controla la validez del aï¿½o de presentaciï¿½n en la cabecera,
+	 para ser invocada en el evento Onblur del aï¿½o de declaraciï¿½n y en el Before Save.-
 	*/
 	var yearValue = getValueFormatless('fiscalPeriodYear');
 	var declarationType = document.getElementById('declarationType').value;
@@ -758,7 +789,7 @@ function validateFormYear() //EXCLUSIVO PARA CONTROL DE FORMULARIOS ANUALES.-
 	var actualYear=getActualYear();
 	
 	if (!validateYearValue(yearValue)){
-		alert("Error!\n Valor incorrecto para año de presenación");
+		alert("Error!\n Valor incorrecto para aÃ±o de presenaciÃ³n");
 		document.getElementById('fiscalPeriodYear').value='';
 		return false;
 	}
@@ -766,12 +797,12 @@ function validateFormYear() //EXCLUSIVO PARA CONTROL DE FORMULARIOS ANUALES.-
 	
 	if ((declarationType=='| 3 | CLAUSURA') || (declarationType=='| 5 | CLAUSURA')){
 		if (yearValue > actualYear){
-			alert("Error!\n El valor del año no debe ser mayor al año actual")
+			alert("Error!\n El valor del aÃ±o no debe ser mayor al aÃ±o actual")
 			document.getElementById('fiscalPeriodYear').value='';
 			return false;
 		}
 	}else if(yearValue >= actualYear){
-		alert("Error!\n El valor del año debe ser menor al año actual")
+		alert("Error!\n El valor del aÃ±o debe ser menor al aÃ±o actual")
 		document.getElementById('fiscalPeriodYear').value='';
 		return false;
 	}

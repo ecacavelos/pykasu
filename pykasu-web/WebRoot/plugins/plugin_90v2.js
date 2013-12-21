@@ -320,35 +320,35 @@ function periodControl(){
 	case "A":
 		dateValue=trim(document.getElementById('c19').value);
 		if(dateValue.length==0 ){
-			alert('El campo 19 requiere una fecha v�lida en formato DD/MM/AAAA, no puede estar vacio');
+			alert('El campo 19 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
 			return false
 		}
 		break;
 	case "B":
 		dateValue= document.getElementById('c21').value;
 		if(dateValue.length==0 ){
-			alert('El campo 21 requiere una fecha v�lida en formato DD/MM/AAAA, no puede estar vacio');
+			alert('El campo 21 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
 			return false
 		}
 		break;
 	case "C":
 		dateValue= document.getElementById('c29').value;
 		if(dateValue.length==0 ){
-			alert('El campo 29 requiere una fecha v�lida en formato DD/MM/AAAA, no puede estar vacio');
+			alert('El campo 29 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
 			return false
 		}
 		break;
 	case "D":
 		dateValue= document.getElementById('c31').value;
 		if(dateValue.length==0 ){
-			alert('El campo 31 requiere una fecha v�lida en formato DD/MM/AAAA, no puede estar vacio');
+			alert('El campo 31 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
 			return false
 		}
 		break;
 	case "E":
 		dateValue= document.getElementById('c33').value;
 		if(dateValue.length==0 ){
-			alert('El campo 33 requiere una fecha v�lida en formato DD/MM/AAAA, no puede estar vacio');
+			alert('El campo 33 requiere una fecha válida en formato DD/MM/AAAA, no puede estar vacio');
 			return false
 		}
 		break;
@@ -358,6 +358,8 @@ function periodControl(){
 }
 
 function beforeSave(){
+	
+	
 	if (!datesControl()){
 		return false;
 	}
@@ -365,6 +367,29 @@ function beforeSave(){
 	if(!periodControl()){
 		return false;
 	}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
+	var isEmpty = true;
+	for (i = 15 ; i <= 43 ; i++) // Recorrer todas las celdas
+	{
+		if(document.getElementById("c"+i) != null) 
+			if (document.getElementById("c"+i).value != ''){ // hay ALGO en el campo
+				if (document.getElementById("c"+i).value != '0' ){ // Hay un monto diferente a 0 
+					isEmpty = false; // existe un mvto.
+					break;
+				}
+			}		
+	}
+	if (isEmpty){//Sin movimientos
+		alert ('Sr. usuario, les informamos que por disposición de la resolución general nro. 107 del Ministerio de Hacienda, no se pueden presentar declaraciones juradas SIN MOVIMIENTO por este medio.');
+		return false; 
+	}
+	if (document.getElementById("estado-ruc").value == "SUSPENSION TEMPORAL"){
+		alert ('Sr. usuario, les informamos que por disposición de la resolución general nro. 107 del Ministerio de Hacienda, los contribuyentes cuyos RUCs se encuentren en estado de Suspensión Temporal, no podrán presentar DDJJ por este medio.');
+		return false; 
+	}
+	
+	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
 		
 	return true;
 }

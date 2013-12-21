@@ -4,7 +4,7 @@ nombreFirma tipos string
 cargoFirma tipo string
 
 PASO 2. 
-Señalar cuantas firmas tendra el documento
+SeÃ±alar cuantas firmas tendra el documento
 
 PASO 3.
 generar el xml de ejemplo
