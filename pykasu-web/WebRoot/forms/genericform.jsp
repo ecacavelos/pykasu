@@ -40,6 +40,9 @@ function setField(obj){
 
 function lostFocus(obj){
 
+	if(document.getElementById("nroCedula").value == ""){
+		alert("Favor completar el campo con su CI.");
+	} 
 	if (!isCorrectHead()){
 		alert("Favor completar datos de la cabecera (RUC, Periodo Fiscal, Fecha Presentación) antes de completar este campo.");
 		obj.value = "";
@@ -57,6 +60,7 @@ function lostFocus(obj){
 	o = null;
 	valueOld = null;
 }
+
 
 
 			<%
@@ -372,12 +376,12 @@ function lostFocus(obj){
                 	readOnly = "true";
 				String value = null;
             	%> 
-				<%if (!cell.getType().equals("LABEL")){ %>
+				<% if (!cell.getType().equals("LABEL")){ %>
                     <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                     		
-                  		<%if (position.equals(py.com.roshka.pykasu.ui.form.Cell.TOP) || position.equals(py.com.roshka.pykasu.ui.form.Cell.BOTTON)){%>
-                  			<%if (position.equals(py.com.roshka.pykasu.ui.form.Cell.TOP)){ %>
+                  		<% if (position.equals(py.com.roshka.pykasu.ui.form.Cell.TOP) || position.equals(py.com.roshka.pykasu.ui.form.Cell.BOTTON)){%>
+                  			<% if (position.equals(py.com.roshka.pykasu.ui.form.Cell.TOP)){ %>
                   			
                   				<th class="header" width="20%">
                   					<% if (cell.getAdditionalDescription() != null && !cell.getAdditionalDescription().equals("")){
