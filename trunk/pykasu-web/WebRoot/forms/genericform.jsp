@@ -40,12 +40,12 @@ function setField(obj){
 
 function lostFocus(obj){
 
-	if(document.getElementById("nroCedula").value == ""){
-		alert("Ingrese el número de cédula de la persona que presenta la declaración.");
-	} 
 	if (!isCorrectHead()){
 		alert("Favor completar datos de la cabecera (RUC, Periodo Fiscal, Fecha Presentación) antes de completar este campo.");
 		obj.value = "";
+		if(document.getElementById("nroCedula").value == ""){
+			alert("Ingrese el número de cédula de la persona que presenta la declaración.");
+		}
 		return;		
 	}
 	if (obj != o){
