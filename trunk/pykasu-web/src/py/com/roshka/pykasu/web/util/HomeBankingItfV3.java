@@ -117,6 +117,7 @@ public class HomeBankingItfV3 implements Serializable{
 			  * Manejo de codigos de respuesta
 			  * 
 			  * */
+			 
 			// Manejar cada error. Si la respuesta NO es exitosa se debe arrojar la excepcion HBUpdateException - emulando HomeBankingitfV2.
 			 if (respuesta.getSdtOut().getCodigoRetorno().equalsIgnoreCase("TRILISA000")) {// SIN ERROR                                                                       
 					logger.info("codigo de retorno: " + respuesta.getSdtOut().getCodigoRetorno() + "mensaje:" + respuesta.getSdtOut().getMensajeRetorno());

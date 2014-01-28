@@ -148,8 +148,8 @@
 			    
 			    document.getElementById("amount").value = removeCommas(document.getElementById("amount").value);
 				
-
-				form.submit(); //el control los montos se realizan en el momento de la carga.
+// 				alert("FORM ID: " +form.getAttribute(id));
+				form.submit();//el control los montos se realizan en el momento de la carga.
 		
 			}
 			

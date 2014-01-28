@@ -1,3 +1,5 @@
+<%@page import="py.com.roshka.pykasu.web.Globals"%>
+<%@page import="py.com.roshka.pykasu.persistence.users.User"%>
 <%@ page contentType="text/html" language="java"
 
 %>
@@ -13,6 +15,7 @@
 
 var menus = new Array()
 var tds = new Array()
+var u ;
 
 function addTd(td2){
 	tds[tds.length] = td2;
@@ -69,8 +72,8 @@ function colorear(seleccionar, td){
 }	
 
 
-
 function encryp(){
+
 	tmp_pass = document.getElementById("tmp_password");
 	pass = document.getElementById("j_password");
 	pass.value = hex_sha1(tmp_pass.value);
@@ -91,6 +94,7 @@ function encryp(){
 		<tr>
 			<th><bean:write name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>" property="fullName"/></th>
 		</tr>
+		
 	</table>
 	</logic:present>
 	<logic:notPresent name="<%=py.com.roshka.pykasu.web.Globals.LOGIN_USER%>">
@@ -159,19 +163,26 @@ function encryp(){
 				    <div ID="<%="div_"+actionId%>"  STYLE="border:0px; position:absolute;visibility:hidden;top: -10px;left:100px;z-index:3;"  onMouseOut="hideAll();">
 				    <table  cellspacing="0"  class="options" cellspacing="0">
 <%		    	while (subActions.hasNext()){
+					//si subaction no es nuevo formulario
+					
 		    	    py.com.roshka.pykasu.ui.menu.Action action2 = (py.com.roshka.pykasu.ui.menu.Action)subActions.next();
+		    	   
 		    	    
 %>
 <%-- 					<tr><td id="<%="td2_"+actionId+"_"+indexSubAction%>" onmouseover="colorear('true','<%="td2_"+actionId+"_"+indexSubAction%>')" onmouseout="colorear('false','<%="td2_"+actionId+"_"+indexSubAction%>');" class="options"><img src="images/puntero.gif"><a href="<%=action2.getUrl()%>"><%=action2.getName()%> --%>
+
 					<tr><td id="<%="td2_"+actionId+"_"+indexSubAction%>" onmouseover="colorear('true',this)" onmouseout="colorear('false',this);" class="options"><img src="images/puntero.gif"><a href="<%=action2.getUrl()%>"><%=action2.getName()%>
 			</td></tr>
+
 			<%}//iterador de subacionts%>
 		</table>
 	</div>
 <script LANGUAGE="JavaScript">
 				addDiv(document.getElementById('<%="div_"+actionId%>'));
 			</script>
-<%			}//si hay sub actions%>
+				
+<%			//}
+			}//si hay sub actions%>
 
 			
 			<div>

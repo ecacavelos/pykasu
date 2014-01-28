@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.SessionContext;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +26,7 @@ import py.com.roshka.pykasu.interfaces.Form101ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form103v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form104ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form105ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form105v3ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form106ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form107v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form108ManagerInterface;
@@ -36,10 +36,12 @@ import py.com.roshka.pykasu.interfaces.Form110v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form105v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form112ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form111ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form112v2ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form117ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form118ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form120ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form120v2ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form120v3ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form122ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form123ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form124ManagerInterface;
@@ -99,12 +101,16 @@ public class FormManagerEJB implements FormManager {
 	@EJB private Form124ManagerInterface form124Mgr;
 	@EJB private Form90v2ManagerInterface form90v2Mgr;
 	@EJB private Form120v2ManagerInterface form120v2Mgr;
+	@EJB private Form120v3ManagerInterface form120v3Mgr; //Agregado por Edith Ruiz Diaz el 28-01-2014
 	@EJB private Form103v2ManagerInterface form103v2Mgr;
 	@EJB private Form107v2ManagerInterface form107v2Mgr;
 	@EJB private Form111ManagerInterface form111Mgr;
 	@EJB private Form110v2ManagerInterface form110v2Mgr; //Agregado por esteban cacavelos 18-12-2012
 	@EJB private Form105v2ManagerInterface form105v2Mgr; //Agregado por esteban cacavelos 18-12-2012
 	@EJB private Form112ManagerInterface form112Mgr; //Agregado por esteban cacavelos 18-12-2012
+	
+	@EJB private Form112v2ManagerInterface form112v2Mgr; //Agregado por Edith Ruiz Diaz el 28-01-2014
+	@EJB private Form105v3ManagerInterface form105v3Mgr; //Agregado por Edith Ruiz Diaz el 28-01-2014
 	
 	@EJB private ClientDataInterface clientDataMgr;
 	@EJB private Contributor contributor;
@@ -145,6 +151,8 @@ public class FormManagerEJB implements FormManager {
 			return form104Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_105)){
 			return form105Mgr;
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_105v3)){
+			return form105v3Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_130)){
 			return form130Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_848)){
@@ -160,6 +168,9 @@ public class FormManagerEJB implements FormManager {
 			return form90v2Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_120v2)){
 			return form120v2Mgr;
+			
+		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_120v3)){
+			return form120v3Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_103v2)){
 			return form103v2Mgr;
 		}else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_107v2)){
@@ -175,6 +186,9 @@ public class FormManagerEJB implements FormManager {
 		}
 		else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_112)){
 			return form112Mgr;
+		}
+		else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_112v2)){
+			return form112v2Mgr;
 		}
 		throw new FormManagerException(formType + " is not available.");
 	}

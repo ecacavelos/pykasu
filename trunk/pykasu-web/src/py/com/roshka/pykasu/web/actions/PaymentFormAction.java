@@ -71,7 +71,7 @@ public class PaymentFormAction extends Action {
 			return mapping.findForward("error");			
 		}
 		
-		PaymentForm pf = null;
+		PaymentForm pf = new PaymentForm();
 		try{
 			logger.info(">>>>>>>>>>  PaymentAccionExecute");
 			PaymentFormWeb pfw = (PaymentFormWeb) form;
@@ -89,7 +89,6 @@ public class PaymentFormAction extends Action {
 			
 			pf.setObligation(pfw.getObligationTax());//ImpTpoImp
 			pf.setResolution(pfw.getResolutionNr());//ImpNroRes
-			
 			pf.setPaymentAmount(new Double(pfw.getAmount()));
 			
 			pfi.savePayment(pf, user);
@@ -100,6 +99,7 @@ public class PaymentFormAction extends Action {
 			if(user.getPaymentAvaliable().booleanValue()){
 				paymentAmount = 0.0;
 				HomeBankingItfV3 hbi = (HomeBankingItfV3) request.getSession().getAttribute("homeBanking");
+//				HomeBankingItfV2 hbi = (HomeBankingItfV2) request.getSession().getAttribute("homeBanking");
 				List<HBAccountV2> hbAccounts = (List<HBAccountV2>) request.getSession().getAttribute("accounts");
 				makeEPaid = true;
 				

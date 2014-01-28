@@ -19,6 +19,7 @@ import py.com.roshka.pykasu.exceptions.HBQueryException;
 import py.com.roshka.pykasu.interfaces.TaxManager;
 import py.com.roshka.pykasu.persistence.users.User;
 import py.com.roshka.pykasu.web.Globals;
+//import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
 import py.com.roshka.pykasu.web.util.HomeBankingItfV3;
 //import py.com.roshka.pykasu.web.util.HomeBankingItfV2;
 import py.com.roshka.pykasu.web.util.LabelValueBean;
@@ -51,6 +52,7 @@ public class PrvPaydmentFormAction extends Action {
 		
 		logger.info("PrvPaydmentFormAction - EXECUTE");
 		HomeBankingItfV3 hbi = null;
+//		HomeBankingItfV2 hbi = null;
 		Properties properties = null;
 		try {//TODO:(Mirna)Explicarle a pablo el problema que salia cuando no estaba correcto el n�mero de cedula
 
@@ -97,16 +99,22 @@ public class PrvPaydmentFormAction extends Action {
 				user = (User) request.getSession().getAttribute(Globals.LOGIN_USER);
 				
 				hbi = new HomeBankingItfV3(user);
+//				hbi = new HomeBankingItfV2(user);
 				logger.info("Home Bancking Interface created!");
 			}else{
 				hbi = (HomeBankingItfV3) request.getSession().getAttribute("homeBanking");
+//				hbi = (HomeBankingItfV2) request.getSession().getAttribute("homeBanking");
 				logger.info("Using existing Home Bancking Interface");
 			}
 			if(hbi.getAccounts() != null){
+//			if(hbi.getAccunts() != null){
 				logger.info("Account is not null!. Size:" + hbi.getAccounts().size());
+//				logger.info("Account is not null!. Size:" + hbi.getAccunts().size());
 				request.setAttribute("accounts",hbi.getAccounts());
+//				request.setAttribute("accounts",hbi.getAccunts());
 				//coloco en la session la lista de cuentas, de tal manera que a la hora de hacer el pago, se recorran las cuentas y se extraigan los valores de pago ingresados por el usuario
 				request.getSession().setAttribute("accounts",hbi.getAccounts());
+//				request.getSession().setAttribute("accounts",hbi.getAccunts());
 			}else{				
 				request.setAttribute("accounts",null);
 				logger.warn(">>>>>>>>>>>>>>>>  hbi.getAccunts() is NULL");
