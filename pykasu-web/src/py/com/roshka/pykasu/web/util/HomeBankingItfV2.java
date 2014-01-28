@@ -313,6 +313,7 @@ public class HomeBankingItfV2 implements Serializable{
 			
 			stmt.setQueryTimeout(10);
 			
+			
 			stmt.execute();
 			logger.info("El valor de retorno: " + stmt.getBigDecimal(9+d));	
 	
@@ -523,7 +524,8 @@ public class HomeBankingItfV2 implements Serializable{
 		try{
 			int d = 0;
 			String lib = properties.getProperty("SP_REGISTRA_DATOS_SET_LIB","PROTPGM");
-			String sql = "{call "+lib+".ATRILQ00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
+			String sql = "{call "+lib+". PCAJLI00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
+//			String sql = "{call "+lib+".ATRILQ00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
 			logger.info("---------------------");			
 			logger.info(sql);
 			stmt = conn.prepareCall(sql);
@@ -555,7 +557,12 @@ public class HomeBankingItfV2 implements Serializable{
 			logger.info("Parametro 1-"+d+": "+ fiscalPeriod);
 			logger.info("Parametro 2-"+d+": "+ pf.getRuc());
 			logger.info("Parametro 3-"+d+": "+ new BigDecimal(amount));
-			logger.info("Parametro 4-"+d+": "+ new BigDecimal(resolucion));
+			if(resolucion != null){
+				logger.info("Parametro 4-"+d+": "+ new BigDecimal(resolucion));
+			}else{
+				resolucion = "";
+				logger.info("Parametro 4-"+d+": "+ new BigDecimal(resolucion));
+			}
 			logger.info("Parametro 5-"+d+": "+ new BigDecimal(pf.getObligation()));
 			logger.info("Parametro 6-"+d+": "+ properties.getProperty("WS_USER_PAGO_LIQ", "tributos"));
 			logger.info("Parametro 7-"+d+": "+ new BigDecimal(pf.getId()));

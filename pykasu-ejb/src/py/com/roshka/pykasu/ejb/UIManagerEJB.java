@@ -62,18 +62,7 @@ public class UIManagerEJB implements UIManager{
 			logger.info(" ---------------------------> Principal! : "
 					+ sc.getCallerPrincipal());
 			
-//			if(user.getBusinessCompany().getIsActive().equals(Boolean.FALSE)){
-//				Program p = new Program("General","algo",1);
-//				Action a = new Action("Activar cuenta","algo","activation.do");
-//				Set actions = new HashSet();
-//				actions.add(a);
-//				a = new Action("Salir","","closepykasusession.do");
-//				actions.add(a);
-//				p.setActions(actions);
-//				menu = new HashSet();
-//				menu.add(p);
-//				
-//			}else
+		
 			{
 				user.getRoles();
 				List userRoles = new ArrayList();
@@ -81,16 +70,26 @@ public class UIManagerEJB implements UIManager{
 	
 				ClassLoader cl = getClass().getClassLoader();
 				logger.info("Parseando el xml");
-				
-				menu = Parser.parseMenu(cl.getResourceAsStream(FILE_MENU_XML),
+				logger.info("AVALIABLE TO PAY -- > " + user.getPaymentAvaliable());
+				// El usuario no tiene permitido el pago
+				if(user.getPaymentAvaliable()== false){
+					menu = Parser.parseMenu2(cl.getResourceAsStream(FILE_MENU_XML),
+							userRoles);
+				}else{
+					// El usuario tiene permitido el pago
+					menu = Parser.parseMenu(cl.getResourceAsStream(FILE_MENU_XML),
 						userRoles);
+				}
+				
 			}
+			
 		} catch (FindingException e) {
 			logger.error(e);
 		} catch (Exception e){
 			logger.error(e);	
 			e.printStackTrace();
 		}
+		
 		ArrayList al = new ArrayList(menu);
         Collections.sort(al);
 		return al;
@@ -101,7 +100,6 @@ public class UIManagerEJB implements UIManager{
 	private Program getPrograms(Role role){
 		Program program = null;
 		Action action = null;
-		
 		if(role.getRoleName().equals(RoleManager.USERROLENAME)){
 			program = new Program("Formularios","Carga de diversos formularios",10);
 			action = new Action("Formulario 850","Carga del formularion 850","/showForm.do");

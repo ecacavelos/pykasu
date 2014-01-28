@@ -40,6 +40,9 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 		agregar una entrada para: public static final String FORM_TYPE_xxx  = "xxx";
 		agregar una entrada para: public static final String FORM_xxx_CLASS_NAME  = "Formxxx";
 	4. Agragar la entrada en el Men�: menu.xml
+	5. Agregar la interfaz FormxxxManager interface.java en el paq. interfaces
+	6. Agregar la clase FormxxxManager.java en el paq. ejb
+	7. Agregar la condicion en la clase FormManagerEJB en el metodo getFormManager 
  */
 
 	public static final String FORM_STATUS_PROCESS 		= "PROCESO";
@@ -90,12 +93,15 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_TYPE_124  = "124";
 	public static final String FORM_TYPE_90v2  = "90v2";
 	public static final String FORM_TYPE_120v2  = "120v2";
+	public static final String FORM_TYPE_120v3  = "120v3";
 	public static final String FORM_TYPE_103v2  = "103v2";
 	public static final String FORM_TYPE_107v2  = "107v2";
 	public static final String FORM_TYPE_111  = "111";
 	public static final String FORM_TYPE_110v2  = "110v2"; // Agregado por Esteban Cacavelos 18-12-2012
 	public static final String FORM_TYPE_105v2  = "105v2"; // Agregado por Esteban Cacavelos 19-12-2012
 	public static final String FORM_TYPE_112  = "112"; // Agregado por Esteban Cacavelos 19-12-2012
+	public static final String FORM_TYPE_112v2  = "112v2";	// Agregado por Edith Ruiz Diaz  el 28-01-2014
+	public static final String FORM_TYPE_105v3  = "105v3"; 	// Agregado por Edith Ruiz Diaz  el 28-01-2014
 	
 	
 	//--
@@ -128,9 +134,13 @@ public abstract class TaxForm extends GenericForm implements Serializable{
 	public static final String FORM_124_CLASS_NAME    = "Form124";
 	public static final String FORM_90v2_CLASS_NAME   = "Form90v2";
 	public static final String FORM_120v2_CLASS_NAME  = "Form120v2";
+	public static final String FORM_120v3_CLASS_NAME  = "Form120v3";  // Agregado por Edith Ruiz Diaz  el 27-01-2014
 	public static final String FORM_103v2_CLASS_NAME  = "Form103v2";
 	public static final String FORM_107v2_CLASS_NAME  = "Form107v2";
 	public static final String FORM_111_CLASS_NAME  = "Form111";
+	public static final String FORM_112v2_CLASS_NAME  = "Form112v2"; // Agregado por Edith Ruiz Diaz  el 28-01-2014
+	public static final String FORM_105v3_CLASS_NAME  = "Form105v3"; // Agregado por Edith Ruiz Diaz  el 28-01-2014
+	
 	//--
 	
 	

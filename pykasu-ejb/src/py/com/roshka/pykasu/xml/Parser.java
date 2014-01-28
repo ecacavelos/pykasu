@@ -326,6 +326,114 @@ public class Parser {
 	    }
 		return programs;
 	}
+	public static Set<Program> parseMenu2(InputStream is, List userRoles){
+        try{
+            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            org.w3c.dom.Document doc = db.parse(is);            
+            Element e = doc.getDocumentElement();
+            
+            if (e != null && e.getNodeName().equals(XML_MENU)){
+
+            	NodeList xmlPrograms = e.getElementsByTagName(XML_PROGRAM);
+                return loadPrograms2(xmlPrograms, userRoles);
+
+            } 
+
+        }catch (Throwable e){
+            System.out.println(System.getProperty("java.vm.version"));
+            System.out.println(System.getProperty("java.specification.version"));
+            e.printStackTrace();
+        }
+		return null;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	private static Set<Program> loadPrograms2(NodeList xmlPrograms, List userRoles){
+		
+		Set<Program> programs = new TreeSet();
+		
+		Program program = null;
+		for(int i=0; i< xmlPrograms.getLength(); i++){ //iterate programs
+			if(xmlPrograms.item(i).getNodeType()== Node.ELEMENT_NODE){
+				program = new Program();
+
+				NamedNodeMap attrs = xmlPrograms.item(i).getAttributes();
+				if(attrs.getNamedItem("rolesAllowed")==null || havePrivileges(attrs.getNamedItem("rolesAllowed").getNodeValue(), userRoles )){
+
+					program.setName(attrs.getNamedItem("name").getNodeValue());
+					program.setOrder(Integer.parseInt(attrs.getNamedItem("order").getNodeValue()));
+					
+					logger.info("Parsenado el programa0: " + program.getName());
+					
+					if(!program.getName().equals("Nuevo formulario") || !program.getName().equals("Realizar Pagos")){
+					
+						if(attrs.getNamedItem("description") != null){
+							program.setDescription(attrs.getNamedItem("description").getNodeValue());
+						}
+		
+						if(attrs.getNamedItem("active") != null){
+							program.setActive(Boolean.parseBoolean(attrs.getNamedItem("active").getNodeValue()));					
+						}
+						
+						//ahora por cada programa hay que parsear las acciones
+						NodeList xmlActions = xmlPrograms.item(i).getChildNodes();
+						program.setActions(loadAction2(xmlActions,userRoles));
+						
+						//al final agrego el programa al Set
+						programs.add(program);
+					}
+				}
+			}
+	    }
+		return programs;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static Set<Action> loadAction2(NodeList xmlAction, List userRoles){
+	
+	
+		if(xmlAction == null || xmlAction.getLength() == 0)
+			return null;
+		
+		Set <Action> actions = new TreeSet();
+		
+		for(int i=0; i< xmlAction.getLength(); i++){ //iterate actions
+			Action action = null;
+			if(xmlAction.item(i).getNodeType()== Node.ELEMENT_NODE){
+				action = new Action();
+
+				NamedNodeMap attrs = xmlAction.item(i).getAttributes();
+
+				if(attrs.getNamedItem("rolesAllowed")==null || havePrivileges(attrs.getNamedItem("rolesAllowed").getNodeValue(), userRoles )){
+				
+					action.setName(attrs.getNamedItem("name").getNodeValue());
+					action.setOrder(Integer.parseInt(attrs.getNamedItem("order").getNodeValue()));
+					
+					logger.info("Parsenado action: " + action.getName());
+
+					if(!action.getName().equals("Nuevo formulario") && !action.getName().equals("Realizar Pagos")){
+						if(attrs.getNamedItem("url") != null){
+							action.setUrl(attrs.getNamedItem("url").getNodeValue());
+						}
+		
+						if(attrs.getNamedItem("description") != null){
+							action.setDescription(attrs.getNamedItem("description").getNodeValue());
+						}
+		
+						if(attrs.getNamedItem("active") != null){
+							action.setActive(Boolean.parseBoolean(attrs.getNamedItem("active").getNodeValue()));					
+						}
+		
+						action.setSubactions(loadAction2(xmlAction.item(i).getChildNodes(),userRoles));
+									
+						actions.add(action);
+					}
+				}//whitout privileges
+			}
+		}
+		return actions;
+	}
 
 	
 	private static boolean havePrivileges(String requiredRoles, List userRoles){
@@ -371,7 +479,7 @@ public class Parser {
 					action.setOrder(Integer.parseInt(attrs.getNamedItem("order").getNodeValue()));
 					
 					logger.info("Parsenado action: " + action.getName());
-	
+
 					if(attrs.getNamedItem("url") != null){
 						action.setUrl(attrs.getNamedItem("url").getNodeValue());
 					}

@@ -28,7 +28,8 @@ import py.com.roshka.pykasu.util.Globals;
  * </p>
  * 
  */
-@WebServiceClient(name = "ws_tri_sal", targetNamespace = "services", wsdlLocation = "/Users/esteban/Desktop/cuentas.wsdl")
+//@WebServiceClient(name = "ws_tri_sal", targetNamespace = "services", wsdlLocation = "/Users/esteban/Desktop/cuentas.wsdl")
+@WebServiceClient(name = "ws_tri_sal", targetNamespace = "services", wsdlLocation = "http://research01:8180/tributos_web/servlet/srv.aws_tri_sal?wsdl")
 public class WsTriSal extends Service {
 	
 	
@@ -40,27 +41,34 @@ public class WsTriSal extends Service {
 	
 	
 	static {
+		Properties properties = new Properties();
 		URL url = null;
 		try {
 			URL baseUrl;
 			baseUrl = py.com.cbi.pykasu.web.ws.cuentas.WsTriSal.class.getResource(".");
-			url = new URL(
-					baseUrl,
-					"/Users/esteban/Desktop/cuentas.wsdl");
+			URL url_properties = new URL(py.com.roshka.pykasu.util.Globals.PYKASU_PROPERTIES);
+			 properties.load(url_properties.openStream());
+			url = new URL(properties.getProperty("WS_CONSULTA_CUENTAS"));
+//					"/Users/esteban/Desktop/cuentas.wsdl");
 		} catch (MalformedURLException e) {
 			logger.warning("Failed to create URL for the wsdl Location: 'xxxxx', retrying as a local file");
 			logger.warning(e.getMessage());
 			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		WSTRISAL_WSDL_LOCATION = url;
 	}
 
 	public WsTriSal(URL wsdlLocation, QName serviceName) {
-		super(wsdlLocation, serviceName);
+//		super(wsdlLocation, serviceName);
+		super(wsdlLocation, serviceName = new QName("services", "ws_tri_sal"));
 	}
 
 	public WsTriSal() {
 		super(WSTRISAL_WSDL_LOCATION, new QName("services", "ws_tri_sal"));
+//		super(WSTRISAL_WSDL_LOCATION, serviceName);
 
 	}
 
