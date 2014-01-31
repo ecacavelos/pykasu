@@ -144,7 +144,7 @@ public class ProcesarForm extends Action{
                 }
                 else if (isFormEmpty){
     					
-    					msg = "Estimado usuario. El formulario no puede ser presentado sin movimientos según resolución nro 107 del Ministerio de Hacienda. Disculpe las molestias ocasionadas.";
+    					msg = "Estimado usuario. El formulario no puede ser presentado sin movimientos según resoluci\u00f3n nro 107 del Ministerio de Hacienda. Disculpe las molestias ocasionadas.";
     				}
     				else{
     	                if (gf.getNewInstance().equals("true")){                    
@@ -167,8 +167,8 @@ public class ProcesarForm extends Action{
     		                    if(user.getBusinessCompany().getClient().booleanValue()){ //es cliente de VISION, se debe generar el ticket correspondiente
     		                    	RaffleTicket ticket = raffleTicketManager.generateTicket(user);	                    	
     		                    	msg = msg + "" +user.getBusinessCompany().getName() + 
-    		                    				" tiene 1 cupón número: "+ ticket.getId() + " a su nombre" +
-    		                    				" para el sorteo electrónico de 5 notebook" +
+    		                    				" tiene 1 cup\u00f3n número: "+ ticket.getId() + " a su nombre" +
+    		                    				" para el sorteo electr\u00f3nico de 5 notebook" +
     		                    				" con internet movil gratis por 1 año.";
     		                    }
     						}
@@ -184,12 +184,12 @@ public class ProcesarForm extends Action{
                 logger.error("Error al editar el formulario! ", e );
             }
             catch (Throwable e) {
-                request.setAttribute(Globals.ERROR, "Error al editar el formulario: Informar error a Administración del Sistema");
+                request.setAttribute(Globals.ERROR, "Error al editar el formulario: Informar error a Administraci\u00f3n del Sistema");
                 logger.error("Error al editar el formulario! ", e );
             }
         }
         else{
-            request.setAttribute(Globals.MESSAGE, "Se canceló la edicion del formulario");
+            request.setAttribute(Globals.MESSAGE, "Se cancel\u00f3 la edicion del formulario");
         }
         return mapping.findForward("index");
         
