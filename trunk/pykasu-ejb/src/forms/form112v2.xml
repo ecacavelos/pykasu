@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<form type="112v2" description="Formulario 112v3">
+<form type="112v2" description="Formulario 112v2">
 
 	<sections type="header">
 		<section id="H1" name="HEADER1" description="SET" order="0">
@@ -269,7 +269,7 @@
 		
 		<rule name="TRGc37a" order="120" cellTargetId="c46" formula="c40 - c41 - c42 - c43 - c44 - c45" />
 		<rule name="TRGc37b" order="125" cellTargetId="c46" formula="0" condition="c46 &lt; 0" />
-		<rule name="TRGc48a" order="110" cellTargetId="c58" formula="c49 + c50 + c51 + c52 + c53 + c54 + c55 + c56 + c57)" />
+		<rule name="TRGc48a" order="110" cellTargetId="c58" formula="c49 + c50 + c51 + c52 + c53 + c54 + c55 + c56 + c57" />
 		
 		<rule name="TRGc49a" order="120" cellTargetId="c59" formula="0" />
 		<rule name="TRGc49b" order="125" cellTargetId="c59" formula="c59" condition="c49 &gt; 0" />

@@ -355,7 +355,7 @@
 		</section>
 		<section id="R8" name="RUBRO8" description="Rubro 8. Detalle de compras del periodo afectadas a operaciones exentas y gravadas importaciones y renta agropecuaria" order="100">
 			<line id="TL8" name="TLS8" order="-1" description="Rubro 8. Detalle de compras del periodo afectadas a operaciones exentas y gravadas importaciones y renta agropecuaria">
-				<cell id="LBL_R8_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Imporote" alignAddtionalDescription="FILLED" />
+				<cell id="LBL_R8_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="Importe" alignAddtionalDescription="FILLED" />
 			</line>
 			
 			<line id="IA" name="INC_A" order="0" description="| a | Compras con credito fiscal del 10% relacionadas exentas">
