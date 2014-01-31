@@ -2,7 +2,7 @@ var salaryAmount;
 
 var pm_fiscalPeriodMounth = null;
 
-function disabledByCondition105(cell, cellConditionId){
+function disabledByCondition(cell, cellConditionId){
 
 	var cellCondition = document.getElementById(cellConditionId);
 	
@@ -35,8 +35,8 @@ function checkIfContent(cellToTest, targetCellId){
 		cellCondition.focus();
 	}
 	refreshVars();
-	TRGc155();
-	TRGc156();
+//	TRGc155();
+//	TRGc156();
 
 }
 
@@ -56,20 +56,9 @@ function onloadForm(){
 	
 	
 	
-	disabledByCondition105(document.getElementById('c15'), 'c23');
-	disabledByCondition105(document.getElementById('c15'), 'c24');
-	disabledByCondition105(document.getElementById('c40'), 'c53');
-
-	
-	document.getElementById('c138').disabled = 'true';
-	document.getElementById('c140').disabled = 'true';
-	document.getElementById('c142').disabled = 'true';
-	document.getElementById('c144').disabled = 'true';
-	document.getElementById('c146').disabled = 'true';
-	document.getElementById('c148').disabled = 'true';
-	document.getElementById('c150').disabled = 'true';
-	document.getElementById('c152').disabled = 'true';
-	document.getElementById('c154').disabled = 'true';
+	disabledByCondition(document.getElementById('c15'), 'c23');
+	disabledByCondition(document.getElementById('c15'), 'c24');
+	disabledByCondition(document.getElementById('c40'), 'c53');
 	
 	
 	document.getElementById('fiscalPeriodMounth').value =getValidMonth();
@@ -115,41 +104,41 @@ function calcPorcentajeMoras(){
 		norectificativa = 0;
 	}
 	if(CONTRAVENSION_SMOV && CONTRAVENSION_CMOV != null){
-		document.getElementById('c82').value =  CONTRAVENSION_CMOV * norectificativa;		
-		if(document.getElementById('c82').value != null)
-  		   colocarpuntos(document.getElementById('c82'));
+		document.getElementById('c76').value =  CONTRAVENSION_CMOV * norectificativa;		
+		if(document.getElementById('c76').value != null)
+  		   colocarpuntos(document.getElementById('c76'));
 	}
 	refreshVars();
 
-	var tmp82 =	getValueFormatless('c82');
-	var tmp86 = getValueFormatless('c86');	
-	var op = tmp86 - tmp82;
-	if(op < 0){
-		op = 0;
-	}
-	
-	if (PORC_MORA && PORC_MORA != null){
-		document.getElementById('c87').value =  (PORC_MORA * op).toFixed(0);
-		if(document.getElementById('c87').value < 0){
-			document.getElementById('c87').value  = 0;
-		}
-		if(document.getElementById('c87').value != null)
-  		   colocarpuntos(document.getElementById('c87'));
-	}		
-	if (PORC_INTERES && PORC_INTERES != null){
-		document.getElementById('c88').value =  (PORC_INTERES * op).toFixed(0);
-		if(document.getElementById('c88').value < 0){
-			document.getElementById('c88').value  = 0;
-		}
-		if(document.getElementById('c88').value != null)
-  		   colocarpuntos(document.getElementById('c88'));
-	}
-	
+//	var tmp82 =	getValueFormatless('c82');
+//	var tmp86 = getValueFormatless('c86');	
+//	var op = tmp86 - tmp82;
+//	if(op < 0){
+//		op = 0;
+//	}
+//	
+//	if (PORC_MORA && PORC_MORA != null){
+//		document.getElementById('c87').value =  (PORC_MORA * op).toFixed(0);
+//		if(document.getElementById('c87').value < 0){
+//			document.getElementById('c87').value  = 0;
+//		}
+//		if(document.getElementById('c87').value != null)
+//  		   colocarpuntos(document.getElementById('c87'));
+//	}		
+//	if (PORC_INTERES && PORC_INTERES != null){
+//		document.getElementById('c88').value =  (PORC_INTERES * op).toFixed(0);
+//		if(document.getElementById('c88').value < 0){
+//			document.getElementById('c88').value  = 0;
+//		}
+//		if(document.getElementById('c88').value != null)
+//  		   colocarpuntos(document.getElementById('c88'));
+//	}
+//	
 	refreshVars();
-	TRGc84();
-	TRGc83();
-	TRGc86();
-	TRGc89();
+//	TRGc84();
+//	TRGc83();
+//	TRGc86();
+//	TRGc89();
 	
 	
 
@@ -259,10 +248,10 @@ function calculateC78(){
 // Segun documento de Referencia: Impuesto resultante (Inc. d x 10 %)
 function calculateC72(){
 
-	var campo71 = getValueFormatless('c71');
-	
-	document.getElementById('c72').value = campo71*0.1;
-	colocarpuntos(document.getElementById('c72'));
+//	var campo71 = getValueFormatless('c71');
+//	
+//	document.getElementById('c72').value = campo71*0.1;
+//	colocarpuntos(document.getElementById('c72'));
 	   	
 }
 

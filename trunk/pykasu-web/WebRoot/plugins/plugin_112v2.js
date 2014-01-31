@@ -96,35 +96,35 @@ function calcPorcentajeMoras() {
 			colocarpuntos(document.getElementById('c22'));
 	}
 
-	var tmp1 = removeCommas(document.getElementById('c26').value);
-	var tmp2 = removeCommas(document.getElementById('c22').value);
-	var op = tmp1 - tmp2;
-	if (op < 0) {
-		op = 0;
-	}
+//	var tmp1 = removeCommas(document.getElementById('c26').value);
+//	var tmp2 = removeCommas(document.getElementById('c22').value);
+//	var op = tmp1 - tmp2;
+//	if (op < 0) {
+//		op = 0;
+//	}
 
-	if (PORC_MORA && PORC_MORA != null) {
-		document.getElementById('c27').value = (PORC_MORA * op).toFixed(0);
-		if (document.getElementById('c27').value < 0) {
-			document.getElementById('c27').value = 0;
-		}
-		if (document.getElementById('c27').value != null)
-			colocarpuntos(document.getElementById('c27'));
-	}
-	if (PORC_INTERES && PORC_INTERES != null) {
-		document.getElementById('c28').value = (PORC_INTERES * op).toFixed(0);
-		if (document.getElementById('c28').value < 0) {
-			document.getElementById('c28').value = 0;
-		}
-		if (document.getElementById('c28').value != null)
-			colocarpuntos(document.getElementById('c28'));
-	}
+//	if (PORC_MORA && PORC_MORA != null) {
+//		document.getElementById('c22').value = (PORC_MORA * op).toFixed(0);
+//		if (document.getElementById('c22').value < 0) {
+//			document.getElementById('c22').value = 0;
+//		}
+//		if (document.getElementById('c22').value != null)
+//			colocarpuntos(document.getElementById('c22'));
+//	}
+//	if (PORC_INTERES && PORC_INTERES != null) {
+//		document.getElementById('c28').value = (PORC_INTERES * op).toFixed(0);
+//		if (document.getElementById('c28').value < 0) {
+//			document.getElementById('c28').value = 0;
+//		}
+//		if (document.getElementById('c28').value != null)
+//			colocarpuntos(document.getElementById('c28'));
+//	}
 
 	refreshVars();
-	TRGc24();
-	TRGc26a();
-	TRGc26b();
-	TRGc29();
+//	TRGc24();
+//	TRGc26a();
+//	TRGc26b();
+//	TRGc29();
 
 	var tmp = (0).toFixed(0);
 
@@ -145,8 +145,8 @@ function checkIfContent(cellToTest, targetCellId){
 	        cellCondition.focus();
 	}
 	refreshVars();
-	TRGc72();
-	TRGc73();
+//	TRGc72();
+//	TRGc73();
 	
 }
 
@@ -227,7 +227,7 @@ function getValidMonth() {
 function beforeSave() {
 	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
 	var isEmpty = true;
-	for (i = 10 ; i <= 170 ; i++) // Recorrer todas las celdas
+	for (i = 10 ; i <= 73 ; i++) // Recorrer todas las celdas
 	{
 		if(document.getElementById("c"+i) != null) 
 			if (document.getElementById("c"+i).value != ''){ // hay ALGO en el campo

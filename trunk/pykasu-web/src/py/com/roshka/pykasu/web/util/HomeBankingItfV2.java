@@ -524,8 +524,8 @@ public class HomeBankingItfV2 implements Serializable{
 		try{
 			int d = 0;
 			String lib = properties.getProperty("SP_REGISTRA_DATOS_SET_LIB","PROTPGM");
-			String sql = "{call "+lib+". PCAJLI00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
-//			String sql = "{call "+lib+".ATRILQ00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
+//			String sql = "{call "+lib+". PCAJLI00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
+			String sql = "{call "+lib+".ATRILQ00(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) } ";
 			logger.info("---------------------");			
 			logger.info(sql);
 			stmt = conn.prepareCall(sql);
