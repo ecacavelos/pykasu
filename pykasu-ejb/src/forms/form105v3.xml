@@ -569,69 +569,69 @@
 			</line>
 			
 			<line id="L7010" order="20" description="|a| Terneros machos y hembras" >
-				<cell id="c128" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="128" xmlTagName="C128" events="onblur:checkIfContent(this,'c128')" />
-				<cell id="c138" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="138" xmlTagName="C138" />
-				<cell id="c150" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="150" xmlTagName="C150" />				
+				<cell id="c128" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="128" xmlTagName="C128" />
+				<cell id="c138" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="138" xmlTagName="C138"  events="onblur:checkIfContent(this,'c128')" />
+				<cell id="c150" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="150" xmlTagName="C150" events="onblur:checkIfContent(this,'c138')"/>				
 			</line>
 
 			<line id="L7020" order="30" description="|b| Vaquillas" >
-				<cell id="c129" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="129" xmlTagName="C129" events="onblur:checkIfContent(this,'c129')" />
-				<cell id="c139" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="139" xmlTagName="C139" />				
-				<cell id="c151" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="151" xmlTagName="C151" />
+				<cell id="c129" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="129" xmlTagName="C129"  />
+				<cell id="c139" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="139" xmlTagName="C139" events="onblur:checkIfContent(this,'c129')" />				
+				<cell id="c151" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="151" xmlTagName="C151" events="onblur:checkIfContent(this,'c139')"/>
 			</line>
 
 			<line id="L7030" order="40" description="|c| Vacas" >
-				<cell id="c130" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="130" xmlTagName="C130" events="onblur:checkIfContent(this,'c142')" />
-				<cell id="c140" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="140" xmlTagName="C140" />				
-				<cell id="c152" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="152" xmlTagName="C152" />
+				<cell id="c130" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="130" xmlTagName="C130" />
+				<cell id="c140" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="140" xmlTagName="C140" events="onblur:checkIfContent(this,'c130')" />				
+				<cell id="c152" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="152" xmlTagName="C152" events="onblur:checkIfContent(this,'c140')"/>
 			</line>
 
 			<line id="L7040" order="50" description="|d| Toros" >
-				<cell id="c131" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="131" xmlTagName="C131" events="onblur:checkIfContent(this,'c144')" />
-				<cell id="c141" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="141" xmlTagName="C141" />				
-				<cell id="c153" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="153" xmlTagName="C153" />
+				<cell id="c131" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="131" xmlTagName="C131" />
+				<cell id="c141" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="141" xmlTagName="C141" events="onblur:checkIfContent(this,'c131')"/>				
+				<cell id="c153" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="153" xmlTagName="C153" events="onblur:checkIfContent(this,'c141')"/>
 			</line>
 		
 			<line id="L7050" order="60" description="|e| Novillos" >
-				<cell id="c132" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="132" xmlTagName="C132" events="onblur:checkIfContent(this,'c146')" />
-				<cell id="c142" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="142" xmlTagName="C142" />				
-				<cell id="c154" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="154" xmlTagName="C154" />
+				<cell id="c132" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="132" xmlTagName="C132"  />
+				<cell id="c142" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="142" xmlTagName="C142" events="onblur:checkIfContent(this,'c132')" />				
+				<cell id="c154" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="154" xmlTagName="C154" events="onblur:checkIfContent(this,'c142')" />
 			</line>
 
 			<line id="L7060" order="70" description="|f| Equinos" >
-				<cell id="c133" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="133" xmlTagName="C133" events="onblur:checkIfContent(this,'c148')" />
-				<cell id="c143" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="143" xmlTagName="C143" />				
-				<cell id="c155" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="155" xmlTagName="C155" />
+				<cell id="c133" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="133" xmlTagName="C133"  />
+				<cell id="c143" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="143" xmlTagName="C143" events="onblur:checkIfContent(this,'c133')"/>				
+				<cell id="c155" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="155" xmlTagName="C155" events="onblur:checkIfContent(this,'c143')" />
 			</line>
 
 			<line id="L7070" order="80" description="|g| Ovinos" >
-				<cell id="c134" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="134" xmlTagName="C134" events="onblur:checkIfContent(this,'c150')" />
-				<cell id="c144" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="144" xmlTagName="C144" />				
-				<cell id="c156" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156" />
+				<cell id="c134" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="134" xmlTagName="C134"/>
+				<cell id="c144" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="144" xmlTagName="C144" events="onblur:checkIfContent(this,'c134')" />				
+				<cell id="c156" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156" events="onblur:checkIfContent(this,'c144')" />
 			</line>
 
 			<line id="L7080" order="90" description="|h| Caprinos" >
-				<cell id="c135" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="135" xmlTagName="C135" events="onblur:checkIfContent(this,'c152')" />
-				<cell id="c145" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="145" xmlTagName="C145" />				
-				<cell id="c157" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="157" xmlTagName="C157" />
+				<cell id="c135" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="135" xmlTagName="C135" />
+				<cell id="c145" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="145" xmlTagName="C145" events="onblur:checkIfContent(this,'c135')" />				
+				<cell id="c157" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="157" xmlTagName="C157" events="onblur:checkIfContent(this,'c145')"/>
 			</line>
 
 			<line id="L7090" order="100" description="|i| Otros (burros, mulas, etc)" >
-				<cell id="c136" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="136" xmlTagName="C136" events="onblur:checkIfContent(this,'c154')" />
-				<cell id="c146" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146" />				
-				<cell id="c158" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="158" xmlTagName="C158" />
+				<cell id="c136" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="136" xmlTagName="C136" />
+				<cell id="c146" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146" events="onblur:checkIfContent(this,'c136')"/>				
+				<cell id="c158" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="158" xmlTagName="C158" events="onblur:checkIfContent(this,'c146')"/>
 			</line>
 
 			<line id="L7100" order="110" description="|j| Cultivo en proceso" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" colSpan="1"/>	
 				<cell id="c147" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="147" xmlTagName="C147" />
-				<cell id="c159" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="159" xmlTagName="C159" />				
+				<cell id="c159" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="159" xmlTagName="C159" events="onblur:checkIfContent(this,'c147')" />				
 			</line>
 			
 			<line id="L7110" order="120" description="|k| TOTALES (Inc. a + b + c + d + e + f + g + h + i)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" colSpan="1"/>
 				<cell id="c148" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="148" xmlTagName="C148" />
-				<cell id="c160" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="160" xmlTagName="C160" />				
+				<cell id="c160" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="160" xmlTagName="C160" events="onblur:checkIfContent(this,'c148')" />				
 			</line>
 			
 			<line id="L7120" order="130" description="|l| TOTALES" >

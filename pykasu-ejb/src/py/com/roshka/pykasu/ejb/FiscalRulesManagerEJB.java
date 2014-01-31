@@ -369,7 +369,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			c.set(fiscalPeriodYear.intValue(), fiscalPeriodMonth.intValue()-1, 5);
 			
 			if(fs.getPeriodBegin() == null || fs.getPeriodEnd() == null){
-				logger.warn(">>>>>> TABLA DE FORMULARIOS - LIBRERIA TRIBUTO : " +
+				logger.warn(">>>>>> TABLA DE FORMULARIOS - LIBRER	IA TRIBUTO : " +
 						    "Faltan datos para determinación de periodo fiscal. " +
 						    "Formulario: " + formType.toString());
 				logger.error("NO se pudo determinar el periodo de inicio y fin: => Period begin: "
