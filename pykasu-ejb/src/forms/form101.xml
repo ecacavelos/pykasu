@@ -624,6 +624,8 @@
 		<rule name="TRGc86_0"  order="260" cellTargetId="c86" formula="0" condition="c86 &lt; 0"/>
 		<rule name="TRGc89"  order="265" cellTargetId="c89" formula="c86 +c87+c88"/>
 		
+		<rule name="TRGc90"  order="266" cellTargetId="c90" formula="c76"/>
+		<rule name="TRGc90_1"  order="267"  cellTargetId="c90" formula="0" condition="c76 &lt; 1658232"/>
 		<!-- RUBRO 6 -->
 		
 		<rule name="TRGc92"  order="270" cellTargetId="c92" formula="c90 - c91"/>

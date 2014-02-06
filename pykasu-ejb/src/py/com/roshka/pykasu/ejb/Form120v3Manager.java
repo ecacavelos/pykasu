@@ -69,7 +69,6 @@ public class Form120v3Manager extends GenericFormManagerEJB implements Form120v3
         	}
     		
     		Form120v3 form120v3 = new Form120v3(user);
-    		
         	form120v3.fillForm(form);    		
 	    	em.persist(form120v3);
 	    	form120v3.setPrePrintedNumber(form120v3.getId().toString());

@@ -53,7 +53,7 @@ public class UserManagerEJB implements UserManager {
 	 * Intenta recuperar el usuario de la base de datos
 	 * Primer intento, busca el usuario teniendo en cuenta que NO realiza PAGOS
 	 * Si no lo encuentra, busca como que SI realiza pagos.
-	 * Si realiza pagos asume que el usuario esta cargado en la base de datos con un número en el formato "000000000000000"
+	 * Si realiza pagos asume que el usuario esta cargado en la base de datos con un nï¿½mero en el formato "000000000000000"
 	 */
 	
 	public User getUser(String userName, String passwdDigest)
@@ -98,7 +98,7 @@ public class UserManagerEJB implements UserManager {
 		if(!user.getPasswordDigest().equals(passwdDigest)){
 			logger.info("DB Password:" + user.getPasswordDigest());
 			logger.info("User Password:" + passwdDigest);
-			throw new LoginFailureException("La contrase–a provista para autenticar al usuario  " + user.getUserName() + " no corresponde." );
+			throw new LoginFailureException("La contraseï¿½a provista para autenticar al usuario  " + user.getUserName() + " no corresponde." );
 		}
 
 		return user;
@@ -116,7 +116,7 @@ public class UserManagerEJB implements UserManager {
 			em.persist(user);
 			
 		}catch (UserNotFoundException userNotFound) {
-			throw new LoginFailureException("No se ha encontrado un usuario con la contrase–a provista");
+			throw new LoginFailureException("No se ha encontrado un usuario con la contraseï¿½a provista");
 			
 		}catch (LoginFailureException lfe){
 			throw lfe;	
@@ -177,6 +177,20 @@ public class UserManagerEJB implements UserManager {
 					.getSingleResult();
 
 			logger.info("-------------> After perform query.");	
+		}catch(NoResultException e){
+			logger.error(e);
+			throw new FindingException(e.getMessage());
+		}
+		return user;
+	}
+	
+	public User getUserByRuc(String ruc)
+			 throws FindingException{
+		User user = null;
+		try{
+			user = (User)em.createQuery("select users from User users where users.ruc = :principalUser")
+					.setParameter("principalUser", ruc.trim())
+					.getSingleResult();
 		}catch(NoResultException e){
 			logger.error(e);
 			throw new FindingException(e.getMessage());

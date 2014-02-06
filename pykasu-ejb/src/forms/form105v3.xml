@@ -31,7 +31,7 @@
 			<line id="L6" name="H1L6" order="5" description="| 04 | Periodo Fiscal">
 				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
 				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" />
-				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT"/><!--   events="onblur:controlaAnho"/>-->
+				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT"  events="onblur:controlaAnho,getPorcentajeMoras"/>
 				<!-- <cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#retriveSalary()"/> -->
 			</line>		
 			
@@ -95,7 +95,7 @@
 
 				<line id="L1070" order="60">
 						<cell id="t15" col="1" type="LABEL"  value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Otros ingresos, no gravados por el IMAGRO" alignAddtionalDescription="LEFT"/>
-						<cell id="c15" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="15" xmlTagName="C15" events="onblur:disabledByCondition(this,'c23'), disabledByCondition(this,'c24')" />
+						<cell id="c15" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="15" xmlTagName="C15" events="onblur:checkIfContent(this,'c23'), checkIfContent(this,'c24')" />
 						<cell id="t39" col="3" type="LABEL"  value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Previsiones y/o castigos por malos créditos" alignAddtionalDescription="LEFT"/>
 						<cell id="c39" col="4" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="39" xmlTagName="C39"/>
 				</line>
@@ -104,7 +104,7 @@
 						<cell id="t16" col="1" type="LABEL"  value="" opaque="true" readOnly="false" calculable="false" additionalDescription="TOTAL INGRESOS BRUTOS (Suma de las Cas. 10 al 15)" alignAddtionalDescription="LEFT"/>
 						<cell id="c16" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="16" xmlTagName="C16"/>
 						<cell id="t40" col="3" type="LABEL"  value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Donaciones" alignAddtionalDescription="LEFT"/>
-						<cell id="c40" col="4" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="40" xmlTagName="C40" events="onblur:disabledByCondition(this,'c53')" />
+						<cell id="c40" col="4" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="40" xmlTagName="C40" events="onblur:checkIfContent(this,'c53')" />
 				</line>
 				
 				<line id="L1090" order="80">
@@ -265,12 +265,12 @@
 			</line>
 
 			<line id="L3020" order="20" description="|b| Resultado Fiscal del Ejercicio/Pérdida (Resultado del Inc. b Col. I del Rubro 2)" >
-				<cell id="c62" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="62" xmlTagName="C62"/>
+				<cell id="c62" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="62" xmlTagName="C62"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 
 			<line id="L3030" order="30" description="|c| PÉRDIDA DE EJERCICIOS ANTERIORES (El contribuyente deberá tener en cuenta que la pérdida declarada en este Inc. esté dentro del plazo legal previsto en la Ley)" >
-				<cell id="c63" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="63" xmlTagName="C63"/>
+				<cell id="c63" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="63" xmlTagName="C63"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 
@@ -330,7 +330,7 @@
 			
 			<line id="L5010" order="10" description="|a| Impuesto liquidado sobre la renta alcanzada (Inc. d del Rubro 4)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c72" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="72" xmlTagName="C72"/>
+				<cell id="c72" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="72" xmlTagName="C72"/>
 			</line>
 
 			<line id="L5020" order="20" description="|b| Saldo a favor del Contribuyente del período anterior" >				
@@ -344,7 +344,7 @@
 			</line>
 
 			<line id="L5060" order="60" description="|d| Anticipos ingresados" >				
-				<cell id="c75" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="75" xmlTagName="C75"/>
+				<cell id="c75" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="75" xmlTagName="C75"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 
@@ -569,69 +569,69 @@
 			</line>
 			
 			<line id="L7010" order="20" description="|a| Terneros machos y hembras" >
-				<cell id="c128" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="128" xmlTagName="C128" />
-				<cell id="c138" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="138" xmlTagName="C138"  events="onblur:checkIfContent(this,'c128')" />
-				<cell id="c150" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="150" xmlTagName="C150" events="onblur:checkIfContent(this,'c138')"/>				
+				<cell id="c128" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="128" xmlTagName="C128" events="onblur:checkIfContent(this,'c150'), checkIfContent(this,'c138')"/>
+				<cell id="c138" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="138" xmlTagName="C138" events="onblur:checkIfContent(this,'c150')"/>
+				<cell id="c150" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="150" xmlTagName="C150"/>				
 			</line>
 
 			<line id="L7020" order="30" description="|b| Vaquillas" >
-				<cell id="c129" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="129" xmlTagName="C129"  />
-				<cell id="c139" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="139" xmlTagName="C139" events="onblur:checkIfContent(this,'c129')" />				
-				<cell id="c151" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="151" xmlTagName="C151" events="onblur:checkIfContent(this,'c139')"/>
+				<cell id="c129" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="129" xmlTagName="C129"  events="onblur:checkIfContent(this,'c151'), checkIfContent(this,'c139')"/>
+				<cell id="c139" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="139" xmlTagName="C139" events="onblur:checkIfContent(this,'c151')"/>				
+				<cell id="c151" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="151" xmlTagName="C151"/>
 			</line>
 
 			<line id="L7030" order="40" description="|c| Vacas" >
-				<cell id="c130" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="130" xmlTagName="C130" />
-				<cell id="c140" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="140" xmlTagName="C140" events="onblur:checkIfContent(this,'c130')" />				
-				<cell id="c152" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="152" xmlTagName="C152" events="onblur:checkIfContent(this,'c140')"/>
+				<cell id="c130" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="130" xmlTagName="C130" events="onblur:checkIfContent(this,'c152'), checkIfContent(this,'c140')"/>
+				<cell id="c140" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="140" xmlTagName="C140" events="onblur:checkIfContent(this,'c152')"/>				
+				<cell id="c152" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="152" xmlTagName="C152" />
 			</line>
 
 			<line id="L7040" order="50" description="|d| Toros" >
-				<cell id="c131" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="131" xmlTagName="C131" />
-				<cell id="c141" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="141" xmlTagName="C141" events="onblur:checkIfContent(this,'c131')"/>				
-				<cell id="c153" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="153" xmlTagName="C153" events="onblur:checkIfContent(this,'c141')"/>
+				<cell id="c131" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="131" xmlTagName="C131" events="onblur:checkIfContent(this,'c153'), checkIfContent(this,'c141')"/>
+				<cell id="c141" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="141" xmlTagName="C141" events="onblur:checkIfContent(this,'c153')"/>				
+				<cell id="c153" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="153" xmlTagName="C153"/>
 			</line>
 		
 			<line id="L7050" order="60" description="|e| Novillos" >
-				<cell id="c132" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="132" xmlTagName="C132"  />
-				<cell id="c142" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="142" xmlTagName="C142" events="onblur:checkIfContent(this,'c132')" />				
-				<cell id="c154" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="154" xmlTagName="C154" events="onblur:checkIfContent(this,'c142')" />
+				<cell id="c132" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="132" xmlTagName="C132" events="onblur:checkIfContent(this,'c154'), checkIfContent(this,'c142')"  />
+				<cell id="c142" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="142" xmlTagName="C142" events="onblur:checkIfContent(this,'c154')"/>				
+				<cell id="c154" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="154" xmlTagName="C154" />
 			</line>
 
 			<line id="L7060" order="70" description="|f| Equinos" >
-				<cell id="c133" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="133" xmlTagName="C133"  />
-				<cell id="c143" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="143" xmlTagName="C143" events="onblur:checkIfContent(this,'c133')"/>				
-				<cell id="c155" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="155" xmlTagName="C155" events="onblur:checkIfContent(this,'c143')" />
+				<cell id="c133" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="133" xmlTagName="C133"  events="onblur:checkIfContent(this,'c155'), checkIfContent(this,'c143')"/>
+				<cell id="c143" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="143" xmlTagName="C143" events="onblur:checkIfContent(this,'c155')"/>				
+				<cell id="c155" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="155" xmlTagName="C155"  />
 			</line>
 
 			<line id="L7070" order="80" description="|g| Ovinos" >
-				<cell id="c134" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="134" xmlTagName="C134"/>
-				<cell id="c144" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="144" xmlTagName="C144" events="onblur:checkIfContent(this,'c134')" />				
-				<cell id="c156" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156" events="onblur:checkIfContent(this,'c144')" />
+				<cell id="c134" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="134" xmlTagName="C134" events="onblur:checkIfContent(this,'c156'), checkIfContent(this,'c144')"/>
+				<cell id="c144" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="144" xmlTagName="C144" events="onblur:checkIfContent(this,'c156')"/>				
+				<cell id="c156" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156"  />
 			</line>
 
 			<line id="L7080" order="90" description="|h| Caprinos" >
-				<cell id="c135" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="135" xmlTagName="C135" />
-				<cell id="c145" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="145" xmlTagName="C145" events="onblur:checkIfContent(this,'c135')" />				
-				<cell id="c157" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="157" xmlTagName="C157" events="onblur:checkIfContent(this,'c145')"/>
+				<cell id="c135" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="135" xmlTagName="C135" events="onblur:checkIfContent(this,'c157'), checkIfContent(this,'c145')"/>
+				<cell id="c145" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="145" xmlTagName="C145" events="onblur:checkIfContent(this,'c157')"/>				
+				<cell id="c157" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="157" xmlTagName="C157" />
 			</line>
 
 			<line id="L7090" order="100" description="|i| Otros (burros, mulas, etc)" >
-				<cell id="c136" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="136" xmlTagName="C136" />
-				<cell id="c146" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146" events="onblur:checkIfContent(this,'c136')"/>				
-				<cell id="c158" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="158" xmlTagName="C158" events="onblur:checkIfContent(this,'c146')"/>
+				<cell id="c136" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="136" xmlTagName="C136" events="onblur:checkIfContent(this,'c158'), checkIfContent(this,'c146')"/>
+				<cell id="c146" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146" events="onblur:checkIfContent(this,'c158')"/>				
+				<cell id="c158" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="158" xmlTagName="C158"/>
 			</line>
 
 			<line id="L7100" order="110" description="|j| Cultivo en proceso" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" colSpan="1"/>	
-				<cell id="c147" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="147" xmlTagName="C147" />
-				<cell id="c159" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="159" xmlTagName="C159" events="onblur:checkIfContent(this,'c147')" />				
+				<cell id="c147" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="147" xmlTagName="C147" events="onblur:checkIfContent(this,'c159')"/>
+				<cell id="c159" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="159" xmlTagName="C159" />				
 			</line>
 			
 			<line id="L7110" order="120" description="|k| TOTALES (Inc. a + b + c + d + e + f + g + h + i)" >
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" colSpan="1"/>
-				<cell id="c148" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="148" xmlTagName="C148" />
-				<cell id="c160" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="160" xmlTagName="C160" events="onblur:checkIfContent(this,'c148')" />				
+				<cell id="c148" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" additionalDescription="148" xmlTagName="C148" events="onblur:checkIfContent(this,'c160')"/>
+				<cell id="c160" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="160" xmlTagName="C160"  />				
 			</line>
 			
 			<line id="L7120" order="130" description="|l| TOTALES" >
@@ -670,9 +670,10 @@
 	<rules>
 		<rule name="TRGc16" 	order="10"  cellTargetId="c16" 	formula="c10+c11+c12+c13+c14+c15"/>
 		<rule name="TRGc18" 	order="20"  cellTargetId="c18" 	formula="c16-c17"/>
+		<rule name="TRGc18_0"  order="25" cellTargetId="c18" formula="0" condition="c18 &lt; 0"/>
 		<rule name="TRGc21" 	order="30"  cellTargetId="c21" 	formula="c18-c19-c20"/>
-		<rule name="TRGc22"  order="35" cellTargetId="c23" formula="c22-c23-c24"/>
-		<rule name="TRGc22_0"  order="36" cellTargetId="c23" formula="0" condition="c25 &lt; 0"/>
+		<rule name="TRGc21_0"  order="31" cellTargetId="c21" formula="0" condition="c21 &lt; 0"/>
+		
 		<rule name="TRGc25"  order="40" cellTargetId="c25" formula="c22-c23-c24"/>
 		<rule name="TRGc25_0"  order="45" cellTargetId="c25" formula="0" condition="c25 &lt; 0"/>
 		<rule name="TRGc49" 	order="50"  cellTargetId="c49" 	formula="c26+c27+c28+c29+c30+c31+c32+c33+c34+c35+c36+c37+c38+c39+c40+c41+c42+c43+c44+c45+c46+c47+c48"/>
@@ -688,64 +689,62 @@
 		<rule name="TRGc59_0"  order="105" cellTargetId="c59" formula="0" condition="c59 &lt; 0"/>
 		<rule name="TRGc60"  order="110" cellTargetId="c60" formula="c21-c25-c56"/>
 		<rule name="TRGc60_0"  order="115" cellTargetId="c60" formula="0" condition="c60 &lt; 0"/>
-		<rule name="TRGc61"  order="120" cellTargetId="c61" formula="c60"/>
-		<rule name="TRGc62"  order="130" cellTargetId="c62" formula="c59"/>
+		<rule name="TRGc61"  order="120" cellTargetId="c61" formula="c59"/>
+		<rule name="TRGc63"  order="130" cellTargetId="c63" formula="c61 + c62"/>
 	
-		<rule name="TRGc64"  order="140" cellTargetId="c64" formula="c63+c62"/>
-		
+		<rule name="TRGc64"  order="140" cellTargetId="c64" formula="c63-c66"/>
+		<rule name="TRGc64_1"  order="145" cellTargetId="c64" formula="0" condition="c64 &lt; 0"/>		
 				
-		<rule name="TRGc66"  order="160" cellTargetId="c65" formula="c61"/>
-		<rule name="TRGc66_0"  order="165" cellTargetId="c66" formula="c64 - c65" />
-		<rule name="TRGc66_1"  order="166" cellTargetId="c66" formula="0" condition="c66 &lt; 0"/>
-		<rule name="TRGc67"  order="167" cellTargetId="c67" formula="c65-c64"/>
+		<rule name="TRGc65"  order="160" cellTargetId="c65" formula="c60"/>
+		<rule name="TRGc66"  order="165" cellTargetId="c66" formula="c65" />
+
+		<rule name="TRGc67"  order="167" cellTargetId="c67" formula="c66-c63"/>
 		<rule name="TRGc67_0"  order="168" cellTargetId="c67" formula="0" condition="c67 &lt; 0"/>
-		<rule name="TRGc68"  order="170" cellTargetId="c68" formula="c67"/>
-		<rule name="TRGc69"  order="180" cellTargetId="c69" formula="c54"/>
-
+		<rule name="TRGc68"  order="170" cellTargetId="c68" formula="c54"/>
+		<rule name="TRGc69"  order="180" cellTargetId="c69" formula="c68-c70"/>
+		<rule name="TRGc69_0"  order="185" cellTargetId="c69" formula="0" condition="c69 &lt; 0"/>
 		
-		<rule name="TRGc70"  order="190" cellTargetId="c70" formula="c69 - c68"/>
-		<rule name="TRGc70_0"  order="195" cellTargetId="c70" formula="0" condition="c70 &lt; 0"/>
-		<rule name="TRGc71"  order="200" cellTargetId="c71" formula="c68-c69"/>
+		<rule name="TRGc70"  order="190" cellTargetId="c70" formula="c67"/>
+		
+		<rule name="TRGc71"  order="200" cellTargetId="c71" formula="c70-c68"/>
 		<rule name="TRGc71_0"  order="205" cellTargetId="c71" formula="0" condition="c71 &lt; 0"/>
-		<rule name="TRGc72"  order="206" cellTargetId="c72" formula="c71*0.1"/>
 		
-<!-- 		<rule name="TRGc74"  order="210" cellTargetId="c76" formula="c75-c79"/> -->
-<!-- 		<rule name="TRGc74_0"  order="215" cellTargetId="c76" formula="0" condition="c76 &lt; 0"/> -->
+ 		<rule name="TRGc75"  order="210" cellTargetId="c75" formula="c72+c73+c74"/> 
+ 		
+		<rule name="TRGc76"  order="210" cellTargetId="c76" formula="c75-c79"/>
+		<rule name="TRGc76_0"  order="215" cellTargetId="c76" formula="0" condition="c76 &lt; 0"/>
 		
-		<rule name="TRGc75"  order="220" cellTargetId="c77" formula="c73+c74+c75"/>
-		<rule name="TRGc76"  order="225" cellTargetId="c78" formula="c72+c76"/>
+		<rule name="TRGc77"  order="220" cellTargetId="c77" formula="c71*0.1"/>
 		
 		
-		<rule name="TRGc77"  order="230" cellTargetId="c79" formula="c77 - c78"/>
-		<rule name="TRGc77_0"  order="231" cellTargetId="c80" formula="0" condition="c80 &lt; 0"/>
-		<rule name="TRGc83"  order="232" cellTargetId="c80" formula="c78-c77"/>
-		<rule name="TRGc83_0"  order="233" cellTargetId="c80" formula="0" condition="c80 &lt; 0"/>
-		
-		<rule name="TRGc85"  order="240" cellTargetId="c91" formula="c81 + c82 + c83 + c84 + c85 + c86 + c87 + c88 + c89 + c90"/>
-		
-		<rule name="TRGc86"  order="250" cellTargetId="c94" formula="c92 + c93"/>
-		<rule name="TRGc86_0"  order="255" cellTargetId="c102" formula="c102" />
-		
-		<rule name="TRGc100"  order="270" cellTargetId="c103" formula="c94+c95+c96+c97+c98-c99+c100-c101"/>
-		<rule name="TRGc100_0"  order="275" cellTargetId="c103" formula="0" condition="c103 &lt; 0" />
+		<rule name="TRGc79"  order="230" cellTargetId="c79" formula="c77 + c78"/>
 
-		<rule name="TRGc111"  order="290" cellTargetId="c107" formula="c104+c105-c106"/>
-		<rule name="TRGc111_0"  order="295" cellTargetId="c107" formula="0" condition="c107 &lt; 0" />
+		<rule name="TRGc80"  order="232" cellTargetId="c80" formula="c79-c75"/>
+		<rule name="TRGc80_0"  order="233" cellTargetId="c80" formula="0" condition="c80 &lt; 0"/>
 		
-		<rule name="TRGc112"  order="300" cellTargetId="c113" formula="c107-c108-c109 -c110 - c111 - c112"/>
-		<rule name="TRGc112_0"  order="305" cellTargetId="c113" formula="0" condition="c113 &lt; 0"/>	
+		<rule name="TRGc91"  order="240" cellTargetId="c91" formula="c81 + c82 + c83 + c84 + c85 + c86 + c87 + c88 + c89 + c90"/>
+		
+		<rule name="TRGc94"  order="250" cellTargetId="c94" formula="c92 + c93"/>
+		<rule name="TRGc102"  order="255" cellTargetId="c102" formula="c95+c96+c97+c98+c99+c100-c101" />
+		<rule name="TRGc102_0"  order="275" cellTargetId="c102" formula="0" condition="c102 &lt; 0" />
+		<rule name="TRGc103"  order="270" cellTargetId="c103" formula="c94+c102"/>
+
+
+		<rule name="TRGc107"  order="290" cellTargetId="c107" formula="c104+c105-c106"/>
+		<rule name="TRGc107_0"  order="295" cellTargetId="c107" formula="0" condition="c107 &lt; 0" />
+		
+		<rule name="TRGc113"  order="300" cellTargetId="c113" formula="c107-c108-c109 -c110 - c111 - c112"/>
+		<rule name="TRGc113_0"  order="305" cellTargetId="c113" formula="0" condition="c113 &lt; 0"/>	
 							
 		<rule name="TRGc119"  order="310" cellTargetId="c119" formula="c116+c117-c118"/>
 		<rule name="TRGc119_0"  order="315" cellTargetId="c119" formula="0" condition="c119 &lt; 0"/>
 		
-		<rule name="TRGc120"  order="320" cellTargetId="c125" formula="c119-c120-c121-c122-c123-c124"/>
-		<rule name="TRGc120_0"  order="325" cellTargetId="c125" formula="0" condition="c125 &lt; 0"/>
-		
-		<rule name="TRGc131"  order="330" cellTargetId="c137" formula="c128+c129+c130+c131+c132+c133+c134+c135+c136"/>
+		<rule name="TRGc125"  order="320" cellTargetId="c125" formula="c119-c120-c121-c122-c123-c124"/>
+		<rule name="TRGc125_0"  order="325" cellTargetId="c125" formula="0" condition="c125 &lt; 0"/>
 
-		<rule name="TRGc152"  order="370" cellTargetId="c149" formula="c138+c139 + c140+c141+c142+c143+c144+c145+c146+c147+c148"/>
+		<rule name="TRGc149"  order="340" cellTargetId="c149" formula="c138+c139 + c140+c141+c142+c143+c144+c145+c146+c147+c148"/>
 
-		<rule name="TRGc155"  order="340" cellTargetId="c161" formula="c150+c151+c152+c153+c154+c155+c156+c157+c158+c159+c160"/>
+		<rule name="TRGc155"  order="350" cellTargetId="c161" formula="c150+c151+c152+c153+c154+c155+c156+c157+c158+c159+c160"/>
 		
 
 	</rules>

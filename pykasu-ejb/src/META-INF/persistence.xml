@@ -25,7 +25,7 @@
 	  <class>py.com.roshka.pykasu.persistence.forms.Form110</class>		  
 	  <class>py.com.roshka.pykasu.persistence.forms.Form117</class>		  		  
 	  <class>py.com.roshka.pykasu.persistence.forms.Form118</class>		  		  
-	  <class>py.com.roshka.pykasu.persistence.forms.Form120</class>		  		  
+	  <class>py.com.roshka.pykasu.persistence.forms.Form120</class>			  		  
 	  <class>py.com.roshka.pykasu.persistence.forms.Form122</class>		  		  
 	  <class>py.com.roshka.pykasu.persistence.forms.Form123</class>
 	  <class>py.com.roshka.pykasu.persistence.forms.Form125</class>
@@ -41,9 +41,11 @@
          <property name="hibernate.hbm2ddl.auto" value="update" />
          <property name="hibernate.show_sql" value="true" /> 
          <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>-->
-         <!--<property name="hibernate.dialect" value="org.hibernate.dialect.DB2400Dialect"/>-->
+<!--          <property name="hibernate.dialect" value="org.hibernate.dialect.DB2400Dialect"/> -->
           <property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect"/> 
-		 <!--  <property name="hibernate.connection.autocommit">true</property>   -->
+<!--  		    <property name="hibernate.connection.autocommit" value = "true"></property>   -->
+  		     <property name="connection.isolation" value = "true"></property>
+ 		   
       </properties>
    </persistence-unit>
 
@@ -58,6 +60,7 @@
   		 <property name="hibernate.dialect" value="org.hibernate.dialect.DB2400Dialect"/>
          <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>-->
          <property name="hibernate.show_sql" value="true" /> 
+         
       </properties>
    </persistence-unit>   
       

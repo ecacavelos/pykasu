@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <form type="120v3" description="Formulario 120 version 3" >
 	<sections type="header">
 		<section id="H1" name="HEADER1" description="SET"  order="0">
@@ -176,7 +176,7 @@
 				<cell id="c48" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="48" alignAddtionalDescription="LEFT" xmlTagName="C48" />
 			</line>                                                
 			<line id="IF" name="INC_F" order="5" description="| f | Monto del crédito fiscal por exportación utilizado en el periodo que se liquida para operaciones gravadas (Proviene de la casilla 148 del Anexo Exportador)">
-				<cell id="c49" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" />
+				<cell id="c49" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" events="onblur:refresh49"/>
 			</line>                                                
 			<line id="IG" name="INC_G" order="6" description="| g | IMPUESTO DETERMINADO Inc. e - Inc. f">
 				<cell id="c50" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="50" alignAddtionalDescription="LEFT" xmlTagName="C50" />
@@ -284,18 +284,21 @@
  		<rule name="TRGS4L3"   order="183"  cellTargetId="c47" formula="(c45+c46)-c44"  /> 
  		<rule name="TRGS4L3_2"  order="184"  cellTargetId="c47" formula="0" condition="c47 &lt;= 0"/>
  		<rule name="TRGS4L4"   order="185"  cellTargetId="c48" formula="c44 - (c45 + c46)"  />
- 		<rule name="TRGS4L4_2"  order="186"  cellTargetId="c48" formula="0" condition="c48 &lt;= 0"/> 
+ 		<rule name="TRGS4L4_2"  order="186"  cellTargetId="c48" formula="0" condition="c48 &lt;= 0"/>
 		<rule name="TRGS4L5"   order="190"  cellTargetId="c50" formula="c48 - c49" />
+		<rule name="TRGS4L5_2"  order="194"  cellTargetId="c50" formula="0" condition="c50 &lt;= 0"/> 
 		<rule name="TRGS4L7"   order="195"  cellTargetId="c53" formula="c51 + c52"/>
 		<rule name="TRGS4L101" order="200"  cellTargetId="c54" formula="c53 - c57"  />
 		<rule name="TRGS4L101_2"  order="210"  cellTargetId="c54" formula="0" condition="c54 &lt;= 0"/>
-		<rule name="TRGS4L102" order="210"  cellTargetId="c55" formula="c50" />  
+		<rule name="TRGS4L102" order="220"  cellTargetId="c55" formula="c50" />  
 		
 		
 <!-- 		<rule name="TRGS4L103" order="220"  cellTargetId="c56" formula="0" /> -->
 		<rule name="TRGS4L104" order="230"  cellTargetId="c57" formula="c55 + c56" />
+		<rule name="TRGS4L104_1" order="231"  cellTargetId="c54" formula="c53 - c57"  />
+		<rule name="TRGS4L104_2"  order="232"  cellTargetId="c54" formula="0" condition="c54 &lt;= 0"/>
 		<rule name="TRGS4L105" order="240"  cellTargetId="c58" formula="c57 - c53"  />
-		<rule name="TRGS4L105_2"  order="250"  cellTargetId="c58" formula="0" condition="c50 &lt;= 0"/>
+		<rule name="TRGS4L105_2"  order="250"  cellTargetId="c58" formula="0" condition="c58 &lt;= 0"/>
 				
 		<!-- RUBRO 5  -->
 		<rule name="TRGS5L1"  order="260"  cellTargetId="c65" formula="c59 * 0.1"/> 
