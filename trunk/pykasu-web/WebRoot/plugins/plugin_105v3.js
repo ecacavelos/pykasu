@@ -21,12 +21,12 @@ function disabledByCondition(cell, cellConditionId){
 }
 
 //Funcion que se realizo para esta regla //# SI (C[137]=0, 0, C[138]). 
-function checkIfContent(cellToTest, targetCellId){
+function checkIfContent(cellToTest, targetCellId){//c15 c23
 	
 	var cellCondition = document.getElementById(targetCellId);
 	
 	if(cellToTest.value == null || cellToTest.value == 0){
-		cellCondition.value=0;
+		cellCondition.value="";
 		cellCondition.disabled = 'true';
 	}
 	else {
@@ -104,44 +104,14 @@ function calcPorcentajeMoras(){
 		norectificativa = 0;
 	}
 	if(CONTRAVENSION_SMOV && CONTRAVENSION_CMOV != null){
-		document.getElementById('c76').value =  CONTRAVENSION_CMOV * norectificativa;		
+		document.getElementById('c76').value =  CONTRAVENSION_CMOV * norectificativa;	
+		if(document.getElementById('c76').value == 0){
+			document.getElementById('c76').value == "";
+		}
 		if(document.getElementById('c76').value != null)
   		   colocarpuntos(document.getElementById('c76'));
 	}
 	refreshVars();
-
-//	var tmp82 =	getValueFormatless('c82');
-//	var tmp86 = getValueFormatless('c86');	
-//	var op = tmp86 - tmp82;
-//	if(op < 0){
-//		op = 0;
-//	}
-//	
-//	if (PORC_MORA && PORC_MORA != null){
-//		document.getElementById('c87').value =  (PORC_MORA * op).toFixed(0);
-//		if(document.getElementById('c87').value < 0){
-//			document.getElementById('c87').value  = 0;
-//		}
-//		if(document.getElementById('c87').value != null)
-//  		   colocarpuntos(document.getElementById('c87'));
-//	}		
-//	if (PORC_INTERES && PORC_INTERES != null){
-//		document.getElementById('c88').value =  (PORC_INTERES * op).toFixed(0);
-//		if(document.getElementById('c88').value < 0){
-//			document.getElementById('c88').value  = 0;
-//		}
-//		if(document.getElementById('c88').value != null)
-//  		   colocarpuntos(document.getElementById('c88'));
-//	}
-//	
-	refreshVars();
-//	TRGc84();
-//	TRGc83();
-//	TRGc86();
-//	TRGc89();
-	
-	
-
 	var tmp = (0).toFixed(0);
 }
 

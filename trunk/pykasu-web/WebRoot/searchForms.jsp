@@ -1,3 +1,5 @@
+<%@page import="py.com.roshka.pykasu.ejb.UserManagerEJB"%>
+<%@page import="py.com.roshka.pykasu.persistence.users.User"%>
 <%@ page language="java" pageEncoding="ISO-8859-1"%>
 <%@page import="py.com.roshka.pykasu.persistence.forms.TaxForm"%>
 
@@ -20,6 +22,7 @@
 		<script LANGUAGE="JavaScript" SRC="js/pykasu_util.js"></script>
 		<script LANGUAGE="JavaScript" SRC="js/CalendarPopup.js"></script>
 		<script LANGUAGE="JavaScript" SRC="js/option.js"></script>
+		<script LANGUAGE="JavaScript" SRC="js/load.js"></script>
 		
 		<script type="text/javascript">
 			var opt = new OptionTransfer("list1","list2");
@@ -157,6 +160,7 @@
 			<% 			
 				for(ItemSearch item : items){%>
 					<tr>
+						 	
 						<td> <%=item.getValue(ItemSearch.FieldName.FORM_TYPE)%></td>
 						<td> <%=item.getValue(ItemSearch.FieldName.RUC)%></td>
 						<td> <%=item.getValue(ItemSearch.FieldName.DV)%></td>
@@ -180,6 +184,8 @@
 								<input type="hidden" name="form" value="<%=item.getValue(ItemSearch.FieldName.FORM_TYPE)%>">
 																
 								<input type="submit" value="Detalles" name="option"/>
+								<%//User u = getUserByRuc(item.getValue(ItemSearch.FieldName.RUC));
+								%>
 								<%if(((String)item.getValue(ItemSearch.FieldName.STATUS)).equalsIgnoreCase(TaxForm.FORM_STATUS_PROCESS)){ %>
 								<input type="submit" value="Editar" name="option"/>
 								<%}%>

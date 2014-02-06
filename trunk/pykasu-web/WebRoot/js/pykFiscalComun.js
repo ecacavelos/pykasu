@@ -173,14 +173,11 @@ function changeMoraInfo(){
 					}
 					
 				}
-//				alert("HERE");
 				if (key == 'CONTRAVENSION_CMOV'){
 					CONTRAVENSION_CMOV = parseFloat(value).toFixed(0);		
-//					alert("CONTRAVENSION_CMOV" + CONTRAVENSION_CMOV);
 				}
 				if (key == 'CONTRAVENSION_SMOV'){
 					CONTRAVENSION_SMOV = parseFloat(value).toFixed(0);	
-//					alert("CONTRAVENSION_SMOV" + CONTRAVENSION_SMOV);
 				}
 				
 				
@@ -232,7 +229,7 @@ function submitForm(action){
 			return;
 		}
 		
-		if(!confirm('Est\u00e1; a punto de Guardar el Formulario.\nSe encuentra seguro de realizar esta operaci\u00f3n?')){
+		if(!confirm('Está a punto de Guardar el Formulario.\nSe encuentra seguro de realizar esta operaci\u00f3n?')){
 			return;
 		}
 		

@@ -1,6 +1,7 @@
 
 function onloadForm(){
 	loadScript('js/pykFiscalComun.js');
+	loadScript('js/pykasu_util.js');
 	var valueOld;
 	if(document.getElementById('formStatus').value == 'insert_mode'){
 		document.getElementById('paymentDate').value = document.getElementById('suggestedPaymentDate').value;
@@ -10,6 +11,42 @@ function onloadForm(){
 	v_onload = 0; 
 
 }
+
+function refresh49(){
+	var c48 = removeCommas(document.getElementById("c48").value);
+	var c49 = removeCommas(document.getElementById("c49").value);
+	c55 = c48 - c49;
+	if(c55<0){
+		c55 = "";
+	}
+	var c53 = removeCommas(document.getElementById("c53").value);
+	var c56 = removeCommas(document.getElementById("c56").value);
+	if(c56 != ""){
+		c57 = c56 + c55;
+	}else{
+		c57 = c55;
+	}
+	var r = "";
+	if(c53 >c57){
+		r = c53 - c57;
+	}
+//	addCommas(r);
+//	console.log(r);
+	document.getElementById("c54").value = r;
+
+
+}
+
+//function refresh54(){
+//	var c53 = removeCommas(document.getElementById("c53").value);
+//	var c57 = removeCommas(document.getElementById("c57").value);
+//	var r = "";
+//	if(c53 >c57){
+//		r = c53 - c57;
+//	}
+//	document.getElementById("c54").value = r;// colocarpuntos(r);
+//	console.log("r: " + r); 
+//}
 
 function calculateBeforePlugin(){
 
@@ -33,58 +70,7 @@ function calcPorcentajeMoras(){
 		if(document.getElementById('c56').value != null)
   		   colocarpuntos(document.getElementById('c56'));
 	}
-//	if (pm_called == 0){
-//		getFiscalMoraInfo();
-//		return;
-//	}
-//	//alert("calcPorcentajeMoras() CONTRAVENSION_CMOV:" + CONTRAVENSION_CMOV + "  PORC_MORA:" + PORC_MORA + "  PORC_INTERES: "+ PORC_INTERES);
-//	
-//	var norectificativa = 1;
-//	if (document.getElementById('declarationType').value=='| 2 | RECTIFICATIVA'){
-//		norectificativa = 0;
-//	}
-//	
-	
-	
-//	if(CONTRAVENSION_CMOV && CONTRAVENSION_CMOV != null){
-//		document.getElementById('c113').value =  CONTRAVENSION_CMOV*norectificativa;
-//		if(document.getElementById('c113').value != null)
-//  		   colocarpuntos(document.getElementById('c113'));
-//	}
-//	
-//	var tmp115 = removeCommas(document.getElementById('c115').value);
-//	var tmp113 = removeCommas(document.getElementById('c113').value);
-//	var op = tmp115 - tmp113
-//	if(op < 0){
-//		op = 0
-//	}
-//	
-//	if (PORC_MORA && PORC_MORA != null){
-//		document.getElementById('c56').value =  (PORC_MORA * op).toFixed(0);//*norectificativa;
-//		if(document.getElementById('c56').value != null)
-//  		   colocarpuntos(document.getElementById('c56'));
-//	}		
-//	if (PORC_INTERES && PORC_INTERES != null){
-//		document.getElementById('c117').value =  (PORC_INTERES * op).toFixed(0);//*norectificativa;
-//		if(document.getElementById('c117').value != null)
-//  		   colocarpuntos(document.getElementById('c117'));
-//	}
 
-	//alert("calcPorcentajeMoras() c113:" + document.getElementById('c113').value + "  c116:" + document.getElementById('c116').value + "  c117: "+ document.getElementById('c117').value);	
-//	refreshVars();
-//	TRG_C114();
-//	TRG_C111_1();
-//	TRG_C111_2();
-//	TRG_C115_1();
-//	TRG_C115_2();
-//	TRG_C116();
-//	TRG_C117();
-//	TRG_C118();
-//	checkC57();
-
-	//alert("calcPorcentajeMoras() c113:" + document.getElementById('c113').value + "  c116:" + document.getElementById('c116').value + "  c117: "+ document.getElementById('c117').value);	
-
-//	var tmp = (0).toFixed(0);
 }
 
 
@@ -118,26 +104,6 @@ function orirecti(){
 
 }
 
-//function checkC57(){
-//	var tmp_c56= parseInt(removeCommas(document.getElementById("c56").value));
-//	var tmp_c57= parseInt(removeCommas(document.getElementById("c57").value));
-//	var tmp_c58= parseInt(removeCommas(document.getElementById("c58").value));
-//	
-//	if(tmp_c57 > tmp_c56){
-//		alert('El valor del campo 57 no puede ser mayor al campo 56');
-//		document.getElementById("c57").value='';
-//		return -1;
-//	}else{
-//		if(tmp_c58+tmp_c57 > tmp_c56){
-//			alert('La suma de los campos 57 y 58 no puede ser mayor al campo 56');
-//			document.getElementById("c57").value='';
-//			document.getElementById("c58").value='';
-//			return -1;
-//		}
-//	
-//	}
-//	
-//}
 
 function giveFormType(){
  return 'mensual';
