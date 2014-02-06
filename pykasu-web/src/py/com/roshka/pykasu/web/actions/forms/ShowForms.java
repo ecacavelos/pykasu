@@ -104,6 +104,8 @@ public class ShowForms extends Action {
             request.setAttribute(Globals.FORM_NAME,formName);
             request.setAttribute(Globals.FORMS_RESULTSET, forms);
             request.setAttribute(Globals.GLOBAL_TITLE, title);
+            //request.setAttribute(Globals.LOGIN_USER, user);
+            
 
             
 //            if (forms!=null){

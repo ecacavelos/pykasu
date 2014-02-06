@@ -92,6 +92,9 @@ function calcPorcentajeMoras() {
 		//multa
 		document.getElementById('c22').value = CONTRAVENSION_CMOV
 				* norectificativa;
+		if(document.getElementById('c22').value == 0){
+			document.getElementById('c22').value = "";
+		}
 		if (document.getElementById('c22').value != null)
 			colocarpuntos(document.getElementById('c22'));
 	}
@@ -130,12 +133,12 @@ function calcPorcentajeMoras() {
 
 }
 
-// Funcion que se realizo para esta regla //# SI (C[N]=0, 0, C[N+1]). 
+// Funcion que se realizo para esta regla //# SI (C[N]=0, 0, C[N+10]). 
 function checkIfContent(cellToTest, targetCellId){
 	var cellCondition = document.getElementById(targetCellId);
 	// Si el valor de la celda es nulo o cero, desabilitamos la celda dependiente.
 	if(cellToTest.value == null || cellToTest.value == 0){
-	        cellCondition.value=0;
+	        cellCondition.value="";
 	        cellCondition.disabled = 'true';
 	}
 	// Si existe un valor, habilitamos la celda dependiente.
