@@ -70,7 +70,6 @@ public class UIManagerEJB implements UIManager{
 	
 				ClassLoader cl = getClass().getClassLoader();
 				logger.info("Parseando el xml");
-				logger.info("AVALIABLE TO PAY -- > " + user.getPaymentAvaliable());
 				// El usuario no tiene permitido el pago
 				if(user.getPaymentAvaliable()== false){
 					menu = Parser.parseMenu2(cl.getResourceAsStream(FILE_MENU_XML),
@@ -111,10 +110,10 @@ public class UIManagerEJB implements UIManager{
 			action = new Action("Formulario 801","Carga del formularion 801","/showForm.do");
 			program.getActions().add(action);
 		}else if(role.getRoleName().equals(RoleManager.ADMNISTRATORROLENAME)){
-			program = new Program("Administración de Usuarios","Administración de Usuarios",20); 
+			program = new Program("Administraciï¿½n de Usuarios","Administraciï¿½n de Usuarios",20); 
 			action = new Action("Agregar usuario","Agrega un nuevo usuario a su empresa","addUser.do");
 			program.getActions().add(action);
-			action = new Action("Buscar usuario","Realiza una búsquda de usuarioa de su empresa","showUsers.do");
+			action = new Action("Buscar usuario","Realiza una bï¿½squda de usuarioa de su empresa","showUsers.do");
 			program.getActions().add(action);
 		}else if(role.getRoleName().equals(RoleManager.SYSTEMADMINROLENAME)){
 

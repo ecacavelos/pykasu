@@ -141,7 +141,7 @@
 			<line id="ID" name="INC_D" order="3" description="| d | Crédito fiscal atribuido proporcionalmente a operaciones gravadas en el mercado interno y a exportación (Proviene de la casilla 136 de la Hoja de Cálculo)">
 				<cell id="cn1_1d" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription=""   alignAddtionalDescription="LEFT"/>
 				<cell id="cn1_2d" col="1" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription=""   alignAddtionalDescription="LEFT"/>
-				<cell id="c41" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="41" alignAddtionalDescription="LEFT" xmlTagName="C41" />
+				<cell id="c41" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="41" alignAddtionalDescription="LEFT" xmlTagName="C41" />
 			</line>
 			<line id="IE" name="INC_E" order="4" description="| e | Crédito fiscal por ajustes de precios, devoluciones y descuentos otorgados, por ventajas ya declaradas y operaciones declaradas incobrables">
 				<cell id="c34" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="34" alignAddtionalDescription="LEFT" xmlTagName="C34" />
@@ -176,7 +176,7 @@
 				<cell id="c48" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="48" alignAddtionalDescription="LEFT" xmlTagName="C48" />
 			</line>                                                
 			<line id="IF" name="INC_F" order="5" description="| f | Monto del crédito fiscal por exportación utilizado en el periodo que se liquida para operaciones gravadas (Proviene de la casilla 148 del Anexo Exportador)">
-				<cell id="c49" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" events="onblur:refresh49"/>
+				<cell id="c49" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" events="onblur:refresh49"/>
 			</line>                                                
 			<line id="IG" name="INC_G" order="6" description="| g | IMPUESTO DETERMINADO Inc. e - Inc. f">
 				<cell id="c50" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="50" alignAddtionalDescription="LEFT" xmlTagName="C50" />
@@ -193,7 +193,7 @@
 				<cell id="c55" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="55" alignAddtionalDescription="LEFT" xmlTagName="C55" />
 			</line>
 			<line id="IB" name="INC_B" order="1" description="| b | Saldo a favor del contribuyente del periodo anterior (Proviene del Rubro 5, Col. I: Inc. f, de la Declaración jurada del periodo anterior)">
-				<cell id="c51" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="51" alignAddtionalDescription="LEFT" xmlTagName="C51" />
+				<cell id="c51" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  additionalDescription="51" alignAddtionalDescription="LEFT" xmlTagName="C51"/>
 				<cell id="cn1_1b" col="10" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription=""   alignAddtionalDescription="LEFT"/>
 			</line>                       
 			<line id="IC" name="INC_C" order="2" description="| c | Retenciones computables por operaciones gravadas">
@@ -214,7 +214,7 @@
 			</line>                                           
 			<line id="IG" name="INC_G" order="6" description="| g | SALDO DEFINITIVO A PAGAR A FAVOR DEL FISCO (Diferencia entre Col. I y Col. II: Inc e, cuando Col. II sea mayor que Col. I)">
 				<cell id="cn1_1g" col="0" type="NUMBER" value="" opaque="true"  readOnly="true"  calculable="false" additionalDescription=""   alignAddtionalDescription="LEFT"/>
-				<cell id="c58" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="58" alignAddtionalDescription="LEFT" xmlTagName="C58" />
+				<cell id="c58" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  additionalDescription="58" alignAddtionalDescription="LEFT" xmlTagName="C58"/>
 			</line>                                           
 		</section>	
 		<section id="R6" name="RUBRO6" description="Rubro 6. Información de las compras del periodo vinculadas a operaciones exoneradas o no alcanzadas por el tributo" order="80">
@@ -262,14 +262,14 @@
   		<rule name= "TRGS1L2"  order="20"  cellTargetId="c19" formula="c11 * 0.05"/> 
   		<rule name="TRGS1L3"  order="30"  cellTargetId="c23" formula="c15 * 0.1"/> 
  		<rule name="TRGS1L4"  order="40"  cellTargetId="c20" formula="c16 * 0.05"/>		
- 		<rule name="TRGS1L9"  order="50"  cellTargetId="c18" formula=" c10 + c11+c12+c13+c14+c15+c16+c17"/>				
- 		<rule name="TRGS1L10" order="60"  cellTargetId="c21" formula="c19+c20"/>					
-		<rule name="TRGS1L11" order="70"  cellTargetId="c24" formula="c22+c23"/>
+ 		<rule name="TRGS1L5"  order="50"  cellTargetId="c18" formula=" c10 + c11+c12+c13+c14+c15+c16+c17"/>				
+ 		<rule name="TRGS1L6" order="60"  cellTargetId="c21" formula="c19+c20"/>					
+		<rule name="TRGS1L7" order="70"  cellTargetId="c24" formula="c22+c23"/>
 		
 		<!-- RUBRO 2  -->
-		<rule name="TRGS2L3"  order="80"  cellTargetId="c27" formula="c25 + c26"/> 
-		<rule name="TRGS2L5"  order="90"  cellTargetId="c30" formula="c28 + c29"/> 		
-		<rule name="TRGS2L7"  order="100" cellTargetId="c31" formula="c27 + c30"/> 
+		<rule name="TRGS2L1"  order="80"  cellTargetId="c27" formula="c25 + c26"/> 
+		<rule name="TRGS2L2"  order="90"  cellTargetId="c30" formula="c28 + c29"/> 		
+		<rule name="TRGS2L3"  order="100" cellTargetId="c31" formula="c27 + c30"/> 
 		
 		<!-- RUBRO 3  -->
 		<rule name="TRGS3L1"  order="110"  cellTargetId="c38" formula="c32*0.05+c35*0.1"/>
@@ -288,6 +288,7 @@
 		<rule name="TRGS4L5"   order="190"  cellTargetId="c50" formula="c48 - c49" />
 		<rule name="TRGS4L5_2"  order="194"  cellTargetId="c50" formula="0" condition="c50 &lt;= 0"/> 
 		<rule name="TRGS4L7"   order="195"  cellTargetId="c53" formula="c51 + c52"/>
+		<rule name="TRGS4L105_2"  order="197"  cellTargetId="c58" formula="0" condition="c58 &lt;= 0"/>
 		<rule name="TRGS4L101" order="200"  cellTargetId="c54" formula="c53 - c57"  />
 		<rule name="TRGS4L101_2"  order="210"  cellTargetId="c54" formula="0" condition="c54 &lt;= 0"/>
 		<rule name="TRGS4L102" order="220"  cellTargetId="c55" formula="c50" />  
