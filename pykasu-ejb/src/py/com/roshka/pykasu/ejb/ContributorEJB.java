@@ -30,7 +30,7 @@ public class ContributorEJB implements Contributor{
 	
 
 	static org.apache.log4j.Logger logger = org.apache.log4j.Logger
-	.getLogger(ContributorEJB.class);
+			.getLogger(ContributorEJB.class);
 
 	
 	public Ruc getInfo(String ruc, boolean checkExcludedRuc) throws GetContributorInfoException {
@@ -65,11 +65,11 @@ public class ContributorEJB implements Contributor{
 					 						.getSingleResult();
 	
 					if(exists == 1){
-						logger.warn("El ruc: "+ruc+" ingresado queda excluido del servicio de presentación por CAJA. " +
-								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS");
+						logger.warn("El ruc: "+ruc+" ingresado queda excluido del servicio de presentaciï¿½n por CAJA. " +
+								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resoluciï¿½n de la SET para las ERAS");
 						
-						throw new ExcludedContributorException("El ruc: "+ruc+" ingresado queda excluido del servicio de presentación por CAJA. " +
-								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS");
+						throw new ExcludedContributorException("El ruc: "+ruc+" ingresado queda excluido del servicio de presentaciï¿½n por CAJA. " +
+								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resoluciï¿½n de la SET para las ERAS");
 						
 					}
 				}catch (NoResultException e) {
@@ -125,11 +125,11 @@ public class ContributorEJB implements Contributor{
 //					 						.getSingleResult();
 //	
 //					if(exists == 1){
-//						logger.warn("El ruc: "+ruc+" ingresado queda excluido del servicio de presentación por CAJA. " +
-//								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS");
+//						logger.warn("El ruc: "+ruc+" ingresado queda excluido del servicio de presentaciï¿½n por CAJA. " +
+//								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resoluciï¿½n de la SET para las ERAS");
 //						
-//						throw new ExcludedContributorException("El ruc: "+ruc+" ingresado queda excluido del servicio de presentación por CAJA. " +
-//								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resolución de la SET para las ERAS");
+//						throw new ExcludedContributorException("El ruc: "+ruc+" ingresado queda excluido del servicio de presentaciï¿½n por CAJA. " +
+//								"Solo puede presentar DDJJ por Sistema Web de Hacienda Resoluciï¿½n de la SET para las ERAS");
 //						
 //					}
 //				}catch (NoResultException e) {

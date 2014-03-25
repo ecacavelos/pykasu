@@ -153,6 +153,10 @@ public abstract class GenericFormManagerEJB implements GenericFormManager {
 	    	    	 ri.setEditable(false);
 	    	    	 ri.setShowDetails(true);    	    	 
 	    	     }
+	    	     /*Si el usuario no esta habilitado para pagar, no podra editar sus pagos anteriores*/
+	    	     if(user.getPaymentAvaliable() == false){
+	    	    	 ri.setEditable(false);
+	    	     }
 	    	     results.add(ri);
 	    	}
 		} catch (FindingException e) {
