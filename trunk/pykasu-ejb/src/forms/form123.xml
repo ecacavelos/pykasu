@@ -28,7 +28,7 @@
 				<!-- <cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" /> -->
 			</line>			
 			<line id="L6" name="H1L6" order="5" description="| 04 | Periodo Fiscal">
-				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" events="onblur:isValidPeriod('fiscalPeriodMounth')#getPorcentajeMoras"/>
+				<<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" events="onblur:isValidPeriod('fiscalPeriodMounth')#getPorcentajeMoras"/>
 				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras"/>
 			</line>			
 		</section>

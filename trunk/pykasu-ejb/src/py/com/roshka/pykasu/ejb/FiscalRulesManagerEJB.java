@@ -639,7 +639,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			logger.info("Setting Calendar with: year: " + presentationYear + " month: " + presentationMonth + " day: " + day );
 			c.set(presentationYear.intValue(), presentationMonth.intValue()-1, day);
 			
-			if(fs.isMonthy() || fs.isFourMonthy() || fs.isSixMonthy())
+			if(fs.isMonthy() || fs.isFourMonthy() || fs.isSixMonthy() || fs.isThreeMonthy())
 				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentaci�n
 				c.add(Calendar.MONTH,1);
 			else if(fs.isAnnual())
