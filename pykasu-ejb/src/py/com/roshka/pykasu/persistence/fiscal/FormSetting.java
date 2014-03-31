@@ -24,6 +24,8 @@ public class FormSetting implements Serializable {
 	public static final String FORM_FREQUENCY_FOURMONTHY = "C";
 	public static final String FORM_FREQUENCY_SIXMONTHY = "S";	
 	public static final String FORM_FREQUENCY_OCCASSIONALY = "O";
+	public static final String FORM_FREQUENCY_THREEMONTHY = "T";
+	
 	
 	private String formType;
 	private String state;
@@ -111,6 +113,11 @@ public class FormSetting implements Serializable {
 	public Boolean isAnnual(){
 		return new Boolean(getFrequency().equals(FORM_FREQUENCY_ANNUAL));
 	}
+	
+	@Transient
+	public Boolean isThreeMonthy(){
+		return new Boolean(getFrequency().equals(FORM_FREQUENCY_THREEMONTHY));
+	}	
 	
 	@Transient
 	public Boolean isFourMonthy(){

@@ -46,6 +46,7 @@ import py.com.roshka.pykasu.interfaces.Form122ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form123ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form124ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form125ManagerInterface;
+import py.com.roshka.pykasu.interfaces.Form126ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form130ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form800ManagerInterface;
 import py.com.roshka.pykasu.interfaces.Form801ManagerInterface;
@@ -111,6 +112,8 @@ public class FormManagerEJB implements FormManager {
 	
 	@EJB private Form112v2ManagerInterface form112v2Mgr; //Agregado por Edith Ruiz Diaz el 28-01-2014
 	@EJB private Form105v3ManagerInterface form105v3Mgr; //Agregado por Edith Ruiz Diaz el 28-01-2014
+	
+	@EJB private Form126ManagerInterface form126Mgr;	//Agregado por Edith Ruiz Diaz el 25-03-2014
 	
 	@EJB private ClientDataInterface clientDataMgr;
 	@EJB private Contributor contributor;
@@ -189,6 +192,9 @@ public class FormManagerEJB implements FormManager {
 		}
 		else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_112v2)){
 			return form112v2Mgr;
+		}
+		else if(formType.equalsIgnoreCase(TaxForm.FORM_TYPE_126)){
+			return form126Mgr;
 		}
 		throw new FormManagerException(formType + " is not available.");
 	}
