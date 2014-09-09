@@ -670,6 +670,13 @@ function validateMonthByType(monthValue, specialType){
 			return false;
 		}
 	}
+	else if(specialType=='trimestral'){
+		if (monthValue != 3 && monthValue != 6 && monthValue != 8 &&  monthValue!=12 ){
+			alert("Periodo incorrecto! \n Sólo válido para Marzo, Junio, Septiembre y Diciembre");
+			document.getElementById('fiscalPeriodMounth').value='';
+			return false;
+		}
+	}
 	return true;
 }
 
@@ -765,7 +772,7 @@ Para ser invocado en el OnBlur del campo mes de la cabecera y en el BeforeSave d
 		}
 	}
 */	
-	if(specialType=='semestral' || specialType=='cuatrimestral')
+	if(specialType=='semestral' || specialType=='cuatrimestral' || specialType=='trimestral')
 	{
 		if (!validateMonthByType(monthValue, specialType)){
 			return false;
@@ -832,6 +839,17 @@ function controlFiscalPeriod(formType){
 		return true;	
 		break;
 
+	case 'trimestral':
+		if(!validateMonthlyForm(formType)){
+			return false;
+		}else{
+			if (!validateYearForMonthly()){
+				return false;
+			}
+		}
+		return true;	
+		break;
+		
 	case 'cuatrimestral':
 		if(!validateMonthlyForm(formType)){
 			return false;

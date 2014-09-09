@@ -19,15 +19,15 @@ function onloadForm() {
 	// El form 112 es anual. Y el mes (fijo) de vencimiento es 5.
 	document.getElementById('fiscalPeriodMounth').value = 5;
 	
-//	document.getElementById('c55').disabled = 'true';
-//	document.getElementById('c57').disabled = 'true';
-//	document.getElementById('c59').disabled = 'true';
-//	document.getElementById('c61').disabled = 'true';
-//	document.getElementById('c63').disabled = 'true';
-//	document.getElementById('c65').disabled = 'true';
-//	document.getElementById('c67').disabled = 'true';
-//	document.getElementById('c69').disabled = 'true';
-//	document.getElementById('c71').disabled = 'true';
+	document.getElementById('c59').disabled = 'true';
+	document.getElementById('c60').disabled = 'true';
+	document.getElementById('c61').disabled = 'true';
+	document.getElementById('c62').disabled = 'true';
+	document.getElementById('c63').disabled = 'true';
+	document.getElementById('c64').disabled = 'true';
+	document.getElementById('c65').disabled = 'true';
+	document.getElementById('c66').disabled = 'true';
+	document.getElementById('c67').disabled = 'true';
 }
 
 function calculateBeforePlugin() {

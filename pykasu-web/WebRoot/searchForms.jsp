@@ -8,6 +8,7 @@
 <%@ taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic" %>
 <jsp:directive.page import="py.com.roshka.pykasu.persistence.forms.ItemSearch"/>
 <% java.util.List<ItemSearch> items = (java.util.List<ItemSearch>) request.getAttribute("items");  %>
+<% java.util.List<ItemSearch> itemsPermiso = (java.util.List<ItemSearch>) request.getAttribute("isAvaliableToPay");%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html:html>
 	<head>
@@ -157,8 +158,7 @@
 					<th>Estado</th>
 					<th>Historia</th>
 				</tr>		
-			<% 			
-				for(ItemSearch item : items){%>
+			<%for(ItemSearch item : items){%>
 					<tr>
 						 	
 						<td> <%=item.getValue(ItemSearch.FieldName.FORM_TYPE)%></td>
@@ -168,6 +168,7 @@
 						<td> <%=item.getValue(ItemSearch.FieldName.FISCAL_PERIOD_MOUNTH)%></td>
 						<td> <%=item.getValue(ItemSearch.FieldName.FISCAL_PERIOD_YEAR)%></td>					
 						<td> <%=item.getValue(ItemSearch.FieldName.PRESENTATION_DATE)%></td>
+						<td> <%=item.getValue(ItemSearch.FieldName.STATUS)%></td>
 						<td> <%=item.getValue(ItemSearch.FieldName.STATUS)%></td>
 						<td>
 							<%if(item.getDetails() != null){%>
@@ -184,8 +185,9 @@
 								<input type="hidden" name="form" value="<%=item.getValue(ItemSearch.FieldName.FORM_TYPE)%>">
 																
 								<input type="submit" value="Detalles" name="option"/>
-								<%//User u = getUserByRuc(item.getValue(ItemSearch.FieldName.RUC));
-								%>
+								
+								
+								
 								<%if(((String)item.getValue(ItemSearch.FieldName.STATUS)).equalsIgnoreCase(TaxForm.FORM_STATUS_PROCESS)){ %>
 								<input type="submit" value="Editar" name="option"/>
 								<%}%>

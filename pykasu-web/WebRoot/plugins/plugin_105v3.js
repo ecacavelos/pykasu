@@ -18,6 +18,8 @@ function disabledByCondition(cell, cellConditionId){
 		cellCondition.disabled = '';
 		
 	}
+	refreshVars();
+	
 }
 
 //Funcion que se realizo para esta regla //# SI (C[137]=0, 0, C[138]). 
@@ -30,14 +32,19 @@ function checkIfContent(cellToTest, targetCellId){//c15 c23
 		cellCondition.disabled = 'true';
 	}
 	else {
-//		cellCondition.value="";
 		cellCondition.disabled = '';
 		cellCondition.focus();
 	}
 	refreshVars();
-//	TRGc155();
-//	TRGc156();
-
+	TRGc137();
+	TRGc149();
+	if(cellToTest == c128){
+		TRGc137();
+	}
+	if(cellToTest == c15){
+		TRGc16();
+	}
+	
 }
 
 function onloadForm(){
@@ -60,6 +67,27 @@ function onloadForm(){
 	disabledByCondition(document.getElementById('c15'), 'c24');
 	disabledByCondition(document.getElementById('c40'), 'c53');
 	
+	disabledByCondition(document.getElementById('c128'), 'c138');
+	disabledByCondition(document.getElementById('c129'), 'c139');
+	disabledByCondition(document.getElementById('c130'), 'c140');
+	disabledByCondition(document.getElementById('c131'), 'c141');
+	disabledByCondition(document.getElementById('c132'), 'c142');
+	disabledByCondition(document.getElementById('c133'), 'c143');
+	disabledByCondition(document.getElementById('c134'), 'c144');
+	disabledByCondition(document.getElementById('c135'), 'c145');
+	disabledByCondition(document.getElementById('c136'), 'c146');
+	
+	disabledByCondition(document.getElementById('c138'), 'c150');
+	disabledByCondition(document.getElementById('c139'), 'c151');
+	disabledByCondition(document.getElementById('c140'), 'c152');
+	disabledByCondition(document.getElementById('c141'), 'c153');
+	disabledByCondition(document.getElementById('c142'), 'c154');
+	disabledByCondition(document.getElementById('c143'), 'c155');
+	disabledByCondition(document.getElementById('c144'), 'c156');
+	disabledByCondition(document.getElementById('c145'), 'c157');
+	disabledByCondition(document.getElementById('c146'), 'c158');
+	disabledByCondition(document.getElementById('c147'), 'c159');
+	disabledByCondition(document.getElementById('c148'), 'c160');
 	
 	document.getElementById('fiscalPeriodMounth').value =getValidMonth();
 	pm_fiscalPeriodMounth = getValidMonth(); 				
@@ -112,6 +140,9 @@ function calcPorcentajeMoras(){
   		   colocarpuntos(document.getElementById('c76'));
 	}
 	refreshVars();
+	TRGc78();
+	TRGc80();
+	TRGc80_0();
 	var tmp = (0).toFixed(0);
 }
 
@@ -187,43 +218,6 @@ function mustBeMinor()
 	}
 }
 
-/*
-function calculateC78(){
-
-	var campo77 = getValueFormatless('c77');
-	var campo78 = getValueFormatless('c78');
-
-	var campo15 = getValueFormatless('c15');
-
-	var calc = campo15*0.3;
-
-	if (campo78 <= calc){
-		if(campo78 > campo77){
-			alert('El valor del campo 78 no puede superar al valor del campo 77');
-			document.getElementById('c78').value = "";
-	  	   	colocarpuntos(document.getElementById('c78'));
-	  	}
-	}else{
-		if (calc <= campo77){
-			document.getElementById('c78').value = calc;
-	  	   	colocarpuntos(document.getElementById('c78'));
-		}else{
-			document.getElementById('c78').value = "";
-	  	   	colocarpuntos(document.getElementById('c78'));
-		}
-	}
-	
-}
-*/
-// Segun documento de Referencia: Impuesto resultante (Inc. d x 10 %)
-function calculateC72(){
-
-//	var campo71 = getValueFormatless('c71');
-//	
-//	document.getElementById('c72').value = campo71*0.1;
-//	colocarpuntos(document.getElementById('c72'));
-	   	
-}
 
 /*
 Retorna el mes valido de presentacion
@@ -278,102 +272,3 @@ function beforeSave(){
 	/*REsolucion general nro 107 --> NO se pueden presentar declaraciones sin movimiento*/
 	return true;
 }
-/*#########################################################
-	FUNCIONES SIN USO.
-#########################################################
-
-function beforeSave(){
-
-	fecha = new Date();
-	var anho = getActualYear();
-	var anhoform = getValueFormatless('fiscalPeriodYear');	
-	
-	var v120 = removeCommas(document.getElementById("c120").value);
-	if(v120!='' && v120.length != 4){
-		alert('El a�o debe tener cuatro d�gitos.');
-		return false;
-	}
-	
-	if(parseInt(v120)< 1900){
-		alert('El a�o debe ser mayor al 1900.');
-		return false;		
-	}
-	
-	var server = document.getElementById("serverActualDate").value;
-	sp = server.split('/');
-	if(v120.replace(' ','') > sp[2].replace(' ','')){
-		alert('El valor del campo 120 debe ser menor que el a�o actual.');
-		return false;
-	}
-
-	if(!(
-		(
-			(document.getElementById('declarationType').value == '| 5 | CLAUSURA') 
-			&&(anho == anhoform)
-		) 
-	   || (anhoform < anho)  )
-	){
-		alert('A�o de presentaci�n incorrecto. El a�o debe ser menor al a�o corriente. En el caso de CLAUSURA, el a�o puede ser el mismo que el corriente.');
-		document.getElementById('fiscalPeriodYear').focus();
-		return false;
-	}
-
-	return true;
-}
-
-function retriveSalary(){
-	
-	request= GetXmlHttpObject();
-
-	//request= new XMLHttpRequest();
-
-	if (request == null){
-		alert('El sitio no soporta AJAX.');
-		return;
-	}
-
-	var fpMonth = document.getElementById('fiscalPeriodMounth').value.toUpperCase();
-	var fpYear  = document.getElementById('fiscalPeriodYear').value.toUpperCase();
-
-	if((fpMonth == null)||(fpYear==null)||(fpMonth == '')||(fpYear == '')){		
-		return;
-	}
-
-	var url = 'getSalary.do'
-	url = url + '?id='+Math.random();
-	url = url + '&fpMonth='+fpMonth;
-	url = url + '&fpYear=' + fpYear;
-	
-	request.onreadystatechange=calculateC90;
-	request.open('POST',url,true);
-	request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-	request.send(null);
-}
-
-function calculateC90(){
-	if(request.readyState == 4 || request.readyState == 'complete'){
-		
-		var xmlDoc = request.responseXML;
-	
-		var values = xmlDoc.getElementsByTagName("salary-info");
-		
-				
-		for (i=0; i<values[0].childNodes.length; i++){
-			if (values[0].childNodes[i].nodeName == 'salary'){
-				for (j = 0; j<values[0].childNodes[i].childNodes.length; j++){
-					if (values[0].childNodes[i].childNodes[j].nodeName == 'salary-amount'){					
-						salaryAmount = values[0].childNodes[i].childNodes[j].firstChild.nodeValue;
-					}
-				}
-			}//if comentario
-		}
-	//	alert('salaryAmount: ' + salaryAmount);
-		if(getValueFormatless('c76') > parseInt(salaryAmount)){
-			document.getElementById('c90').value = document.getElementById('c76').value;	
-		}else{
-			document.getElementById('c90').value = '';
-		}
-	}
-}
-
-*/
