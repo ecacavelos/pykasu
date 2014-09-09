@@ -335,7 +335,9 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	}
     
     private boolean isClaurura(String declarationType){
-    	return true;
+    	if(declarationType.equals("| 5 | CLAUSURA"))
+    		return true;
+		return false;
     }
 
 	@SuppressWarnings("unchecked")
@@ -389,39 +391,57 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 					return result;					
 				}
 				
-				validPresentationDate =  c.getTime().after(fs.getPeriodBegin())&& c.getTime().before(fs.getPeriodEnd());//el formulario est� dentro de su fecha de presentaci�n
+				validPresentationDate =  c.getTime().after(fs.getPeriodBegin())&& c.getTime().before(fs.getPeriodEnd());//el formulario est� dentro de su fecha de presentación
 				if(!validPresentationDate){
-					logger.warn("El formulario est� fuera de su fecha de presentaci�n " + fs.getPeriodBegin().getTime() + " : " + fs.getPeriodEnd().getTime());
+					logger.warn("El formulario está fuera de su fecha de presentación " + fs.getPeriodBegin().getTime() + " : " + fs.getPeriodEnd().getTime());
 					result.put("DECLARATION_DATE_NOT_VALID",true);
 					return result;					
 				}
 				
 				
-				boolean f1, f2, f3,  f4;
-				
-				logger.info("Es anual? " + fs.isAnnual());
+				boolean f1, f2, f3,  f4, f5;
+				f5 = false;
+				logger.info("Es anual? " + !fs.isAnnual());
 				logger.info("Es clausura? " + isClaurura(declarationType));
-				logger.info("Presentaci�n a�o: " + c.get(Calendar.YEAR));
-				logger.info("Presentaci�n mes: " + c.get(Calendar.MONTH)+1);
+				logger.info("Presentación año: " + c.get(Calendar.YEAR));
+				logger.info("Presentación mes: " + (c.get(Calendar.MONTH)+1));
 				
 				f1 = fs.isAnnual() && isClaurura(declarationType) &&  c.get(Calendar.YEAR) <= Calendar.getInstance().get(Calendar.YEAR);
-				logger.info(f1 + " --> Es anual, es de clausura, y el a�o de declaraci�n (en la presentaci�n) es menor o igual al a�o actual" );
+				logger.info(f1 + " --> Es anual, es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual" );
 				
 				f2 = fs.isAnnual() && !isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR);
-				logger.info(f2 + " --> Es anual, NO es de clausura, y el a�o de declaraci�n (en la presentaci�n) es menor al a�o actual");
+				logger.info(f2 + " --> Es anual, NO es de clausura, y el año de declaración (en la presentación) es menor al año actual");
 				
+				//f3 = !fs.isAnnual() && isClaurura(declarationType) &&  !(  c.get(Calendar.YEAR) > Calendar.getInstance().get(Calendar.YEAR)  ) && !(c.get(Calendar.MONTH) > Calendar.getInstance().get(Calendar.MONTH));
+				
+				boolean f126 = fs.isThreeMonthy();
+				f3 = !fs.isAnnual() && isClaurura(declarationType) && ( c.get(Calendar.YEAR) <= Calendar.getInstance().get(Calendar.YEAR)) && c.get(Calendar.MONTH) <= Calendar.getInstance().get(Calendar.MONTH);
+				logger.info("----> " +  c.get(Calendar.YEAR) + " <= " + Calendar.getInstance().get(Calendar.YEAR));
 
-				f3 = !fs.isAnnual() && isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR) || (c.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && c.get(Calendar.MONTH) <= Calendar.getInstance().get(Calendar.MONTH));
-				logger.info(f3 + " --> NO es anual, es de clausura, y el a�o de declaraci�n (en la presentaci�n) es menor o igual al a�o actual y el mes de declaraci�n (en la presentaci�n) es menor o igual al mes actual");
+				logger.info("----> " + c.get(Calendar.MONTH) + " <= " + Calendar.getInstance().get(Calendar.MONTH));
+				
+				logger.info(f3 + " --> NO es anual, es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual y el mes de declaración (en la presentación) es menor o igual al mes actual");
 				
 				f4 = !fs.isAnnual() && !isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR) || (c.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && c.get(Calendar.MONTH) < Calendar.getInstance().get(Calendar.MONTH));
-				logger.info(f4 + " --> NO es anual, NO es de clausura, y el a�o de declaraci�n (en la presentaci�n) es menor o igual al a�o actual y el mes de declaraci�n (en la presentaci�n) es menor  al mes actual");
-
+				logger.info(f4 + " --> NO es anual, NO es de clausura, y el año de declaración (en la presentación) es menor o igual al año actual y el mes de declaración (en la presentación) es menor  al mes actual");
+				
+				if(fs.getFrequency().equals("T") && fs.getFormType().trim().equals("126") && isClaurura(declarationType)){
+				//entra si el formulario es el 126 y es clausura
+					f5 = false;
+					int a = c.get(Calendar.YEAR) - Calendar.getInstance().get(Calendar.YEAR); 
+					int m = c.get(Calendar.MONTH) - Calendar.getInstance().get(Calendar.MONTH);
+					//Se verifica que el periodo en el cual se representa es valido 
+					if (a < 3){
+						f5 = true;
+					}
+					logger.info("dif año " + a + "  dif mes " + m);
+				}
+				logger.info("f5 " + f5);
 				if(!(f1 || f2 || f3 || f4)){
 					logger.warn("Todas las condiciones de las fechas son falsas");
 				}
 				
-				validPresentationDate = validPresentationDate && (f1 || f2 || f3 || f4);
+				validPresentationDate = validPresentationDate && (f1 || f2 || f3 || f4 || f5);
 			
 			}
 			
@@ -640,13 +660,13 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			c.set(presentationYear.intValue(), presentationMonth.intValue()-1, day);
 			
 			if(fs.isMonthy() || fs.isFourMonthy() || fs.isSixMonthy() || fs.isThreeMonthy())
-				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentaci�n
+				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentación
 				c.add(Calendar.MONTH,1);
 			else if(fs.isAnnual())
-				//c.roll(Calendar.YEAR,1); //hay que poner el siguiente a~no a la de presentaci�n
+				//c.roll(Calendar.YEAR,1); //hay que poner el siguiente a~no a la de presentación
 				c.add(Calendar.YEAR,1); 
 			else if(fs.isOccassionaly()){
-				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentaci�n
+				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentación
 				c.add(Calendar.MONTH,1);
 			}else
 				throw new FiscalInfoException("Tipo de Periodicidad de Formulario no reconocido");
@@ -763,7 +783,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 	}
 
 	public Map getFiscalInfoForm90(Map params) throws FiscalInfoException {
-		//el formulario 90 es un formulario que se puede presentar en cualquier momento, por eso no se hace un control si es una fecha v�lida de presentaci�n
+		//el formulario 90 es un formulario que se puede presentar en cualquier momento, por eso no se hace un control si es una fecha v�lida de presentación
 		Map map = new HashMap();
 		
 		String section = (String) params.get(Globals.FORM90_SECTION);
