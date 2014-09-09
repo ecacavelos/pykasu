@@ -18,17 +18,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.sun.org.apache.commons.beanutils.BeanUtils;
-
 import py.com.roshka.pykasu.exceptions.FindingException;
 import py.com.roshka.pykasu.interfaces.AdmissionManager;
-import py.com.roshka.pykasu.interfaces.SystemRegistration;
 import py.com.roshka.pykasu.interfaces.UserManager;
 import py.com.roshka.pykasu.persistence.admission.Admission;
 import py.com.roshka.pykasu.scheduler.FormErrorNotification;
 import py.com.roshka.pykasu.web.Globals;
-import py.com.roshka.pykasu.web.forms.RegisterUserForm;
-import py.com.roshka.pykasu.web.forms.SelectUserType;
 /**
  * 
  * @author jrey

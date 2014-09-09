@@ -37,6 +37,10 @@ function refresh49(){
 
 }
 
+function refresh58(){
+	refreshvars();
+	TRGS4L105_2();
+}
 //function refresh54(){
 //	var c53 = removeCommas(document.getElementById("c53").value);
 //	var c57 = removeCommas(document.getElementById("c57").value);
@@ -64,15 +68,22 @@ function calculateAfterPlugin(){
 
 
 function calcPorcentajeMoras(){
-	//document.getElementById('c56').value = "50000";
+	//document.getElementById('c56').value = "50.000";
+	var c53 = removeCommas(document.getElementById('c53').value);
+
+	var c55 = removeCommas(document.getElementById('c55').value);
+
 	if(CONTRAVENSION_CMOV && CONTRAVENSION_CMOV != null){
 		document.getElementById('c56').value =  CONTRAVENSION_CMOV;//*norectificativa;
 		if(document.getElementById('c56').value != null)
   		   colocarpuntos(document.getElementById('c56'));
 	}
-
+	var c56 = removeCommas(document.getElementById('c56').value);
+	refreshVars();
+	TRGS4L104();
+	TRGS4L105();
+	TRGS4L105_2();
 }
-
 
 function getFormType(){
 	return '120v3';
