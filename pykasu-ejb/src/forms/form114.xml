@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<form type="114" description="Formulario 114" >
+	<sections type="header">
+		<section id="H1" name="HEADER1" description="SET"  order="0">
+			<line id="L0" name="H1L0" order="-1">
+				<cell id="paymentDate" col="0" type="DATE" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Día previsto de pago: dd/mm/aaaa" alignAddtionalDescription="TOP" events="onChange:getPorcentajeMoras"/>
+				<cell id="prePrintedNumber" col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Identificador del formulario:" alignAddtionalDescription="TOP" events="onblur:removeZeros#updatePreprinterNumber" xmlTagName="numeroDocumento" />
+			</line>
+			
+			<line id="L1" name="H1L1" order="0">
+				<cell id="ruc" col="1" type="STRING" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="RUC:" alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="ruc"/>
+				<cell id="dv" col="2"  type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="DV:"  alignAddtionalDescription="TOP" events="onblur:updateRuc" xmlTagName="dv" colSpan="2" staticValue="true"/>				
+			</line>
+			<line id="L2" name="H1L2" order="1">
+				<cell id="firstLastName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Razón Social o Primer Apellido:" alignAddtionalDescription="TOP" xmlTagName="PrimerApellido"/>
+				<cell id="secondLastName" col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Apellido:" alignAddtionalDescription="TOP"/>				
+			</line>
+			<line id="L3" name="H1L3" order="2">
+				<cell id="firstName"  col="0" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Primer Nombre:" alignAddtionalDescription="LEFT"/>
+				<cell id="middleName"  col="1" type="STRING" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Segundo Nombre:" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="L4" name="H1L4" order="3">
+			    <cell id="nroCedula"  col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Cédula de identidad:" alignAddtionalDescription="LEFT" xmlTagName="nroCedula" events="" /> 
+			</line>
+			<line id="L5" name="H1L5" order="4">
+				<!-- <cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/> -->
+				<cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 5 | CLAUSURA" events="onChange: calculate;"/>
+				<!-- <cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" /> -->
+				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
+			</line>			
+			<line id="L6" name="H1L6" order="5" description="| 04 | Periodo Fiscal">
+				<!--<cell id="LBLPeriodoFiscal"    col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="false" additionalDescription="Perido fiscal:" alignAddtionalDescription="LEFT"/>-->
+				<cell id="fiscalPeriodMounth"  col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="false" additionalDescription="Mes" alignAddtionalDescription="LEFT" />
+				<cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:controlaAnho"/>
+				<!-- <cell id="fiscalPeriodYear"    col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Año" alignAddtionalDescription="LEFT" events="onblur:getPorcentajeMoras#retriveSalary()"/> -->
+			</line>			
+		</section>
+	</sections>	
+	<sections type="body">
+		<section id="R0" order="-2">
+			<line id="TL0" name="TLS0" order="-1" description="Para contribuyentes que realicen actividades gravadas y liquiden el impuesto por el régimen contable">
+				<cell id="c6"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false"  additionalDescription="Codigo Actividad Economica Principal: | 6 |" alignAddtionalDescription="LEFT" />
+			</line>			
+		</section>
+		<section id="R_1" name="RUBRO1" description="Rubro 1. Estado de resultados" order="-1">
+			<line id="TL1" name="TLS1" order="0" description="RUBRO 1 - Estado de resultados">
+				<cell id="LBL_R1_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="Importe -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R1_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="false" calculable="true"  additionalDescription="Total -II-" alignAddtionalDescription="FILLED"/>
+			</line>
+			
+			<line id="TL2" name="TLS2" order="1" description="Ingresos">
+			</line>
+				
+  			<line id="IA_A" name="INC_A_A" order="2" description="Ingresos por venta de ganado bovino">  
+  				<cell id="c10" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="10" alignAddtionalDescription="LEFT" xmlTagName="C10" />  
+  				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+  			</line>  
+ 			<line id="IA_B" name="INC_A_B" order="3" description="Ingresos por venta de otros tipos de ganado"> 
+ 				<cell id="c11" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="11" alignAddtionalDescription="LEFT" xmlTagName="C11" />
+ 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" /> 
+ 			</line>                        
+			<line id="IA_C" name="INC_A_C" order="4" description="Ingresos por venta de productos derivados de la ganadería">
+				<cell id="c12" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="12" alignAddtionalDescription="LEFT" xmlTagName="C12" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IA_D" name="INC_A_D" order="5" description="Ingresos por venta de productos agrícolas, frutícolas, hortícolas e ictícolas">
+				<cell id="c13" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="13" alignAddtionalDescription="LEFT" xmlTagName="C13" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IA_E" name="INC_A_E" order="6" description="Ingresos por suinicultura, cunicultura, floricultura, sericultura, avicultura, apicultura y explotación forestal.(Si no supera el 30% de los ingresos totales del establecimiento rural)	">
+				<cell id="c14" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="14" alignAddtionalDescription="LEFT" xmlTagName="C14" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>                                                
+			<line id="IA_F" name="INC_A_F" order="7" description="Otros ingresos gravados por el IRAGRO">
+				<cell id="c15" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="15" alignAddtionalDescription="LEFT" xmlTagName="C15" events="onblur:refresh49"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>                                                
+			<line id="IA_G" name="INC_A_G" order="8" description="Otros ingresos no gravados por el IRAGRO">
+				<cell id="c16" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="16" alignAddtionalDescription="LEFT" xmlTagName="C16" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>     
+			<line id="IA_H" name="INC_A_H" order="9" description="Aumento del Patrimonio por transformación y valuación de Activos Biológicos">
+				<cell id="c17" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="17" alignAddtionalDescription="LEFT" xmlTagName="C17" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IA_I" name="INC_A_I" order="10" description="TOTAL DE INGRESOS BRUTOS. Suma de las casillas 10 al 17">
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c46" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="46" alignAddtionalDescription="LEFT" xmlTagName="C46" />
+			</line>
+			<line id="IA_J" name="INC_A_J" order="11" description="Menos: Devoluciones, bonificaciones y descuentos otorgados">
+				<cell id="c18" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="18" alignAddtionalDescription="LEFT" xmlTagName="C18" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IA_K" name="INC_A_K" order="12" description="A - TOTAL DE INGRESOS NETOS. Diferencia entre la casilla 46 y 18">
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c47" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="47" alignAddtionalDescription="LEFT" xmlTagName="C47" />
+			</line>
+			<line id="IA_L" name="INC_A_L" order="13" description="Menos: Ingresos no gravados por el IRAGRO. Suma de las casillas 16 y 17">
+				<cell id="c19" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="19" alignAddtionalDescription="LEFT" xmlTagName="C19" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IA_M" name="INC_A_M" order="14" description="B - TOTAL DE INGRESOS NETOS GRAVADOS. Diferencia entre las casillas 47 y 19">
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c48" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="48" alignAddtionalDescription="LEFT" xmlTagName="C48" />
+			</line>    
+			
+			<line id="TL3" name="TL3S2" order="15" description="Costos">
+			</line>
+			
+			<line id="IB_A" name="INC_B_A" order="16" description="C - TOTAL DE COSTOS">
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c49" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" />
+			</line> 
+			<line id="IB_B" name="INC_B_B" order="17" description="Menos: Costos no deducibles del IRAGRO">
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c20" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="20" alignAddtionalDescription="LEFT" xmlTagName="C20" />
+			</line> 
+			<line id="IB_C" name="INC_B_C" order="18" description="Más: Diferencia del costo por enajenación de inmueble (costo presunto - costo contable)">
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c21" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="21" alignAddtionalDescription="LEFT" xmlTagName="C21" />
+			</line> 
+			<line id="IB_D" name="INC_B_D" order="19" description="D - TOTAL DE COSTOS DEDUCIBLES">
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c50" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="50" alignAddtionalDescription="LEFT" xmlTagName="C50" />
+			</line> 
+			
+			<line id="TL3_2" name="TL4S2" order="20" description="Gastos">
+			</line>
+			
+			<line id="I_C_A" name="INC_C_A" order="21" description="Gastos vinculados a la producción Agrícola">
+				<cell id="c22" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="22" alignAddtionalDescription="LEFT" xmlTagName="C22" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_B" name="INC_C_B" order="22" description="Gastos vinculados a la producción Pecuaria">
+				<cell id="c23" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="23" alignAddtionalDescription="LEFT" xmlTagName="C23" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_C" name="INC_C_C" order="23" description="Gastos generales (Incluido gastos de movilidad y otros)">
+				<cell id="c24" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="24" alignAddtionalDescription="LEFT" xmlTagName="C24" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_D" name="INC_C_D" order="24" description="Sueldos y jornales, aguinaldos">
+				<cell id="c25" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="25" alignAddtionalDescription="LEFT" xmlTagName="C25" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_E" name="INC_C_E" order="25" description="Cargas sociales - aporte patronal">
+				<cell id="c26" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="26" alignAddtionalDescription="LEFT" xmlTagName="C26" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_F" name="INC_C_F" order="26" description="Remuneración personal superior">
+				<cell id="c27" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="27" alignAddtionalDescription="LEFT" xmlTagName="C27" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_G" name="INC_C_G" order="27" description="Honorarios profesionales">
+				<cell id="c28" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="28" alignAddtionalDescription="LEFT" xmlTagName="C28" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_H" name="INC_C_H" order="28" description="Gastos de arrendamiento">
+				<cell id="c29" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="29" alignAddtionalDescription="LEFT" xmlTagName="C29" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_I" name="INC_C_I" order="29" description="Gastos de mantenimiento y reparación en tanto no constituyan reparaciones extraordinarias">
+				<cell id="c30" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="30" alignAddtionalDescription="LEFT" xmlTagName="C30" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_J" name="INC_C_J" order="30" description="Fletes y Gastos de Comercialización">
+				<cell id="c31" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="31" alignAddtionalDescription="LEFT" xmlTagName="C31" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_K" name="INC_C_K" order="31" description="Intereses financieros">
+				<cell id="c32" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="32" alignAddtionalDescription="LEFT" xmlTagName="C32" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_L" name="INC_C_L" order="32" description="Gastos documentados con Autofacturas">
+				<cell id="c33" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="33" alignAddtionalDescription="LEFT" xmlTagName="C33" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_M" name="INC_C_M" order="33" description="IVA Gastos">
+				<cell id="c34" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="34" alignAddtionalDescription="LEFT" xmlTagName="C34" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_N" name="INC_C_N" order="34" description="Pérdida por mortandad y consumo de la hacienda vacuna para el establecimiento rura">
+				<cell id="c35" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="35" alignAddtionalDescription="LEFT" xmlTagName="C35" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_O" name="INC_C_O" order="35" description="Depreciaciones de bienes del activo fijo">
+				<cell id="c36" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="36" alignAddtionalDescription="LEFT" xmlTagName="C36" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_P" name="INC_C_P" order="36" description="Pérdidas extraordinarias y hechos punibles cometidos por terceros">
+				<cell id="c37" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="37" alignAddtionalDescription="LEFT" xmlTagName="C37" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			
+			
+			<line id="I_C_Q" name="INC_C_Q" order="37" description="Donaciones">
+				<cell id="c38" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="38" alignAddtionalDescription="LEFT" xmlTagName="C38" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_R" name="INC_C_R" order="38" description="Apoyo a fincas colindantes">
+				<cell id="c39" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="39" alignAddtionalDescription="LEFT" xmlTagName="C39" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_S" name="INC_C_S" order="39" description="Impuesto a la Renta (IRAGRO)">
+				<cell id="c40" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="40" alignAddtionalDescription="LEFT" xmlTagName="C40" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_T" name="INC_C_T" order="40" description="Otros gastos">
+				<cell id="c41" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="41" alignAddtionalDescription="LEFT" xmlTagName="C41" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_U" name="INC_C_U" order="41" description="Gastos vinculados a ingresos no gravados por el IRAGRO">
+				<cell id="c42" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="42" alignAddtionalDescription="LEFT" xmlTagName="C42" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_V" name="INC_C_V" order="42" description="E - TOTAL DE GASTOS. Suma de las casillas 22 al 42">
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c51" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="51" alignAddtionalDescription="LEFT" xmlTagName="C51" />
+			</line> 
+			<line id="I_C_W" name="INC_C_W" order="43" description="Menos: Impuesto a la Renta (IRAGRO)">
+				<cell id="c43" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="43" alignAddtionalDescription="LEFT" xmlTagName="C43" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_X" name="INC_C_X" order="44" description="Menos: Gastos no deducibles del IRAGRO">
+				<cell id="c44" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="44" alignAddtionalDescription="LEFT" xmlTagName="C44" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_Y" name="INC_C_Y" order="45" description="Más: Depreciación del ganado vacuno hembra">
+				<cell id="c45" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="45" alignAddtionalDescription="LEFT" xmlTagName="C45" />
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line> 
+			<line id="I_C_Z" name="INC_C_Z" order="46" description="F - TOTAL DE GASTOS DEDUCIBLES">
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c52" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="52" alignAddtionalDescription="LEFT" xmlTagName="C52" />
+			</line> 
+			                                       
+		</section>	
+		
+		  <section  id="R_2" order="47">
+			<line id="TL4" name="TLS4" order="-1" description="RUBRO 2 - Resultado del ejercicio">
+				<cell id="LBL_R4_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; IMPORTE &lt;/div&gt;&lt;BR&gt;PERDIDA -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R4_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;         &lt;/div&gt; &lt;BR&gt;UTILIDAD -II-" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IA" order="48" description="|a| Resultado Contable del Ejercicio (Proviene del Inc. A - (C + E) del Rubro 1" >
+				<cell id="c53" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="53" xmlTagName="C53"/>
+				<cell id="c55" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="55" xmlTagName="C55"/>
+			</line>
+			<line id="IB" order="49" description="|b| Resultado Fiscal del Ejercicio (Proviene del Inc. B - (D + F) del Rubro 1" >
+				<cell id="c54" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="54" xmlTagName="C54"/>
+				<cell id="c56" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="56" xmlTagName="C56"/>
+			</line>
+		</section>
+		
+		<section  id="R_3" order="50">
+			<line id="TL5" name="TLS5" order="-1" description="RUBRO 3 - Determinación de la renta neta imponible y pérdida arrastrable">
+				<cell id="LBL_R4_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; IMPORTE &lt;/div&gt;&lt;BR&gt;CONTRIBUYENTE -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R4_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;         &lt;/div&gt; &lt;BR&gt;FISCO -II-" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IA" order="51" description="|a| Resultado Fiscal del Ejercicio/Utilidad (Proviene del Rubro 2, Col. II: Inc. b)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c66" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="66" xmlTagName="C66"/>
+			</line>
+			<line id="IB" order="52" description="|b| Resultado Fiscal del Ejercicio/Pérdida (Proviene del Rubro 2, Col. I: Inc. b)" >
+				<cell id="c57" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="57" xmlTagName="C57"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IC" order="53" description="|c| Menos: Pérdida por mortandad, Hacienda para Consumo del Establecimiento, Depreciaciones del Ganado Vacuno Hembra, Donaciones y Apoyo a Fincas Colindantes." >
+				<cell id="c58" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="58" xmlTagName="C58"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="ID" order="54" description="|d| PÉRDIDA FISCAL DEL EJERCICIO ARRASTRABLE (Inc. b - Inc. c). En caso que el inciso c, sea mayor consignar 0 (cero)." >
+				<cell id="c59" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="59" xmlTagName="C59"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />dditionalDescription="39" xmlTagName="C39"/>
+			</line>
+			<line id="IE" order="55" description="|e| PÉRDIDA DE EJERCICIOS ANTERIORES (El contribuyente deberá tener en cuenta que la pérdida declarada en el presente Inciso, esté dentro del plazo legal previsto en la Ley)" >
+				<cell id="c60" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="60" xmlTagName="C60"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />ditionalDescription="44" xmlTagName="C44"/>
+			</line>
+			<line id="IF" order="56" description="|f| PÉRDIDA TOTAL ACUMULADA (Inc. d + Inc. e)" >
+				<cell id="c61" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="61" xmlTagName="C61"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IG" order="57" description="|g| Menos: Pérdida que al cierre del presente ejercicio quedó por fuera de los 5 (cinco) años" >
+				<cell id="c62" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="62" xmlTagName="C62"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IH" order="58" description="|h| SALDO DE PÉRDIDAS COMPENSABLES AL CIERRE DEL PRESENTE EJERCICIO (Inc. f - Inc. g)" >
+				<cell id="c63" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="63" xmlTagName="C63"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="II" order="59" description="|i| Menos: Pérdida compensada en el presente ejercicio fiscal (No podrá exceder el 20 % de la Renta Neta)" >
+				<cell id="c64" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="64" xmlTagName="C64"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IJ" order="60" description="|j| SALDO DE PÉRDIDA AL CIERRE DEL PRESENTE EJERCICIO (Inc. h - Inc. i). Monto a trasladar en el Inc. e del presente rubro, para el siguiente periodo fiscal" >
+				<cell id="c65" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="65" xmlTagName="C65"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IK" order="61" description="|k| Renta Neta Imponible del Ejercicio. (Inc. a - Inc. i). Cuando el Inc. a sea mayor" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c67" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="67" xmlTagName="C67"/>
+			</line>
+		</section>
+		
+		<section  id="R_4" order="62">
+			<line id="TL6" name="TLS6" order="-1" description="RUBRO 4 -  Liquidación y saldo del impuesto">
+				<cell id="LBL_R4_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; IMPORTE &lt;/div&gt;&lt;BR&gt;CONTRIBUYENTE -I-" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R4_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;         &lt;/div&gt; &lt;BR&gt;FISCO -II-" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="IA" order="63" description="|a| Impuesto determinado sobre la Renta Neta Imponible (Proviene del Rubro 3, Inc. k)" >
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+				<cell id="c72" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="72" xmlTagName="C72"/>
+			</line>
+			<line id="IB" order="64" description="|b| Saldo a favor del contribuyente del periodo anterior" >
+				<cell id="c68" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="68" xmlTagName="C68"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IC" order="65" description="|c| Retenciones computables por operaciones gravadas" >
+				<cell id="c69" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="69" xmlTagName="C69"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="ID" order="66" description="|d| Multa por presentar la Declaración Jurada con posterioridad al vencimiento" >
+				<cell id="c73" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="73" xmlTagName="C73"/>
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />dditionalDescription="39" xmlTagName="C39"/>
+			</line>
+			<line id="IE" order="67" description="|e| SUBTOTAL:(Col. I: Inc. b + c); (Col. II: Inc. a + d)" >
+				<cell id="c70" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="70" xmlTagName="C70"/>
+				<cell id="c74" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="74" xmlTagName="C74"/>
+			</line>
+			<line id="IF" order="68" description="|f| SALDO A FAVOR DEL CONTRIBUYENTE.(Monto a trasladar al siguiente periodo fiscal en el Inc b del presente Rubro). Diferencia entre Col. I y Col. II del Inc. e, cuando la Col. I sea mayor" >
+				<cell id="c71" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="71" xmlTagName="C71"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+			<line id="IG" order="69" description="|g| SALDO DEFINITIVO A PAGAR A FAVOR DEL FISCO.Diferencia entre Col. I y Col. II del Inc. e, cuando la Col. II sea mayor" >
+				<cell id="c75" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="75" xmlTagName="C75"/>
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+			</line>
+		</section>
+		
+		<section  id="R_6" order="70">
+			<line id="TL7" name="TLS7" order="-1" description="RUBRO 5 - Declaración jurada patrimonial">
+				<cell id="LBL_R6_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="TL7_1" name="TLS7_1" order="0" description = "" colSpan="2" >
+				<cell id="LBL_R4_IA_C1" col="0" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt; ACTIVO" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R4_IA_C2" col="1" type="LABEL" value="" colSpan= "2"  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;&lt;/div&gt; PASIVO" alignAddtionalDescription="LEFT"/>
+ 				<cell id="LBL_R4_IA_C3" col="2" type="LABEL" value="" colSpan= "2" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; " alignAddtionalDescription="FILLED"/> 
+			</line>
+			<line id="TL7_2" name="TLS7_2" order="1" description="" colspan="6">
+				<cell id="LBL_R5_IB_C1" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="CORRIENTE" />
+				<cell id="LBL1_R4_IB_C2" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt; |l| Pasivo Corriente" alignAddtionalDescription="FILLED"/>
+				<cell id="c87" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="87" xmlTagName="C87"/>
+			</line>
+			<line id="IA" order="71" description="|a| Caja" >
+				<cell id="c76" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="76" xmlTagName="C76"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|m| Pasivo No Corriente" alignAddtionalDescription="FILLED"/>
+				<cell id="c88" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="88" xmlTagName="C88"/>
+			</line>
+			<line id="IB" order="72" description="|b| Bancos y otros Valores" >
+				<cell id="c77" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="77" xmlTagName="C77"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|n| Total Pasivo" alignAddtionalDescription="FILLED"/>
+				<cell id="c89" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="89" xmlTagName="C89"/>
+			</line>
+			<line id="IC" order="73" description="|c| Inversiones temporales" >
+				<cell id="c78" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="78" xmlTagName="C78"/>
+				<cell id="LBL_R4_IC_C1" col="2" type="LABEL" value="" colSpan= "2"  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;&lt;/div&gt; PATRIMONIO NETO" alignAddtionalDescription="LEFT"/>
+			</line>
+			<line id="ID" order="74" description="|d| Créditos (importe neto)" >
+				<cell id="c79" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="79" xmlTagName="C79"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|o| Capital" alignAddtionalDescription="FILLED"/>
+				<cell id="c90" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="90" xmlTagName="C90"/>
+			</line>
+			<line id="IE" order="75" description="|e| Inventario (importe neto)" >
+				<cell id="c80" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="80" xmlTagName="C80"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|p| Reserva de Revalúo" alignAddtionalDescription="FILLED"/>
+				<cell id="c91" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="91" xmlTagName="C91"/>
+			</line>
+			<line id="IF" order="76" description="|f| Anticipos" >
+				<cell id="c81" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="81" xmlTagName="C81"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|q| Reserva Legal y otras reservas" alignAddtionalDescription="FILLED"/>
+				<cell id="c92" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="92" xmlTagName="C92"/>
+			</line>
+			<line id="IG" order="77" description="|g| Otros Activos Corrientes" >
+				<cell id="c82" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="82" xmlTagName="C82"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|r| Utilidad del Ejercicio" alignAddtionalDescription="FILLED"/>
+				<cell id="c93" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="93" xmlTagName="C93"/>
+			</line>			
+			<line id="IH" order="78" description="" >
+				<cell id="LBL_R5_IB_C1" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="NO CORRIENTE" />
+				<cell id="LBL1_R4_IB_C2" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt; |s| Menos: Pérdida del Ejercicio" alignAddtionalDescription="FILLED"/>
+				<cell id="c94" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="94" xmlTagName="C94"/>
+			</line>
+			<line id="II" order="79" description="|h| Créditos (importe neto)" >
+				<cell id="c83" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="83" xmlTagName="C83"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|t| Utilidades no Asignadas" alignAddtionalDescription="FILLED"/>
+				<cell id="c95" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="95" xmlTagName="C95"/>
+			</line>
+			<line id="IJ" order="80" description="|i| Propiedad: planta y equipo (importe neto)" >
+				<cell id="c84" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="84" xmlTagName="C84"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|u| Menos: Pérdidas Acumuladas" alignAddtionalDescription="FILLED"/>
+				<cell id="c96" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="96" xmlTagName="C96"/>
+			</line>
+			<line id="IK" order="81" description="|j| Otros Activos No Corrientes (importe neto, incluido intangibles)" >
+				<cell id="c85" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="85" xmlTagName="C85"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|v| Total Patrimonio Neto (Casilla 90 + 91 + 92 + 93 - 94 + 95 - 96)" alignAddtionalDescription="FILLED"/>
+				<cell id="c97" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="97" xmlTagName="C97"/>
+			</line>
+			<line id="IL" order="82" description="|k| Total Activo" >
+				<cell id="c86" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="86" xmlTagName="C86"/>
+				<cell id="LBL1_R4_IA_C4" col="2" type="LABEL" value=""  opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;left&quot;&gt;|w| Total Pasivo + Patrimonio Neto" alignAddtionalDescription="FILLED"/>
+				<cell id="c98" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="98" xmlTagName="C98"/>
+			</line>
+
+		</section>
+
+		<section  id="R_7" order="83">
+			<line id="TL5" name="TLS5" order="-1" description="RUBRO 5 - Inventario de la existencia del ganado">
+				<cell id="LBL_R5_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt;  &lt;/div&gt;&lt;BR&gt;" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R5_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; &lt;/div&gt;&lt;BR&gt;" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="TL5_1" name="TLS5_1" order="0" description = ""  >
+				<cell id="LBL_R5_IB_C0" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="Categorías" colSpan="4"/>
+			</line>
+			<line id="TL5_2" name="TLS5_2" order="1" description="MOVIMIENTOS" colspan="6">
+				<cell id="LBL_R5_IB_C1" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="TERNEROS" />
+				<cell id="LBL_R5_IB_C2" col="1" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="DESMAMANTES" />
+				<cell id="LBL_R5_IB_C3" col="2" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="VAQUILLAS" />
+				<cell id="LBL_R5_IB_C4" col="3" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="VACAS" />
+			</line>
+
+			<line id="IA" order="84" description="|a| Existencia Anterior" >
+				<cell id="c99" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="99" xmlTagName="C99"/>
+				<cell id="c113" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="113" xmlTagName="C113"/>
+				<cell id="c127" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="127" xmlTagName="C127"/>
+				<cell id="c141" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="141" xmlTagName="C141"/>
+			</line>
+			
+			<line id="IB" order="85" description="|b| Nacimientos" >
+				<cell id="c100" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="100" xmlTagName="C100"/>
+				<cell id="c114" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="114" xmlTagName="C114"/>
+				<cell id="c128" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="128" xmlTagName="C128"/>
+				<cell id="c142" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="142" xmlTagName="C142"/>
+			</line>
+
+			<line id="IC" order="86" description="|c| Reclasificación Entrada" >
+				<cell id="c101" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="101" xmlTagName="C101"/>
+				<cell id="c115" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="115" xmlTagName="C115"/>
+				<cell id="c129" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="129" xmlTagName="C129"/>
+				<cell id="c143" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="143" xmlTagName="C143"/>
+			</line>
+			
+			<line id="ID" order="87" description="|d| Compra" >
+				<cell id="c102" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="102" xmlTagName="C102"/>
+				<cell id="c116" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="116" xmlTagName="C116"/>
+				<cell id="c130" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="130" xmlTagName="C130"/>
+				<cell id="c144" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="144" xmlTagName="C144"/>
+			</line>
+			
+			<line id="IE" order="88" description="|e| Aparcería y Otros Ingresos" >
+				<cell id="c103" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="103" xmlTagName="C103"/>
+				<cell id="c117" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="117" xmlTagName="C117"/>
+				<cell id="c131" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="131" xmlTagName="C131"/>
+				<cell id="c145" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="145" xmlTagName="C145"/>
+			</line>
+			
+			<line id="IF" order="89" description="|f| Total Entrada" >
+				<cell id="c104" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="104" xmlTagName="C104"/>
+				<cell id="c118" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="118" xmlTagName="C118"/>
+				<cell id="c132" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="132" xmlTagName="C132"/>
+				<cell id="c146" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146"/>
+			</line>
+			
+			<line id="IG" order="90" description="|g| Mortandad" >
+				<cell id="c105" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="105" xmlTagName="C105"/>
+				<cell id="c119" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="119" xmlTagName="C119"/>
+				<cell id="c133" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="133" xmlTagName="C133"/>
+				<cell id="c146" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146"/>
+			</line>
+			
+			<line id="IH" order="91" description="|h| Reclasificación Salida" >
+				<cell id="c106" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="106" xmlTagName="C106"/>
+				<cell id="c120" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="120" xmlTagName="C120"/>
+				<cell id="c134" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="134" xmlTagName="C134"/>
+				<cell id="c148" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="148" xmlTagName="C148"/>
+			</line>
+			
+			<line id="II" order="92" description="|i| Consumo" >
+				<cell id="c107" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="107" xmlTagName="C107"/>
+				<cell id="c121" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="121" xmlTagName="C121"/>
+				<cell id="c135" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="135" xmlTagName="C135"/>
+				<cell id="c149" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="149" xmlTagName="C149"/>
+			</line>
+			
+			<line id="IJ" order="93" description="|j| Venta" >
+				<cell id="c108" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="108" xmlTagName="C108"/>
+				<cell id="c122" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="122" xmlTagName="C122"/>
+				<cell id="c136" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="136" xmlTagName="C136"/>
+				<cell id="c150" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="150" xmlTagName="C150"/>
+			</line>
+			
+			<line id="IK" order="94" description="|k| Extravío y Otros Egresos" >
+				<cell id="c109" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="109" xmlTagName="C109"/>
+				<cell id="c123" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="123" xmlTagName="C123"/>
+				<cell id="c137" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="137" xmlTagName="C137"/>
+				<cell id="c151" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="151" xmlTagName="C151"/>
+			</line>
+			
+			<line id="IL" order="95" description="|l| Total Salidar" >
+				<cell id="c110" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="110" xmlTagName="C110"/>
+				<cell id="c124" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="124" xmlTagName="C124"/>
+				<cell id="c138" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="138" xmlTagName="C138"/>
+				<cell id="c152" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="152" xmlTagName="C152"/>
+			</line>
+			
+			
+			<line id="IM" order="96" description="|m| Existencia Final" >
+				<cell id="c111" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="111" xmlTagName="C111"/>
+				<cell id="c125" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="125" xmlTagName="C125"/>
+				<cell id="c139" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="139" xmlTagName="C139"/>
+				<cell id="c153" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="153" xmlTagName="C153"/>
+			</line>
+			
+			<line id="IN" order="97" description="|n| Valor del Ganado" >
+				<cell id="c112" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="112" xmlTagName="C112"/>
+				<cell id="c126" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="126" xmlTagName="C126"/>
+				<cell id="c140" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="140" xmlTagName="C140"/>
+				<cell id="c154" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="154" xmlTagName="C154"/>
+			</line>
+		</section>
+		
+		<section  id="R_8" order="98">
+			<line id="TL5_2" name="TLS5_2" order="-1" description="RUBRO 6 - Inventario de la existencia del ganado">
+				<cell id="LBL_R5_2_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt;  &lt;/div&gt;&lt;BR&gt;" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R5_2_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; &lt;/div&gt;&lt;BR&gt;" alignAddtionalDescription="FILLED"/>
+			</line>
+			<line id="TL5_2_1" name="TLS5_1" order="0" description = ""  >
+				<cell id="LBL_R5_2_IB_C0" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="Categorías" colSpan="4"/>
+			</line>
+			<line id="TL5_2_2" name="TLS5_2" order="1" description="MOVIMIENTOS" colspan="6">
+				<cell id="LBL_R5_2_IB_C1" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="TERNEROS" />
+				<cell id="LBL_R5_2_IB_C2" col="1" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="DESMAMANTES" />
+				<cell id="LBL_R5_2_IB_C3" col="2" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="VAQUILLAS" />
+				<cell id="LBL_R_25_IB_C4" col="3" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="VACAS" />
+			</line>
+
+			<line id="IA" order="99" description="|a| Existencia Anterior" >
+				<cell id="c155" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="155" xmlTagName="C155"/>
+				<cell id="c169" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="169" xmlTagName="C169"/>
+				<cell id="c183" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="183" xmlTagName="C183"/>
+				<cell id="c197" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="197" xmlTagName="C197"/>
+			</line>
+			
+			<line id="IB" order="100" description="|b| Nacimientos" >
+				<cell id="c156" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156"/>
+				<cell id="c170" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="170" xmlTagName="C170"/>
+				<cell id="c132" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="132" xmlTagName="C132"/>
+				<cell id="c146" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146"/>
+			</line>
+
+			<line id="IC" order="101" description="|c| Reclasificación Entrada" >
+				<cell id="c157" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="157" xmlTagName="C157"/>
+				<cell id="c171" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="171" xmlTagName="C171"/>
+				<cell id="c185" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="185" xmlTagName="C185"/>
+				<cell id="c199" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="199" xmlTagName="C199"/>
+			</line>
+			
+			<line id="ID" order="102" description="|d| Compra" >
+				<cell id="c158" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="158" xmlTagName="C158"/>
+				<cell id="c172" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="172" xmlTagName="C172"/>
+				<cell id="c186" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="186" xmlTagName="C186"/>
+				<cell id="c200" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="200" xmlTagName="C200"/>
+			</line>
+			
+			<line id="IE" order="103" description="|e| Aparcería y Otros Ingresos" >
+				<cell id="c159" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="159" xmlTagName="C159"/>
+				<cell id="c173" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="173" xmlTagName="C173"/>
+				<cell id="c187" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="187" xmlTagName="C187"/>
+				<cell id="c201" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="201" xmlTagName="C201"/>
+			</line>
+			
+			<line id="IF" order="104" description="|f| Total Entrada" >
+				<cell id="c160" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="160" xmlTagName="C160"/>
+				<cell id="c174" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="174" xmlTagName="C174"/>
+				<cell id="c188" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="188" xmlTagName="C188"/>
+				<cell id="c202" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="202" xmlTagName="C202"/>
+			</line>
+			
+			<line id="IG" order="105" description="|g| Mortandad" >
+				<cell id="c161" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="161" xmlTagName="C161"/>
+				<cell id="c175" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="175" xmlTagName="C175"/>
+				<cell id="c189" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="189" xmlTagName="C189"/>
+				<cell id="c203" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="203" xmlTagName="C203"/>
+			</line>
+			
+			<line id="IH" order="106" description="|h| Reclasificación Salida" >
+				<cell id="c162" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="162" xmlTagName="C162"/>
+				<cell id="c176" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="176" xmlTagName="C176"/>
+				<cell id="c190" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="190" xmlTagName="C190"/>
+				<cell id="c204" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="204" xmlTagName="C204"/>
+			</line>
+			
+			<line id="II" order="107" description="|i| Consumo" >
+				<cell id="c163" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="163" xmlTagName="C163"/>
+				<cell id="c177" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="177" xmlTagName="C177"/>
+				<cell id="c191" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="191" xmlTagName="C191"/>
+				<cell id="c205" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="205" xmlTagName="C205"/>
+			</line>
+			
+			<line id="IJ" order="108" description="|j| Venta" >
+				<cell id="c164" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="164" xmlTagName="C164"/>
+				<cell id="c178" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="178" xmlTagName="C178"/>
+				<cell id="c192" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="192" xmlTagName="C192"/>
+				<cell id="c206" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="206" xmlTagName="C206"/>
+			</line>
+			
+			 <line id="IK" order="109" description="|k| Extravío y Otros Egresos" >
+				<cell id="c165" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="165" xmlTagName="C165"/>
+				<cell id="c179" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="179" xmlTagName="C179"/>
+				<cell id="c193" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="193" xmlTagName="C193"/>
+				<cell id="c207" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="207" xmlTagName="C207"/>
+			</line>
+			
+			<line id="IL" order="110" description="|l| Total Salidar" >
+				<cell id="c166" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="166" xmlTagName="C166"/>
+				<cell id="c180" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="180" xmlTagName="C180"/>
+				<cell id="c194" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="194" xmlTagName="C194"/>
+				<cell id="c208" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="208" xmlTagName="C208"/>
+			</line>
+			
+			
+			<line id="IM" order="111" description="|m| Existencia Final" >
+				<cell id="c167" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="167" xmlTagName="C167"/>
+				<cell id="c181" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="181" xmlTagName="C181"/>
+				<cell id="c195" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="195" xmlTagName="C195"/>
+				<cell id="c209" col="3" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="209" xmlTagName="C209"/>
+			</line>
+			
+			<line id="IN" order="112" description="|n| Valor del Ganado" >
+				<cell id="c168" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="168" xmlTagName="C168"/>
+				<cell id="c182" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="182" xmlTagName="C182"/>
+				<cell id="c196" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="196" xmlTagName="C196"/>
+				<cell id="c210" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="210" xmlTagName="C210"/>
+			</line>
+		</section>
+		
+		<section  id="R_9" order="113">
+			<line id="TL6" name="TLS6" order="-1" description="RUBRO 6 - Información de productos agrícolas en existencia">
+				<cell id="LBL_R6_IA_C1" col="0" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt;  &lt;/div&gt;&lt;BR&gt;" alignAddtionalDescription="FILLED"/>
+				<cell id="LBL_R6_IA_C2" col="1" type="LABEL" value="" opaque="true" readOnly="true" calculable="false" additionalDescription="&lt;div align=&quot;right&quot;&gt; &lt;/div&gt;&lt;BR&gt;" alignAddtionalDescription="FILLED"/>
+			</line>
+			
+			<line id="TL6_1" name="TLS5_2" order="114" description="CANTIDAD/VALOR" colspan="6">
+				<cell id="LBL_R6_IB_C1" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="MAIZ" />
+				<cell id="LBL_R6_IB_C2" col="1" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="SOJA" />
+				<cell id="LBL_R6_IB_C3" col="2" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="TRIGO" />
+				<cell id="LBL_R6_IB_C4" col="3" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="OTROS" />
+			</line>
+			
+			<line id="TL6_2" name="TLS6_1" order="115" description = ""  >
+				<cell id="LBL_R5_IB_C0" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="EN DEPÓSITO PROPIO" colSpan="4"/>
+			</line>
+			
+			<line id="IA" order="116" description="|a| Kilogramos" >
+				<cell id="c211" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="211" xmlTagName="C211"/>
+				<cell id="c215" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="215" xmlTagName="C215"/>
+				<cell id="c219" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="219" xmlTagName="C219"/>
+				<cell id="c223" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="223" xmlTagName="C223"/>
+			</line>
+			
+			<line id="IB" order="117" description="|b| Valor total" >
+				<cell id="c212" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="212" xmlTagName="C212"/>
+				<cell id="c216" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="216" xmlTagName="C216"/>
+				<cell id="c220" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="220" xmlTagName="C220"/>
+				<cell id="c224" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="224" xmlTagName="C224"/>
+			</line>
+			
+			<line id="TL6_3" name="TLS6_1" order="118" description = ""  >
+				<cell id="LBL_R5_IB_C0" col="0" type="LABEL" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="EN DEPÓSITO DE TERCEROS" colSpan="4"/>
+			</line>
+			
+			<line id="IC" order="119" description="|c| Kilogramos" >
+				<cell id="c213" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="213" xmlTagName="C213"/>
+				<cell id="c217" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="217" xmlTagName="C217"/>
+				<cell id="c221" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="221" xmlTagName="C221"/>
+				<cell id="c225" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="225" xmlTagName="C225"/>
+			</line>
+			
+			<line id="ID" order="120" description="|d| Valor total" >
+				<cell id="c214" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="214" xmlTagName="C214"/>
+				<cell id="c218" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="218" xmlTagName="C218"/>
+				<cell id="c222" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="222" xmlTagName="C222"/>
+				<cell id="c226" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="226" xmlTagName="C226"/>
+			</line>
+		</section>
+		
+		<section  id="R_10" order="121">
+			<line id="TL8" name="TLS8" order="-1" description="RUBRO 7 - Información Complementaria">
+			</line>
+		
+			<line id="L8010" order="122" description="|a| RUC del Auditor o de la Empresa Auditora" >
+				<cell id="c227" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="227" xmlTagName="C227"/>
+			</line>
+
+			<line id="L8020" order="123" description="|b| RUC del Contador" >
+				<cell id="c228" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="228" xmlTagName="C228"/>
+			</line>
+
+			<line id="L8030" order="124" description="|c| Total personal ocupado en relación de dependencia al cierre del ejercicio" >
+				<cell id="c229" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="229" xmlTagName="C229"/>
+			</line>
+		</section>
+
+		<section  id="STATUS" name="STATUS" description="Estado" order="125">
+			<line id="STATUSLINE" name="STATUS" order="1" description="Estado del presente documento:">
+				<cell id="status" col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="false"  additionalDescription="" alignAddtionalDescription="LEFT" choices="PROCESO;CONFIRMADO"/>
+			</line>
+		</section>		
+		
+
+	</sections>
+	
+	<rules>
+		<!-- RUBRO 1  -->
+		<rule name="TRGc19"  order="10"  cellTargetId="c19" formula="c16 +c17"/>
+		<rule name="TRGc20"  order="20"  cellTargetId="c20" formula="c20"/>
+		<rule name="TRGc20_1"  order="25" cellTargetId="c20" formula="0" condition="c49 &lt; c20"/>
+		
+		<rule name="TRGc21"  order="30"  cellTargetId="c21" formula="c21"/>
+		<rule name="TRGc21_1"  order="35" cellTargetId="c21" formula="0" condition="c15 &lt; c21"/>
+		
+		<rule name="TRGc46"  order="60"  cellTargetId="c46" formula="c10 + c11 + c12 + c13 + c14 + c15 + c16 + c17"/>
+		<rule name="TRGc47"  order="70"  cellTargetId="c47" formula="c46 - c18"/>
+		<rule name="TRGc47_0"  order="75" cellTargetId="c47" formula="0" condition="c47 &lt; 0"/>
+		
+		<rule name="TRGc48"  order="80"  cellTargetId="c48" formula="c47 - c19"/>
+		<rule name="TRGc48_0"  order="85" cellTargetId="c48" formula="0" condition="c48 &lt; 0"/>
+		
+		<rule name="TRGc50"  order="90"  cellTargetId="c50" formula="c49 - c20 + c21"/>
+		<rule name="TRGc50_0"  order="95" cellTargetId="c50" formula="0" condition="c50 &lt; 0"/>
+		
+		<rule name="TRGc51"  order="100"  cellTargetId="c51" formula="c22+c23+c24+c25+c26+c27+c28+c29+c30+c31+c32+c33+c34+c35+c36+c37+c38+c39+c40+c41+c42"/>
+		<rule name="TRGc52"  order="110"  cellTargetId="c52" formula="c51-c43-c44+c45"/>
+		<rule name="TRGc52_0"  order="115" cellTargetId="c52" formula="0" condition="c52 &lt; 0"/>
+			
+		<!-- RUBRO 2 --> 
+		<rule name="TRGc53"  order="120"  cellTargetId="c53" formula="c49 +c51-c47"/>
+		<rule name="TRGc53_0"  order="125" cellTargetId="c53" formula="0" condition="c53 &lt; 0"/>
+		
+		<rule name="TRGc54"  order="130"  cellTargetId="c54" formula="c50 +c52-c48"/>
+		<rule name="TRGc54_0"  order="135" cellTargetId="c54" formula="0" condition="c54 &lt; 0"/>
+		
+		<!-- RUBRO 3 --> 
+		<rule name="TRGc57"  order="140"  cellTargetId="c57" formula="c54"/>
+		<rule name="TRGc59"  order="150"  cellTargetId="c59" formula="c57-c58"/>
+		<rule name="TRGc59_0"  order="155" cellTargetId="c59" formula="0" condition="c59 &lt; 0"/>
+		<rule name="TRGc61"  order="160"  cellTargetId="c61" formula="c59+c60"/>
+		<rule name="TRGc63"  order="170"  cellTargetId="c63" formula="c61-c62"/>
+		
+		<rule name="TRGc65"  order="180"  cellTargetId="c65" formula="c63-c64"/>
+		<rule name="TRGc65_0"  order="185" cellTargetId="c65" formula="0" condition="c65 &lt; 0"/>
+		
+		<rule name="TRGc66"  order="190"  cellTargetId="c66" formula="c56"/>
+		
+		<!-- RUBRO 4 -->
+		
+		<rule name="TRGc70"  order="200"  cellTargetId="c70" formula="c68+c69"/>
+		<rule name="TRGc71"  order="210"  cellTargetId="c71" formula="c70+c74"/>
+		<rule name="TRGc71_0"  order="215" cellTargetId="c71" formula="0" condition="c71 &lt; 0"/>
+		
+		<rule name="TRGc72"  order="220"  cellTargetId="c72" formula="c67*0.1" />
+		<rule name="TRGc74"  order="230"  cellTargetId="c74" formula="c72+c73" />
+		<rule name="TRGc75"  order="240"  cellTargetId="c75" formula="c74-c70" />
+		<rule name="TRGc75_0"  order="245" cellTargetId="c75" formula="0" condition="c75 &lt; 0"/>
+		
+		<!-- RUBRO 5 -->
+		<rule name="TRGc86"  order="250"  cellTargetId="c86" formula="c76+c77+c78+c79+c80+c81+c82+c83+c84+c85" />
+		<rule name="TRGc89"  order="260"  cellTargetId="c89" formula="c87+c88" />
+		<rule name="TRGc97"  order="270"  cellTargetId="c97" formula="c90+c91+c92+c93+c94+c95+c96" />
+		<rule name="TRGc98"  order="280"  cellTargetId="c98" formula="c89+c97" />
+		
+<!-- 		RUBRO 6 --> 
+		<rule name="TRGc104"  order="290"  cellTargetId="c104" formula="c99+c100+c101+c102+c103" />
+		<rule name="TRGc104"  order="290"  cellTargetId="c104" formula="c99+c100+c101+c102+c103" />
+		<rule name="TRGc110"  order="300"  cellTargetId="c110" formula="c105+c106+c107+c108+c109" />
+		<rule name="TRGc118"  order="310"  cellTargetId="c118" formula="c113+c114+c115+c116+c117" />
+		<rule name="TRGc124"  order="320"  cellTargetId="c124" formula="c119+c120+c121+c122+c123" />
+		<rule name="TRGc132"  order="330"  cellTargetId="c132" formula="c127+c128+c129+c130+c131" />
+		<rule name="TRGc138"  order="340"  cellTargetId="c138" formula="c133+c134+c135+c136+c137" />
+		<rule name="TRGc146"  order="350"  cellTargetId="c146" formula="c141+c142+c143+c144+c145" />
+		<rule name="TRGc152"  order="360"  cellTargetId="c152" formula="c147+c148+c149+c150+c151" />
+<!-- 		RUBRO 7 -->
+		<rule name="TRGc160"  order="370"  cellTargetId="c160" formula="c155+c156+c157+c158+c159" />
+		<rule name="TRGc166"  order="380"  cellTargetId="c166" formula="c161+c162+c163+c164+c165" />
+		<rule name="TRGc174"  order="390"  cellTargetId="c174" formula="c169+c170+c171+c172+c173" />
+		<rule name="TRGc180"  order="400"  cellTargetId="c180" formula="c175+c176+c177+c178+c179" />
+		<rule name="TRGc188"  order="410"  cellTargetId="c188" formula="c183+c184+c185+c186+c187" />
+		<rule name="TRGc194"  order="420"  cellTargetId="c194" formula="c189+c190+c191+c192+c193" />
+		<rule name="TRGc202"  order="430"  cellTargetId="c202" formula="c197+c198+c199+c200+c201" />
+		<rule name="TRGc208"  order="440"  cellTargetId="c208" formula="c203+c204+c205+c206+c207" />
+		<rule name="TRGc132"  order="330"  cellTargetId="c132" formula="c127+c128+c129+c130+c131" />
+		
+		
+<!-- 		<rule name="TRGc90"  order="266" cellTargetId="c90" formula="c76"/> -->
+<!-- 		<rule name="TRGc90_1"  order="267"  cellTargetId="c90" formula="0" condition="c76 &lt; 1658232"/> -->
+		
+		
+<!-- 		<rule name="TRGc93_1"  order="275" cellTargetId="c93" formula="c83" condition="c83 &lt;= c92"/> -->
+<!-- 		<rule name="TRGc93_2"  order="276" cellTargetId="c93" formula="c92" condition="c92 &lt; c83"/>		 -->
+		
+		
+		
+	</rules>	
+	
+</form>
