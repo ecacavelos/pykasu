@@ -72,7 +72,7 @@
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>                                                
 			<line id="IA_F" name="INC_A_F" order="7" description="Otros ingresos gravados por el IRAGRO">
-				<cell id="c15" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="15" alignAddtionalDescription="LEFT" xmlTagName="C15" events="onblur:refresh49"/>
+				<cell id="c15" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="15" alignAddtionalDescription="LEFT" xmlTagName="C15" events="onblur:checkIfContent('c15','c21'),mustBeMinor( 'c21', 'c15')"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>                                                
 			<line id="IA_G" name="INC_A_G" order="8" description="Otros ingresos no gravados por el IRAGRO">
@@ -109,15 +109,15 @@
 			
 			<line id="IB_A" name="INC_B_A" order="16" description="C - TOTAL DE COSTOS">
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c49" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" />
+				<cell id="c49" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="49" alignAddtionalDescription="LEFT" xmlTagName="C49" events="onblur:checkIfContentM('c20','c49'),mustBeMinor( 'c20', 'c49')"/>
 			</line> 
 			<line id="IB_B" name="INC_B_B" order="17" description="Menos: Costos no deducibles del IRAGRO">
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c20" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="20" alignAddtionalDescription="LEFT" xmlTagName="C20" />
+				<cell id="c20" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="20" alignAddtionalDescription="LEFT" xmlTagName="C20" events="onblur:mustBeMinor( 'c20', 'c49'),checkIfContentM('c20','c49')"/>
 			</line> 
 			<line id="IB_C" name="INC_B_C" order="18" description="Más: Diferencia del costo por enajenación de inmueble (costo presunto - costo contable)">
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c21" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="21" alignAddtionalDescription="LEFT" xmlTagName="C21" />
+				<cell id="c21" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="21" alignAddtionalDescription="LEFT" xmlTagName="C21" events="onblur:mustBeMinor( 'c21', 'c15')"/>
 			</line> 
 			<line id="IB_D" name="INC_B_D" order="19" description="D - TOTAL DE COSTOS DEDUCIBLES">
 				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
@@ -218,11 +218,11 @@
 				<cell id="c51" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="51" alignAddtionalDescription="LEFT" xmlTagName="C51" />
 			</line> 
 			<line id="I_C_W" name="INC_C_W" order="43" description="Menos: Impuesto a la Renta (IRAGRO)">
-				<cell id="c43" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="43" alignAddtionalDescription="LEFT" xmlTagName="C43" />
+				<cell id="c43" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="43" alignAddtionalDescription="LEFT" xmlTagName="C43" events="onblur:checkIfSumGreatOrEq('c43','c44','c51')"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line> 
 			<line id="I_C_X" name="INC_C_X" order="44" description="Menos: Gastos no deducibles del IRAGRO">
-				<cell id="c44" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="44" alignAddtionalDescription="LEFT" xmlTagName="C44" />
+				<cell id="c44" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="44" alignAddtionalDescription="LEFT" xmlTagName="C44" events="onblur:checkIfSumGreatOrEq('c44','c43','c51')"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line> 
 			<line id="I_C_Y" name="INC_C_Y" order="45" description="Más: Depreciación del ganado vacuno hembra">
@@ -265,16 +265,16 @@
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 			<line id="IC" order="53" description="|c| Menos: Pérdida por mortandad, Hacienda para Consumo del Establecimiento, Depreciaciones del Ganado Vacuno Hembra, Donaciones y Apoyo a Fincas Colindantes." >
-				<cell id="c58" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="58" xmlTagName="C58"/>
+				<cell id="c58" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="58" xmlTagName="C58" events="onblur:checkIfContentNotZero('c57','c58')"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 			<line id="ID" order="54" description="|d| PÉRDIDA FISCAL DEL EJERCICIO ARRASTRABLE (Inc. b - Inc. c). En caso que el inciso c, sea mayor consignar 0 (cero)." >
 				<cell id="c59" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="59" xmlTagName="C59"/>
-				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />dditionalDescription="39" xmlTagName="C39"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 			<line id="IE" order="55" description="|e| PÉRDIDA DE EJERCICIOS ANTERIORES (El contribuyente deberá tener en cuenta que la pérdida declarada en el presente Inciso, esté dentro del plazo legal previsto en la Ley)" >
 				<cell id="c60" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="60" xmlTagName="C60"/>
-				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />ditionalDescription="44" xmlTagName="C44"/>
+				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 			<line id="IF" order="56" description="|f| PÉRDIDA TOTAL ACUMULADA (Inc. d + Inc. e)" >
 				<cell id="c61" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="61" xmlTagName="C61"/>
@@ -312,7 +312,7 @@
 				<cell id="c72" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="72" xmlTagName="C72"/>
 			</line>
 			<line id="IB" order="64" description="|b| Saldo a favor del contribuyente del periodo anterior" >
-				<cell id="c68" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="68" xmlTagName="C68"/>
+				<cell id="c68" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="68" xmlTagName="C68"/>
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
 			</line>
 			<line id="IC" order="65" description="|c| Retenciones computables por operaciones gravadas" >
@@ -321,7 +321,8 @@
 			</line>
 			<line id="ID" order="66" description="|d| Multa por presentar la Declaración Jurada con posterioridad al vencimiento" >
 				<cell id="c73" col="2" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="73" xmlTagName="C73"/>
-				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />dditionalDescription="39" xmlTagName="C39"/>
+				<cell id="c999" col="1" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
+
 			</line>
 			<line id="IE" order="67" description="|e| SUBTOTAL:(Col. I: Inc. b + c); (Col. II: Inc. a + d)" >
 				<cell id="c70" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="70" xmlTagName="C70"/>
@@ -474,7 +475,7 @@
 				<cell id="c105" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="105" xmlTagName="C105"/>
 				<cell id="c119" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="119" xmlTagName="C119"/>
 				<cell id="c133" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="133" xmlTagName="C133"/>
-				<cell id="c146" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146"/>
+				<cell id="c147" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="147" xmlTagName="C147"/>
 			</line>
 			
 			<line id="IH" order="91" description="|h| Reclasificación Salida" >
@@ -553,8 +554,8 @@
 			<line id="IB" order="100" description="|b| Nacimientos" >
 				<cell id="c156" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="156" xmlTagName="C156"/>
 				<cell id="c170" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="170" xmlTagName="C170"/>
-				<cell id="c132" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="132" xmlTagName="C132"/>
-				<cell id="c146" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="146" xmlTagName="C146"/>
+				<cell id="c184" col="2" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="184" xmlTagName="C184"/>
+				<cell id="c198" col="3" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="198" xmlTagName="C198"/>
 			</line>
 
 			<line id="IC" order="101" description="|c| Reclasificación Entrada" >
@@ -722,11 +723,7 @@
 	<rules>
 		<!-- RUBRO 1  -->
 		<rule name="TRGc19"  order="10"  cellTargetId="c19" formula="c16 +c17"/>
-		<rule name="TRGc20"  order="20"  cellTargetId="c20" formula="c20"/>
-		<rule name="TRGc20_1"  order="25" cellTargetId="c20" formula="0" condition="c49 &lt; c20"/>
-		
-		<rule name="TRGc21"  order="30"  cellTargetId="c21" formula="c21"/>
-		<rule name="TRGc21_1"  order="35" cellTargetId="c21" formula="0" condition="c15 &lt; c21"/>
+
 		
 		<rule name="TRGc46"  order="60"  cellTargetId="c46" formula="c10 + c11 + c12 + c13 + c14 + c15 + c16 + c17"/>
 		<rule name="TRGc47"  order="70"  cellTargetId="c47" formula="c46 - c18"/>
@@ -749,22 +746,38 @@
 		<rule name="TRGc54"  order="130"  cellTargetId="c54" formula="c50 +c52-c48"/>
 		<rule name="TRGc54_0"  order="135" cellTargetId="c54" formula="0" condition="c54 &lt; 0"/>
 		
+		<rule name="TRGc55"  order="136"  cellTargetId="c55" formula="c47 - c49-c51"/>
+		<rule name="TRGc55_0"  order="137" cellTargetId="c55" formula="0" condition="c55 &lt; 0"/>
+		
+		<rule name="TRGc56"  order="138"  cellTargetId="c56" formula="c48 -c50-c52"/>
+		<rule name="TRGc56_0"  order="139" cellTargetId="c56" formula="0" condition="c56 &lt; 0"/>
+		
 		<!-- RUBRO 3 --> 
 		<rule name="TRGc57"  order="140"  cellTargetId="c57" formula="c54"/>
+		
+		<rule name="TRGc58"  order="142"  cellTargetId="c58" formula="c58"/>
+		<rule name="TRGc58_0"  order="145" cellTargetId="c58" formula="0" condition="c57 &lt; 1"/>
+		
 		<rule name="TRGc59"  order="150"  cellTargetId="c59" formula="c57-c58"/>
 		<rule name="TRGc59_0"  order="155" cellTargetId="c59" formula="0" condition="c59 &lt; 0"/>
 		<rule name="TRGc61"  order="160"  cellTargetId="c61" formula="c59+c60"/>
 		<rule name="TRGc63"  order="170"  cellTargetId="c63" formula="c61-c62"/>
+		
+		<rule name="TRGc64"  order="175"  cellTargetId="c64" formula="c63"/>
+		<rule name="TRGc64_0"  order="176" cellTargetId="c64" formula="c66*0.2" condition="c64 &gt; c66*0.2"/>
 		
 		<rule name="TRGc65"  order="180"  cellTargetId="c65" formula="c63-c64"/>
 		<rule name="TRGc65_0"  order="185" cellTargetId="c65" formula="0" condition="c65 &lt; 0"/>
 		
 		<rule name="TRGc66"  order="190"  cellTargetId="c66" formula="c56"/>
 		
+		<rule name="TRGc67"  order="195"  cellTargetId="c67" formula="c66-c64"/>
+		<rule name="TRGc67_0"  order="196" cellTargetId="c67" formula="0" condition="c67 &lt; 0"/>
+		
 		<!-- RUBRO 4 -->
 		
 		<rule name="TRGc70"  order="200"  cellTargetId="c70" formula="c68+c69"/>
-		<rule name="TRGc71"  order="210"  cellTargetId="c71" formula="c70+c74"/>
+		<rule name="TRGc71"  order="210"  cellTargetId="c71" formula="c70-c74"/>
 		<rule name="TRGc71_0"  order="215" cellTargetId="c71" formula="0" condition="c71 &lt; 0"/>
 		
 		<rule name="TRGc72"  order="220"  cellTargetId="c72" formula="c67*0.1" />
@@ -775,29 +788,60 @@
 		<!-- RUBRO 5 -->
 		<rule name="TRGc86"  order="250"  cellTargetId="c86" formula="c76+c77+c78+c79+c80+c81+c82+c83+c84+c85" />
 		<rule name="TRGc89"  order="260"  cellTargetId="c89" formula="c87+c88" />
-		<rule name="TRGc97"  order="270"  cellTargetId="c97" formula="c90+c91+c92+c93+c94+c95+c96" />
+		<rule name="TRGc97"  order="270"  cellTargetId="c97" formula="c90+c91+c92+c93-c94+c95-c96" />
+		<rule name="TRGc97_0"  order="275" cellTargetId="c97" formula="0" condition="c97 &lt; 0"/>
 		<rule name="TRGc98"  order="280"  cellTargetId="c98" formula="c89+c97" />
 		
 <!-- 		RUBRO 6 --> 
 		<rule name="TRGc104"  order="290"  cellTargetId="c104" formula="c99+c100+c101+c102+c103" />
-		<rule name="TRGc104"  order="290"  cellTargetId="c104" formula="c99+c100+c101+c102+c103" />
 		<rule name="TRGc110"  order="300"  cellTargetId="c110" formula="c105+c106+c107+c108+c109" />
+		
+		<rule name="TRGc111"  order="305"  cellTargetId="c111" formula="c104-c110"/>
+		<rule name="TRGc111_0"  order="306" cellTargetId="c111" formula="0" condition="c111 &lt; 0"/>
+		
 		<rule name="TRGc118"  order="310"  cellTargetId="c118" formula="c113+c114+c115+c116+c117" />
 		<rule name="TRGc124"  order="320"  cellTargetId="c124" formula="c119+c120+c121+c122+c123" />
+		
+		<rule name="TRGc125"  order="325"  cellTargetId="c125" formula="c118-c124"/>
+		<rule name="TRGc125_0"  order="326" cellTargetId="c125" formula="0" condition="c125 &lt; 0"/>
+		
 		<rule name="TRGc132"  order="330"  cellTargetId="c132" formula="c127+c128+c129+c130+c131" />
 		<rule name="TRGc138"  order="340"  cellTargetId="c138" formula="c133+c134+c135+c136+c137" />
+		
+		<rule name="TRGc139"  order="344"  cellTargetId="c139" formula="c132-c138"/>
+		<rule name="TRGc139_0"  order="345" cellTargetId="c139" formula="0" condition="c139 &lt; 0"/>		
+		
 		<rule name="TRGc146"  order="350"  cellTargetId="c146" formula="c141+c142+c143+c144+c145" />
-		<rule name="TRGc152"  order="360"  cellTargetId="c152" formula="c147+c148+c149+c150+c151" />
+		<rule name="TRGc152"  order="360"  cellTargetId="c152" formula="c147 + c148 + c149 + c150 + c151" />
+		
+		<rule name="TRGc153"  order="364"  cellTargetId="c153" formula="c146-c152"/>
+		<rule name="TRGc153_0"  order="365" cellTargetId="c153" formula="0" condition="c53 &lt; 0"/>
 <!-- 		RUBRO 7 -->
 		<rule name="TRGc160"  order="370"  cellTargetId="c160" formula="c155+c156+c157+c158+c159" />
 		<rule name="TRGc166"  order="380"  cellTargetId="c166" formula="c161+c162+c163+c164+c165" />
+		
+		<rule name="TRGc167"  order="384"  cellTargetId="c167" formula="c160-c166"/>
+		<rule name="TRGc167_0"  order="385" cellTargetId="c167" formula="0" condition="c167 &lt; 0"/>
+		
 		<rule name="TRGc174"  order="390"  cellTargetId="c174" formula="c169+c170+c171+c172+c173" />
 		<rule name="TRGc180"  order="400"  cellTargetId="c180" formula="c175+c176+c177+c178+c179" />
+		
+		<rule name="TRGc181"  order="404"  cellTargetId="c181" formula="c174 - c180"/>
+		<rule name="TRGc181_0"  order="405" cellTargetId="c181" formula="0" condition="c181 &lt; 0"/>
+		
 		<rule name="TRGc188"  order="410"  cellTargetId="c188" formula="c183+c184+c185+c186+c187" />
 		<rule name="TRGc194"  order="420"  cellTargetId="c194" formula="c189+c190+c191+c192+c193" />
+		
+		<rule name="TRGc195"  order="424"  cellTargetId="c195" formula="c188 - c194"/>
+		<rule name="TRGc195_0"  order="425" cellTargetId="c195" formula="0" condition="c195 &lt; 0"/>
+		
 		<rule name="TRGc202"  order="430"  cellTargetId="c202" formula="c197+c198+c199+c200+c201" />
 		<rule name="TRGc208"  order="440"  cellTargetId="c208" formula="c203+c204+c205+c206+c207" />
-		<rule name="TRGc132"  order="330"  cellTargetId="c132" formula="c127+c128+c129+c130+c131" />
+		
+		<rule name="TRGc209"  order="450"  cellTargetId="c209" formula="c202-c208"/>
+		<rule name="TRGc209_0"  order="455" cellTargetId="c209" formula="0" condition="c209 &lt; 0"/>
+		
+		<rule name="TRGc132"  order="460"  cellTargetId="c132" formula="c127+c128+c129+c130+c131" />
 		
 		
 <!-- 		<rule name="TRGc90"  order="266" cellTargetId="c90" formula="c76"/> -->
