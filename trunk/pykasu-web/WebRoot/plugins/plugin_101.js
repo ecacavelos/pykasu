@@ -285,7 +285,7 @@ function controlaAnho(){
 		if(
 			(
 				(document.getElementById('declarationType').value == '| 5 | CLAUSURA') 
-				&&(anho == anhoform)
+				&&((anhoform - anho <2) && (anhoform - anho >=0))
 			) 
 		   || (anhoform < anho)  
 		){
@@ -328,7 +328,7 @@ function beforeSave(){
 	if(!(
 		(
 			(document.getElementById('declarationType').value == '| 5 | CLAUSURA') 
-			&&(anho == anhoform)
+			&&((anhoform - anho <2) && (anhoform - anho >=0))
 		) 
 	   || (anhoform < anho)  )
 	){

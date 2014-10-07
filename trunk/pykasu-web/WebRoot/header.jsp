@@ -7,7 +7,7 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td align="right" style="font-size: 10px; color: gray;">Versión: 1.5.10.v8</td></td><!-- 1.5.11-beta2 -->
+				<td align="right" style="font-size: 10px; color: gray;">Versión: 1.5.10.v11</td></td><!-- 1.5.11-beta2 -->
 
 			</tr>
 

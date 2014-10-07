@@ -39,9 +39,6 @@ function calcularC34(){//c15 c23
 	
 }
 
-function calculate(){
-	alert("Boo");
-}
 
 function calculateBeforePlugin(){
 
@@ -151,6 +148,7 @@ function beforeSave(){
 				}
 			}		
 	}
+	
 	if (isEmpty){//Sin movimientos
 		alert ('Sr. usuario, les informamos que por disposici\u00f3n de la resoluci\u00f3n general nro. 107 del Ministerio de Hacienda, no se pueden presentar declaraciones juradas SIN MOVIMIENTO por este medio.');
 		return false; 
