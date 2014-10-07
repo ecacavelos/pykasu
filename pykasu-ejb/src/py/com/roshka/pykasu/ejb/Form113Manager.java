@@ -78,13 +78,13 @@ public class Form113Manager extends GenericFormManagerEJB implements
     			throw new AddFormException(e1.getClass() + " --> " + e1.getMessage());
         	}
     		
-    		Form113 Form113 = new Form113(user);
+    		Form113 form113 = new Form113(user);
     		
-        	Form113.fillForm(form);    		
-	    	em.persist(Form113);
-	    	Form113.setPrePrintedNumber(Form113.getId().toString());
+        	form113.fillForm(form);    		
+	    	em.persist(form113);
+	    	form113.setPrePrintedNumber(form113.getId().toString());
 	    	
-	    	return Form113.getId().toString();
+	    	return form113.getId().toString();
 	    	
     	} catch (FillFormException e) {
     		logger.error(e);

@@ -40,7 +40,13 @@
 		<section id="R0" order="-2">
 			<line id="TL0" name="TLS0" order="-1" description="Para empresas unipersonales que liquiden el impuesto por el régimen del pequeño o mediano contribuyente rural">
 				<cell id="c6"  col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="false"  additionalDescription="Codigo Actividad Economica Principal: | 6 |" alignAddtionalDescription="LEFT" />
-			</line>			
+			</line>	
+			<line id="TL1" name="TLS0_1" order="1">
+				<!-- <cell id="declarationType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 1 | ORIGINAL;| 2 | RECTIFICATIVA;| 5 | CLAUSURA" events="onChange: calculate;"/> -->
+				<cell id="contribuyenteType"  col="0" type="MULTIPLE" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="Elegir:" alignAddtionalDescription="LEFT" choices="| 7 | PEQUEÑO CONTRIBUYENTE RURAL (PCR);| 8 | MEDIANO CONTRIBUYENTE RURAL (MCR)" events="onChange: calcular;"/>
+				<!-- <cell id="rectificativePPN" col="1" type="STRING"   value="" opaque="false" readOnly="false" calculable="false" additionalDescription="| 3 | Número de orden de la &lt;BR&gt; declaración que se rectifica:" alignAddtionalDescription="LEFT" xmlTagName="C3" /> -->
+				<!--<cell id="clausureType"     col="2" type="CHECK"    value="" opaque="false" readOnly="false" calculable="false" additionalDescription="Declaración jurada en carácter &lt;BR&gt; de clausura o cese" alignAddtionalDescription="LEFT"/>-->
+			</line>				
 		</section>
 		<section id="R_1" name="RUBRO1" description="Rubro 1. Determinación de los ingresos" order="-1">
 			<line id="TL1" name="TLS1" order="0" description="RUBRO 1 - Determinación de los ingresos">
@@ -48,28 +54,28 @@
 			</line>
 				
  			<line id="IA" name="INC_A" order="1" description="| a | Ingresos por venta de ganado en general"> 
- 				<cell id="c10" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="10" alignAddtionalDescription="LEFT" xmlTagName="C10" /> 
+ 				<cell id="c10" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="10" alignAddtionalDescription="LEFT" xmlTagName="C10" events = "onBlur:medContribuyente"/> 
  			</line> 
  			<line id="IB" name="INC_B" order="2" description="| b | Ingresos por venta de productos derivados de la ganadería"> 
- 				<cell id="c11" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="11" alignAddtionalDescription="LEFT" xmlTagName="C11" /> 
+ 				<cell id="c11" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="11" alignAddtionalDescription="LEFT" xmlTagName="C11" events = "onBlur:medContribuyente"/> 
  			</line>                        
 			<line id="IC" name="INC_C" order="3" description="| c | Ingresos por venta de productos agrícolas, fructícolas, hortícolas e ictícolas">
-				<cell id="c12" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="12" alignAddtionalDescription="LEFT" xmlTagName="C12" />
+				<cell id="c12" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="12" alignAddtionalDescription="LEFT" xmlTagName="C12" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="ID" name="INC_D" order="4" description="| d | Ingresos por venta de leche">
-				<cell id="c13" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="13" alignAddtionalDescription="LEFT" xmlTagName="C13" />
+				<cell id="c13" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="13" alignAddtionalDescription="LEFT" xmlTagName="C13" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IE" name="INC_E" order="5" description="| e | Ingresos por arrendamiento de bienes inmuebles, afectados a la actividad agropecuaria">
-				<cell id="c14" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="14" alignAddtionalDescription="LEFT" xmlTagName="C14" />
+				<cell id="c14" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="14" alignAddtionalDescription="LEFT" xmlTagName="C14" events = "onBlur:medContribuyente"/>
 			</line>                                                
 			<line id="IF" name="INC_F" order="6" description="| f | Ingresos por enajenación, arrendamiento y/o cesión de uso de bienes muebles del activo, afectados a la actividad agropecuaria">
-				<cell id="c15" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="15" alignAddtionalDescription="LEFT" xmlTagName="C15" events="onblur:refresh49"/>
+				<cell id="c15" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="15" alignAddtionalDescription="LEFT" xmlTagName="C15" events = "onBlur:medContribuyente"/>
 			</line>                                                
 			<line id="IG" name="INC_G" order="7" description="| g | Ingresos por suinicultura, cunicultura, floricultura, sericultura, avicultura, apicultura y explotación forestal.(Si no supera el 30% de los ingresos totales del establecimiento rural)">
-				<cell id="c16" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="16" alignAddtionalDescription="LEFT" xmlTagName="C16" />
+				<cell id="c16" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="16" alignAddtionalDescription="LEFT" xmlTagName="C16" events = "onBlur:medContribuyente"/>
 			</line>     
 			<line id="IH" name="INC_G" order="8" description="| h | Otros ingresos gravados por el IRAGRO">
-				<cell id="c17" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="17" alignAddtionalDescription="LEFT" xmlTagName="C17" />
+				<cell id="c17" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="17" alignAddtionalDescription="LEFT" xmlTagName="C17" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="II" name="INC_G" order="9" description="| i | TOTAL DE INGRESOS.Suma de las casillas 10 al 17">
 				<cell id="c18" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="18" alignAddtionalDescription="LEFT" xmlTagName="C18" />
@@ -81,49 +87,49 @@
 			</line>
 			
 			<line id="IA" name="INC_A" order="12" description="| a | Adquisición de bienes muebles, afectados a la actividad agropecuaria">
-				<cell id="c19" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="19" alignAddtionalDescription="LEFT" xmlTagName="C19" />
+				<cell id="c19" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="19" alignAddtionalDescription="LEFT" xmlTagName="C19" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IB" name="INC_B" order="13" description="| b | Adquisición de activos biológicos">
-				<cell id="c20" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="20" alignAddtionalDescription="LEFT" xmlTagName="C20" />
+				<cell id="c20" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="20" alignAddtionalDescription="LEFT" xmlTagName="C20" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IC" name="INC_C" order="14" description="| c | Compra de insumos y de servicios relacionados a la actividad agrícola">
-				<cell id="c21" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="21" alignAddtionalDescription="LEFT" xmlTagName="C21" />
+				<cell id="c21" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="21" alignAddtionalDescription="LEFT" xmlTagName="C21" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="ID" name="INC_D" order="15" description="| d | Compra de insumos y de servicios relacionados a la actividad pecuaria">
-				<cell id="c22" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="22" alignAddtionalDescription="LEFT" xmlTagName="C22" />
+				<cell id="c22" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="22" alignAddtionalDescription="LEFT" xmlTagName="C22" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IE" name="INC_E" order="16" description="| e | Pago de servicios públicos y privados">
-				<cell id="c23" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="23" alignAddtionalDescription="LEFT" xmlTagName="C23" />
+				<cell id="c23" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="23" alignAddtionalDescription="LEFT" xmlTagName="C23" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IF" name="INC_F" order="17" description="| f | Apoyo de personas físicas en calidad de propietarios de fincas colindantes o cercanas">
-				<cell id="c24" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="24" alignAddtionalDescription="LEFT" xmlTagName="C24" />
+				<cell id="c24" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="24" alignAddtionalDescription="LEFT" xmlTagName="C24" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IG" name="INC_G" order="18" description="| g | Arrendamiento o locación del establecimiento">
-				<cell id="c25" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="25" alignAddtionalDescription="LEFT" xmlTagName="C25" />
+				<cell id="c25" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="25" alignAddtionalDescription="LEFT" xmlTagName="C25" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IH" name="INC_H" order="19" description="| h | Fletes y Gastos de Comercialización">
-				<cell id="c26" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="26" alignAddtionalDescription="LEFT" xmlTagName="C26" />
+				<cell id="c26" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="26" alignAddtionalDescription="LEFT" xmlTagName="C26" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="II" name="INC_I" order="20" description="| i | Fondos destinados a la capitalización de las sociedades cooperativas">
-				<cell id="c27" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="27" alignAddtionalDescription="LEFT" xmlTagName="C27" />
+				<cell id="c27" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="27" alignAddtionalDescription="LEFT" xmlTagName="C27" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IJ" name="INC_J" order="21" description="| j | Combustible y lubricantes">
-				<cell id="c28" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="28" alignAddtionalDescription="LEFT" xmlTagName="C28" />
+				<cell id="c28" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="28" alignAddtionalDescription="LEFT" xmlTagName="C28" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IK" name="INC_K" order="22" description="| k | Construcciones rurales y mantenimiento de caminos, de bosques, de cultivos y de pasturas">
-				<cell id="c29" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="29" alignAddtionalDescription="LEFT" xmlTagName="C29" />
+				<cell id="c29" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="29" alignAddtionalDescription="LEFT" xmlTagName="C29" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IL" name="INC_L" order="23" description="| l | Honorarios profesionales por servicios veterinarios, agronómicos y otros">
-				<cell id="c30" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="30" alignAddtionalDescription="LEFT" xmlTagName="C30" />
+				<cell id="c30" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="30" alignAddtionalDescription="LEFT" xmlTagName="C30" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IM" name="INC_M" order="24" description="| m | Sueldos, jornales, tributos y cargas sociales">
-				<cell id="c31" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="31" alignAddtionalDescription="LEFT" xmlTagName="C31" />
+				<cell id="c31" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="31" alignAddtionalDescription="LEFT" xmlTagName="C31" events = "onBlur:medContribuyente"/>
 			</line>
 			<line id="IN" name="INC_N" order="25" description="| n | Otros egresos debidamente documentados">
 				<cell id="c32" col="0" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true" additionalDescription="32" alignAddtionalDescription="LEFT" xmlTagName="C32" />
 			</line>
 			<line id="IO" name="INC_O" order="26" description="| o | TOTAL DE EGRESOS.Suma de las casillas 19 al 32">
-				<cell id="c33" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="33" alignAddtionalDescription="LEFT" xmlTagName="C33" />
+				<cell id="c33" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="33" alignAddtionalDescription="LEFT" xmlTagName="C33" events = "onBlur:medContribuyente"/>
 			</line>
 		</section>
 		
@@ -139,10 +145,10 @@
 				<cell id="c35" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="35" alignAddtionalDescription="LEFT" xmlTagName="C35" />
 			</line>
 			<line id="IC" name="INC_C" order="31" description="| c | RENTA NETA REAL:Inc. a menos Inc. b. del presente Rubro. En caso que el Inc. b sea mayor, consignar 0 (cero)">
-				<cell id="c36" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="36" alignAddtionalDescription="LEFT" xmlTagName="C36" />
+				<cell id="c36" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="36" alignAddtionalDescription="LEFT" xmlTagName="C36" events = "onBlur:medContribuyente" />
 			</line>
 			<line id="ID" name="INC_D" order="32" description="| d | RENTA NETA PRESUNTA: 30% (treinta por ciento) del Inc. a del presente Rubro">
-				<cell id="c37" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="37" alignAddtionalDescription="LEFT" xmlTagName="C37" />
+				<cell id="c37" col="0" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true" additionalDescription="37" alignAddtionalDescription="LEFT" xmlTagName="C37" events = "onBlur:medContribuyente"/>
 			</line>
 		</section>
 		
@@ -161,7 +167,7 @@
 			</line>
 			<line id="IC" order="36" description="|c| Saldo a favor del contribuyente del periodo anterior" >
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
-				<cell id="c38" col="1" type="NUMBER" value="" opaque="false" readOnly="true" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="38" xmlTagName="C38"/>
+				<cell id="c38" col="1" type="NUMBER" value="" opaque="false" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT"  additionalDescription="38" xmlTagName="C38"/>
 			</line>
 			<line id="ID" order="37" description="|d| Retenciones computables por operaciones gravadas" >
 				<cell id="c999" col="2" type="NUMBER" value="" opaque="true" readOnly="false" calculable="true"  alignAddtionalDescription="LEFT" />
@@ -508,20 +514,51 @@
 		<rule name="TRGc46_0"  order="130"  cellTargetId="c46" formula="0" condition="c46 &lt; 0"/>
 		<rule name="TRGc52"  order="140"  cellTargetId="c52" formula="c47+c48+c49+c50+c51"/>
 		<rule name="TRGc58"  order="150"  cellTargetId="c58" formula="c53+c54+c55+c56+c57"/>
+		
+		<rule name="TRGc59"  order="154"  cellTargetId="c59" formula="c52-c58"/>	
+		<rule name="TRGc59_0"  order="155"  cellTargetId="c59" formula="0" condition="c59 &lt; 0"/>
+		
 		<rule name="TRGc66"  order="160"  cellTargetId="c66" formula="c61+c62+c63+c64+c65"/>
 		<rule name="TRGc72"  order="170"  cellTargetId="c72" formula="c67+c68+c69+c70+c71"/>
+		
+		<rule name="TRGc73"  order="174"  cellTargetId="c73" formula="c66-c72"/>	
+		<rule name="TRGc73_0"  order="145"  cellTargetId="c73" formula="0" condition="c73 &lt; 0"/>
+		
 		<rule name="TRGc80"  order="180"  cellTargetId="c80" formula="c75+c76+c77+c78+c79"/>
 		<rule name="TRGc86"  order="190"  cellTargetId="c86" formula="c81+c82+c83+c84+c85"/>
+		
+		<rule name="TRGc87"  order="194"  cellTargetId="c87" formula="c80-c86"/>	
+		<rule name="TRGc87_0"  order="195"  cellTargetId="c87" formula="0" condition="c87 &lt; 0"/>
+		
 		<rule name="TRGc94"  order="200"  cellTargetId="c94" formula="c89+c90+c91+c92+c93"/>
 		<rule name="TRGc100"  order="210"  cellTargetId="c100" formula="c95+c96+c97+c98+c99"/>
+		
+		<rule name="TRGc101"  order="214"  cellTargetId="c101" formula="c94-c100"/>	
+		<rule name="TRGc101_0"  order="215"  cellTargetId="c101" formula="0" condition="c101 &lt; 0"/>
+		
 		<rule name="TRGc108"  order="220"  cellTargetId="c108" formula="c103+c104+c105+c106+c107"/>
 		<rule name="TRGc114"  order="230"  cellTargetId="c114" formula="c109+c110+c111+c112+c113"/>
+		
+		<rule name="TRGc115"  order="234"  cellTargetId="c115" formula="c108-c114"/>	
+		<rule name="TRGc115_0"  order="235"  cellTargetId="c115" formula="0" condition="c115 &lt; 0"/>
+		
 		<rule name="TRGc122"  order="240"  cellTargetId="c122" formula="c117+c118+c119+c120+c121"/>
 		<rule name="TRGc128"  order="250"  cellTargetId="c128" formula="c123+c124+c125+c126+c127"/>
+		
+		<rule name="TRGc129"  order="254"  cellTargetId="c129" formula="c122-c128"/>	
+		<rule name="TRGc129_0"  order="255"  cellTargetId="c129" formula="0" condition="c129 &lt; 0"/>
+		
 		<rule name="TRGc136"  order="260"  cellTargetId="c136" formula="c131+c132+c133+c134+c135"/>		
 		<rule name="TRGc142"  order="270"  cellTargetId="c142" formula="c137+c138+c139+c140+c141"/>
+		
+		<rule name="TRGc143"  order="274"  cellTargetId="c143" formula="c136-c142"/>	
+		<rule name="TRGc143_0"  order="275"  cellTargetId="c143" formula="0" condition="c143 &lt; 0"/>
+		
 		<rule name="TRGc150"  order="280"  cellTargetId="c150" formula="c145+c145+c146+c147+c148"/>
 		<rule name="TRGc156"  order="290"  cellTargetId="c156" formula="c151+c152+c153+c154+c155"/>
+		
+		<rule name="TRGc157"  order="300"  cellTargetId="c157" formula="c150-c156"/>	
+		<rule name="TRGc157_0"  order="305"  cellTargetId="c157" formula="0" condition="c157 &lt; 0"/>
 		
 		
 		

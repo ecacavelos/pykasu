@@ -399,7 +399,7 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 				}
 				
 				
-				boolean f1, f2, f3,  f4, f5;
+				boolean f1, f2, f3,  f4, f5, f6;
 				f5 = false;
 				logger.info("Es anual? " + !fs.isAnnual());
 				logger.info("Es clausura? " + isClaurura(declarationType));
@@ -436,12 +436,24 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 					}
 					logger.info("dif año " + a + "  dif mes " + m);
 				}
-				logger.info("f5 " + f5);
+				f6=  !fs.isAnnual() && !isClaurura(declarationType) &&  c.get(Calendar.YEAR) < Calendar.getInstance().get(Calendar.YEAR) || (c.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR) && c.get(Calendar.MONTH) < Calendar.getInstance().get(Calendar.MONTH));
+				if(fs.getFrequency().equals("R") && fs.getFormType().trim().equals("113") && isClaurura(declarationType)){
+					//entra si el formulario es el 126 y es clausura
+						f6 = false;
+						int a = c.get(Calendar.YEAR) - Calendar.getInstance().get(Calendar.YEAR); 
+						int m = c.get(Calendar.MONTH) - Calendar.getInstance().get(Calendar.MONTH);
+						//Se verifica que el periodo en el cual se representa es valido 
+						if (a < 3){
+							f6 = true;
+						}
+						logger.info("dif año " + a + "  dif mes " + m);
+					}
+				logger.info("f6 " + f6);
 				if(!(f1 || f2 || f3 || f4)){
 					logger.warn("Todas las condiciones de las fechas son falsas");
 				}
 				
-				validPresentationDate = validPresentationDate && (f1 || f2 || f3 || f4 || f5);
+				validPresentationDate = validPresentationDate && (f1 || f2 || f3 || f4 || f5 || f6);
 			
 			}
 			
@@ -668,6 +680,8 @@ public class FiscalRulesManagerEJB implements FiscalRulesManager{
 			else if(fs.isOccassionaly()){
 				//c.roll(Calendar.MONTH,1); //hay que poner el siguiente mes a la de presentación
 				c.add(Calendar.MONTH,1);
+			}else if(fs.isAnnualRural()){
+				c.add(Calendar.YEAR,1); 
 			}else
 				throw new FiscalInfoException("Tipo de Periodicidad de Formulario no reconocido");
 			
